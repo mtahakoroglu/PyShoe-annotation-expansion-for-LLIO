@@ -56,9 +56,9 @@ pip install pandas==1.1.5
 <h3>Example Results (Own Sensor Data)</h3>
 <p align="justify">We first used pre-trained LSTM ZUPT detector and the resulting adaptive pedestrian INS on our own-collected data (where our sensor is 3DM-GX5-25). In two of five experiments conducted, we noticed that one stride is missed in each one after manual examination (we counted actual number of strides made in the experiments for checking if number of strides are correctly detected or not). The failure of detection of any stride would definitely affect the performance of the foot-mounted INS as the ZUPT corrections could not be made in respective stationary phases. Below, we show all five experiments made to test pre-trained LSTM ZUPT detector.</p>
 
-<h4>Experiment 1 (74/75 strides detected) - Failure</h4>
+<h4>Experiment 1 (74/75 strides detected) - Failure (First ZUPT phase (and stride) is missed)</h4>
 
-<p align="justify">We see the very first stride (we assume the first stride that is also the start point is numbered as stride #0, i.e., initial stride) is not detected below. Note that ZV labels are filtered for correct stride detection but the filtered values are not used in trajectory generation in the second figure. In other words, in the trajectory plot, the red trajectory is obtained with raw (not filtered) LSTM ZUPT detected ZV labels, which misses some possible strides, while the strides (with red color cross signs x) are superimposed on the trajectory (labeled as LSTM)based on filtered LSTM ZUPT labels stride detections given in the first graph. </p>
+<p align="justify">We see the very first stride (we assume the first stride that is also the start point is numbered as stride #0, i.e., initial stride) is not detected below. Note that ZV labels are filtered for accurate stride detection but the filtered values are not used in trajectory generation in the second figure. In other words, in the trajectory plot, the red trajectory is obtained with raw (not filtered) LSTM ZUPT detected ZV labels, which sometimes misses some strides, while the strides (visualized on the trajectory as red color cross signs and labeled as "LSTM") are extracted from filtered LSTM ZUPT labels given in the first graph. </p>
 
 <img src="results/figs/own/zv_lstm_heuristically_filtered_SensorConnectData_16.png" alt="ZV labels for adaptive ZUPT (LSTM filtered) detector method - experiment 16" width=%100 height=auto>
 
@@ -82,9 +82,9 @@ pip install pandas==1.1.5
 
 <img src="results/figs/own/SensorConnectData_19.png" alt="experiment 18 trajectories obtained with (various) ZUPT (detectors) aided (Error-State Kalman Filter based) foot-mounted INS" width=%100 height=auto>
 
-<h4>Experiment 5 (64/65 strides detected) - Failure</h4>
+<h4>Experiment 5 (64/65 strides detected) - Failure (33<sup>rd</sup> ZUPT phase (and stride) is missed)</h4>
 
-<p align=""justify>If the reader carefully examines the second plot (i.e., the trajectory), it is not hard to notice that the 33rd stride is not detected (the pedestrian made 24 strides in the first side of the rectangle, 8 strides in the second after a CCW 90 degree turn at the corner, and the very first stride on the third side is missed).</p>
+<p align=""justify>If the reader carefully examines the second plot (i.e., the trajectory), it is not hard to notice that the 33<sup>rd</sup> stride is not detected (the pedestrian made 24 strides in the first side of the rectangle, after a CCW 90 degree turn at the corner, 8 more strides in the second that makes a total of 32 strides, and the very first stride on the third side is missed).</p>
 <img src="results/figs/own/zv_lstm_heuristically_filtered_SensorConnectData_20.png" alt="ZV labels for adaptive ZUPT (LSTM filtered) detector method - experiment 20" width=%100 height=auto>
 
 <img src="results/figs/own/SensorConnectData_20.png" alt="experiment 20 trajectories obtained with (various) ZUPT (detectors) aided (Error-State Kalman Filter based) foot-mounted INS" width=%100 height=auto>
@@ -102,7 +102,9 @@ pip install pandas==1.1.5
 
 <img src="results/figs/vicon/vicon_data_zv_optimal_2017-11-22-11-25-20.png" alt="ZV labels for experiment 4 (2017-11-22-11-25-20) VICON dataset" width=%100 height=auto>
 
-<p>As mentioned above, to detect the missed stride(s), supplementary detectors will be exploited such as VICON, ARED, MBGTD or AMVD. Generally VICON detector is able to generate ZUPT phases correctly; therefore, in many of the cases, we only use VICON ZUPT detector as the only supplementary detector. This process shown here is annotation of some parts of some experiments of VICON training dataset manually to correct for errors in the training data. While correcting for missed strides one by one in the experiments with at least one missed stride, some experiments are excluded by observing zero-velocity plots that belong to crawling experiments. Eventually, generation of bipedal locomotion training dataset is going to be completed. After that, the bi-LSTM network will be trained for robust ZUPT phase (and stride) detection.</p>
+<p align="justify">As mentioned above, to detect the missed stride(s), supplementary detectors will be exploited such as VICON, ARED, MBGTD or AMVD. Generally VICON detector is able to generate ZUPT phases correctly; therefore, in many of the cases, we only use VICON ZUPT detector as the only supplementary detector. <b>The process described here is the annotation of some parts of some experiments of VICON training dataset manually to correct for ZUPT phase and stride detection errors in the training data.</b> While correcting for the missed stride(s) one by one in the experiments <b>with at least one missed stride</b>, crawling experiments (non-bipedal motion) are excluded by observing zero-velocity plots. PyShoe is based on OpenShoe ZUPT aided EKF method, which is a traditional double integration approach (in prediction step of KF) where the corrections are made in periodic ZUPT phase (correction step of KF). Including non-bipedal locomotion data such as crawling experiments affect PyShoe performance on walking and running data negatively by missing some ZV phases and corresponding strides.</p>
+
+<p align="justify">Eventually, after correction process of VICON experiments, bipedal locomotion training dataset is going to be formed and subsequently the bi-LSTM network will be retrained for robust ZUPT phase (and stride) detection for bipedal locomotion data suhc as walking, jogging and running.</p>
 
 <p align="justify">Please use <b>detect_missed_strides.m</b> located at <b>data/vicon/processed</b> if you like to reproduce the following figures.</p>
 

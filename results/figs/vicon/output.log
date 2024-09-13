@@ -14,3 +14,71 @@ Processing file: data/vicon/processed\2017-11-22-11-25-20.mat
 Processing shoe detector for file: data/vicon/processed\2017-11-22-11-25-20.mat
 Applying heuristic filter to shoe zero velocity detection
 Detected 17 strides in the experiment 4.
+Processing file: data/vicon/processed\2017-11-22-11-22-03.mat
+Processing shoe detector for file: data/vicon/processed\2017-11-22-11-22-03.mat
+Applying heuristic filter to shoe zero velocity detection
+Detected 22 strides in the experiment 1.
+Processing file: data/vicon/processed\2017-11-22-11-22-46.mat
+Processing ared detector for file: data/vicon/processed\2017-11-22-11-22-46.mat
+Applying heuristic filter to ared zero velocity detection
+Detected 21 strides in the experiment 2.
+Processing file: data/vicon/processed\2017-11-22-11-23-25.mat
+Processing shoe detector for file: data/vicon/processed\2017-11-22-11-23-25.mat
+Applying heuristic filter to shoe zero velocity detection
+Detected 21 strides in the experiment 3.
+Processing file: data/vicon/processed\2017-11-22-11-25-20.mat
+Processing shoe detector for file: data/vicon/processed\2017-11-22-11-25-20.mat
+Applying heuristic filter to shoe zero velocity detection
+Detected 17 strides in the experiment 4.
+Processing file: data/vicon/processed\2017-11-22-11-26-05.mat
+Processing shoe detector for file: data/vicon/processed\2017-11-22-11-26-05.mat
+Applying heuristic filter to shoe zero velocity detection
+Detected 26 strides in the experiment 5.
+Processing file: data/vicon/processed\2017-11-22-11-26-46.mat
+Processing ared detector for file: data/vicon/processed\2017-11-22-11-26-46.mat
+Applying heuristic filter to ared zero velocity detection
+Detected 23 strides in the experiment 6.
+Processing file: data/vicon/processed\2017-11-22-11-27-30.mat
+Processing shoe detector for file: data/vicon/processed\2017-11-22-11-27-30.mat
+Applying heuristic filter to shoe zero velocity detection
+Detected 18 strides in the experiment 7.
+Processing file: data/vicon/processed\2017-11-22-11-28-03.mat
+Processing shoe detector for file: data/vicon/processed\2017-11-22-11-28-03.mat
+Applying heuristic filter to shoe zero velocity detection
+Detected 20 strides in the experiment 8.
+Processing file: data/vicon/processed\2017-11-22-11-28-39.mat
+Processing vicon detector for file: data/vicon/processed\2017-11-22-11-28-39.mat
+Applying heuristic filter to vicon zero velocity detection
+Detected 28 strides in the experiment 9.
+Processing file: data/vicon/processed\2017-11-22-11-30-14.mat
+Processing shoe detector for file: data/vicon/processed\2017-11-22-11-30-14.mat
+Applying heuristic filter to shoe zero velocity detection
+Detected 35 strides in the experiment 10.
+Processing file: data/vicon/processed\2017-11-22-11-35-59.mat
+Processing shoe detector for file: data/vicon/processed\2017-11-22-11-35-59.mat
+Applying heuristic filter to shoe zero velocity detection
+Detected 28 strides in the experiment 11.
+Processing file: data/vicon/processed\2017-11-22-11-22-03.mat
+Processing shoe detector for file: data/vicon/processed\2017-11-22-11-22-03.mat
+Applying heuristic filter to shoe zero velocity detection
+Detected 22 strides in the experiment 1.
+Processing file: data/vicon/processed\2017-11-22-11-22-46.mat
+Processing ared detector for file: data/vicon/processed\2017-11-22-11-22-46.mat
+Applying heuristic filter to ared zero velocity detection
+Detected 21 strides in the experiment 2.
+Processing file: data/vicon/processed\2017-11-22-11-23-25.mat
+Processing shoe detector for file: data/vicon/processed\2017-11-22-11-23-25.mat
+Applying heuristic filter to shoe zero velocity detection
+Detected 21 strides in the experiment 3.
+Processing file: data/vicon/processed\2017-11-22-11-25-20.mat
+Processing shoe detector for file: data/vicon/processed\2017-11-22-11-25-20.mat
+Applying heuristic filter to shoe zero velocity detection
+Detected 17 strides in the experiment 4.
+Processing file: data/vicon/processed\2017-11-22-11-26-05.mat
+Processing shoe detector for file: data/vicon/processed\2017-11-22-11-26-05.mat
+Applying heuristic filter to shoe zero velocity detection
+Detected 26 strides in the experiment 5.
+Processing file: data/vicon/processed\2017-11-22-11-26-46.mat
+Processing ared detector for file: data/vicon/processed\2017-11-22-11-26-46.mat
+Applying heuristic filter to ared zero velocity detection
+Detected 23 strides in the experiment 6.

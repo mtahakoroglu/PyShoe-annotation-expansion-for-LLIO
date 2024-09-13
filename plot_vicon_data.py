@@ -66,7 +66,7 @@ def reconstruct_trajectory(displacements, heading_changes, initial_position):
     return np.array(trajectory)
 
 i = 0  # experiment index
-stride_experiment = [1]*3
+stride_experiment = [1]*5
 stride_experiment.append(1)
 stride_experiment = [abs(x) for x in stride_experiment]
 # Process each Vicon data file
@@ -116,11 +116,11 @@ for file in vicon_data_files:
         plt.figure()
         visualize.plot_topdown([reconstructed_traj, gt[:, :2]], title=f"{base_filename} (opt detector={detector[i]} for exp#{i+1})",
                             legend=['Stride & Heading', 'GT (sample-wise)'])
-        # if i+1==22:
-        #     plt.scatter(-reconstructed_traj[-3:, 0], reconstructed_traj[-3:, 1], c='b', marker='x')
-        #     plt.scatter(-reconstructed_traj[:-3, 0], reconstructed_traj[:-3, 1], c='b', marker='o')
+        # if i+1==6:
+        #     plt.scatter(-reconstructed_traj[-2:, 0], reconstructed_traj[-2:, 1], c='b', marker='x')
+        #     plt.scatter(-reconstructed_traj[:-2, 0], reconstructed_traj[:-2, 1], c='b', marker='o')
         # else:    
-        plt.scatter(-reconstructed_traj[:, 0], reconstructed_traj[:, 1], c='b', marker='x')
+        plt.scatter(-reconstructed_traj[:, 0], reconstructed_traj[:, 1], c='b', marker='o')
         plt.savefig(os.path.join(output_dir, f'stride_and_heading_{base_filename}.png'), dpi=600, bbox_inches='tight')
 
         # plotting vertical trajectories
