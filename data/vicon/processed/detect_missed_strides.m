@@ -8,7 +8,7 @@ subplot(4,1,1); % OPTIMAL DETECTOR (RAW DATA)
 [zv, n, strideIndex] = heuristic_zv_filter_and_stride_detector(zv_shoe_opt, 1);
 fprintf(sprintf('There are %i strides detected by (filtered) SHOE ZV detector in experiment %i.\n', n, expIndex));
 plot(ts, zv_shoe_opt, 'LineWidth', 1.5, 'Color', 'k'); hold on;
-plot(ts(strideIndex), zv(strideIndex), 'ko', 'LineWidth', 1.1, 'MarkerSize', 8, 'MarkerFaceColor', 'r');
+plot(ts(strideIndex), zv(strideIndex), 'ko', 'LineWidth', 1.1, 'MarkerSize', 6, 'MarkerFaceColor', 'r');
 grid on; set(gca, 'GridLineStyle', '--'); axis tight;
 set(gca, 'position', [0.0437    0.77    0.948    0.17]);
 h = legend('ZV labels', 'strides'); set(h, 'FontSize', 12, 'location', 'southeast');
@@ -22,7 +22,7 @@ subplot(4,1,2); % OPTIMAL DETECTOR (FILTERED DATA)
 [zv_shoe_opt_filtered, n, strideIndex] = heuristic_zv_filter_and_stride_detector(zv_shoe_opt, k);
 fprintf(sprintf('There are %i strides detected by (filtered) SHOE ZV detector in experiment %i.\n', n, expIndex));
 plot(ts, zv_shoe_opt_filtered, 'LineWidth', 1.5, 'Color', 'k'); hold on;
-plot(ts(strideIndex), zv_shoe_opt_filtered(strideIndex), 'ko', 'LineWidth', 1.1, 'MarkerSize', 8, 'MarkerFaceColor', 'r');
+plot(ts(strideIndex), zv_shoe_opt_filtered(strideIndex), 'ko', 'LineWidth', 1.1, 'MarkerSize', 6, 'MarkerFaceColor', 'r');
 grid on; set(gca, 'GridLineStyle', '--'); axis tight;
 set(gca, 'position', [0.0437    0.54    0.948    0.17]);
 h = legend('ZV labels', 'strides'); set(h, 'FontSize', 12, 'location', 'southeast');
@@ -37,7 +37,7 @@ subplot(4,1,3); % SUPPLEMENTARY DETECTOR (FILTERED DATA)
 fprintf(sprintf('There are %i strides detected by (filtered) VICON ZV detector in experiment %i.\n', n, expIndex));
 plot(ts, zv, 'LineWidth', 1.5, 'Color', 'k');
 hold on;
-plot(ts(strideIndex), zv(strideIndex), 'ko', 'LineWidth', 1.1, 'MarkerSize', 8, 'MarkerFaceColor', 'r');
+plot(ts(strideIndex), zv(strideIndex), 'ko', 'LineWidth', 1.1, 'MarkerSize', 6, 'MarkerFaceColor', 'r');
 grid on; set(gca, 'GridLineStyle', '--'); axis tight;
 set(gca, 'position', [0.0437    0.31    0.948    0.17]);
 h = legend('ZV labels', 'strides'); set(h, 'FontSize', 12, 'location', 'southeast');
@@ -57,7 +57,7 @@ zv = zv_shoe_opt_filtered; zv(indexStart-T:indexEnd+T) = 1;
 fprintf(sprintf('There are %i strides detected by combined ZV detector in experiment %i.\n', n, expIndex));
 plot(ts, zv, 'LineWidth', 1.5, 'Color', 'k');
 hold on;
-plot(ts(strideIndex), zv(strideIndex), 'ko', 'LineWidth', 1.1, 'MarkerSize', 8, 'MarkerFaceColor', 'r');
+plot(ts(strideIndex), zv(strideIndex), 'ko', 'LineWidth', 1.1, 'MarkerSize', 6, 'MarkerFaceColor', 'r');
 grid on; set(gca, 'GridLineStyle', '--'); axis tight;
 set(gca, 'position', [0.0437    0.08    0.948    0.17]);
 h = legend('ZV labels', 'strides'); set(h, 'FontSize', 12, 'location', 'southeast');
@@ -75,7 +75,7 @@ subplot(4,1,1); % OPTIMAL DETECTOR (RAW DATA)
 [zv, n, strideIndex] = heuristic_zv_filter_and_stride_detector(zv_ared_opt, 1);
 fprintf(sprintf('There are %i strides detected by (filtered) ARED ZV detector in experiment %i.\n', n, expIndex));
 plot(ts, zv_ared_opt, 'LineWidth', 1.5, 'Color', 'k'); hold on;
-plot(ts(strideIndex), zv(strideIndex), 'ko', 'LineWidth', 1.1, 'MarkerSize', 8, 'MarkerFaceColor', 'r');
+plot(ts(strideIndex), zv(strideIndex), 'ko', 'LineWidth', 1.1, 'MarkerSize', 6, 'MarkerFaceColor', 'r');
 grid on; set(gca, 'GridLineStyle', '--'); axis tight;
 set(gca, 'position', [0.0437    0.77    0.948    0.17]);
 h = legend('ZV labels', 'strides'); set(h, 'FontSize', 12, 'location', 'southeast');
@@ -89,7 +89,7 @@ subplot(4,1,2); % OPTIMAL DETECTOR (FILTERED DATA)
 [zv_ared_opt_filtered, n, strideIndex] = heuristic_zv_filter_and_stride_detector(zv_ared_opt, k);
 fprintf(sprintf('There are %i strides detected by (filtered) ARED ZV detector in experiment %i.\n', n, expIndex));
 plot(ts, zv_ared_opt_filtered, 'LineWidth', 1.5, 'Color', 'k'); hold on;
-plot(ts(strideIndex), zv_ared_opt_filtered(strideIndex), 'ko', 'LineWidth', 1.1, 'MarkerSize', 8, 'MarkerFaceColor', 'r');
+plot(ts(strideIndex), zv_ared_opt_filtered(strideIndex), 'ko', 'LineWidth', 1.1, 'MarkerSize', 6, 'MarkerFaceColor', 'r');
 grid on; set(gca, 'GridLineStyle', '--'); axis tight;
 set(gca, 'position', [0.0437    0.54    0.948    0.17]);
 h = legend('ZV labels', 'strides'); set(h, 'FontSize', 12, 'location', 'southeast');
@@ -104,7 +104,7 @@ subplot(4,1,3); % SUPPLEMENTARY DETECTOR (FILTERED DATA)
 fprintf(sprintf('There are %i strides detected by (filtered) VICON ZV detector in experiment %i.\n', n, expIndex));
 plot(ts, zv, 'LineWidth', 1.5, 'Color', 'k');
 hold on;
-plot(ts(strideIndex), zv(strideIndex), 'ko', 'LineWidth', 1.1, 'MarkerSize', 8, 'MarkerFaceColor', 'r');
+plot(ts(strideIndex), zv(strideIndex), 'ko', 'LineWidth', 1.1, 'MarkerSize', 6, 'MarkerFaceColor', 'r');
 grid on; set(gca, 'GridLineStyle', '--'); axis tight;
 set(gca, 'position', [0.0437    0.31    0.948    0.17]);
 h = legend('ZV labels', 'strides'); set(h, 'FontSize', 12, 'location', 'southeast');
@@ -124,7 +124,7 @@ zv = zv_ared_opt_filtered; zv(indexStart-T:indexEnd+T) = 1;
 fprintf(sprintf('There are %i strides detected by combined ZV detector in experiment %i.\n', n, expIndex));
 plot(ts, zv, 'LineWidth', 1.5, 'Color', 'k');
 hold on;
-plot(ts(strideIndex), zv(strideIndex), 'ko', 'LineWidth', 1.1, 'MarkerSize', 8, 'MarkerFaceColor', 'r');
+plot(ts(strideIndex), zv(strideIndex), 'ko', 'LineWidth', 1.1, 'MarkerSize', 6, 'MarkerFaceColor', 'r');
 grid on; set(gca, 'GridLineStyle', '--'); axis tight;
 set(gca, 'position', [0.0437    0.08    0.948    0.17]);
 h = legend('ZV labels', 'strides'); set(h, 'FontSize', 12, 'location', 'southeast');
@@ -132,7 +132,7 @@ set(gca, 'YTick', [0,1], 'YTickLabel', {'0','1'}); set(gca, 'FontSize', 12);
 ylabel('ZV labels', 'FontSize', 12, 'FontWeight', 'normal');
 titleText = sprintf('Combined ZUPT Detector - %i/%i strides detected', n, nGT);
 h = title(titleText); set(h, 'position', [15.3280 1.0985 0]);
-h = xlabel('Time [s]', 'FontSize', 14); set(h, 'Position', [13.2921   -0.1649   -1.0000]);
+h = xlabel('Time [s]', 'FontSize', 14); set(h, 'Position', [17.2921   -0.1649   -1.0000]);
 print(sprintf('-f%i', expIndex),sprintf('experiment%i_ZUPT_detectors_strides', expIndex),'-dpng','-r800');
 %% EXPERIMENT 11
 load('2017-11-22-11-35-59'); % misses 7th stride
@@ -142,7 +142,7 @@ subplot(4,1,1); % OPTIMAL DETECTOR (RAW DATA)
 [zv, n, strideIndex] = heuristic_zv_filter_and_stride_detector(zv_shoe_opt, 1);
 fprintf(sprintf('There are %i strides detected by (filtered) SHOE ZV detector in experiment %i.\n', n, expIndex));
 plot(ts, zv_shoe_opt, 'LineWidth', 1.5, 'Color', 'k'); hold on;
-plot(ts(strideIndex), zv(strideIndex), 'ko', 'LineWidth', 1.1, 'MarkerSize', 8, 'MarkerFaceColor', 'r');
+plot(ts(strideIndex), zv(strideIndex), 'ko', 'LineWidth', 1.1, 'MarkerSize', 6, 'MarkerFaceColor', 'r');
 grid on; set(gca, 'GridLineStyle', '--'); axis tight;
 set(gca, 'position', [0.0437    0.77    0.948    0.17]);
 h = legend('ZV labels', 'strides'); set(h, 'FontSize', 12, 'location', 'southeast');
@@ -156,7 +156,7 @@ subplot(4,1,2); % OPTIMAL DETECTOR (FILTERED DATA)
 [zv_shoe_opt_filtered, n, strideIndex] = heuristic_zv_filter_and_stride_detector(zv_shoe_opt, k);
 fprintf(sprintf('There are %i strides detected by (filtered) SHOE ZV detector in experiment %i.\n', n, expIndex));
 plot(ts, zv_shoe_opt_filtered, 'LineWidth', 1.5, 'Color', 'k'); hold on;
-plot(ts(strideIndex), zv_shoe_opt_filtered(strideIndex), 'ko', 'LineWidth', 1.1, 'MarkerSize', 8, 'MarkerFaceColor', 'r');
+plot(ts(strideIndex), zv_shoe_opt_filtered(strideIndex), 'ko', 'LineWidth', 1.1, 'MarkerSize', 6, 'MarkerFaceColor', 'r');
 grid on; set(gca, 'GridLineStyle', '--'); axis tight;
 set(gca, 'position', [0.0437    0.54    0.948    0.17]);
 h = legend('ZV labels', 'strides'); set(h, 'FontSize', 12, 'location', 'southeast');
@@ -171,7 +171,7 @@ subplot(4,1,3); % SUPPLEMENTARY DETECTOR (FILTERED DATA)
 fprintf(sprintf('There are %i strides detected by (filtered) VICON ZV detector in experiment %i.\n', n, expIndex));
 plot(ts, zv, 'LineWidth', 1.5, 'Color', 'k');
 hold on;
-plot(ts(strideIndex), zv(strideIndex), 'ko', 'LineWidth', 1.1, 'MarkerSize', 8, 'MarkerFaceColor', 'r');
+plot(ts(strideIndex), zv(strideIndex), 'ko', 'LineWidth', 1.1, 'MarkerSize', 6, 'MarkerFaceColor', 'r');
 grid on; set(gca, 'GridLineStyle', '--'); axis tight;
 set(gca, 'position', [0.0437    0.31    0.948    0.17]);
 h = legend('ZV labels', 'strides'); set(h, 'FontSize', 12, 'location', 'southeast');
@@ -191,7 +191,7 @@ zv = zv_shoe_opt_filtered; zv(indexStart-T:indexEnd+T) = 1;
 fprintf(sprintf('There are %i strides detected by combined ZV detector in experiment %i.\n', n, expIndex));
 plot(ts, zv, 'LineWidth', 1.5, 'Color', 'k');
 hold on;
-plot(ts(strideIndex), zv(strideIndex), 'ko', 'LineWidth', 1.1, 'MarkerSize', 8, 'MarkerFaceColor', 'r');
+plot(ts(strideIndex), zv(strideIndex), 'ko', 'LineWidth', 1.1, 'MarkerSize', 6, 'MarkerFaceColor', 'r');
 grid on; set(gca, 'GridLineStyle', '--'); axis tight;
 set(gca, 'position', [0.0437    0.08    0.948    0.17]);
 h = legend('ZV labels', 'strides'); set(h, 'FontSize', 12, 'location', 'southeast');
@@ -199,7 +199,7 @@ set(gca, 'YTick', [0,1], 'YTickLabel', {'0','1'}); set(gca, 'FontSize', 12);
 ylabel('ZV labels', 'FontSize', 12, 'FontWeight', 'normal');
 titleText = sprintf('Combined ZUPT Detector - %i/%i strides detected', n, nGT);
 h = title(titleText); set(h, 'position', [18.3280 1.0985 0]);
-h = xlabel('Time [s]', 'FontSize', 14); set(h, 'Position', [13.2921   -0.1649   -1.0000]);
+h = xlabel('Time [s]', 'FontSize', 14); set(h, 'Position', [20.2921   -0.1649   -1.0000]);
 print(sprintf('-f%i', expIndex),sprintf('experiment%i_ZUPT_detectors_strides', expIndex),'-dpng','-r800');
 %% EXPERIMENT 18
 load('2017-11-22-11-48-35'); % misses 7th stride
@@ -209,7 +209,7 @@ subplot(4,1,1); % OPTIMAL DETECTOR (RAW DATA)
 [zv, n, strideIndex] = heuristic_zv_filter_and_stride_detector(zv_shoe_opt, 1);
 fprintf(sprintf('There are %i strides detected by (filtered) SHOE ZV detector in experiment %i.\n', n, expIndex));
 plot(ts, zv_shoe_opt, 'LineWidth', 1.5, 'Color', 'k'); hold on;
-plot(ts(strideIndex), zv(strideIndex), 'ko', 'LineWidth', 1.1, 'MarkerSize', 8, 'MarkerFaceColor', 'r');
+plot(ts(strideIndex), zv(strideIndex), 'ko', 'LineWidth', 1.1, 'MarkerSize', 6, 'MarkerFaceColor', 'r');
 grid on; set(gca, 'GridLineStyle', '--'); axis tight;
 set(gca, 'position', [0.0437    0.77    0.948    0.17]);
 h = legend('ZV labels', 'strides'); set(h, 'FontSize', 12, 'location', 'southeast');
@@ -223,7 +223,7 @@ subplot(4,1,2); % OPTIMAL DETECTOR (FILTERED DATA)
 [zv_shoe_opt_filtered, n, strideIndex] = heuristic_zv_filter_and_stride_detector(zv_shoe_opt, k);
 fprintf(sprintf('There are %i strides detected by (filtered) SHOE ZV detector in experiment %i.\n', n, expIndex));
 plot(ts, zv_shoe_opt_filtered, 'LineWidth', 1.5, 'Color', 'k'); hold on;
-plot(ts(strideIndex), zv_shoe_opt_filtered(strideIndex), 'ko', 'LineWidth', 1.1, 'MarkerSize', 8, 'MarkerFaceColor', 'r');
+plot(ts(strideIndex), zv_shoe_opt_filtered(strideIndex), 'ko', 'LineWidth', 1.1, 'MarkerSize', 6, 'MarkerFaceColor', 'r');
 grid on; set(gca, 'GridLineStyle', '--'); axis tight;
 set(gca, 'position', [0.0437    0.54    0.948    0.17]);
 h = legend('ZV labels', 'strides'); set(h, 'FontSize', 12, 'location', 'southeast');
@@ -238,7 +238,7 @@ subplot(4,1,3); % SUPPLEMENTARY DETECTOR (FILTERED DATA)
 fprintf(sprintf('There are %i strides detected by (filtered) VICON ZV detector in experiment %i.\n', n, expIndex));
 plot(ts, zv, 'LineWidth', 1.5, 'Color', 'k');
 hold on;
-plot(ts(strideIndex), zv(strideIndex), 'ko', 'LineWidth', 1.1, 'MarkerSize', 8, 'MarkerFaceColor', 'r');
+plot(ts(strideIndex), zv(strideIndex), 'ko', 'LineWidth', 1.1, 'MarkerSize', 6, 'MarkerFaceColor', 'r');
 grid on; set(gca, 'GridLineStyle', '--'); axis tight;
 set(gca, 'position', [0.0437    0.31    0.948    0.17]);
 h = legend('ZV labels', 'strides'); set(h, 'FontSize', 12, 'location', 'southeast');
@@ -258,7 +258,7 @@ zv = zv_shoe_opt_filtered; zv(indexStart-T:indexEnd+T) = 1;
 fprintf(sprintf('There are %i strides detected by combined ZV detector in experiment %i.\n', n, expIndex));
 plot(ts, zv, 'LineWidth', 1.5, 'Color', 'k');
 hold on;
-plot(ts(strideIndex), zv(strideIndex), 'ko', 'LineWidth', 1.1, 'MarkerSize', 8, 'MarkerFaceColor', 'r');
+plot(ts(strideIndex), zv(strideIndex), 'ko', 'LineWidth', 1.1, 'MarkerSize', 6, 'MarkerFaceColor', 'r');
 grid on; set(gca, 'GridLineStyle', '--'); axis tight;
 set(gca, 'position', [0.0437    0.08    0.948    0.17]);
 h = legend('ZV labels', 'strides'); set(h, 'FontSize', 12, 'location', 'southeast');
@@ -266,46 +266,166 @@ set(gca, 'YTick', [0,1], 'YTickLabel', {'0','1'}); set(gca, 'FontSize', 12);
 ylabel('ZV labels', 'FontSize', 12, 'FontWeight', 'normal');
 titleText = sprintf('Combined ZUPT Detector - %i/%i strides detected', n, nGT);
 h = title(titleText); set(h, 'position', [10.3280 1.0985 0]);
-h = xlabel('Time [s]', 'FontSize', 14); set(h, 'Position', [13.2921   -0.1649   -1.0000]);
-print(sprintf('-f%i', expIndex),sprintf('experiment%i_ZUPT_detectors_strides', expIndex),'-dpng','-r800');%% EXPERIMENT 27
+h = xlabel('Time [s]', 'FontSize', 14); set(h, 'Position', [10.2921   -0.1949   -1.0000]);
+print(sprintf('-f%i', expIndex),sprintf('experiment%i_ZUPT_detectors_strides', expIndex),'-dpng','-r800');
 %% EXPERIMENT 27
-% first three strides can be retrieved by VICON zupt detector while the
-% last one can be retrieved by MBGTD
+% first three strides can be retrieved by VICON zupt detector while 
+% the last one can be retrieved by MBGTD
 load('2017-11-27-11-12-44.mat'); % missed strides {9, 16, 17, 18}
-figure(27);
-subplot(4,1,1);
-[zv, n, strideIndex] = heuristic_zv_filter_and_stride_detector(zv_shoe_opt, k);
-fprintf('There are %i strides detected by (filtered) SHOE zupt detector in experiment 27.\n', n);
-plot(ts, zv, 'LineWidth', 1.2);
-hold on;
-plot(ts(strideIndex), zv(strideIndex), 'rx', 'LineWidth', 1.5);
-grid on;
-xlabel('Time [s]'); ylabel('ZV labels [shoe filtered]');
-legend('ZV labels', 'strides');
-subplot(4,1,2);
+expIndex = 27; nGT = 20; % actual number of strides
+figure(expIndex); clf; set(gcf, 'position', [595 60 842 722]);
+subplot(5,1,1); % OPTIMAL DETECTOR (RAW DATA)
+[zv, n, strideIndex] = heuristic_zv_filter_and_stride_detector(zv_shoe_opt, 1);
+fprintf(sprintf('There are %i strides detected by (filtered) SHOE ZV detector in experiment %i.\n', n, expIndex));
+plot(ts, zv_shoe_opt, 'LineWidth', 1.5, 'Color', 'k'); hold on;
+plot(ts(strideIndex), zv(strideIndex), 'ko', 'LineWidth', 1.1, 'MarkerSize', 6, 'MarkerFaceColor', 'r');
+grid on; set(gca, 'GridLineStyle', '--'); axis tight;
+set(gca, 'position', [0.0437    0.82    0.948    0.14]);
+h = legend('ZV labels', 'strides'); set(h, 'FontSize', 12, 'location', 'southeast');
+set(gca, 'YTick', [0,1], 'YTickLabel', {'0','1'}); 
+set(gca, 'XTickLabel', {'','','','','',''}); set(gca, 'FontSize', 12);
+ylabel('ZV labels', 'FontSize', 12, 'FontWeight', 'normal');
+titleText = sprintf('Optimal ZUPT Detector (SHOE) - %i/%i strides detected', n, nGT);
+h = title(titleText); set(h, 'position', [11.3280 1.0985 0]);
+
+subplot(5,1,2); % OPTIMAL DETECTOR (FILTERED DATA)
+[zv_shoe_opt_filtered, n, strideIndex] = heuristic_zv_filter_and_stride_detector(zv_shoe_opt, k);
+fprintf(sprintf('There are %i strides detected by (filtered) SHOE ZV detector in experiment %i.\n', n, expIndex));
+plot(ts, zv_shoe_opt_filtered, 'LineWidth', 1.5, 'Color', 'k'); hold on;
+plot(ts(strideIndex), zv_shoe_opt_filtered(strideIndex), 'ko', 'LineWidth', 1.1, 'MarkerSize', 6, 'MarkerFaceColor', 'r');
+grid on; set(gca, 'GridLineStyle', '--'); axis tight;
+set(gca, 'position', [0.0437    0.63    0.948    0.14]);
+h = legend('ZV labels', 'strides'); set(h, 'FontSize', 12, 'location', 'southeast');
+set(gca, 'YTick', [0,1], 'YTickLabel', {'0','1'});
+set(gca, 'XTickLabel', {'','','','','',''}); set(gca, 'FontSize', 12);
+ylabel('ZV labels', 'FontSize', 12, 'FontWeight', 'normal');
+titleText = sprintf('ZUPT Detector (SHOE filtered) - %i/%i strides detected', n, nGT);
+h = title(titleText); set(h, 'position', [11.3280 1.0985 0]);
+
+subplot(5,1,3); % SUPPLEMENTARY DETECTOR (FILTERED DATA for VICON DETECTOR)
 [zv, n, strideIndex] = heuristic_zv_filter_and_stride_detector(zv_vicon_opt, k);
-fprintf('There are %i strides detected by (filtered) VICON zupt detector in experiment 27.\n', n);
-plot(ts, zv, 'LineWidth', 1.2);
-hold on;
-plot(ts(strideIndex), zv(strideIndex), 'rx', 'LineWidth', 1.5);
-grid on;
-xlabel('Time [s]'); ylabel('ZV labels [vicon filtered]');
-legend('ZV labels', 'strides');
-subplot(4,1,3);
-[zv, n, strideIndex] = heuristic_zv_filter_and_stride_detector(zv_ared_opt, k);
-fprintf('There are %i strides detected by (filtered) ARED zupt detector in experiment 27.\n', n);
-plot(ts, zv, 'LineWidth', 1.2);
-hold on;
-plot(ts(strideIndex), zv(strideIndex), 'rx', 'LineWidth', 1.5);
-grid on;
-xlabel('Time [s]'); ylabel('ZV labels [ared filtered]');
-legend('ZV labels', 'strides');
-subplot(4,1,4);
+fprintf(sprintf('There are %i strides detected by (filtered) VICON ZV detector in experiment %i.\n', n, expIndex));
+plot(ts, zv, 'LineWidth', 1.5, 'Color', 'k'); hold on;
+plot(ts(strideIndex), zv(strideIndex), 'ko', 'LineWidth', 1.1, 'MarkerSize', 6, 'MarkerFaceColor', 'r');
+grid on; set(gca, 'GridLineStyle', '--'); axis tight;
+set(gca, 'position', [0.0437    0.44    0.948    0.14]);
+h = legend('ZV labels', 'strides'); set(h, 'FontSize', 12, 'location', 'southeast');
+set(gca, 'YTick', [0,1], 'YTickLabel', {'0','1'}); set(gca, 'FontSize', 12);
+set(gca, 'XTickLabel', {'','','','','',''}); set(gca, 'FontSize', 12);
+ylabel('ZV labels', 'FontSize', 12, 'FontWeight', 'normal');
+titleText = sprintf('Supplementary ZUPT Detector (VICON filtered) - %i/%i strides detected', n, nGT);
+h = title(titleText); set(h, 'position', [11.3280 1.0985 0]);
+
+subplot(5,1,4); % SUPPLEMENTARY DETECTOR (FILTERED DATA for VICON DETECTOR)
 [zv, n, strideIndex] = heuristic_zv_filter_and_stride_detector(zv_mbgtd_opt, k);
-fprintf('There are %i strides detected by (filtered) MBGTD zupt detector in experiment 27.\n', n);
-plot(ts, zv, 'LineWidth', 1.2);
+fprintf(sprintf('There are %i strides detected by (filtered) MBGTD ZV detector in experiment %i.\n', n, expIndex));
+plot(ts, zv, 'LineWidth', 1.5, 'Color', 'k'); hold on;
+plot(ts(strideIndex), zv(strideIndex), 'ko', 'LineWidth', 1.1, 'MarkerSize', 6, 'MarkerFaceColor', 'r');
+grid on; set(gca, 'GridLineStyle', '--'); axis tight;
+set(gca, 'position', [0.0437    0.25    0.948    0.14]);
+h = legend('ZV labels', 'strides'); set(h, 'FontSize', 12, 'location', 'southeast');
+set(gca, 'YTick', [0,1], 'YTickLabel', {'0','1'}); set(gca, 'FontSize', 12);
+set(gca, 'XTickLabel', {'','','','','',''}); set(gca, 'FontSize', 12);
+ylabel('ZV labels', 'FontSize', 12, 'FontWeight', 'normal');
+titleText = sprintf('Supplementary ZUPT Detector (MBGTD filtered) - %i/%i strides detected', n, nGT);
+h = title(titleText); set(h, 'position', [11.3280 1.0985 0]);
+
+subplot(5,1,5); % COMBINED DETECTOR
+tolerance = 1e-4;  % Define a small tolerance
+indexStart1 = find(abs(ts-9.08498) < tolerance);
+indexEnd1 = find(abs(ts-9.14998) < tolerance);
+indexStart2 = find(abs(ts-14.9496) < tolerance);
+indexEnd2 = find(abs(ts-15.0098) < tolerance);
+indexStart3 = find(abs(ts-15.7747) < tolerance);
+indexEnd3 = find(abs(ts-15.8398) < tolerance);
+index4 = find(abs(ts-16.6496) < tolerance);
+T = 0; % expand to right and left (extend ZV period)
+zv = zv_shoe_opt_filtered; zv(indexStart1-T:indexEnd1+T) = 1;
+zv(indexStart2-T:indexEnd2+T) = 1; zv(indexStart3-T:indexEnd3+T) = 1;
+zv(index4-3:index4+3) = 1;
+[zv, n, strideIndex] = heuristic_zv_filter_and_stride_detector(zv, 1);
+fprintf(sprintf('There are %i strides detected by combined ZV detector in experiment %i.\n', n, expIndex));
+plot(ts, zv, 'LineWidth', 1.5, 'Color', 'k');
 hold on;
-plot(ts(strideIndex), zv(strideIndex), 'rx', 'LineWidth', 1.5);
-grid on;
-xlabel('Time [s]'); ylabel('ZV labels [MBGTD filtered]');
-legend('ZV labels', 'strides');
+plot(ts(strideIndex), zv(strideIndex), 'ko', 'LineWidth', 1.1, 'MarkerSize', 6, 'MarkerFaceColor', 'r');
+grid on; set(gca, 'GridLineStyle', '--'); axis tight;
+set(gca, 'position', [0.0437    0.06    0.948    0.14]);
+h = legend('ZV labels', 'strides'); set(h, 'FontSize', 12, 'location', 'southeast');
+set(gca, 'YTick', [0,1], 'YTickLabel', {'0','1'}); set(gca, 'FontSize', 12);
+ylabel('ZV labels', 'FontSize', 12, 'FontWeight', 'normal');
+titleText = sprintf('Combined ZUPT Detector - %i/%i strides detected', n, nGT);
+h = title(titleText); set(h, 'position', [11.3280 1.0985 0]);
+h = xlabel('Time [s]', 'FontSize', 14); set(h, 'Position', [11.2921   -0.1949   -1.0000]);
+print(sprintf('-f%i', expIndex),sprintf('experiment%i_ZUPT_detectors_strides', expIndex),'-dpng','-r800');
+%% EXPERIMENT 30
+% three missed strides {2, 10, 11}
+% first three strides can be retrieved by VICON zupt detector while 
+% the last one can be retrieved by MBGTD
+load('2017-11-27-11-14-03.mat'); % missed strides {9, 16, 17, 18}
+expIndex = 30; nGT = 12; % actual number of strides
+figure(expIndex); clf; set(gcf, 'position', [565 165 842 545]);
+subplot(4,1,1); % OPTIMAL DETECTOR (RAW DATA)
+[zv, n, strideIndex] = heuristic_zv_filter_and_stride_detector(zv_vicon_opt, 1);
+fprintf(sprintf('There are %i strides detected by (filtered) VICON ZV detector in experiment %i.\n', n, expIndex));
+plot(ts, zv_vicon_opt, 'LineWidth', 1.5, 'Color', 'k'); hold on;
+plot(ts(strideIndex), zv(strideIndex), 'ko', 'LineWidth', 1.1, 'MarkerSize', 6, 'MarkerFaceColor', 'r');
+grid on; set(gca, 'GridLineStyle', '--'); axis tight;
+set(gca, 'position', [0.0437    0.77    0.948    0.17]);
+h = legend('ZV labels', 'strides'); set(h, 'FontSize', 12, 'location', 'southeast');
+set(gca, 'YTick', [0,1], 'YTickLabel', {'0','1'}); 
+set(gca, 'XTickLabel', {'','','','','',''}); set(gca, 'FontSize', 12);
+ylabel('ZV labels', 'FontSize', 12, 'FontWeight', 'normal');
+titleText = sprintf('Optimal ZUPT Detector (VICON) - %i/%i strides detected', n, nGT);
+h = title(titleText); set(h, 'position', [10.3280 1.0985 0]);
+
+subplot(4,1,2); % OPTIMAL DETECTOR (FILTERED DATA)
+[zv_vicon_opt_filtered, n, strideIndex] = heuristic_zv_filter_and_stride_detector(zv_vicon_opt, k);
+fprintf(sprintf('There are %i strides detected by (filtered) SHOE ZV detector in experiment %i.\n', n, expIndex));
+plot(ts, zv_vicon_opt_filtered, 'LineWidth', 1.5, 'Color', 'k'); hold on;
+plot(ts(strideIndex), zv_vicon_opt_filtered(strideIndex), 'ko', 'LineWidth', 1.1, 'MarkerSize', 6, 'MarkerFaceColor', 'r');
+grid on; set(gca, 'GridLineStyle', '--'); axis tight;
+set(gca, 'position', [0.0437    0.54    0.948    0.17]);
+h = legend('ZV labels', 'strides'); set(h, 'FontSize', 12, 'location', 'southeast');
+set(gca, 'YTick', [0,1], 'YTickLabel', {'0','1'});
+set(gca, 'XTickLabel', {'','','','','',''}); set(gca, 'FontSize', 12);
+ylabel('ZV labels', 'FontSize', 12, 'FontWeight', 'normal');
+titleText = sprintf('ZUPT Detector (VICON filtered) - %i/%i strides detected', n, nGT);
+h = title(titleText); set(h, 'position', [10.3280 1.0985 0]);
+
+subplot(4,1,3); % SUPPLEMENTARY DETECTOR (FILTERED DATA for VICON DETECTOR)
+[zv, n, strideIndex] = heuristic_zv_filter_and_stride_detector(zv_shoe_opt, k);
+fprintf(sprintf('There are %i strides detected by (filtered) SHOE ZV detector in experiment %i.\n', n, expIndex));
+plot(ts, zv, 'LineWidth', 1.5, 'Color', 'k'); hold on;
+plot(ts(strideIndex), zv(strideIndex), 'ko', 'LineWidth', 1.1, 'MarkerSize', 6, 'MarkerFaceColor', 'r');
+grid on; set(gca, 'GridLineStyle', '--'); axis tight;
+set(gca, 'position', [0.0437    0.31    0.948    0.17]);
+h = legend('ZV labels', 'strides'); set(h, 'FontSize', 12, 'location', 'southeast');
+set(gca, 'YTick', [0,1], 'YTickLabel', {'0','1'}); set(gca, 'FontSize', 12);
+set(gca, 'XTickLabel', {'','','','','',''}); set(gca, 'FontSize', 12);
+ylabel('ZV labels', 'FontSize', 12, 'FontWeight', 'normal');
+titleText = sprintf('Supplementary ZUPT Detector (SHOE filtered) - %i/%i strides detected', n, nGT);
+h = title(titleText); set(h, 'position', [10.3280 1.0985 0]);
+
+subplot(4,1,4); % COMBINED DETECTOR
+tolerance = 1e-4;  % Define a small tolerance
+indexStart1 = find(abs(ts-3.10498) < tolerance);
+indexEnd1 = find(abs(ts-3.15017) < tolerance);
+indexStart2 = find(abs(ts-8.92976) < tolerance);
+indexEnd2 = find(abs(ts-8.94988) < tolerance);
+T = 0; % expand to right and left (extend ZV period)
+zv = zv_vicon_opt_filtered;
+zv(indexStart1-T:indexEnd1+T) = 1;
+zv(indexStart2-T:indexEnd2+T) = 1;
+[zv, n, strideIndex] = heuristic_zv_filter_and_stride_detector(zv, 1);
+fprintf(sprintf('There are %i strides detected by combined ZV detector in experiment %i.\n', n, expIndex));
+plot(ts, zv, 'LineWidth', 1.5, 'Color', 'k'); hold on;
+plot(ts(strideIndex), zv(strideIndex), 'ko', 'LineWidth', 1.1, 'MarkerSize', 6, 'MarkerFaceColor', 'r');
+grid on; set(gca, 'GridLineStyle', '--'); axis tight;
+set(gca, 'position', [0.0437    0.31-0.23    0.948    0.17]);
+h = legend('ZV labels', 'strides'); set(h, 'FontSize', 12, 'location', 'southeast');
+set(gca, 'YTick', [0,1], 'YTickLabel', {'0','1'}); set(gca, 'FontSize', 12);
+ylabel('ZV labels', 'FontSize', 12, 'FontWeight', 'normal');
+titleText = sprintf('Combined ZUPT Detector - %i/%i strides detected', n, nGT);
+h = title(titleText); set(h, 'position', [10.3280 1.0985 0]);
+h = xlabel('Time [s]', 'FontSize', 14); set(h, 'Position', [10.2921   -0.1949   -1.0000]);
+print(sprintf('-f%i', expIndex),sprintf('experiment%i_ZUPT_detectors_strides', expIndex),'-dpng','-r800');

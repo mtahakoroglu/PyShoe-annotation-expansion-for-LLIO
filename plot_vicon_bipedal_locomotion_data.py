@@ -66,12 +66,13 @@ def reconstruct_trajectory(displacements, heading_changes, initial_position):
     return np.array(trajectory)
 
 i = 0  # experiment index
-training_data_tag = [0]*17
+training_data_tag = [0]*29
 training_data_tag.append(1)
 
-corrected_data_index = [4, 6, 11, 18]
+corrected_data_index = [4, 6, 11, 18, 27, 30]
 nGT = [22, 21, 21, 18, 26, 24, 18, 20, 28, 35,
-       29, 22, 30, 34, 24, 7, 20, 15, 10, 33] # number of actual strides
+       29, 22, 30, 34, 24, 7, 20, 15, 10, 33, 
+       22, 19, 13, 16, 17, 21, 20, 28, 18, 12] # number of actual strides
 training_data_tag = [abs(x) for x in training_data_tag]
 # Process each VICON room training data file
 for file in vicon_data_files:
@@ -150,14 +151,22 @@ for file in vicon_data_files:
         # while some experiments are excluded due to being non bipedal locomotion motion (i.e., crawling experiments)
         # some other bipedal locomotion experimental data requires correction for some ZV labels and stride detections 
         # correction indexes are extracted manually (see detect_missed_strides.m for details)
-        if i+1 == 4: # Experiment #4 needs ZV correction in 10th stride
-            zv_filtered[2800:2814] = 1 # correction indexes for a missed stride
-        elif i+1 == 6: # Experiment #6 needs ZV correction in 9th stride
-            zv_filtered[2544:2627] = 1 # correction indexes for a missed stride
-        elif i+1 == 11:
-            zv_filtered[2137:2162] = 1 # correction indexes for a missed stride
-        elif i+1 == 18:
-            zv_filtered[1882:1940] = 1 # correction indexes for a missed stride
+        if i+1 == 4: # Experiment needs ZV correction in 10th stride
+            zv_filtered[2800:2814] = 1 # correction indexes for the missed stride
+        elif i+1 == 6: # Experiment needs ZV correction in 9th stride
+            zv_filtered[2544:2627] = 1 # correction indexes for the missed stride
+        elif i+1 == 11: # Experiment needs ZV correction in 7th stride
+            zv_filtered[2137:2162] = 1 # correction indexes for the missed stride
+        elif i+1 == 18: # Experiment needs ZV correction in 7th stride
+            zv_filtered[1882:1940] = 1 # correction indexes for the missed stride
+        elif i+1 == 27: # Experiment needs ZV correction in {9, 16, 17, 18}th strides (first 3 by VICON and the last one by MBGTD)
+            zv_filtered[1816:1830] = 1 
+            zv_filtered[2989:3002] = 1
+            zv_filtered[3154:3168] = 1
+            zv_filtered[3329-3:3329+3] = 1
+        elif i+1 == 30: # Experiment needs ZV correction in {2, 10}th strides are detected by SHOE detector
+            zv_filtered[620:630] = 1
+            zv_filtered[1785:1790] = 1
         
         if i+1 in corrected_data_index:
             # Apply median filter to zero velocity detection
