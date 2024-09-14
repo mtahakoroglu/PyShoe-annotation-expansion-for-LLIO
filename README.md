@@ -116,6 +116,10 @@ pip install pandas==1.1.5
 
 <img src="results/figs/vicon_bipedal_locomotion/zv_labels_optimal_2017-11-22-11-25-20_corrected.png" alt="ZV labels for experiment 4 (2017-11-22-11-25-20) VICON dataset" width=%100 height=auto>
 
+<p align="justify">To see the correction by the supplementary ZUPT detector, check the gif file shown below.</p>
+
+<img src="results/figs/vicon_bipedal_locomotion/exp4.gif" alt="experiment 4 stride & heading trajectory after ZV correction" width=%100 height=auto>
+
 <h4>Experiment 6 (2017-11-22-11-26-46) - VICON training dataset</h4>
 
 <p align="justify">We see that the 9th stride is not detected in the plots below.</p>
@@ -134,6 +138,9 @@ pip install pandas==1.1.5
 
 <img src="results/figs/vicon_bipedal_locomotion/zv_labels_optimal_2017-11-22-11-26-46_corrected.png" alt="ZV labels for experiment 6 (2017-11-22-11-26-46) VICON dataset" width=%100 height=auto>
 
+<p align="justify">To see the correction by the supplementary ZUPT detector, check the gif file shown below.</p>
+
+<img src="results/figs/vicon_bipedal_locomotion/exp6.gif" alt="experiment 6 stride & heading trajectory after ZV correction" width=%100 height=auto>
 
 <p align="justify" id="ref1"><a href="#gobacktoref1">[1]</a> X. Liu, N. Li and Y. Zhang, <a href="https://ieeexplore.ieee.org/document/9956821" target="_blank">"A Novel Adaptive Zero Velocity Detection Algorithm Based on Improved General Likelihood Ratio Test Detector,"</a> in <i>IEEE Sensors Journal</i>, vol. 22, no. 24, pp. 24479-24492, 2022.</p>
 <p align="justify" id="ref2"><a href="#gobacktoref2">[2]</a> B. Wagstaff, V. Peretroukhin and J. Kelly, <a href="https://ieeexplore.ieee.org/document/8115947" target="_blank">"Improving foot-mounted inertial navigation through real-time motion classification,"</a> in <i>2017 International Conference on Indoor Positioning and Indoor Navigation (IPIN)</i>, Sapporo, Japan, 2017, pp. 1-8.</p>

@@ -68,6 +68,7 @@ def reconstruct_trajectory(displacements, heading_changes, initial_position):
 i = 0  # experiment index
 training_data_index = [1]*6
 corrected_data_index = [4, 6]
+nGT = [22, 21, 21, 18, 26, 24] # number of actual strides
 stride_experiment = [1]*5
 stride_experiment.append(1)
 stride_experiment = [abs(x) for x in stride_experiment]
@@ -91,32 +92,28 @@ for file in vicon_data_files:
         zv = ins.Localizer.compute_zv_lrt(W=5 if detector[i] != 'mbgtd' else 2, G=thresh[i], detector=detector[i])
         x = ins.baseline(zv=zv)
 
-        # Apply median filter to zero velocity detection
-        logging.info(f"Applying heuristic filter to {detector[i]} zero velocity detection")
+        # Apply filter to zero velocity detection results for stride detection corrections
+        logging.info(f'Applying heuristic filter to optimal ZUPT detector "{detector[i]}".')
         k = 75 # temporal window size for checking if detected strides are too close or not
-        print(f"zv size: {zv.shape}")
-        print(f"zv content: {zv}")
         zv_filtered, n, strideIndex = heuristic_zv_filter_and_stride_detector(zv, k)
         # zv_filtered = medfilt(zv_filtered, 15)
         # n, strideIndex = count_one_to_zero_transitions(zv_filtered)
         # strideIndex = strideIndex - 1 # make all stride indexes the last samples of the respective ZUPT phase
         # strideIndex[0] = 0 # first sample is the first stride index
         # strideIndex = np.append(strideIndex, len(timestamps)-1) # last sample is the last stride index
-        logging.info(f"Detected {n} strides in the experiment {i+1}.")
+        logging.info(f"Detected {n}/{nGT[i]} strides in the experiment {i+1}.")
 
         # Calculate displacement and heading changes between stride points based on ground truth
         displacements, heading_changes = calculate_displacement_and_heading(gt[:, :2], strideIndex)
-
         # Reconstruct the trajectory from displacements and heading changes
         initial_position = gt[strideIndex[0], :2]  # Starting point from the GT trajectory
         reconstructed_traj = reconstruct_trajectory(displacements, heading_changes, initial_position)
 
         # Remove the '.mat' extension from the filename
         base_filename = os.path.splitext(os.path.basename(file))[0]
-
         # Plotting the reconstructed trajectory and the ground truth without stride indices
         plt.figure()
-        visualize.plot_topdown([reconstructed_traj, gt[:, :2]], title=f"{base_filename} (opt detector={detector[i]} for exp#{i+1})",
+        visualize.plot_topdown([reconstructed_traj, gt[:, :2]], title=f"{base_filename} - opt detector={detector[i]} for exp#{i+1}",
                             legend=['Stride & Heading', 'GT (sample-wise)'])
         # if i+1==6:
         #     plt.scatter(-reconstructed_traj[-2:, 0], reconstructed_traj[-2:, 1], c='b', marker='x')
@@ -130,7 +127,7 @@ for file in vicon_data_files:
         plt.plot(timestamps[:len(gt)], gt[:, 2], label='GT (sample-wise)')  # Plot GT Z positions
         plt.plot(timestamps[:len(reconstructed_traj)], reconstructed_traj[:, 1],
                 label='Stride & Heading')  # Plot reconstructed Z positions (use Y axis for visualization)
-        plt.title(f'Vertical Trajectories - {base_filename} (ZUPT detector={detector[i]} for exp#{i+1})')
+        plt.title(f'Vertical Trajectories - {base_filename} - ZUPT detector={detector[i]} for exp#{i+1}')
         plt.grid(True, which='both', linestyle='--', linewidth=1.5)
         plt.xlabel('Time [s]')
         plt.ylabel('Z Position')
@@ -142,7 +139,7 @@ for file in vicon_data_files:
         plt.plot(timestamps[:len(zv)], zv, label='Raw')
         plt.plot(timestamps[:len(zv_filtered)], zv_filtered, label='Filtered')
         plt.scatter(timestamps[strideIndex], zv_filtered[strideIndex], c='r', marker='x')
-        plt.title(f'{base_filename} (optimal ZUPT detector={detector[i]} for exp{i+1})')
+        plt.title(f'{base_filename} - {n}/{nGT[i]} strides detected with optimal ZUPT detector={detector[i]} exp{i+1}')
         plt.xlabel('Time [s]')
         plt.ylabel('Zero Velocity')
         plt.grid(True, which='both', linestyle='--', linewidth=1.5)
@@ -159,9 +156,9 @@ for file in vicon_data_files:
         
         if i+1 in corrected_data_index:
             # Apply median filter to zero velocity detection
-            logging.info(f"Applying stride detection to the combined zero velocity detection results for experiment {i+1}")
+            logging.info(f"Applying stride detection to the combined zero velocity detection results for experiment {i+1}.")
             zv_filtered, n, strideIndex = heuristic_zv_filter_and_stride_detector(zv_filtered, 1)
-            logging.info(f"Detected {n} strides (in the combined ZV detector) in the experiment {i+1}.")
+            logging.info(f"Detected {n}/{nGT[i]} strides detected with the combined ZV detector in the experiment {i+1}.")
 
             # Calculate displacement and heading changes between stride points based on ground truth
             displacements, heading_changes = calculate_displacement_and_heading(gt[:, :2], strideIndex)
@@ -182,7 +179,7 @@ for file in vicon_data_files:
             plt.plot(timestamps[:len(zv)], zv, label='Raw')
             plt.plot(timestamps[:len(zv_filtered)], zv_filtered, label='Filtered')
             plt.scatter(timestamps[strideIndex], zv_filtered[strideIndex], c='r', marker='x')
-            plt.title(f'{base_filename} - combined ZUPT detector for exp{i+1}')
+            plt.title(f'{base_filename} - {n}/{nGT[i]} strides detected with combined ZUPT detector for exp{i+1}')
             plt.xlabel('Time [s]')
             plt.ylabel('Zero Velocity')
             plt.grid(True, which='both', linestyle='--', linewidth=1.5)
