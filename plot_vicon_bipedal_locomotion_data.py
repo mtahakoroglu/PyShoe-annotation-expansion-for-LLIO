@@ -66,15 +66,16 @@ def reconstruct_trajectory(displacements, heading_changes, initial_position):
     return np.array(trajectory)
 
 i = 0  # experiment index
-training_data_index = [1]*6
-corrected_data_index = [4, 6]
-nGT = [22, 21, 21, 18, 26, 24] # number of actual strides
-stride_experiment = [1]*5
-stride_experiment.append(1)
-stride_experiment = [abs(x) for x in stride_experiment]
+training_data_tag = [0]*17
+training_data_tag.append(1)
+
+corrected_data_index = [4, 6, 11, 18]
+nGT = [22, 21, 21, 18, 26, 24, 18, 20, 28, 35,
+       29, 22, 30, 34, 24, 7, 20, 15, 10, 33] # number of actual strides
+training_data_tag = [abs(x) for x in training_data_tag]
 # Process each VICON room training data file
 for file in vicon_data_files:
-    if stride_experiment[i]:
+    if training_data_tag[i]:
         logging.info(f"Processing file: {file}")
         data = sio.loadmat(file)
 
@@ -153,6 +154,10 @@ for file in vicon_data_files:
             zv_filtered[2800:2814] = 1 # correction indexes for a missed stride
         elif i+1 == 6: # Experiment #6 needs ZV correction in 9th stride
             zv_filtered[2544:2627] = 1 # correction indexes for a missed stride
+        elif i+1 == 11:
+            zv_filtered[2137:2162] = 1 # correction indexes for a missed stride
+        elif i+1 == 18:
+            zv_filtered[1882:1940] = 1 # correction indexes for a missed stride
         
         if i+1 in corrected_data_index:
             # Apply median filter to zero velocity detection
