@@ -25,12 +25,14 @@ def plot_topdown(traj, trigger_ind=None, gt_method = 'dense', title=None, save_d
         plt.title(title, fontsize=20, color='black')
     plt.ylabel('y [m]', fontsize=22)
     plt.xlabel('x [m]', fontsize=22)
+    plt.axis('tight')
+    plt.axis('equal')
     plt.tick_params(labelsize=22)
     plt.subplots_adjust(top=0.8)
     plt.legend(legend, fontsize=15, numpoints=1)
     plt.grid(True, which='both', linestyle='--', linewidth=1.5)
     if save_dir:
-        plt.savefig(save_dir, dpi=1200, bbox_inches='tight')
+        plt.savefig(save_dir, dpi=600, bbox_inches='tight')
 
 ###Plot the vertical estimate wrt time.  (traj is a list of trajectories, no ground truth is required)
 def plot_vertical(ts, traj, trigger_ind=None, title=None, save_dir=None, legend=[], Loc=4, markerind =[]):
