@@ -92,7 +92,7 @@ pip install pandas==1.1.5
 <p align="justify">At this point, before checking the performance of LSTM ZUPT detector on VICON training data, for all five experiments, we examined other ZUPT detectors' results to see if they are able to detect missed steps. Qualitately speaking, for missed ZUPT phase regions, other detectors such as SHOE and ARED were able to produce 1s in some cases. This observation gave us the idea of using ARED, SHOE or other ZUPT detectors as supplementary detectors to include the missed stride into the set of strides detected by LSTM ZUPT detector. However, we did not use this idea on own collected data. Instead, we first visited VICON training dataset to see how LSTM ZUPT detector performed there. Then, in case of missed strides in some experiments, mentioned supplementary ZUPT detectors can be used for including missed strides. The ultimate goal is to extract a gait-driven system (stride & heading system) from VICON training dataset, which is a sampling-frequency driven system (sample-wise INS), by generating displacement and heading change values at each stride. Subsequently, produced displacement and heading change values will be used to train deep neural network or a time-series predictor that acts as an end-to-end modern INS, which will function as learned inertial odometry and eventually aid the traditional INS (i.e., robust ZUPT aided Error-State Kalman Filter).</p>
 
 <h3>Example Results (VICON training Data)</h3>
-<p align="justify">Here, some troublesome experiments are shown to understand stride detection problems. The optimal ZUPT detectors are run, e.g., SHOE for experiment 4, with the optimal threshold values (these values are supplied by Wagstaff <i>et. al.</i>) in the structure of the mat files in VICON room experiments of PyShoe dataset). The results are given as follows.</p>
+<p align="justify">Here, some troublesome experiments are shown to understand stride detection problems. The optimal ZUPT detectors are run (e.g., SHOE for experiment 4, ARED for experiment 6) with the optimal threshold values (the optimal ZV detectors and the respective optimal threshold values are supplied by Wagstaff <i>et. al.</i>) in the structure of the mat files in VICON room experiments of PyShoe dataset). The results are given as follows.</p>
 
 <h4>Experiment 4 (2017-11-22-11-25-20) - VICON training dataset</h4>
 
@@ -106,15 +106,33 @@ pip install pandas==1.1.5
 
 <p align="justify">Eventually, after correction process of VICON experiments, bipedal locomotion training dataset is going to be formed and subsequently the bi-LSTM network will be retrained for robust ZUPT phase (and stride) detection for bipedal locomotion data suhc as walking, jogging and running.</p>
 
-<p align="justify">Please use <b>detect_missed_strides.m</b> located at <b>data/vicon/processed</b> if you like to reproduce the following figures.</p>
+<p align="justify">Please use <b>detect_missed_strides.m</b> located at <b>data/vicon/processed</b> if you like to reproduce the figures related to training dataset correction.</p>
 
 <img src="data/vicon/processed/experiment4_ZUPT_detectors_strides.png" alt="ZV labels for experiment 4 (2017-11-22-11-25-20) VICON dataset" width=%100 height=auto>
 
-<p align="justify">Integration of optimal ZUPT detector SHOE (after filtering) with the supplementary VICON ZUPT detector provided us successfull detection of 10th stride as shown in the combined ZUPT detector plot shown at the bottom. Corrected trajectory and ZV labels can be seen below for the experiment 4.</p>
+<p align="justify">Integration of optimal ZUPT detector SHOE (after filtering) with the supplementary VICON ZUPT detector provided us successfull detection of the missed stride as shown in the combined ZUPT detector plot located at the bottom. Corresponding stride & heading system generated trajectory and ZV labels can be seen below for the experiment 4.</p>
 
 <img src="results/figs/vicon_bipedal_locomotion/stride_and_heading_2017-11-22-11-25-20_corrected.png" alt="experiment 4 (2017-11-22-11-25-20) VICON dataset - trajectory" width=%100 height=auto>
 
 <img src="results/figs/vicon_bipedal_locomotion/zv_labels_optimal_2017-11-22-11-25-20_corrected.png" alt="ZV labels for experiment 4 (2017-11-22-11-25-20) VICON dataset" width=%100 height=auto>
+
+<h4>Experiment 6 (2017-11-22-11-26-46) - VICON training dataset</h4>
+
+<p align="justify">We see that the 9th stride is not detected in the plots below.</p>
+
+<img src="results/figs/vicon_bipedal_locomotion/stride_and_heading_2017-11-22-11-26-46.png" alt="experiment 6 (2017-11-22-11-26-46) VICON dataset - trajectory" width=%100 height=auto>
+
+<img src="results/figs/vicon_bipedal_locomotion/zv_labels_optimal_2017-11-22-11-26-46.png" alt="optimal ZV labels for experiment 6 (2017-11-22-11-26-46) VICON dataset" width=%100 height=auto>
+
+<p align="justify">Just like we did to correct experiment 4 ZUPT phase and stride detection, here again VICON ZUPT detector is selected as the supplementary detector to include the detection of the missed stride.</p>
+
+<img src="data/vicon/processed/experiment4_ZUPT_detectors_strides.png" alt="ZV labels for experiment 6 (2017-11-22-11-26-46) VICON dataset" width=%100 height=auto>
+
+<p align="justify">Integration of optimal ZUPT detector SHOE (after filtering) with the supplementary VICON ZUPT detector provided us successfull detection of the missed stride as shown in the combined ZUPT detector plot located at the bottom. Corresponding stride & heading system generated trajectory and ZV labels can be seen below for the experiment 6.</p>
+
+<img src="results/figs/vicon_bipedal_locomotion/stride_and_heading_2017-11-22-11-26-46_corrected.png" alt="experiment 6 (2017-11-22-11-26-46) VICON dataset - trajectory" width=%100 height=auto>
+
+<img src="results/figs/vicon_bipedal_locomotion/zv_labels_optimal_2017-11-22-11-26-46_corrected.png" alt="ZV labels for experiment 6 (2017-11-22-11-26-46) VICON dataset" width=%100 height=auto>
 
 
 <p align="justify" id="ref1"><a href="#gobacktoref1">[1]</a> X. Liu, N. Li and Y. Zhang, <a href="https://ieeexplore.ieee.org/document/9956821" target="_blank">"A Novel Adaptive Zero Velocity Detection Algorithm Based on Improved General Likelihood Ratio Test Detector,"</a> in <i>IEEE Sensors Journal</i>, vol. 22, no. 24, pp. 24479-24492, 2022.</p>

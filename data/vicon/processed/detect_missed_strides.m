@@ -82,7 +82,7 @@ h = legend('ZV labels', 'strides'); set(h, 'FontSize', 12, 'location', 'southeas
 set(gca, 'YTick', [0,1], 'YTickLabel', {'0','1'}); 
 set(gca, 'XTickLabel', {'','','','','',''}); set(gca, 'FontSize', 12);
 ylabel('ZV labels', 'FontSize', 12, 'FontWeight', 'normal');
-titleText = sprintf('Optimal ZUPT Detector (ARED) - %i/%i strides detected in experiment %i', n, nGT, expIndex);
+titleText = sprintf('Optimal ZUPT Detector (ARED) - %i/%i strides detected', n, nGT);
 h = title(titleText); set(h, 'position', [13.3280 1.0985 0]);
 
 subplot(4,1,2); % OPTIMAL DETECTOR (FILTERED DATA)
