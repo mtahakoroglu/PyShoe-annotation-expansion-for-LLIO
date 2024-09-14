@@ -182,7 +182,7 @@ pip install pandas==1.1.5
 
 <p align="justify">Integration of filtered optimal ZUPT detector SHOE with the supplementary ZUPT detectors (i.e., filtered VICON and filtered MBGTD) enabled successfull detection of the missed strideS as shown in the combined ZUPT detector plot above (located at the bottom). The corrected stride & heading system trajectory and ZV labels can be seen below for the experiment 27.</p>
 
-<img src="results/figs/vicon_bipedal_locomotion/stride_and_heading_2017-11-27-11-12-44_corrected.png" alt="corrected results for experiment 27 (2017-11-27-11-12-44) VICON dataset" width=%100 height=auto>
+<img src="results/figs/vicon_bipedal_locomotion/exp27_corrected.jpg" alt="corrected results for experiment 27 (2017-11-27-11-12-44) VICON dataset" width=%100 height=auto>
 
 <p align="justify">To see the correction by the supplementary ZUPT detectors, check the gif file inserted below.</p>
 
