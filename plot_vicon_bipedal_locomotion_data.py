@@ -172,7 +172,7 @@ for file in vicon_data_files:
 
             # Plotting the reconstructed trajectory and the ground truth without stride indices
             plt.figure()
-            visualize.plot_topdown([reconstructed_traj, gt[:, :2]], title=f"{base_filename} (opt detector=combined for exp#{i+1})",
+            visualize.plot_topdown([reconstructed_traj, gt[:, :2]], title=f"{base_filename} - combined detector for exp#{i+1}",
                                 legend=['Stride & Heading', 'GT (sample-wise)']) 
             plt.scatter(-reconstructed_traj[:, 0], reconstructed_traj[:, 1], c='b', marker='o')
             plt.savefig(os.path.join(output_dir, f'stride_and_heading_{base_filename}_corrected.png'), dpi=600, bbox_inches='tight')
@@ -182,7 +182,7 @@ for file in vicon_data_files:
             plt.plot(timestamps[:len(zv)], zv, label='Raw')
             plt.plot(timestamps[:len(zv_filtered)], zv_filtered, label='Filtered')
             plt.scatter(timestamps[strideIndex], zv_filtered[strideIndex], c='r', marker='x')
-            plt.title(f'{base_filename} (combined ZUPT detector) for exp{i+1})')
+            plt.title(f'{base_filename} - combined ZUPT detector for exp{i+1}')
             plt.xlabel('Time [s]')
             plt.ylabel('Zero Velocity')
             plt.grid(True, which='both', linestyle='--', linewidth=1.5)
