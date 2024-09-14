@@ -91,20 +91,20 @@ pip install pandas==1.1.5
 
 <p align="justify">At this point, before checking the performance of LSTM ZUPT detector on VICON training data, for all five experiments, we examined other ZUPT detectors' results to see if they are able to detect missed steps. Qualitately speaking, for missed ZUPT phase regions, other detectors such as SHOE and ARED were able to produce 1s in some cases. This observation gave us the idea of using ARED, SHOE or other ZUPT detectors as supplementary detectors to include the missed stride into the set of strides detected by LSTM ZUPT detector. However, we did not use this idea on own collected data. Instead, we first visited VICON training dataset to see how LSTM ZUPT detector performed there. Then, in case of missed strides in some experiments, mentioned supplementary ZUPT detectors can be used for including missed strides. The ultimate goal is to extract a gait-driven system (stride & heading system) from VICON training dataset, which is a sampling-frequency driven system (sample-wise INS), by generating displacement and heading change values at each stride. Subsequently, produced displacement and heading change values will be used to train deep neural network or a time-series predictor that acts as an end-to-end modern INS, which will function as learned inertial odometry and eventually aid the traditional INS (i.e., robust ZUPT aided Error-State Kalman Filter).</p>
 
-<h3>Example Results (VICON training Data)</h3>
-<p align="justify">Here, some troublesome experiments are shown to understand stride detection problems. The optimal ZUPT detectors are run (e.g., SHOE for experiment 4, ARED for experiment 6) with the optimal threshold values (the optimal ZV detectors and the respective optimal threshold values are supplied by Wagstaff <i>et. al.</i>) in the structure of the mat files in VICON room experiments of PyShoe dataset). The results are given as follows.</p>
+<h3>VICON Training Manual Annotation (Corrections)</h3>
+<p align="justify">Here, some troublesome experiments are shown to understand stride detection problems. The optimal ZUPT detectors are run (e.g., SHOE for experiment 4, ARED for experiment 6) with the corresponding optimal threshold values (optimal values are supplied by Wagstaff <i>et. al.</i>) in the structure of the mat files for VICON room experiments of PyShoe dataset).</p>
 
 <h4>Experiment 4 (2017-11-22-11-25-20) - VICON training dataset</h4>
 
-<p align="justify">We see that the 10th stride is not detected in the plots below.</p>
-
-<img src="results/figs/vicon_bipedal_locomotion/stride_and_heading_2017-11-22-11-25-20.png" alt="experiment 4 (2017-11-22-11-25-20) VICON dataset - trajectory" width=%100 height=auto>
+<p align="justify">We see that the 10th stride is not detected in the plots below. It is more obvious to notice it in ZV plot yet one may detect the missed stride in the trajectory plot as well when carefully tracked strating from the initial stride.</p>
 
 <img src="results/figs/vicon_bipedal_locomotion/zv_labels_optimal_2017-11-22-11-25-20.png" alt="optimal ZV labels for experiment 4 (2017-11-22-11-25-20) VICON dataset" width=%100 height=auto>
 
-<p align="justify">As mentioned above, to detect the missed stride(s), supplementary detectors will be exploited such as VICON, ARED, MBGTD or AMVD. Generally VICON detector is able to generate ZUPT phases correctly; therefore, in many of the cases, we only use VICON ZUPT detector as the only supplementary detector. <b>The process described here is the annotation of some parts of some experiments of VICON training dataset manually to correct for ZUPT phase and stride detection errors in the training data.</b> While correcting for the missed stride(s) one by one in the experiments <b>with at least one missed stride</b>, crawling experiments (non-bipedal motion) are excluded by observing zero-velocity plots. PyShoe is based on OpenShoe ZUPT aided EKF method, which is a traditional double integration approach (in prediction step of KF) where the corrections are made in periodic ZUPT phase (correction step of KF). Including non-bipedal locomotion data such as crawling experiments affect PyShoe performance on walking and running data negatively by missing some ZV phases and corresponding strides.</p>
+<img src="results/figs/vicon_bipedal_locomotion/stride_and_heading_2017-11-22-11-25-20.png" alt="experiment 4 (2017-11-22-11-25-20) VICON dataset - trajectory" width=%100 height=auto>
 
-<p align="justify">Eventually, after correction process of VICON experiments, bipedal locomotion training dataset is going to be formed and subsequently the bi-LSTM network will be retrained for robust ZUPT phase (and stride) detection for bipedal locomotion data suhc as walking, jogging and running.</p>
+<p align="justify">As mentioned above, to detect the missed stride(s), supplementary detectors will be exploited such as VICON, ARED, MBGTD or AMVD. Generally VICON detector was able to generate ZUPT phases correctly; therefore, in many of the cases, we only used VICON ZUPT detector as the only supplementary detector. <b>The process described here is the manual annotation of some parts of some experiments of VICON training dataset to correct for ZUPT phase and stride detection errors in the bipedal locomotion training data.</b> While correcting for the missed stride(s) one by one in the experiments <b>with at least one missed stride</b>, crawling experiments (non-bipedal motion) were excluded by observing zero-velocity plots qualitatively. PyShoe is based on OpenShoe ZUPT aided EKF method, which is a traditional double integration approach (in prediction step of KF) where the corrections are made in periodic ZUPT phase (correction step of KF). Including non-bipedal locomotion data such as crawling experiments affected PyShoe (i.e., adaptive version of OpenShoe) performance on walking and running data negatively by missing some ZV phases and corresponding strides.</p>
+
+<p align="justify">Eventually, after correction process of VICON experiments, bipedal locomotion training dataset is going to be formed and subsequently the bi-LSTM network will be retrained for robust ZUPT phase (and stride) detection for bipedal locomotion data such as walking, jogging and running.</p>
 
 <p align="justify">Please use <b>detect_missed_strides.m</b> located at <b>data/vicon/processed</b> if you like to reproduce the figures related to training dataset correction.</p>
 
@@ -112,13 +112,15 @@ pip install pandas==1.1.5
 
 <p align="justify">Integration of filtered optimal ZUPT detector SHOE with the supplementary ZUPT detector (i.e., filtered VICON) enabled successfull detection of the missed stride as shown in the combined ZUPT detector plot above (located at the bottom). The corrected stride & heading system trajectory and ZV labels can be seen below for the experiment 4. Note that the correction is only going to be used in extracting displacement and heading change values for further research on Deep Learning based modern INS development; therefore, corrected ZV labels are not used in any INS generation.</p>
 
-<img src="results/figs/vicon_bipedal_locomotion/stride_and_heading_2017-11-22-11-25-20_corrected.png" alt="experiment 4 (2017-11-22-11-25-20) VICON dataset - trajectory" width=%100 height=auto>
-
 <img src="results/figs/vicon_bipedal_locomotion/zv_labels_optimal_2017-11-22-11-25-20_corrected.png" alt="ZV labels for experiment 4 (2017-11-22-11-25-20) VICON dataset" width=%100 height=auto>
+
+<img src="results/figs/vicon_bipedal_locomotion/stride_and_heading_2017-11-22-11-25-20_corrected.png" alt="experiment 4 (2017-11-22-11-25-20) VICON dataset - trajectory" width=%100 height=auto>
 
 <p align="justify">To see the correction by the supplementary ZUPT detector, check the gif file shown below.</p>
 
-<img src="results/figs/vicon_bipedal_locomotion/exp4.gif" alt="experiment 4 stride & heading trajectory after ZV correction" width=%100 height=auto>
+<img src="results/figs/vicon_bipedal_locomotion/zv_exp4.gif" alt="experiment 4 stride & heading trajectory after ZV correction" width=%100 height=auto>
+
+<img src="results/figs/vicon_bipedal_locomotion/trajectory_exp4.gif" alt="experiment 4 stride & heading trajectory after ZV correction" width=%100 height=auto>
 
 <h4>Experiment 6 (2017-11-22-11-26-46) - VICON training dataset</h4>
 
@@ -140,7 +142,9 @@ pip install pandas==1.1.5
 
 <p align="justify">To see the correction by the supplementary ZUPT detector, check the gif file shown below.</p>
 
-<img src="results/figs/vicon_bipedal_locomotion/exp6.gif" alt="experiment 6 stride & heading trajectory after ZV correction" width=%100 height=auto>
+<img src="results/figs/vicon_bipedal_locomotion/zv_exp6.gif" alt="experiment 6 stride & heading trajectory after ZV correction" width=%100 height=auto>
+
+<img src="results/figs/vicon_bipedal_locomotion/trajectory_exp6.gif" alt="experiment 6 stride & heading trajectory after ZV correction" width=%100 height=auto>
 
 <p align="justify" id="ref1"><a href="#gobacktoref1">[1]</a> X. Liu, N. Li and Y. Zhang, <a href="https://ieeexplore.ieee.org/document/9956821" target="_blank">"A Novel Adaptive Zero Velocity Detection Algorithm Based on Improved General Likelihood Ratio Test Detector,"</a> in <i>IEEE Sensors Journal</i>, vol. 22, no. 24, pp. 24479-24492, 2022.</p>
 <p align="justify" id="ref2"><a href="#gobacktoref2">[2]</a> B. Wagstaff, V. Peretroukhin and J. Kelly, <a href="https://ieeexplore.ieee.org/document/8115947" target="_blank">"Improving foot-mounted inertial navigation through real-time motion classification,"</a> in <i>2017 International Conference on Indoor Positioning and Indoor Navigation (IPIN)</i>, Sapporo, Japan, 2017, pp. 1-8.</p>
