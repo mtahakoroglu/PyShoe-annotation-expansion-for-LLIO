@@ -2,3 +2,5 @@ ffmpeg -framerate 2 -i image%d.png zv_exp.gif
 ffmpeg -framerate 2 -i image%d.png -vf "scale=640:-1:flags=lanczos" -compression_level 1 trajectory_exp6.gif
 
 ffmpeg -framerate 2 -i image%d.png traj_exp.gif
+
+ffmpeg -framerate 2 -i image%d.jpg -vf "scale=1920:-1:flags=lanczos" -compression_level 0 exp4.gif
