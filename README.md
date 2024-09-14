@@ -112,7 +112,7 @@ pip install pandas==1.1.5
 
 <img src="results/figs/vicon_bipedal_locomotion/exp4_corrected.jpg" alt="corrected results for experiment 4 (2017-11-22-11-25-20) VICON dataset" width=%100 height=auto>
 
-<p align="justify">The gif file shown below shows the correction explicitly.</p>
+<p align="justify">The gif file inserted below shows the correction explicitly.</p>
 
 <img src="results/figs/vicon_bipedal_locomotion/gif/exp4.gif" alt="experiment 4 results after ZV correction" width=%100 height=auto>
 
@@ -130,7 +130,7 @@ pip install pandas==1.1.5
 
 <img src="results/figs/vicon_bipedal_locomotion/exp6_corrected.jpg" alt="corrected results for experiment 6 (2017-11-22-11-26-46) VICON dataset - trajectory" width=%100 height=auto>
 
-<p align="justify">To see the correction by the supplementary ZUPT detector, check the gif file shown below.</p>
+<p align="justify">To see the correction by the supplementary ZUPT detector, check the gif file inserted below.</p>
 
 <img src="results/figs/vicon_bipedal_locomotion/gif/exp6.gif" alt="experiment 6 results after ZV correction" width=%100 height=auto>
 
@@ -148,7 +148,7 @@ pip install pandas==1.1.5
 
 <img src="results/figs/vicon_bipedal_locomotion/exp11_corrected.jpg" alt="corrected results for experiment 11 (2017-11-22-11-35-59) VICON dataset" width=%100 height=auto>
 
-<p align="justify">To see the correction by the supplementary ZUPT detector, check the gif file shown below.</p>
+<p align="justify">To see the correction by the supplementary ZUPT detector, check the gif file inserted below.</p>
 
 <img src="results/figs/vicon_bipedal_locomotion/gif/exp11.gif" alt="experiment 11 results after ZV correction" width=%100 height=auto>
 
@@ -166,7 +166,7 @@ pip install pandas==1.1.5
 
 <img src="results/figs/vicon_bipedal_locomotion/exp18_corrected.jpg" alt="corrected results for experiment 18 (2017-11-22-11-48-35) VICON dataset" width=%100 height=auto>
 
-<p align="justify">To see the correction by the supplementary ZUPT detector, check the gif file shown below.</p>
+<p align="justify">To see the correction by the supplementary ZUPT detector, check the gif file inserted below.</p>
 
 <img src="results/figs/vicon_bipedal_locomotion/gif/exp18.gif" alt="experiment 18 results after ZV correction" width=%100 height=auto>
 
@@ -184,7 +184,7 @@ pip install pandas==1.1.5
 
 <img src="results/figs/vicon_bipedal_locomotion/stride_and_heading_2017-11-27-11-12-44_corrected.png" alt="corrected results for experiment 27 (2017-11-27-11-12-44) VICON dataset" width=%100 height=auto>
 
-<p align="justify">To see the correction by the supplementary ZUPT detectors, check the gif file shown below.</p>
+<p align="justify">To see the correction by the supplementary ZUPT detectors, check the gif file inserted below.</p>
 
 <img src="results/figs/vicon_bipedal_locomotion/gif/exp27.gif" alt="experiment 27 results after ZV correction" width=%100 height=auto>
 
@@ -202,7 +202,7 @@ pip install pandas==1.1.5
 
 <img src="results/figs/vicon_bipedal_locomotion/exp30_corrected.jpg" alt="corrected results for experiment 30 (2017-11-27-11-14-03) VICON dataset" width=%100 height=auto>
 
-<p align="justify">To see the correction by the supplementary ZUPT detector, check the gif file shown below.</p>
+<p align="justify">To see the correction by the supplementary ZUPT detector, check the gif file inserted below.</p>
 
 <img src="results/figs/vicon_bipedal_locomotion/gif/exp30.gif" alt="experiment 30 results after ZV correction" width=%100 height=auto>
 
