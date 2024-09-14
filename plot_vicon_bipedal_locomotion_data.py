@@ -14,7 +14,7 @@ vicon_data_dir = 'data/vicon/processed/'
 vicon_data_files = glob.glob(os.path.join(vicon_data_dir, '*.mat'))
 
 # Set up logging
-output_dir = "results/figs/vicon/"
+output_dir = "results/figs/vicon_bipedal_locomotion/"
 os.makedirs(output_dir, exist_ok=True)
 log_file = os.path.join(output_dir, 'output.log')
 logging.basicConfig(level=logging.INFO, format='%(message)s',
@@ -66,10 +66,12 @@ def reconstruct_trajectory(displacements, heading_changes, initial_position):
     return np.array(trajectory)
 
 i = 0  # experiment index
+training_data_index = [1]*6
+corrected_data_index = [4, 6]
 stride_experiment = [1]*5
 stride_experiment.append(1)
 stride_experiment = [abs(x) for x in stride_experiment]
-# Process each Vicon data file
+# Process each VICON room training data file
 for file in vicon_data_files:
     if stride_experiment[i]:
         logging.info(f"Processing file: {file}")
@@ -133,7 +135,7 @@ for file in vicon_data_files:
         plt.xlabel('Time [s]')
         plt.ylabel('Z Position')
         plt.legend()
-        plt.savefig(os.path.join(output_dir, f'vicon_data_vertical_lstm_{base_filename}.png'), dpi=600, bbox_inches='tight')
+        plt.savefig(os.path.join(output_dir, f'vertical_{base_filename}.png'), dpi=600, bbox_inches='tight')
 
         # Plotting the zero velocity detection for median filtered data without stride indices
         plt.figure()
@@ -145,7 +147,48 @@ for file in vicon_data_files:
         plt.ylabel('Zero Velocity')
         plt.grid(True, which='both', linestyle='--', linewidth=1.5)
         plt.legend()
-        plt.savefig(os.path.join(output_dir, f'vicon_data_zv_optimal_{base_filename}.png'), dpi=600, bbox_inches='tight')
+        plt.savefig(os.path.join(output_dir, f'zv_labels_optimal_{base_filename}.png'), dpi=600, bbox_inches='tight')
+
+        # while some experiments are excluded due to being non bipedal locomotion motion (i.e., crawling experiments)
+        # some other bipedal locomotion experimental data requires correction for some ZV labels and stride detections 
+        # correction indexes are extracted manually (see detect_missed_strides.m for details)
+        if i+1 == 4: # Experiment #4 needs ZV correction in 10th stride
+            zv_filtered[2800:2814] = 1 # correction indexes for a missed stride
+        elif i+1 == 6: # Experiment #6 needs ZV correction in 9th stride
+            zv_filtered[2544:2627] = 1 # correction indexes for a missed stride
+        
+        if i+1 in corrected_data_index:
+            # Apply median filter to zero velocity detection
+            logging.info(f"Applying stride detection to the combined zero velocity detection results for experiment {i+1}")
+            zv_filtered, n, strideIndex = heuristic_zv_filter_and_stride_detector(zv_filtered, 1)
+            logging.info(f"Detected {n} strides (in the combined ZV detector) in the experiment {i+1}.")
+
+            # Calculate displacement and heading changes between stride points based on ground truth
+            displacements, heading_changes = calculate_displacement_and_heading(gt[:, :2], strideIndex)
+
+            # Reconstruct the trajectory from displacements and heading changes
+            initial_position = gt[strideIndex[0], :2]  # Starting point from the GT trajectory
+            reconstructed_traj = reconstruct_trajectory(displacements, heading_changes, initial_position)
+
+            # Plotting the reconstructed trajectory and the ground truth without stride indices
+            plt.figure()
+            visualize.plot_topdown([reconstructed_traj, gt[:, :2]], title=f"{base_filename} (opt detector=combined for exp#{i+1})",
+                                legend=['Stride & Heading', 'GT (sample-wise)']) 
+            plt.scatter(-reconstructed_traj[:, 0], reconstructed_traj[:, 1], c='b', marker='o')
+            plt.savefig(os.path.join(output_dir, f'stride_and_heading_{base_filename}_corrected.png'), dpi=600, bbox_inches='tight')
+
+            # Plotting the zero velocity detection for the combined ZV detector without stride indices
+            plt.figure()
+            plt.plot(timestamps[:len(zv)], zv, label='Raw')
+            plt.plot(timestamps[:len(zv_filtered)], zv_filtered, label='Filtered')
+            plt.scatter(timestamps[strideIndex], zv_filtered[strideIndex], c='r', marker='x')
+            plt.title(f'{base_filename} (combined ZUPT detector) for exp{i+1})')
+            plt.xlabel('Time [s]')
+            plt.ylabel('Zero Velocity')
+            plt.grid(True, which='both', linestyle='--', linewidth=1.5)
+            plt.legend()
+            plt.savefig(os.path.join(output_dir, f'zv_labels_optimal_{base_filename}_corrected.png'), dpi=600, bbox_inches='tight')
+
     i += 1  # Move to the next experiment
 
 logging.info("Processing complete for all files.")
