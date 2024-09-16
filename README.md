@@ -206,6 +206,25 @@ pip install pandas==1.1.5
 
 <img src="results/figs/vicon_bipedal_locomotion/gif/exp30.gif" alt="experiment 30 results after ZV correction" width=%100 height=auto>
 
+<h4>Experiment 32 (2017-11-27-11-17-28) - VICON training dataset</h4>
+
+<p align="justify">We see that the strides {9, 11, 20} are not detected in the plots below.</p>
+
+<img src="results/figs/vicon_bipedal_locomotion/exp32.jpg" alt="optimal detector results for experiment 32 (2017-11-27-11-17-28) VICON dataset" width=%100 height=auto>
+
+<p align="justify">Unlike experiments {4, 6, 11, 18, 27, 30}, here supplementary detectors were not able to detect all missed strides. While first two was recovered by VICON ZV detector, the last stride needed to be introduced via manual annotation as can be seen below.</p>
+
+<img src="data/vicon/processed/experiment32_ZUPT_detectors_strides.png" alt="ZV labels for experiment 32 (2017-11-27-11-17-28) VICON dataset" width=%100 height=auto>
+
+<p align="justify">Integration of filtered optimal ZUPT detector SHOE with the supplementary ZUPT detector (i.e., filtered VICON) and the MANUAL ANNOTATION enabled successfull detection of all missed strides as shown in the combined ZUPT detector plot above (located at the bottom). The corrected stride & heading system trajectory and ZV labels can be seen below for the experiment 32.</p>
+
+<img src="results/figs/vicon_bipedal_locomotion/exp32_corrected.jpg" alt="corrected results for experiment 32 (2017-11-27-11-17-28) VICON dataset" width=%100 height=auto>
+
+<p align="justify">To see the correction by the supplementary ZUPT detector, check the gif file inserted below.</p>
+
+<img src="results/figs/vicon_bipedal_locomotion/gif/exp32.gif" alt="experiment 32 results after ZV correction" width=%100 height=auto>
+
+<h2>REFERENCES<h2>
 <p align="justify" id="ref1"><a href="#gobacktoref1">[1]</a> X. Liu, N. Li and Y. Zhang, <a href="https://ieeexplore.ieee.org/document/9956821" target="_blank">"A Novel Adaptive Zero Velocity Detection Algorithm Based on Improved General Likelihood Ratio Test Detector,"</a> in <i>IEEE Sensors Journal</i>, vol. 22, no. 24, pp. 24479-24492, 2022.</p>
 <p align="justify" id="ref2"><a href="#gobacktoref2">[2]</a> B. Wagstaff, V. Peretroukhin and J. Kelly, <a href="https://ieeexplore.ieee.org/document/8115947" target="_blank">"Improving foot-mounted inertial navigation through real-time motion classification,"</a> in <i>2017 International Conference on Indoor Positioning and Indoor Navigation (IPIN)</i>, Sapporo, Japan, 2017, pp. 1-8.</p>
 <p align="justify" id="ref3"><a href="#gobacktoref3">[3]</a> E. Sangenis, C. -S. Jao and A. M. Shkel, <a href="https://ieeexplore.ieee.org/abstract/document/9967027" target="_blank">"SVM-based Motion Classification Using Foot-mounted IMU for ZUPT-aided INS,"</a> in <i>2022 IEEE Sensors</i>, Dallas, TX, USA, 2022, pp. 1-4.</p>

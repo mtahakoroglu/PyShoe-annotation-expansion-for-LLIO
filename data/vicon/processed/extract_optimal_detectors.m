@@ -26,4 +26,8 @@ end
 
 if shoe_count + ared_count + vicon_count + mbgtd_count == length(filename)
     fprintf('There are %i experients conducted in PyShoe dataset.\n', length(filename));
+    fprintf('SHOE zero velocity detector count:\t%i\n', shoe_count);
+    fprintf('ARED zero velocity detector count:\t%i\n', ared_count);
+    fprintf('VICON zero velocity detector count:\t%i\n', vicon_count);
+    fprintf('MBGTD zero velocity detector count:\t%i\n', mbgtd_count);
 end
