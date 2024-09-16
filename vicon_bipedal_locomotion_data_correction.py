@@ -66,14 +66,14 @@ def reconstruct_trajectory(displacements, heading_changes, initial_position):
     return np.array(trajectory)
 
 i = 0  # experiment index
-training_data_tag = [0]*31
+training_data_tag = [0]*35
 training_data_tag.append(1)
 
-corrected_data_index = [4, 6, 11, 18, 27, 30, 32]
+corrected_data_index = [4, 6, 11, 18, 27, 30, 32, 36] # corrected experiment indexes
 nGT = [22, 21, 21, 18, 26, 24, 18, 20, 28, 35,
        29, 22, 30, 34, 24, 36, 20, 15, 10, 33, 
        22, 19, 13, 16, 17, 21, 20, 28, 18, 12,
-       13, 26] # number of actual strides
+       13, 26, 34, 25, 24, 24] # number of actual strides
 training_data_tag = [abs(x) for x in training_data_tag]
 # Process each VICON room training data file
 for file in vicon_data_files:
@@ -118,14 +118,15 @@ for file in vicon_data_files:
         plt.figure()
         visualize.plot_topdown([reconstructed_traj, gt[:, :2]], title=f"Exp#{i+1} ({base_filename}) - {detector[i].upper()}", 
                                legend=['Stride & Heading', 'GT (sample-wise)'])
-        # if i+1==16:
-        #     # plt.scatter(-reconstructed_traj[-2:, 0], reconstructed_traj[-2:, 1], c='b', marker='x')
-        #     # plt.scatter(-reconstructed_traj[:-2, 0], reconstructed_traj[:-2, 1], c='b', marker='o')
-        #     hms = 8 # "how many strides" to show from the beginning (including the initial stride)
-        #     plt.plot(-reconstructed_traj[0:hms, 0], reconstructed_traj[0:hms, 1], c='r')
+        # if i+1==36:
+        #     # plt.plot(gt[-5:,0], gt[-5:,1], c='r')
+        #     plt.scatter(-reconstructed_traj[-5:, 0], reconstructed_traj[-5:, 1], c='b', marker='x')
+        #     plt.scatter(-reconstructed_traj[0:3, 0], reconstructed_traj[0:3, 1], c='r', marker='x')
+        #     # hms = 34 # "how many strides" to show from the beginning (including the initial stride)
+        #     plt.plot(-reconstructed_traj[-5:, 0], reconstructed_traj[-5:, 1], c='b')
         #     # plt.scatter(-reconstructed_traj[0, 0], reconstructed_traj[0, 1], c='b', marker='s')
-        #     plt.scatter(-reconstructed_traj[0:hms-1, 0], reconstructed_traj[0:hms-1, 1], c='b', marker='x')
-        #     plt.scatter(-reconstructed_traj[hms-1, 0], reconstructed_traj[hms-1, 1], c='g', marker='o')
+        #     # plt.scatter(-reconstructed_traj[0:hms-1, 0], reconstructed_traj[0:hms-1, 1], c='b', marker='x')
+        #     # plt.scatter(-reconstructed_traj[hms-1, 0], reconstructed_traj[hms-1, 1], c='g', marker='o')
         # else:    
         plt.scatter(-reconstructed_traj[:, 0], reconstructed_traj[:, 1], c='b', marker='o')
         plt.savefig(os.path.join(output_dir, f'trajectory_exp_{i+1}.png'), dpi=600, bbox_inches='tight')
@@ -178,9 +179,11 @@ for file in vicon_data_files:
             zv_filtered[1851-3:1851+3] = 1
             zv_filtered[2138:2146] = 1
             zv_filtered[3997:4004] = 1 # this is manual annotation
+        elif i+1 == 36:
+            zv_filtered[1864:1890] = 1
         
         if i+1 in corrected_data_index:
-            # Apply median filter to zero velocity detection
+            # Apply filter to zero velocity detection
             logging.info(f"Applying stride detection to the combined zero velocity detection results for experiment {i+1}.")
             zv_filtered, n, strideIndex = heuristic_zv_filter_and_stride_detector(zv_filtered, 1)
             logging.info(f"Detected {n}/{nGT[i]} strides detected with the combined ZV detector in the experiment {i+1}.")
