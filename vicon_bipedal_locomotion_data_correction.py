@@ -66,14 +66,14 @@ def reconstruct_trajectory(displacements, heading_changes, initial_position):
     return np.array(trajectory)
 
 i = 0  # experiment index
-training_data_tag = [0]*35
+training_data_tag = [0]*37
 training_data_tag.append(1)
 
-corrected_data_index = [4, 6, 11, 18, 27, 30, 32, 36] # corrected experiment indexes
+corrected_data_index = [4, 6, 11, 18, 27, 30, 32, 36, 38] # corrected experiment indexes
 nGT = [22, 21, 21, 18, 26, 24, 18, 20, 28, 35,
        29, 22, 30, 34, 24, 36, 20, 15, 10, 33, 
        22, 19, 13, 16, 17, 21, 20, 28, 18, 12,
-       13, 26, 34, 25, 24, 24] # number of actual strides
+       13, 26, 34, 25, 24, 24, 43, 42] # number of actual strides
 training_data_tag = [abs(x) for x in training_data_tag]
 # Process each VICON room training data file
 for file in vicon_data_files:
@@ -181,6 +181,11 @@ for file in vicon_data_files:
             zv_filtered[3997:4004] = 1 # this is manual annotation
         elif i+1 == 36:
             zv_filtered[1864:1890] = 1
+        elif i+1 == 38: # 38th experiment: missed strides {3,27,33}. All three strides are recovered by VICON.
+            zv_filtered[874-3:874+3] = 1 # stride 3
+            zv_filtered[4520-3:4520+3] = 1 # stride 27
+            zv_filtered[5410:5421] = 1 # stride 33
+        
         
         if i+1 in corrected_data_index:
             # Apply filter to zero velocity detection

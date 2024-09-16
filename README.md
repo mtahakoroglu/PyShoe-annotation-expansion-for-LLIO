@@ -230,7 +230,7 @@ pip install pandas==1.1.5
 
 <img src="results/figs/vicon_bipedal_locomotion/exp36.jpg" alt="optimal detector results for experiment 36 (2017-11-27-11-23-18) VICON dataset" width=%100 height=auto>
 
-<p align="justify">Just like the 4<sup>th</sup> experiment, here the supplementary detector is selected as VICON, which wa able to recover the missed stride.</p>
+<p align="justify">Just like the 4<sup>th</sup> experiment, here the supplementary detector is selected as VICON, which was able to recover the missed stride.</p>
 
 <img src="data/vicon/processed/experiment36_ZUPT_detectors_strides.png" alt="ZV labels for experiment 36 (2017-11-27-11-23-18) VICON dataset" width=%100 height=auto>
 
@@ -241,6 +241,24 @@ pip install pandas==1.1.5
 <p align="justify">To see the correction by the supplementary ZUPT detector, check the gif file inserted below.</p>
 
 <img src="results/figs/vicon_bipedal_locomotion/gif/exp36.gif" alt="experiment 36 results after ZV correction" width=%100 height=auto>
+
+<h4>Experiment 38 (2017-11-27-11-25-12) - VICON training dataset</h4>
+
+<p align="justify">We see that the strides {3, 27, 33} are not detected in the plots below.</p>
+
+<img src="results/figs/vicon_bipedal_locomotion/exp38.jpg" alt="optimal detector results for experiment 38 (2017-11-27-11-25-12) VICON dataset" width=%100 height=auto>
+
+<p align="justify">The supplementary detector is selected as VICON, which was able to recover the missed strides all.</p>
+
+<img src="data/vicon/processed/experiment38_ZUPT_detectors_strides.png" alt="ZV labels for experiment 38 (2017-11-27-11-25-12) VICON dataset" width=%100 height=auto>
+
+<p align="justify">Integration of filtered optimal ZUPT detector SHOE with the supplementary ZUPT detector (i.e., filtered VICON) enabled successfull detection of the missed strides as shown in the combined ZUPT detector plot above (located at the bottom). The corrected stride & heading system trajectory and ZV labels can be seen below for the experiment 38.</p>
+
+<img src="results/figs/vicon_bipedal_locomotion/exp38_corrected.jpg" alt="corrected results for experiment 38 (2017-11-27-11-25-12) VICON dataset" width=%100 height=auto>
+
+<p align="justify">To see the correction by the supplementary ZUPT detector, check the gif file inserted below.</p>
+
+<img src="results/figs/vicon_bipedal_locomotion/gif/exp38.gif" alt="experiment 38 results after ZV correction" width=%100 height=auto>
 
 <h2>REFERENCES</h2>
 <p align="justify" id="ref1"><a href="#gobacktoref1">[1]</a> X. Liu, N. Li and Y. Zhang, <a href="https://ieeexplore.ieee.org/document/9956821" target="_blank">"A Novel Adaptive Zero Velocity Detection Algorithm Based on Improved General Likelihood Ratio Test Detector,"</a> in <i>IEEE Sensors Journal</i>, vol. 22, no. 24, pp. 24479-24492, 2022.</p>

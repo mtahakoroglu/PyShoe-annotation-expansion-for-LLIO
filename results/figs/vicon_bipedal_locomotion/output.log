@@ -756,3 +756,31 @@ Applying heuristic filter to optimal ZUPT detector "shoe" for correct stride det
 Detected 23/24 strides in the experiment 36.
 Applying stride detection to the combined zero velocity detection results for experiment 36.
 Detected 24/24 strides detected with the combined ZV detector in the experiment 36.
+Processing file: data/vicon/processed\2017-11-27-11-24-07.mat
+Processing shoe detector for file: data/vicon/processed\2017-11-27-11-24-07.mat
+Applying heuristic filter to optimal ZUPT detector "shoe" for correct stride detection.
+Detected 43/20 strides in the experiment 37.
+Processing file: data/vicon/processed\2017-11-27-11-24-07.mat
+Processing shoe detector for file: data/vicon/processed\2017-11-27-11-24-07.mat
+Applying heuristic filter to optimal ZUPT detector "shoe" for correct stride detection.
+Detected 43/43 strides in the experiment 37.
+Processing file: data/vicon/processed\2017-11-27-11-25-12.mat
+Processing shoe detector for file: data/vicon/processed\2017-11-27-11-25-12.mat
+Applying heuristic filter to optimal ZUPT detector "shoe" for correct stride detection.
+Detected 39/20 strides in the experiment 38.
+Processing file: data/vicon/processed\2017-11-27-11-25-12.mat
+Processing shoe detector for file: data/vicon/processed\2017-11-27-11-25-12.mat
+Applying heuristic filter to optimal ZUPT detector "shoe" for correct stride detection.
+Detected 39/39 strides in the experiment 38.
+Processing file: data/vicon/processed\2017-11-27-11-25-12.mat
+Processing shoe detector for file: data/vicon/processed\2017-11-27-11-25-12.mat
+Applying heuristic filter to optimal ZUPT detector "shoe" for correct stride detection.
+Detected 39/42 strides in the experiment 38.
+Applying stride detection to the combined zero velocity detection results for experiment 38.
+Detected 39/42 strides detected with the combined ZV detector in the experiment 38.
+Processing file: data/vicon/processed\2017-11-27-11-25-12.mat
+Processing shoe detector for file: data/vicon/processed\2017-11-27-11-25-12.mat
+Applying heuristic filter to optimal ZUPT detector "shoe" for correct stride detection.
+Detected 39/42 strides in the experiment 38.
+Applying stride detection to the combined zero velocity detection results for experiment 38.
+Detected 42/42 strides detected with the combined ZV detector in the experiment 38.
