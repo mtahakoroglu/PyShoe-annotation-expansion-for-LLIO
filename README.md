@@ -224,6 +224,24 @@ pip install pandas==1.1.5
 
 <img src="results/figs/vicon_bipedal_locomotion/gif/exp32.gif" alt="experiment 32 results after ZV correction" width=%100 height=auto>
 
+<h4>Experiment 36 (2017-11-27-11-23-18) - VICON training dataset</h4>
+
+<p align="justify">We see that the 7<sup>th</sup> stride is not detected in the plots below.</p>
+
+<img src="results/figs/vicon_bipedal_locomotion/exp36.jpg" alt="optimal detector results for experiment 36 (2017-11-27-11-23-18) VICON dataset" width=%100 height=auto>
+
+<p align="justify">Just like the 4<sup>th</sup> experiment, here the supplementary detector is selected as VICON, which wa able to recover the missed stride.</p>
+
+<img src="data/vicon/processed/experiment36_ZUPT_detectors_strides.png" alt="ZV labels for experiment 36 (2017-11-27-11-23-18) VICON dataset" width=%100 height=auto>
+
+<p align="justify">Integration of filtered optimal ZUPT detector SHOE with the supplementary ZUPT detector (i.e., filtered VICON) enabled successfull detection of the missed stride as shown in the combined ZUPT detector plot above (located at the bottom). The corrected stride & heading system trajectory and ZV labels can be seen below for the experiment 36.</p>
+
+<img src="results/figs/vicon_bipedal_locomotion/exp36_corrected.jpg" alt="corrected results for experiment 36 (2017-11-27-11-23-18) VICON dataset" width=%100 height=auto>
+
+<p align="justify">To see the correction by the supplementary ZUPT detector, check the gif file inserted below.</p>
+
+<img src="results/figs/vicon_bipedal_locomotion/gif/exp36.gif" alt="experiment 36 results after ZV correction" width=%100 height=auto>
+
 <h2>REFERENCES</h2>
 <p align="justify" id="ref1"><a href="#gobacktoref1">[1]</a> X. Liu, N. Li and Y. Zhang, <a href="https://ieeexplore.ieee.org/document/9956821" target="_blank">"A Novel Adaptive Zero Velocity Detection Algorithm Based on Improved General Likelihood Ratio Test Detector,"</a> in <i>IEEE Sensors Journal</i>, vol. 22, no. 24, pp. 24479-24492, 2022.</p>
 <p align="justify" id="ref2"><a href="#gobacktoref2">[2]</a> B. Wagstaff, V. Peretroukhin and J. Kelly, <a href="https://ieeexplore.ieee.org/document/8115947" target="_blank">"Improving foot-mounted inertial navigation through real-time motion classification,"</a> in <i>2017 International Conference on Indoor Positioning and Indoor Navigation (IPIN)</i>, Sapporo, Japan, 2017, pp. 1-8.</p>
