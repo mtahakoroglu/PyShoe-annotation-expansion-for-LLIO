@@ -260,6 +260,10 @@ pip install pandas==1.1.5
 
 <img src="results/figs/vicon_bipedal_locomotion/gif/exp38.gif" alt="experiment 38 results after ZV correction" width=%100 height=auto>
 
+<h4>Experiment 43 (2017-12-15-18-01-18) - VICON training dataset</h4>
+
+<p align="justify">We see that the strides {3, 14, 16} are not detected in the plots below.</p>
+
 <h2>REFERENCES</h2>
 <p align="justify" id="ref1"><a href="#gobacktoref1">[1]</a> X. Liu, N. Li and Y. Zhang, <a href="https://ieeexplore.ieee.org/document/9956821" target="_blank">"A Novel Adaptive Zero Velocity Detection Algorithm Based on Improved General Likelihood Ratio Test Detector,"</a> in <i>IEEE Sensors Journal</i>, vol. 22, no. 24, pp. 24479-24492, 2022.</p>
 <p align="justify" id="ref2"><a href="#gobacktoref2">[2]</a> B. Wagstaff, V. Peretroukhin and J. Kelly, <a href="https://ieeexplore.ieee.org/document/8115947" target="_blank">"Improving foot-mounted inertial navigation through real-time motion classification,"</a> in <i>2017 International Conference on Indoor Positioning and Indoor Navigation (IPIN)</i>, Sapporo, Japan, 2017, pp. 1-8.</p>
