@@ -1,1 +1,0 @@
-Adopted bi-LSTM is retrained after corrections (i.e., manual ZUPT phase annotations and corresponding stride detections for missed ones, and excluding some non-bipedal-locomotion data such as crawling experiments) in VICON training data.
