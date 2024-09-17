@@ -827,3 +827,9 @@ Processing file: data/vicon/processed\2017-12-15-18-01-18.mat
 Processing ared detector for file: data/vicon/processed\2017-12-15-18-01-18.mat
 Applying heuristic filter to optimal ZUPT detector "ared" for correct stride detection.
 Detected 21/21 strides in the experiment 43.
+Processing file: data/vicon/processed\2017-12-15-18-01-18.mat
+Processing ared detector for file: data/vicon/processed\2017-12-15-18-01-18.mat
+Applying heuristic filter to optimal ZUPT detector "ared" for correct stride detection.
+Detected 21/24 strides in the experiment 43.
+Applying stride detection to the combined zero velocity detection results for experiment 43.
+Detected 24/24 strides detected with the combined ZV detector in the experiment 43.

@@ -733,16 +733,18 @@ set(gca, 'XTickLabel', {'','','','','',''}); set(gca, 'FontSize', 12);
 ylabel('ZV labels', 'FontSize', 12, 'FontWeight', 'normal');
 titleText = sprintf('Supplementary ZUPT Detector (VICON filtered) - %i/%i strides detected', n, nGT);
 h = title(titleText); set(h, 'position', [12.0280 1.0985 0]);
-%%
+
 subplot(4,1,4); % COMBINED DETECTOR
 tolerance = 1e-4;  % Define a small tolerance
-index1 = find(abs(ts-4.37514) < tolerance);
-index2 = find(abs(ts-22.6046) < tolerance);
-indexStart3 = find(abs(ts-27.0543) < tolerance);
-indexEnd3 = find(abs(ts-27.1042) < tolerance);
-T = 3;
-zv = zv_shoe_opt_filtered; zv(index1-T:index1+T) = 1;
-zv(index2-T:index2+T) = 1; zv(indexStart3:indexEnd3) = 1;
+indexStart1 = find(abs(ts-4.52997) < tolerance);
+indexEnd1 = find(abs(ts-4.71999) < tolerance);
+indexStart2 = find(abs(ts-13.0697) < tolerance);
+indexEnd2 = find(abs(ts-13.3098) < tolerance);
+indexStart3 = find(abs(ts-14.6298) < tolerance);
+indexEnd3 = find(abs(ts-14.8697) < tolerance);
+T = 0;
+zv = zv_ared_opt_filtered; zv(indexStart1-T:indexEnd1+T) = 1;
+zv(indexStart2-T:indexEnd2+T) = 1; zv(indexStart3:indexEnd3) = 1;
 [zv, n, strideIndex] = heuristic_zv_filter_and_stride_detector(zv, 1);
 fprintf(sprintf('There are %i strides detected by combined ZV detector in experiment %i.\n', n, expIndex));
 plot(ts, zv, 'LineWidth', 1.5, 'Color', 'k');
@@ -754,6 +756,6 @@ h = legend('ZV labels', 'strides'); set(h, 'FontSize', 12, 'location', 'southeas
 set(gca, 'YTick', [0,1], 'YTickLabel', {'0','1'}); set(gca, 'FontSize', 12);
 ylabel('ZV labels', 'FontSize', 12, 'FontWeight', 'normal');
 titleText = sprintf('Combined ZUPT Detector - %i/%i strides detected', n, nGT);
-h = title(titleText); set(h, 'position', [18.3280 1.0985 0]);
-h = xlabel('Time [s]', 'FontSize', 14); set(h, 'Position', [17.7921   -0.1649   -1.0000]);
+h = title(titleText); set(h, 'position', [12.3280 1.0985 0]);
+h = xlabel('Time [s]', 'FontSize', 14); set(h, 'Position', [11.7921   -0.1949   -1.0000]);
 print(sprintf('-f%i', expIndex),sprintf('experiment%i_ZUPT_detectors_strides', expIndex),'-dpng','-r800');

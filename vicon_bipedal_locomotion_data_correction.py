@@ -69,7 +69,7 @@ i = 0  # experiment index
 training_data_tag = [0]*42
 training_data_tag.append(1)
 
-corrected_data_index = [4, 6, 11, 18, 27, 30, 32, 36, 38] # corrected experiment indexes
+corrected_data_index = [4, 6, 11, 18, 27, 30, 32, 36, 38, 43] # corrected experiment indexes
 nGT = [22, 21, 21, 18, 26, 24, 18, 20, 28, 35,
        29, 22, 30, 34, 24, 36, 20, 15, 10, 33, 
        22, 19, 13, 16, 17, 21, 20, 28, 18, 12,
@@ -186,6 +186,10 @@ for file in vicon_data_files:
             zv_filtered[874-3:874+3] = 1 # stride 3
             zv_filtered[4520-3:4520+3] = 1 # stride 27
             zv_filtered[5410:5421] = 1 # stride 33
+        elif i+1 == 43: # 43rd experiment: missed strides {3, 14, 16}. All three strides are recovered by VICON.
+            zv_filtered[905:944] = 1 # stride 3
+            zv_filtered[2613:2662] = 1 # stride 14
+            zv_filtered[2925:2974] = 1 # stride 16
         
         
         if i+1 in corrected_data_index:
