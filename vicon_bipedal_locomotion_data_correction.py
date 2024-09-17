@@ -27,7 +27,7 @@ detector = ['shoe', 'ared', 'shoe', 'shoe', 'shoe', 'ared', 'shoe', 'shoe',
             'vicon', 'shoe', 'shoe', 'shoe', 'vicon', 'vicon', 'vicon', 'shoe',
             'shoe', 'vicon', 'vicon', 'shoe', 'shoe', 'shoe', 'shoe', 'ared',
             'shoe', 'shoe', 'ared', 'shoe', 'shoe', 'shoe', 'ared', 'shoe',
-            'shoe', 'ared', 'mbgtd', 'shoe', 'vicon', 'shoe', 'shoe', 'vicon']
+            'shoe', 'ared', 'vicon', 'shoe', 'vicon', 'shoe', 'shoe', 'vicon']
 thresh = [2750000, 0.1, 6250000, 15000000, 5500000, 0.08, 3000000, 3250000,
           0.02, 97500000, 20000000, 0.0825, 0.1, 30000000, 0.0625, 0.225,
           92500000, 9000000, 0.015, 0.05, 3250000, 4500000, 0.1, 100000000,
@@ -66,15 +66,15 @@ def reconstruct_trajectory(displacements, heading_changes, initial_position):
     return np.array(trajectory)
 
 i = 0  # experiment index
-training_data_tag = [0]*42
-training_data_tag.append(1)
-
-corrected_data_index = [4, 6, 11, 18, 27, 30, 32, 36, 38, 43] # corrected experiment indexes
-nGT = [22, 21, 21, 18, 26, 24, 18, 20, 28, 35,
-       29, 22, 30, 34, 24, 36, 20, 15, 10, 33, 
-       22, 19, 13, 16, 17, 21, 20, 28, 18, 12,
-       13, 26, 34, 25, 24, 24, 43, 42, 15, 12, 
-       13, 14, 24] # number of actual strides
+# training_data_tag = [0]*12
+# training_data_tag.append(1)
+training_data_tag = [1, 1, 1, -1, 1, -1, 1, 1, 1, 1, -1, 1, 0, 1, 1, 1, 1, -1, 1, 1, 
+                    1, 1, 1, 1, 1, 1, -1, 1, 1, -1, 1, -1, 1, 1, 1, -1, 1, -1, 1, 1, 
+                    1, 1, -1, 1, 1, 1, 0, 0, -1, 0, 1, 1, 1, 1, 0, 1]
+corrected_data_index = [4, 6, 11, 18, 27, 30, 32, 36, 38, 43, 49] # corrected experiment indexes
+nGT = [22, 21, 21, 18, 26, 24, 18, 20, 28, 35, 29, 22, 30, 34, 24, 36, 20, 15, 10, 33, 
+       22, 19, 13, 16, 17, 21, 20, 28, 18, 12, 13, 26, 34, 25, 24, 24, 43, 42, 15, 12, 
+       13, 14, 24, 27, 25, 26, 0, 28, 13, 41, 33, 26, 16, 16, 11, 9] # number of actual strides
 training_data_tag = [abs(x) for x in training_data_tag]
 # Process each VICON room training data file
 for file in vicon_data_files:
@@ -99,6 +99,10 @@ for file in vicon_data_files:
         # Apply filter to zero velocity detection results for stride detection corrections
         logging.info(f'Applying heuristic filter to optimal ZUPT detector "{detector[i]}" for correct stride detection.')
         k = 75 # temporal window size for checking if detected strides are too close or not
+        if i+1 == 54: # remove false positive by changing filter size for experiment 54
+            k = 95
+        # elif i+1 == 13:
+        #     k = 85
         zv_filtered, n, strideIndex = heuristic_zv_filter_and_stride_detector(zv, k)
         # zv_filtered = medfilt(zv_filtered, 15)
         # n, strideIndex = count_one_to_zero_transitions(zv_filtered)
@@ -119,12 +123,13 @@ for file in vicon_data_files:
         plt.figure()
         visualize.plot_topdown([reconstructed_traj, gt[:, :2]], title=f"Exp#{i+1} ({base_filename}) - {detector[i].upper()}", 
                                legend=['Stride & Heading', 'GT (sample-wise)'])
-        # if i+1==36:
+        # if i+1==49:
         #     # plt.plot(gt[-5:,0], gt[-5:,1], c='r')
-        #     plt.scatter(-reconstructed_traj[-5:, 0], reconstructed_traj[-5:, 1], c='b', marker='x')
-        #     plt.scatter(-reconstructed_traj[0:3, 0], reconstructed_traj[0:3, 1], c='r', marker='x')
+        #     # plt.scatter(-reconstructed_traj[-3:, 0], reconstructed_traj[-5:, 1], c='b', marker='x')
+        #     plt.scatter(-reconstructed_traj[:13, 0], reconstructed_traj[:13, 1], c='b', marker='x')
+        #     plt.scatter(-reconstructed_traj[14, 0], reconstructed_traj[14, 1], c='g', marker='s')
         #     # hms = 34 # "how many strides" to show from the beginning (including the initial stride)
-        #     plt.plot(-reconstructed_traj[-5:, 0], reconstructed_traj[-5:, 1], c='b')
+        #     plt.plot(-reconstructed_traj[0:14, 0], reconstructed_traj[0:14, 1], c='r')
         #     # plt.scatter(-reconstructed_traj[0, 0], reconstructed_traj[0, 1], c='b', marker='s')
         #     # plt.scatter(-reconstructed_traj[0:hms-1, 0], reconstructed_traj[0:hms-1, 1], c='b', marker='x')
         #     # plt.scatter(-reconstructed_traj[hms-1, 0], reconstructed_traj[hms-1, 1], c='g', marker='o')
@@ -132,17 +137,17 @@ for file in vicon_data_files:
         plt.scatter(-reconstructed_traj[:, 0], reconstructed_traj[:, 1], c='b', marker='o')
         plt.savefig(os.path.join(output_dir, f'trajectory_exp_{i+1}.png'), dpi=600, bbox_inches='tight')
 
-        # # plotting vertical trajectories
-        # plt.figure()
-        # plt.plot(timestamps[:len(gt)], gt[:, 2], label='GT (sample-wise)')  # Plot GT Z positions
-        # plt.plot(timestamps[:len(reconstructed_traj)], reconstructed_traj[:, 1],
-        #         label='Stride & Heading')  # Plot reconstructed Z positions (use Y axis for visualization)
-        # plt.title(f'Vertical Trajectories - {base_filename} - ZUPT detector={detector[i]} for exp#{i+1}')
-        # plt.grid(True, which='both', linestyle='--', linewidth=1.5)
-        # plt.xlabel('Time [s]')
-        # plt.ylabel('Z Position')
-        # plt.legend()
-        # plt.savefig(os.path.join(output_dir, f'vertical_{base_filename}.png'), dpi=600, bbox_inches='tight')
+        # plotting vertical trajectories
+        plt.figure()
+        plt.plot(timestamps[:len(gt)], gt[:, 2], label='GT (sample-wise)')  # Plot GT Z positions
+        plt.plot(timestamps[:len(reconstructed_traj)], reconstructed_traj[:, 1],
+                label='Stride & Heading')  # Plot reconstructed Z positions (use Y axis for visualization)
+        plt.title(f'Vertical Trajectories - {base_filename} - ZUPT detector={detector[i]} for exp#{i+1}')
+        plt.grid(True, which='both', linestyle='--', linewidth=1.5)
+        plt.xlabel('Time [s]')
+        plt.ylabel('Z Position')
+        plt.legend()
+        plt.savefig(os.path.join(output_dir, f'vertical_{base_filename}.png'), dpi=600, bbox_inches='tight')
 
         # Plotting the zero velocity detection for filtered data without stride indices
         plt.figure()
@@ -190,8 +195,13 @@ for file in vicon_data_files:
             zv_filtered[905:944] = 1 # stride 3
             zv_filtered[2613:2662] = 1 # stride 14
             zv_filtered[2925:2974] = 1 # stride 16
-        
-        
+        elif i+1 == 49: # 49th experiment: Detected last 4 strides are left outside of the experiment as they do not cause any x-y motion.
+            zv_filtered = zv_filtered[:13070] # data cropped to exclude the last 4 strides
+            reconstructed_traj = reconstructed_traj[:13070]
+            gt = gt[:13070]
+            timestamps = timestamps[:13070]
+            zv = zv[:13070]
+
         if i+1 in corrected_data_index:
             # Apply filter to zero velocity detection
             logging.info(f"Applying stride detection to the combined zero velocity detection results for experiment {i+1}.")
@@ -214,8 +224,8 @@ for file in vicon_data_files:
 
             # Plotting the zero velocity detection for the combined ZV detector without stride indices
             plt.figure()
-            plt.plot(timestamps[:len(zv)], zv, label='Raw')
-            plt.plot(timestamps[:len(zv_filtered)], zv_filtered, label='Filtered')
+            plt.plot(timestamps, zv, label='Raw')
+            plt.plot(timestamps, zv_filtered, label='Filtered')
             plt.scatter(timestamps[strideIndex], zv_filtered[strideIndex], c='r', marker='x')
             plt.title(f'Exp#{i+1} ({base_filename}) {n}/{nGT[i]} strides detected (combined)')
             plt.xlabel('Time [s]')
@@ -224,6 +234,30 @@ for file in vicon_data_files:
             plt.legend()
             plt.yticks([0,1])
             plt.savefig(os.path.join(output_dir, f'zv_labels_exp_{i+1}_corrected.png'), dpi=600, bbox_inches='tight')
+    else:
+        print(f"Experiment {i+1} data will not be considered as bipedal locomotion data for the retraining process.".upper())
+        # 4th experiment: 10th stride (8th from the end) is missed in GT data: Split it into two as [0:2650] & [2950:end] (exclude 300 samples in training)
+        # 6th experiment: 9th stride (start counting the strides while going to south) is not detected as a stride in GT data: Split it into two as [0:2400] & [2700:end]
+        # 11th experiment: 7th stride (see above for explanation): Split it into two as [0:2000] & [2300:end] (exclude 300 samples)
+        # 13th experiment shows a lot of 180° turns, which causes multiple ZV phase and stride detections during the turns.
+        # Labeled as 0, i.e., non bi-pedal locomotion data, temporarily. It will be included in future for further research.
+        # 16th experiment: Despite showing MBGTD is the optimal detector in the mat file, VICON & ARED performs a lot better. Optimal detector is selecetd as ARED.
+        # 18th experiment: 7th stride is missed - check for [1700-2165] region for the stride
+        # 20th experiment: The pedestrian stops in every 5 or 6 strides for a while but it is a valid bipedal locomotion data (confirmed by GCetin's ML code)
+        # 27th experiment: missed strides {9,16,17,18}. First three strides can be retrieved by VICON detector while the last one can be retrieved by MBGTD.
+        # 30th experiment: missed strides {2,10}. Both strides are detected by SHOE detector.
+        # 32nd experiment: missed strides {9,11,20}. First two strides are recovered by VICON but the last one needed to be introduced by manual annotation.
+        # 36th experiment: 7th stride is missed
+        # 38th experiment: missed strides {3,27,33}
+        # 43rd experiment: missed strides {3,14,16}
+        # 47th experiment is a crawling experiment so it is not a bipedal locomotion data.
+        # 48th experiment shows a lot of 180° turns, which causes multiple ZV phase and stride detections during the turns.
+        # Labeled as 0, i.e., non bi-pedal locomotion data, temporarily. It will be included in future for further research.
+        # 49th experiment is cropped. Detected last 4 strides are left outside of the experiment as they do not cause any x-y motion.
+        # 50th experiment: shows a lot of 180° turns, which causes multiple ZV phase and stride detections during the turns.
+        # Labeled as 0, i.e., non bi-pedal locomotion data, temporarily. It will be included in future for further research.
+        # 51st experiment opt detector changed from MBGTD to VICON
+        # 55 needs cropping at the beginning or the end - left out of the training dataset yet will be considered as training data in future
 
     i += 1  # Move to the next experiment
 
