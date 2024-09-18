@@ -1,4 +1,4 @@
-<h2>PyShoe Dataset - Correction for Bipedal Locomotion</h2>
+<h2>Improved PyShoe - ZV and Stride Detection Corrections</h2>
 <p align="justify">Just like in <a href="https://github.com/mtahakoroglu/OpenShoe-PyShoe-DeepShoe-FuseShoe">LLIO-aided-iPyShoe</a> repo, one needs the following installations to run the scripts and obtain the results shown here and in the paper.</p>
 
 <h3>Creating iPyShoe Virtual Environment in Anaconda</h3>
