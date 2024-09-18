@@ -29,13 +29,14 @@ detector = ['shoe', 'ared', 'shoe', 'shoe', 'shoe', 'ared', 'shoe', 'shoe',
             'shoe', 'vicon', 'vicon', 'shoe', 'shoe', 'shoe', 'shoe', 'ared',
             'shoe', 'shoe', 'ared', 'shoe', 'shoe', 'shoe', 'ared', 'shoe',
             'shoe', 'ared', 'vicon', 'shoe', 'vicon', 'shoe', 'shoe', 'vicon']
+# corresponding thresholds are changed (#16 and #51)
 thresh = [2750000, 0.1, 6250000, 15000000, 5500000, 0.08, 3000000, 3250000,
-          0.02, 97500000, 20000000, 0.0825, 0.1, 30000000, 0.0625, 0.225,
+          0.02, 97500000, 20000000, 0.0825, 0.1, 30000000, 0.0625, 0.1250,
           92500000, 9000000, 0.015, 0.05, 3250000, 4500000, 0.1, 100000000,
           0.0725, 100000000, 15000000, 250000000, 0.0875, 0.0825, 0.0925, 70000000,
           525000000, 0.4, 0.375, 150000000, 175000000, 70000000, 27500000, 1.1,
           12500000, 65000000, 0.725, 67500000, 300000000, 650000000, 1, 4250000,
-          725000, 0.0175, 0.125, 42500000, 0.0675, 9750000, 3500000, 0.175]
+          725000, 0.0175, 0.0225, 42500000, 0.0675, 9750000, 3500000, 0.175]
 
 # Function to calculate displacement and heading change between stride points
 def calculate_displacement_and_heading(gt, strideIndex):
@@ -67,12 +68,48 @@ def reconstruct_trajectory(displacements, heading_changes, initial_position):
     trajectory[:, 0] = -trajectory[:, 0] # change made by mtahakoroglu to match with GT alignment
     return trajectory
 
+# this function is used in stride detection
+def count_zero_to_one_transitions(arr):
+    # Ensure the array is a NumPy array
+    arr = np.asarray(arr)
+    
+    # Find the locations where transitions from 0 to 1 occur
+    transitions = np.where((arr[:-1] == 0) & (arr[1:] == 1))[0]
+    
+    # Return the count and the indexes
+    return len(transitions), transitions + 1  # Add 1 to get the index of the '1'
+
+# Function to count one-to-zero transitions to determine stride indexes
+def count_one_to_zero_transitions(zv):
+    strides = np.where(np.diff(zv) < 0)[0] + 1
+    return len(strides), strides
+
+# elimination of incorrect stride detections in raw zv_opt
+def heuristic_zv_filter_and_stride_detector(zv, k):
+    if zv.dtype == 'bool':
+        zv = zv.astype(int)
+    zv[:50] = 1 # make sure all labels are zero at the beginning as the foot is stationary
+    # detect strides (falling edge of zv binary signal) and respective indexes
+    n, strideIndexFall = count_one_to_zero_transitions(zv)
+    strideIndexFall = strideIndexFall - 1 # make all stride indexes the last samples of the respective ZUPT phase
+    strideIndexFall = np.append(strideIndexFall, len(zv)-1) # last sample is the last stride index
+    # detect rising edge indexes of zv labels
+    n2, strideIndexRise = count_zero_to_one_transitions(zv)
+    for i in range(len(strideIndexRise)):
+        if (strideIndexRise[i] - strideIndexFall[i] < k):
+            zv[strideIndexFall[i]:strideIndexRise[i]] = 1 # make all samples in between one
+    # after the correction is completed, do the stride index detection process again
+    n, strideIndexFall = count_one_to_zero_transitions(zv)
+    strideIndexFall = strideIndexFall - 1 # make all stride indexes the last samples of the respective ZUPT phase
+    strideIndexFall = np.append(strideIndexFall, len(zv)-1) # last sample is the last stride index
+    return zv, n, strideIndexFall
+
 i = 0  # experiment index
-# training_data_tag = [1]*5
-# training_data_tag.append(1)
-training_data_tag = [1, 1, 1, -1, 1, -1, 1, 1, 1, 1, -1, 1, 0, 1, 1, 1, 1, -1, 1, 1, 
-                    1, 1, 1, 1, 1, 1, -1, 1, 1, -1, 1, -1, 1, 1, 1, -1, 1, -1, 1, 1, 
-                    1, 1, -1, 1, 1, 1, 0, 0, -1, 0, 1, 1, 1, 1, 0, 1]
+training_data_tag = [0]*50
+training_data_tag.append(1)
+# training_data_tag = [1, 1, 1, -1, 1, -1, 1, 1, 1, 1, -1, 1, 0, 1, 1, 1, 1, -1, 1, 1, 
+#                     1, 1, 1, 1, 1, 1, -1, 1, 1, -1, 1, -1, 1, 1, 1, -1, 1, -1, 1, 1, 
+#                     1, 1, -1, 1, 1, 1, 0, 0, -1, 0, 1, 1, 1, 1, 0, 1]
 corrected_data_index = [4, 6, 11, 18, 27, 30, 32, 36, 38, 43, 49] # corrected experiment indexes
 nGT = [22, 21, 21, 18, 26, 24, 18, 20, 28, 35, 29, 22, 30, 34, 24, 36, 20, 15, 10, 33, 
        22, 19, 13, 16, 17, 21, 20, 28, 18, 12, 13, 26, 34, 25, 24, 24, 43, 42, 15, 12, 

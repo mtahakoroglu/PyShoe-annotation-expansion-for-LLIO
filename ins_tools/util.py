@@ -315,37 +315,38 @@ def median_filter(x, k):
         y[-j:,-(i+1)] = x[-1]
     return np.median (y, axis=1)
 
-# this function is no more used for stride detection
-def count_zero_to_one_transitions(arr):
-    # Ensure the array is a NumPy array
-    arr = np.asarray(arr)
+# # this function is used in stride detection
+# def count_zero_to_one_transitions(arr):
+#     # Ensure the array is a NumPy array
+#     arr = np.asarray(arr)
     
-    # Find the locations where transitions from 0 to 1 occur
-    transitions = np.where((arr[:-1] == 0) & (arr[1:] == 1))[0]
+#     # Find the locations where transitions from 0 to 1 occur
+#     transitions = np.where((arr[:-1] == 0) & (arr[1:] == 1))[0]
     
-    # Return the count and the indexes
-    return len(transitions), transitions + 1  # Add 1 to get the index of the '1'
+#     # Return the count and the indexes
+#     return len(transitions), transitions + 1  # Add 1 to get the index of the '1'
 
-# Function to count one-to-zero transitions to detemine stride indexes
-def count_one_to_zero_transitions(zv):
-    strides = np.where(np.diff(zv) < 0)[0] + 1
-    return len(strides), strides
+# # Function to count one-to-zero transitions to determine stride indexes
+# def count_one_to_zero_transitions(zv):
+#     strides = np.where(np.diff(zv) < 0)[0] + 1
+#     return len(strides), strides
 
-def heuristic_zv_filter_and_stride_detector(zv, k):
-    if zv.dtype == 'bool':
-        zv = zv.astype(int)
-    zv[:50] = 1 # make sure all labels are zero at the beginning as the foot is stationary
-    # detect strides (falling edge of zv binary signal) and respective indexes
-    n, strideIndexFall = count_one_to_zero_transitions(zv)
-    strideIndexFall = strideIndexFall - 1 # make all stride indexes the last samples of the respective ZUPT phase
-    strideIndexFall = np.append(strideIndexFall, len(zv)-1) # last sample is the last stride index
-    # detect rising edge indexes of zv labels
-    n2, strideIndexRise = count_zero_to_one_transitions(zv)
-    for i in range(len(strideIndexRise)):
-        if (strideIndexRise[i] - strideIndexFall[i] < k):
-            zv[strideIndexFall[i]:strideIndexRise[i]] = 1 # make all samples in between one
-    # after the correction is completed, do the stride index detection process again
-    n, strideIndexFall = count_one_to_zero_transitions(zv)
-    strideIndexFall = strideIndexFall - 1 # make all stride indexes the last samples of the respective ZUPT phase
-    strideIndexFall = np.append(strideIndexFall, len(zv)-1) # last sample is the last stride index
-    return zv, n, strideIndexFall
+# # elimination of incorrect stride detections in raw zv_opt
+# def heuristic_zv_filter_and_stride_detector(zv, k):
+#     if zv.dtype == 'bool':
+#         zv = zv.astype(int)
+#     zv[:50] = 1 # make sure all labels are zero at the beginning as the foot is stationary
+#     # detect strides (falling edge of zv binary signal) and respective indexes
+#     n, strideIndexFall = count_one_to_zero_transitions(zv)
+#     strideIndexFall = strideIndexFall - 1 # make all stride indexes the last samples of the respective ZUPT phase
+#     strideIndexFall = np.append(strideIndexFall, len(zv)-1) # last sample is the last stride index
+#     # detect rising edge indexes of zv labels
+#     n2, strideIndexRise = count_zero_to_one_transitions(zv)
+#     for i in range(len(strideIndexRise)):
+#         if (strideIndexRise[i] - strideIndexFall[i] < k):
+#             zv[strideIndexFall[i]:strideIndexRise[i]] = 1 # make all samples in between one
+#     # after the correction is completed, do the stride index detection process again
+#     n, strideIndexFall = count_one_to_zero_transitions(zv)
+#     strideIndexFall = strideIndexFall - 1 # make all stride indexes the last samples of the respective ZUPT phase
+#     strideIndexFall = np.append(strideIndexFall, len(zv)-1) # last sample is the last stride index
+#     return zv, n, strideIndexFall
