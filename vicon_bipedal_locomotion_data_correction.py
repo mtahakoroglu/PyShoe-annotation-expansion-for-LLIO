@@ -20,8 +20,8 @@ log_file = os.path.join(output_dir, 'output.log')
 logging.basicConfig(level=logging.INFO, format='%(message)s',
                     handlers=[logging.FileHandler(log_file), logging.StreamHandler()])
 
-# Detector thresholds. Detector 16 is changed from MBGTD to ARED
-# 51st experiment opt detector changed from MBGTD to VICON
+# 16th experiment: Despite showing MBGTD is the optimal detector in the mat file, VICON & ARED performs a lot better. Optimal detector is selected as ARED.
+# 51st experiment: Optimal detector is changed from MBGTD to VICON
 detector = ['shoe', 'ared', 'shoe', 'shoe', 'shoe', 'ared', 'shoe', 'shoe',
             'vicon', 'shoe', 'shoe', 'vicon', 'vicon', 'shoe', 'vicon', 'ared',
             'shoe', 'shoe', 'ared', 'vicon', 'shoe', 'shoe', 'vicon', 'shoe',
@@ -49,7 +49,6 @@ def calculate_displacement_and_heading(gt, strideIndex):
         heading_changes.append(heading_change)
     return np.array(displacements), np.array(heading_changes)
 
-
 # Function to reconstruct trajectory from displacements and heading changes
 def reconstruct_trajectory(displacements, heading_changes, initial_position):
     trajectory = [initial_position]
@@ -64,20 +63,24 @@ def reconstruct_trajectory(displacements, heading_changes, initial_position):
         trajectory.append(new_position)
         current_heading += heading_changes[i]
 
-    # trajectory[:, 0] = -trajectory[:, 0] # change made by mtahakoroglu to match with GT alignment
-    return np.array(trajectory)
+    trajectory = np.array(trajectory)
+    trajectory[:, 0] = -trajectory[:, 0] # change made by mtahakoroglu to match with GT alignment
+    return trajectory
 
 i = 0  # experiment index
-training_data_tag = [1]*5
-training_data_tag.append(1)
-# training_data_tag = [1, 1, 1, -1, 1, -1, 1, 1, 1, 1, -1, 1, 0, 1, 1, 1, 1, -1, 1, 1, 
-#                     1, 1, 1, 1, 1, 1, -1, 1, 1, -1, 1, -1, 1, 1, 1, -1, 1, -1, 1, 1, 
-#                     1, 1, -1, 1, 1, 1, 0, 0, -1, 0, 1, 1, 1, 1, 0, 1]
+# training_data_tag = [1]*5
+# training_data_tag.append(1)
+training_data_tag = [1, 1, 1, -1, 1, -1, 1, 1, 1, 1, -1, 1, 0, 1, 1, 1, 1, -1, 1, 1, 
+                    1, 1, 1, 1, 1, 1, -1, 1, 1, -1, 1, -1, 1, 1, 1, -1, 1, -1, 1, 1, 
+                    1, 1, -1, 1, 1, 1, 0, 0, -1, 0, 1, 1, 1, 1, 0, 1]
 corrected_data_index = [4, 6, 11, 18, 27, 30, 32, 36, 38, 43, 49] # corrected experiment indexes
 nGT = [22, 21, 21, 18, 26, 24, 18, 20, 28, 35, 29, 22, 30, 34, 24, 36, 20, 15, 10, 33, 
        22, 19, 13, 16, 17, 21, 20, 28, 18, 12, 13, 26, 34, 25, 24, 24, 43, 42, 15, 12, 
        13, 14, 24, 27, 25, 26, 0, 28, 13, 41, 33, 26, 16, 16, 11, 9] # number of actual strides
 training_data_tag = [abs(x) for x in training_data_tag]
+target_zv = [] # LSTM retraining for correct ZV and stride detection for own sensor data experiments
+target_displacements = [] # DeepShoe training for modern (data-driven) INS development to aid traiditional INS (i.e., improved PyShoe)
+target_heading_changes = [] # DeepShoe training for modern (data-driven) INS development to aid traidiitonal INS (i.e., improved PyShoe)
 # Process each VICON room training data file
 for file in vicon_data_files:
     if training_data_tag[i]:
@@ -140,17 +143,17 @@ for file in vicon_data_files:
         plt.scatter(reconstructed_traj[:, 0], reconstructed_traj[:, 1], c='b', marker='o')
         plt.savefig(os.path.join(output_dir, f'trajectory_exp_{i+1}.png'), dpi=600, bbox_inches='tight')
 
-        # plotting vertical trajectories
-        plt.figure()
-        plt.plot(timestamps[:len(gt)], gt[:, 2], label='GT (sample-wise)')  # Plot GT Z positions
-        plt.plot(timestamps[:len(reconstructed_traj)], reconstructed_traj[:, 1],
-                label='Stride & Heading')  # Plot reconstructed Z positions (use Y axis for visualization)
-        plt.title(f'Vertical Trajectories - {base_filename} - ZUPT detector={detector[i]} for exp#{i+1}')
-        plt.grid(True, which='both', linestyle='--', linewidth=1.5)
-        plt.xlabel('Time [s]')
-        plt.ylabel('Z Position')
-        plt.legend()
-        plt.savefig(os.path.join(output_dir, f'vertical_{base_filename}.png'), dpi=600, bbox_inches='tight')
+        # # plotting vertical trajectories
+        # plt.figure()
+        # plt.plot(timestamps[:len(gt)], gt[:, 2], label='GT (sample-wise)')  # Plot GT Z positions
+        # plt.plot(timestamps[:len(reconstructed_traj)], reconstructed_traj[:, 1],
+        #         label='Stride & Heading')  # Plot reconstructed Z positions (use Y axis for visualization)
+        # plt.title(f'Vertical Trajectories - {base_filename} - ZUPT detector={detector[i]} for exp#{i+1}')
+        # plt.grid(True, which='both', linestyle='--', linewidth=1.5)
+        # plt.xlabel('Time [s]')
+        # plt.ylabel('Z Position')
+        # plt.legend()
+        # plt.savefig(os.path.join(output_dir, f'vertical_{base_filename}.png'), dpi=600, bbox_inches='tight')
 
         # Plotting the zero velocity detection for filtered data without stride indices
         plt.figure()
@@ -168,43 +171,64 @@ for file in vicon_data_files:
         # while some experiments are excluded due to being non bipedal locomotion motion (i.e., crawling experiments)
         # some other bipedal locomotion experimental data requires correction for some ZV labels and stride detections 
         # correction indexes are extracted manually (see detect_missed_strides.m for details)
-        if i+1 == 4: # Experiment needs ZV correction in 10th stride
+        if i+1 == 4: # Experiment needs ZV correction in 10th stride (8th from the end)
             zv_filtered[2800:2814] = 1 # correction indexes for the missed stride
-        elif i+1 == 6: # Experiment needs ZV correction in 9th stride
+            zv[2800:2814] = 1 # zv is the target data in LSTM retraining for robust ZUPT aided INS
+        elif i+1 == 6: # Experiment needs ZV correction in 9th stride (start counting the strides to south direction)
             zv_filtered[2544:2627] = 1 # correction indexes for the missed stride
+            zv[2544:2627] = 1 # zv is the target data in LSTM retraining for robust ZUPT aided INS
         elif i+1 == 11: # Experiment needs ZV correction in 7th stride
             zv_filtered[2137:2162] = 1 # correction indexes for the missed stride
+            zv[2137:2162] = 1 # zv is the target data in LSTM retraining for robust ZUPT aided INS
         elif i+1 == 18: # Experiment needs ZV correction in 7th stride
             zv_filtered[1882:1940] = 1 # correction indexes for the missed stride
+            zv[1882:1940] = 1 # zv is the target data in LSTM retraining for robust ZUPT aided INS
         elif i+1 == 27: # Experiment needs ZV correction in {9, 16, 17, 18}th strides (first 3 by VICON and the last one by MBGTD)
             zv_filtered[1816:1830] = 1 
             zv_filtered[2989:3002] = 1
             zv_filtered[3154:3168] = 1
             zv_filtered[3329-3:3329+3] = 1
+            zv[1816:1830] = 1 # zv is the target data in LSTM retraining for robust ZUPT aided INS
+            zv[2989:3002] = 1 # zv is the target data in LSTM retraining for robust ZUPT aided INS
+            zv[3154:3168] = 1 # zv is the target data in LSTM retraining for robust ZUPT aided INS
+            zv[3329-3:3329+3] = 1 # zv is the target data in LSTM retraining for robust ZUPT aided INS
         elif i+1 == 30: # Experiment needs ZV correction in {2, 10}th strides (both detected by SHOE (supplementary) detector)
             zv_filtered[620:630] = 1
             zv_filtered[1785:1790] = 1
-        elif i+1 == 32: # 32nd experiment: missed strides {9, 11, 20}. First two strides are recovered by VICON but the last one needed to be introduced by manual annotation.
+            zv[620:630] = 1 # zv is the target data in LSTM retraining for robust ZUPT aided INS
+            zv[1785:1790] = 1 # zv is the target data in LSTM retraining for robust ZUPT aided INS
+        elif i+1 == 32: # 32nd experiment: missed strides {9, 11, 20}. First two are recovered by VICON but the last one needed to be introduced by manual annotation.
             zv_filtered[1851-3:1851+3] = 1
             zv_filtered[2138:2146] = 1
             zv_filtered[3997:4004] = 1 # this is manual annotation
-        elif i+1 == 36:
+            zv[1851-3:1851+3] = 1 # zv is the target data in LSTM retraining for robust ZUPT aided INS
+            zv[2138:2146] = 1 # zv is the target data in LSTM retraining for robust ZUPT aided INS
+            zv[3997:4004] = 1 # zv is the target data in LSTM retraining for robust ZUPT aided INS
+        elif i+1 == 36: # 36th experiment: 7th stride is missed
             zv_filtered[1864:1890] = 1
+            zv[1864:1890] = 1 # zv is the target data in LSTM retraining for robust ZUPT aided INS
         elif i+1 == 38: # 38th experiment: missed strides {3,27,33}. All three strides are recovered by VICON.
             zv_filtered[874-3:874+3] = 1 # stride 3
             zv_filtered[4520-3:4520+3] = 1 # stride 27
             zv_filtered[5410:5421] = 1 # stride 33
+            zv[874-3:874+3] = 1 # zv is the target data in LSTM retraining for robust ZUPT aided INS
+            zv[4520-3:4520+3] = 1 # zv is the target data in LSTM retraining for robust ZUPT aided INS
+            zv[5410:5421] = 1 # zv is the target data in LSTM retraining for robust ZUPT aided INS
         elif i+1 == 43: # 43rd experiment: missed strides {3, 14, 16}. All three strides are recovered by VICON.
             zv_filtered[905:944] = 1 # stride 3
             zv_filtered[2613:2662] = 1 # stride 14
             zv_filtered[2925:2974] = 1 # stride 16
+            zv[905:944] = 1 # zv is the target data in LSTM retraining for robust ZUPT aided INS
+            zv[2613:2662] = 1 # zv is the target data in LSTM retraining for robust ZUPT aided INS
+            zv[2925:2974] = 1 # zv is the target data in LSTM retraining for robust ZUPT aided INS
         elif i+1 == 49: # 49th experiment: Detected last 4 strides are left outside of the experiment as they do not cause any x-y motion.
             zv_filtered = zv_filtered[:13070] # data cropped to exclude the last 4 strides
+            zv = zv[:13070] # zv is the target data in LSTM retraining for robust ZUPT aided INS
             reconstructed_traj = reconstructed_traj[:13070]
             gt = gt[:13070]
             timestamps = timestamps[:13070]
-            zv = zv[:13070]
 
+        # PRODUCE CORRECTED ZV and TRAJECTORY PLOTS
         if i+1 in corrected_data_index:
             # Apply filter to zero velocity detection
             logging.info(f"Applying stride detection to the combined zero velocity detection results for experiment {i+1}.")
@@ -237,31 +261,22 @@ for file in vicon_data_files:
             plt.legend()
             plt.yticks([0,1])
             plt.savefig(os.path.join(output_dir, f'zv_labels_exp_{i+1}_corrected.png'), dpi=600, bbox_inches='tight')
+        ################################# SAVE TRAINING DATA RIGHT AT THIS SPOT for LSTM RETRAINING #########################
+        target_zv.append(zv)
+        target_displacements.append(displacements)
+        target_heading_changes.append(heading_changes)
     else:
-        print(f"Experiment {i+1} data will not be considered as bipedal locomotion data for the retraining process.".upper())
-        # 4th experiment: 10th stride (8th from the end) is missed in GT data: Split it into two as [0:2650] & [2950:end] (exclude 300 samples in training)
-        # 6th experiment: 9th stride (start counting the strides while going to south) is not detected as a stride in GT data: Split it into two as [0:2400] & [2700:end]
-        # 11th experiment: 7th stride (see above for explanation): Split it into two as [0:2000] & [2300:end] (exclude 300 samples)
+        print(f"Experiment {i+1} data is not considered as bipedal locomotion data for the retraining process.".upper())
         # 13th experiment shows a lot of 180° turns, which causes multiple ZV phase and stride detections during the turns.
-        # Labeled as 0, i.e., non bi-pedal locomotion data, temporarily. It will be included in future for further research.
-        # 16th experiment: Despite showing MBGTD is the optimal detector in the mat file, VICON & ARED performs a lot better. Optimal detector is selecetd as ARED.
-        # 18th experiment: 7th stride is missed - check for [1700-2165] region for the stride
+        # Labeled as 0, i.e., non bi-pedal locomotion data, temporarily. It will be included in future for further research. 
         # 20th experiment: The pedestrian stops in every 5 or 6 strides for a while but it is a valid bipedal locomotion data (confirmed by GCetin's ML code)
-        # 27th experiment: missed strides {9,16,17,18}. First three strides can be retrieved by VICON detector while the last one can be retrieved by MBGTD.
-        # 30th experiment: missed strides {2,10}. Both strides are detected by SHOE detector.
-        # 32nd experiment: missed strides {9,11,20}. First two strides are recovered by VICON but the last one needed to be introduced by manual annotation.
-        # 36th experiment: 7th stride is missed
-        # 38th experiment: missed strides {3,27,33}
-        # 43rd experiment: missed strides {3,14,16}
         # 47th experiment is a crawling experiment so it is not a bipedal locomotion data.
         # 48th experiment shows a lot of 180° turns, which causes multiple ZV phase and stride detections during the turns.
         # Labeled as 0, i.e., non bi-pedal locomotion data, temporarily. It will be included in future for further research.
-        # 49th experiment is cropped. Detected last 4 strides are left outside of the experiment as they do not cause any x-y motion.
         # 50th experiment: shows a lot of 180° turns, which causes multiple ZV phase and stride detections during the turns.
         # Labeled as 0, i.e., non bi-pedal locomotion data, temporarily. It will be included in future for further research.
-        # 51st experiment opt detector changed from MBGTD to VICON
         # 55 needs cropping at the beginning or the end - left out of the training dataset yet will be considered as training data in future
-
     i += 1  # Move to the next experiment
 
+print(f"Out of {i} experiments, {len(target_zv)} of them will be used in retraining LSTM robust ZV detector.")
 logging.info("Processing complete for all files.")
