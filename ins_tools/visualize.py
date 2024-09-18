@@ -12,11 +12,11 @@ def plot_topdown(traj, trigger_ind=None, gt_method = 'dense', title=None, save_d
     colour = ['blue', 'green', 'darkorange', 'gold']
     for i in range(len(traj)-1):
         if trigger_ind is not None:
-            plt.plot(-traj[i][:,0], traj[i][:,1], '-gD', markevery=trigger_ind, linewidth = 1.7, color=colour[i], markersize=5, markeredgewidth=0.005, markeredgecolor='black')
+            plt.plot(traj[i][:,0], traj[i][:,1], '-gD', markevery=trigger_ind, linewidth = 1.7, color=colour[i], markersize=5, markeredgewidth=0.005, markeredgecolor='black')
         else:
-            plt.plot(-traj[i][:,0], traj[i][:,1], linewidth = 1.7, color=colour[i])
+            plt.plot(traj[i][:,0], traj[i][:,1], linewidth = 1.7, color=colour[i])
     if gt_method == 'sparse':
-        plt.scatter(-traj[-1][:,0], traj[-1][:,1], s=13, color='red',zorder=len(traj)+1)
+        plt.scatter(traj[-1][:,0], traj[-1][:,1], s=13, color='red',zorder=len(traj)+1)
     elif gt_method == 'none':
         gt=None
     else:

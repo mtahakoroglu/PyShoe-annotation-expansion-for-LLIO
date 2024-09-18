@@ -21,6 +21,7 @@ logging.basicConfig(level=logging.INFO, format='%(message)s',
                     handlers=[logging.FileHandler(log_file), logging.StreamHandler()])
 
 # Detector thresholds. Detector 16 is changed from MBGTD to ARED
+# 51st experiment opt detector changed from MBGTD to VICON
 detector = ['shoe', 'ared', 'shoe', 'shoe', 'shoe', 'ared', 'shoe', 'shoe',
             'vicon', 'shoe', 'shoe', 'vicon', 'vicon', 'shoe', 'vicon', 'ared',
             'shoe', 'shoe', 'ared', 'vicon', 'shoe', 'shoe', 'vicon', 'shoe',
@@ -63,14 +64,15 @@ def reconstruct_trajectory(displacements, heading_changes, initial_position):
         trajectory.append(new_position)
         current_heading += heading_changes[i]
 
+    # trajectory[:, 0] = -trajectory[:, 0] # change made by mtahakoroglu to match with GT alignment
     return np.array(trajectory)
 
 i = 0  # experiment index
-# training_data_tag = [0]*12
-# training_data_tag.append(1)
-training_data_tag = [1, 1, 1, -1, 1, -1, 1, 1, 1, 1, -1, 1, 0, 1, 1, 1, 1, -1, 1, 1, 
-                    1, 1, 1, 1, 1, 1, -1, 1, 1, -1, 1, -1, 1, 1, 1, -1, 1, -1, 1, 1, 
-                    1, 1, -1, 1, 1, 1, 0, 0, -1, 0, 1, 1, 1, 1, 0, 1]
+training_data_tag = [1]*5
+training_data_tag.append(1)
+# training_data_tag = [1, 1, 1, -1, 1, -1, 1, 1, 1, 1, -1, 1, 0, 1, 1, 1, 1, -1, 1, 1, 
+#                     1, 1, 1, 1, 1, 1, -1, 1, 1, -1, 1, -1, 1, 1, 1, -1, 1, -1, 1, 1, 
+#                     1, 1, -1, 1, 1, 1, 0, 0, -1, 0, 1, 1, 1, 1, 0, 1]
 corrected_data_index = [4, 6, 11, 18, 27, 30, 32, 36, 38, 43, 49] # corrected experiment indexes
 nGT = [22, 21, 21, 18, 26, 24, 18, 20, 28, 35, 29, 22, 30, 34, 24, 36, 20, 15, 10, 33, 
        22, 19, 13, 16, 17, 21, 20, 28, 18, 12, 13, 26, 34, 25, 24, 24, 43, 42, 15, 12, 
@@ -101,7 +103,7 @@ for file in vicon_data_files:
         k = 75 # temporal window size for checking if detected strides are too close or not
         if i+1 == 54: # remove false positive by changing filter size for experiment 54
             k = 95
-        # elif i+1 == 13:
+        # elif i+1 == 13: # not considered as part of training data due to sharp 180 degree changes in position
         #     k = 85
         zv_filtered, n, strideIndex = heuristic_zv_filter_and_stride_detector(zv, k)
         # zv_filtered = medfilt(zv_filtered, 15)
@@ -123,6 +125,7 @@ for file in vicon_data_files:
         plt.figure()
         visualize.plot_topdown([reconstructed_traj, gt[:, :2]], title=f"Exp#{i+1} ({base_filename}) - {detector[i].upper()}", 
                                legend=['Stride & Heading', 'GT (sample-wise)'])
+        # to visualize selected stides from the experiment of interest, change the parameters below
         # if i+1==49:
         #     # plt.plot(gt[-5:,0], gt[-5:,1], c='r')
         #     # plt.scatter(-reconstructed_traj[-3:, 0], reconstructed_traj[-5:, 1], c='b', marker='x')
@@ -134,7 +137,7 @@ for file in vicon_data_files:
         #     # plt.scatter(-reconstructed_traj[0:hms-1, 0], reconstructed_traj[0:hms-1, 1], c='b', marker='x')
         #     # plt.scatter(-reconstructed_traj[hms-1, 0], reconstructed_traj[hms-1, 1], c='g', marker='o')
         # else:    
-        plt.scatter(-reconstructed_traj[:, 0], reconstructed_traj[:, 1], c='b', marker='o')
+        plt.scatter(reconstructed_traj[:, 0], reconstructed_traj[:, 1], c='b', marker='o')
         plt.savefig(os.path.join(output_dir, f'trajectory_exp_{i+1}.png'), dpi=600, bbox_inches='tight')
 
         # plotting vertical trajectories
@@ -219,7 +222,7 @@ for file in vicon_data_files:
             plt.figure()
             visualize.plot_topdown([reconstructed_traj, gt[:, :2]], title=f"Exp#{i+1} ({base_filename}) - Combined",
                                 legend=['Stride & Heading', 'GT (sample-wise)']) 
-            plt.scatter(-reconstructed_traj[:, 0], reconstructed_traj[:, 1], c='b', marker='o')
+            plt.scatter(reconstructed_traj[:, 0], reconstructed_traj[:, 1], c='b', marker='o')
             plt.savefig(os.path.join(output_dir, f'trajectory_exp_{i+1}_corrected.png'), dpi=600, bbox_inches='tight')
 
             # Plotting the zero velocity detection for the combined ZV detector without stride indices
