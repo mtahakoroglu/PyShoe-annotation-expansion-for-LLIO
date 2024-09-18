@@ -1,20 +1,20 @@
 <h2>PyShoe Dataset - Correction for Bipedal Locomotion</h2>
-<p align="justify">Just like in <a href="https://github.com/mtahakoroglu/OpenShoe-PyShoe-DeepShoe-FuseShoe">PyShoe-OpenShoe-DeepShoe-FuseShoe</a> repo, one needs the following installations to run the required scripts and obtain the results shown here and in the paper.</p>
+<p align="justify">Just like in <a href="https://github.com/mtahakoroglu/OpenShoe-PyShoe-DeepShoe-FuseShoe">LLIO-aided-iPyShoe</a> repo, one needs the following installations to run the scripts and obtain the results shown here and in the paper.</p>
 
-<h3>Creating PyShoe Virtual Environment in Anaconda</h3>
-<p align="justify">After installling Anaconda, launch <b>Anaconda PowerShell</b> and then type</p>
+<h3>Creating iPyShoe Virtual Environment in Anaconda</h3>
+<p align="justify">After installing Anaconda, launch <b>Anaconda PowerShell</b> and then type</p>
 
 ```
 conda create --name pyshoe python=3.7
 ```
 
-<p align="justify">to create <b>pyshoe</b> virtual environment (venv). Subsequently, type</p>
+<p align="justify">to create <b>ipyshoe</b> virtual environment (venv). Subsequently, type</p>
 
 ```
-conda activate pyshoe
+conda activate ipyshoe
 ```
 
-<p align="justify">to activate <b>pyshoe</b> venv.</p>
+<p align="justify">to activate <b>ipyshoe</b> venv.</p>
 
 <h3>Installing Required Packages</h3>
 <p align="justify">Type and enter the following commands in Anaconda PS terminal to install the required packages and libraries to run PyShoe codes and reproduce the results in the page and the paper. We thank <a href="https://scholar.google.com.tr/citations?user=F2NkKNAAAAAJ&hl=tr">Dr. Ramazan Özgür Doğan</a> for the assistance in setting up the environment.</p>
@@ -23,13 +23,13 @@ conda activate pyshoe
 conda install pytorch==1.13.1 torchvision==0.14.1 torchaudio==0.13.1 pytorch-cuda=11.7 -c pytorch -c nvidia
 ```
 
-<p align="justify">In <a href="https://github.com/mtahakoroglu/OpenShoe-PyShoe-DeepShoe-FuseShoe">PyShoe-OpenShoe-DeepShoe-FuseShoe</a> repo, we used</p>
+<p align="justify">Recall that in <a href="https://github.com/mtahakoroglu/OpenShoe-PyShoe-DeepShoe-FuseShoe">LLIO-aided-iPyShoe</a> repo</p>
 
 ```
 pip install torch==1.13.1+cu117 torchvision==0.14.1+cu117 torchaudio==0.13.1 --extra-index-url https://download.pytorch.org/whl/cu117
 ```
 
-<p align="justify">command to use the pre-trained LSTM network for robust (adaptive) ZUPT detection and pedestrian INS. Here, due to some undetected steps in VICON training data (recall that Wagstaff <i>et. al.</i> (i.e., the creator of PyShoe dataset) included crawling data) and self-collected data, we needed to go over the 56 experiments in the training dataset <i><b>(i)</b></i> to correct for undetected steps (they are classified as 0 in ZV signal plot despite them actually being 1, i.e., it is false-negative) and <i><b>(ii)</b></i> to exclude motions like crawling, which are not of type bipedal locomotion. For this reason, we had to retrain the bi-LSTM network proposed by Wagstaff <i>et. al.</i>. In order to use GPU in the training process, instead of the PyTorch installation command given above, we used the one below.</p>
+<p align="justify">command was entered to use the pre-trained LSTM network for robust (adaptive) ZUPT detection in INS trajectory generation. Here, due to some undetected steps in VICON training data (recall that Wagstaff <i>et. al.</i> (i.e., the creator of PyShoe dataset) included crawling data) and self-collected data, we needed to go over the 56 experiments in the training dataset <i><b>(i)</b></i> to correct for undetected steps (they are classified as 0 in ZV signal plot despite them actually being 1, i.e., it is false-negative) and <i><b>(ii)</b></i> to exclude motions like crawling, which are not of type bipedal locomotion. For this reason, we had to retrain the bi-LSTM network proposed by Wagstaff <i>et. al.</i>. In order to use GPU in the training process, instead of the PyTorch installation command given above, we used the one below.</p>
 
 ```
 pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu117
@@ -54,13 +54,13 @@ pip install pandas==1.1.5
 <p align="justify">After cloning this repository to your local computer, you must install <b><a href="https://github.com/utiasSTARS/liegroups" target="_blank">liegroups</a></b> package to run the code if you would like to reproduce the results shown here in this repo or the paper.</p>
 
 <h3>Example Results (Own Sensor Data)</h3>
-<p align="justify">We first used pre-trained LSTM ZUPT detector and the resulting adaptive pedestrian INS on our own-collected data (where our sensor is 3DM-GX5-25). In two of five experiments conducted, we noticed that one stride is missed in each one after manual examination (we counted actual number of strides made in the experiments for checking if number of strides are correctly detected or not). The failure of detection of any stride would definitely affect the performance of the foot-mounted INS as the ZUPT corrections could not be made in respective stationary phases. Below, we show all five experiments made to test pre-trained LSTM ZUPT detector.</p>
+<p align="justify">We first used the pre-trained LSTM ZUPT detector based robust pedestrian INS on our own-collected data (where our sensor is 3DM-GX5-25). In two of five experiments conducted, we noticed that one stride is missed in each one after manual examination (we counted actual number of strides made in the experiments for checking if number of strides are correctly detected or not). The failure of detection of any stride would definitely affect the performance of the foot-mounted INS as the ZUPT could not be made in the respective ZV phases. The performance of the pre-trained LSTM ZUPT detector on self-collected inertial data can be seen below.</p>
 
 <h4>Experiment 1 (74/75 strides detected) - Failure (First ZUPT phase (and stride) is missed)</h4>
 
-<p align="justify">We see the very first stride (we assume the first stride that is also the start point is numbered as stride #0, i.e., initial stride) is not detected below. Note that ZV labels are filtered for accurate stride detection but the filtered values are not used in trajectory generation in the second figure. In other words, in the trajectory plot, the red trajectory is obtained with raw (not filtered) LSTM ZUPT detected ZV labels, which sometimes misses some strides, while the strides (visualized on the trajectory as red color cross signs and labeled as "LSTM") are extracted from filtered LSTM ZUPT labels given in the first graph. </p>
+<p align="justify">We see the very first stride (we assume the start point is numbered as stride #0, i.e., initial stride) is not detected in the figure. Note that ZV labels are filtered for accurate stride detection but the filtered ZV values are not used in trajectory generation in the second figure. In other words, in the trajectory plot, the red trajectory is obtained with raw (not filtered) LSTM ZUPT detected ZV labels, which sometimes misses some strides, while the strides (visualized on the trajectory as red color cross signs and labeled as "LSTM") are extracted from filtered LSTM ZUPT labels given in the first graph.</p>
 
-<img src="results/figs/own/zv_lstm_heuristically_filtered_SensorConnectData_16.png" alt="ZV labels for adaptive ZUPT (LSTM filtered) detector method - experiment 16" width=%100 height=auto>
+<img src="results/figs/own/zv_lstm_heuristically_filtered_SensorConnectData_16.png" alt="ZV labels for robust ZUPT (LSTM filtered) detector method - experiment 16" width=%100 height=auto>
 
 <img src="results/figs/own/SensorConnectData_16.png" alt="experiment 16 trajectories obtained with (various) ZUPT (detectors) aided (Error-State Kalman Filter based) foot-mounted INS" width=%100 height=auto>
 
