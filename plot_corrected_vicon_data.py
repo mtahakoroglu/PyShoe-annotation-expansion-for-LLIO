@@ -14,7 +14,7 @@ vicon_data_dir = 'data/vicon/processed/'
 vicon_data_files = glob.glob(os.path.join(vicon_data_dir, '*.mat'))
 
 # Set up logging
-output_dir = "results/figs/vicon_bipedal_locomotion/"
+output_dir = "results/figs/vicon_corrected/"
 os.makedirs(output_dir, exist_ok=True)
 log_file = os.path.join(output_dir, 'output.log')
 logging.basicConfig(level=logging.INFO, format='%(message)s',
@@ -105,11 +105,11 @@ def heuristic_zv_filter_and_stride_detector(zv, k):
     return zv, n, strideIndexFall
 
 i = 0  # experiment index
-# training_data_tag = [0]*50
-# training_data_tag.append(1)
-training_data_tag = [1, 1, 1, -1, 1, -1, 1, 1, 1, 1, -1, 1, 0, 1, 1, 1, 1, -1, 1, 1, 
-                    1, 1, 1, 1, 1, 1, -1, 1, 1, -1, 1, -1, 1, 1, 1, -1, 1, -1, 1, 1, 
-                    1, 1, -1, 1, 1, 1, 0, 0, -1, 0, 1, 1, 1, 1, 0, 1]
+training_data_tag = [0]*48
+training_data_tag.append(1)
+# training_data_tag = [1, 1, 1, -1, 1, -1, 1, 1, 1, 1, -1, 1, 0, 1, 1, 1, 1, -1, 1, 1, 
+#                     1, 1, 1, 1, 1, 1, -1, 1, 1, -1, 1, -1, 1, 1, 1, -1, 1, -1, 1, 1, 
+#                     1, 1, -1, 1, 1, 1, 0, 0, -1, 0, 1, 1, 1, 1, 0, 1]
 corrected_data_index = [4, 6, 11, 18, 27, 30, 32, 36, 38, 43, 49] # corrected experiment indexes
 nGT = [22, 21, 21, 18, 26, 24, 18, 20, 28, 35, 29, 22, 30, 34, 24, 36, 20, 15, 10, 33, 
        22, 19, 13, 16, 17, 21, 20, 28, 18, 12, 13, 26, 34, 25, 24, 24, 43, 42, 15, 12, 
@@ -264,6 +264,7 @@ for file in vicon_data_files:
             reconstructed_traj = reconstructed_traj[:13070]
             gt = gt[:13070]
             timestamps = timestamps[:13070]
+            imu_data = imu_data[0:13070,:]
 
         # PRODUCE CORRECTED ZV and TRAJECTORY PLOTS
         if i+1 in corrected_data_index:
