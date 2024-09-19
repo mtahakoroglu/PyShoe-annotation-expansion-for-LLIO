@@ -65,7 +65,7 @@ def reconstruct_trajectory(displacements, heading_changes, initial_position):
         current_heading += heading_changes[i]
 
     trajectory = np.array(trajectory)
-    trajectory[:, 0] = -trajectory[:, 0] # change made by mtahakoroglu to match with GT alignment
+    # trajectory[:, 0] = -trajectory[:, 0] # change made by mtahakoroglu to match with GT alignment
     return trajectory
 
 # this function is used in stride detection
@@ -105,7 +105,7 @@ def heuristic_zv_filter_and_stride_detector(zv, k):
     return zv, n, strideIndexFall
 
 i = 0  # experiment index
-# training_data_tag = [0]*48
+# training_data_tag = [1]*55
 # training_data_tag.append(1)
 training_data_tag = [1, 1, 1, -1, 1, -1, 1, 1, 1, 1, -1, 1, 0, 1, 1, 1, 1, -1, 1, 1, 
                     1, 1, 1, 1, 1, 1, -1, 1, 1, -1, 1, -1, 1, 1, 1, -1, 1, -1, 1, 1, 
@@ -115,10 +115,8 @@ nGT = [22, 21, 21, 18, 26, 24, 18, 20, 28, 35, 29, 22, 30, 34, 24, 36, 20, 15, 1
        22, 19, 13, 16, 17, 21, 20, 28, 18, 12, 13, 26, 34, 25, 24, 24, 43, 42, 15, 12, 
        13, 14, 24, 27, 25, 26, 0, 28, 13, 41, 33, 26, 16, 16, 11, 9] # number of actual strides
 training_data_tag = [abs(x) for x in training_data_tag]
-target_zv = [] # LSTM retraining for correct ZV and stride detection for own sensor data experiments
-target_displacements = [] # LLIO training for modern (data-driven) INS development to aid traditional INS (i.e., improved PyShoe)
-target_heading_changes = [] # LLIO training for modern (data-driven) INS development to aid traiditional INS (i.e., improved PyShoe)
-input_imu_data = [] # LLIO training for modern (data-driven) INS development to aid traiditional INS (i.e.i iPyShoe)
+extract_lstm_retraining_data = True # used to save csv files for zv and stride detection training
+
 # Process each VICON room training data file
 for file in vicon_data_files:
     if training_data_tag[i]:
@@ -300,11 +298,22 @@ for file in vicon_data_files:
             plt.legend()
             plt.yticks([0,1])
             plt.savefig(os.path.join(output_dir, f'zv_labels_exp_{i+1}_corrected.png'), dpi=600, bbox_inches='tight')
-        ################################# SAVE TRAINING DATA RIGHT AT THIS SPOT for LSTM RETRAINING #########################
-        target_zv.append(zv)
-        target_displacements.append(displacements)
-        target_heading_changes.append(heading_changes)
-        input_imu_data.append(imu_data)
+        
+        #################### SAVE TRAINING DATA RIGHT AT THIS SPOT for LSTM RETRAINING #################
+        if extract_lstm_retraining_data:
+            # Combine IMU data and ZV data into one array
+            combined_data = np.column_stack((timestamps, imu_data, zv))
+
+            # Save the combined IMU and ZV data to a CSV file
+            base_filename = os.path.splitext(os.path.basename(file))[0]
+            combined_csv_filename = os.path.join(output_dir, f'lstm_zv_detector_training_data/{base_filename}_imu_zv.csv')
+
+            np.savetxt(combined_csv_filename, combined_data, delimiter=',',
+                    header='t,ax,ay,az,wx,wy,wz,zv', comments='')
+        
+        #################### SAVE TRAINING DATA for LLIO TRAINING #################
+        # saving commands will be added here for future LLIO research
+        
     else:
         print(f"Experiment {i+1} data is not considered as bipedal locomotion data for the retraining process.".upper())
         # 13th experiment shows a lot of 180° turns, which causes multiple ZV phase and stride detections during the turns.
@@ -318,5 +327,5 @@ for file in vicon_data_files:
         # 55 needs cropping at the beginning or the end - left out of the training dataset yet will be considered as training data in future
     i += 1  # Move to the next experiment
 
-print(f"Out of {i} experiments, {len(target_zv)} of them will be used in retraining LSTM robust ZV detector.")
+# print(f"Out of {i} experiments, {len(target_zv)} of them will be used in retraining LSTM robust ZV detector.")
 logging.info("Processing complete for all files.")

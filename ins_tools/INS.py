@@ -51,7 +51,7 @@ class INS():
         
         if zv is None:
             ### Compute the trial's zero-velocity detections using the specified detector
-            self.zv = self.Localizer.compute_zv_lrt(W,G, detector=detector) #ZV detection 
+            self.zv = self.Localizer.compute_zv_lrt(W, G, detector=detector) #ZV detection 
         else:
             ### Use a pre-computed zero-velocity estimate
             self.zv = zv

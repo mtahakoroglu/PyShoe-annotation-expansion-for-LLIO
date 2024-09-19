@@ -20,7 +20,7 @@ def plot_topdown(traj, trigger_ind=None, gt_method = 'dense', title=None, save_d
     elif gt_method == 'none':
         gt=None
     else:
-        plt.plot(-traj[-1][:,0], traj[-1][:,1], color='red')
+        plt.plot(traj[-1][:,0], traj[-1][:,1], color='red')
     if title != None:
         plt.title(title, fontsize=20, color='black')
     plt.ylabel('y [m]', fontsize=22)
