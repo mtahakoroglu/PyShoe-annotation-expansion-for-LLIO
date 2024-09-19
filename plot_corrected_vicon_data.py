@@ -116,8 +116,9 @@ nGT = [22, 21, 21, 18, 26, 24, 18, 20, 28, 35, 29, 22, 30, 34, 24, 36, 20, 15, 1
        13, 14, 24, 27, 25, 26, 0, 28, 13, 41, 33, 26, 16, 16, 11, 9] # number of actual strides
 training_data_tag = [abs(x) for x in training_data_tag]
 target_zv = [] # LSTM retraining for correct ZV and stride detection for own sensor data experiments
-target_displacements = [] # DeepShoe training for modern (data-driven) INS development to aid traiditional INS (i.e., improved PyShoe)
-target_heading_changes = [] # DeepShoe training for modern (data-driven) INS development to aid traidiitonal INS (i.e., improved PyShoe)
+target_displacements = [] # LLIO training for modern (data-driven) INS development to aid traditional INS (i.e., improved PyShoe)
+target_heading_changes = [] # LLIO training for modern (data-driven) INS development to aid traiditional INS (i.e., improved PyShoe)
+input_imu_data = [] # LLIO training for modern (data-driven) INS development to aid traiditional INS (i.e.i iPyShoe)
 # Process each VICON room training data file
 for file in vicon_data_files:
     if training_data_tag[i]:
@@ -303,6 +304,7 @@ for file in vicon_data_files:
         target_zv.append(zv)
         target_displacements.append(displacements)
         target_heading_changes.append(heading_changes)
+        input_imu_data.append(imu_data)
     else:
         print(f"Experiment {i+1} data is not considered as bipedal locomotion data for the retraining process.".upper())
         # 13th experiment shows a lot of 180° turns, which causes multiple ZV phase and stride detections during the turns.
