@@ -105,17 +105,17 @@ def heuristic_zv_filter_and_stride_detector(zv, k):
     return zv, n, strideIndexFall
 
 i = 0  # experiment index
-# training_data_tag = [1]*55
-# training_data_tag.append(1)
-training_data_tag = [1, 1, 1, -1, 1, -1, 1, 1, 1, 1, -1, 1, 0, 1, 1, 1, 1, -1, 1, 1, 
-                    1, 1, 1, 1, 1, 1, -1, 1, 1, -1, 1, -1, 1, 1, 1, -1, 1, -1, 1, 1, 
-                    1, 1, -1, 1, 1, 1, 0, 0, -1, 0, 1, 1, 1, 1, 0, 1]
+training_data_tag = [1]*55
+training_data_tag.append(1)
+# training_data_tag = [1, 1, 1, -1, 1, -1, 1, 1, 1, 1, -1, 1, 0, 1, 1, 1, 1, -1, 1, 1, 
+#                     1, 1, 1, 1, 1, 1, -1, 1, 1, -1, 1, -1, 1, 1, 1, -1, 1, -1, 1, 1, 
+#                     1, 1, -1, 1, 1, 1, 0, 0, -1, 0, 1, 1, 1, 1, 0, 1]
 corrected_data_index = [4, 6, 11, 18, 27, 30, 32, 36, 38, 43, 49] # corrected experiment indexes
 nGT = [22, 21, 21, 18, 26, 24, 18, 20, 28, 35, 29, 22, 30, 34, 24, 36, 20, 15, 10, 33, 
        22, 19, 13, 16, 17, 21, 20, 28, 18, 12, 13, 26, 34, 25, 24, 24, 43, 42, 15, 12, 
        13, 14, 24, 27, 25, 26, 0, 28, 13, 41, 33, 26, 16, 16, 11, 9] # number of actual strides
 training_data_tag = [abs(x) for x in training_data_tag]
-extract_lstm_retraining_data = True # used to save csv files for zv and stride detection training
+extract_lstm_retraining_data = False # used to save csv files for zv and stride detection training
 
 # Process each VICON room training data file
 for file in vicon_data_files:
@@ -135,6 +135,7 @@ for file in vicon_data_files:
         ins.Localizer.set_gt(gt)  # Set the ground truth data required by 'vicon' detector
         ins.Localizer.set_ts(timestamps)  # Set the sampling time required by 'vicon' detector
         zv = ins.Localizer.compute_zv_lrt(W=5 if detector[i] != 'mbgtd' else 2, G=thresh[i], detector=detector[i])
+        zv_lstm = ins.Localizer.compute_zv_lrt(W=0, G=0, detector='lstm')
         x = ins.baseline(zv=zv)
 
         # Apply filter to zero velocity detection results for stride detection corrections
@@ -145,13 +146,14 @@ for file in vicon_data_files:
         # elif i+1 == 13: # not considered as part of training data due to sharp 180 degree changes in position
         #     k = 85
         zv_filtered, n, strideIndex = heuristic_zv_filter_and_stride_detector(zv, k)
+        zv_lstm_filtered, n_lstm_filtered, strideIndexLSTMfiltered = heuristic_zv_filter_and_stride_detector(zv_lstm, k)
         # zv_filtered = medfilt(zv_filtered, 15)
         # n, strideIndex = count_one_to_zero_transitions(zv_filtered)
         # strideIndex = strideIndex - 1 # make all stride indexes the last samples of the respective ZUPT phase
         # strideIndex[0] = 0 # first sample is the first stride index
         # strideIndex = np.append(strideIndex, len(timestamps)-1) # last sample is the last stride index
         logging.info(f"Detected {n}/{nGT[i]} strides in the experiment {i+1}.")
-
+        print(f"LSTM filtered ZV detector found {n_lstm_filtered}/{nGT[i]} strides in the experiment {i+1}.")
         # Calculate displacement and heading changes between stride points based on ground truth
         displacements, heading_changes = calculate_displacement_and_heading(gt[:, :2], strideIndex)
         # Reconstruct the trajectory from displacements and heading changes
@@ -203,6 +205,19 @@ for file in vicon_data_files:
         plt.legend()
         plt.yticks([0,1])
         plt.savefig(os.path.join(output_dir, f'zv_labels_exp_{i+1}.png'), dpi=600, bbox_inches='tight')
+
+        # Plotting the zero velocity detection for LSTM filtered data
+        plt.figure()
+        plt.plot(timestamps[:len(zv_lstm)], zv_lstm, label='Raw')
+        plt.plot(timestamps[:len(zv_lstm_filtered)], zv_lstm_filtered, label='Filtered')
+        plt.scatter(timestamps[strideIndexLSTMfiltered], zv_lstm_filtered[strideIndexLSTMfiltered], c='r', marker='x')
+        plt.title(f'Exp#{i+1} ({base_filename}) {n_lstm_filtered}/{nGT[i]} strides detected ({"lstm".upper()})')
+        plt.xlabel('Time [s]')
+        plt.ylabel('Zero Velocity')
+        plt.grid(True, which='both', linestyle='--', linewidth=1.5)
+        plt.legend()
+        plt.yticks([0,1])
+        plt.savefig(os.path.join(output_dir, f'zv_labels_exp_{i+1}_lstm.png'), dpi=600, bbox_inches='tight')
 
         # while some experiments are excluded due to being non bipedal locomotion motion (i.e., crawling experiments)
         # some other bipedal locomotion experimental data requires correction for some ZV labels and stride detections 
