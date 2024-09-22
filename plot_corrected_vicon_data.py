@@ -234,7 +234,7 @@ for file in vicon_data_files:
         plt.figure()
         plt.plot(timestamps[:len(zv_bilstm)], zv_bilstm, label='Raw')
         plt.plot(timestamps[:len(zv_bilstm_filtered)], zv_bilstm_filtered, label='Filtered')
-        plt.scatter(timestamps[strideIndexBiLSTMfiltered], zv_lstm_filtered[strideIndexBiLSTMfiltered], c='r', marker='x')
+        plt.scatter(timestamps[strideIndexBiLSTMfiltered], zv_bilstm_filtered[strideIndexBiLSTMfiltered], c='r', marker='x')
         plt.title(f'Exp#{i+1} ({base_filename}) {n_bilstm_filtered}/{nGT[i]} strides detected ("BiLSTM")')
         plt.xlabel('Time [s]')
         plt.ylabel('Zero Velocity')

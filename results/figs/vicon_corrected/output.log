@@ -2189,3 +2189,27 @@ Processing file: data/vicon/processed\2017-11-22-11-22-46.mat
 Processing ared detector for file: data/vicon/processed\2017-11-22-11-22-46.mat
 Applying heuristic filter to optimal ZUPT detector "ared" for correct stride detection.
 Detected 21/21 strides in the experiment 2.
+Processing file: data/vicon/processed\2017-11-22-11-22-03.mat
+Processing shoe detector for file: data/vicon/processed\2017-11-22-11-22-03.mat
+Processing file: data/vicon/processed\2017-11-22-11-22-03.mat
+Processing shoe detector for file: data/vicon/processed\2017-11-22-11-22-03.mat
+Processing file: data/vicon/processed\2017-11-22-11-22-03.mat
+Processing shoe detector for file: data/vicon/processed\2017-11-22-11-22-03.mat
+Processing file: data/vicon/processed\2017-11-22-11-22-03.mat
+Processing shoe detector for file: data/vicon/processed\2017-11-22-11-22-03.mat
+Processing file: data/vicon/processed\2017-11-22-11-22-03.mat
+Processing shoe detector for file: data/vicon/processed\2017-11-22-11-22-03.mat
+Applying heuristic filter to optimal ZUPT detector "shoe" for correct stride detection.
+Detected 22/22 strides in the experiment 1.
+Processing file: data/vicon/processed\2017-11-22-11-22-46.mat
+Processing ared detector for file: data/vicon/processed\2017-11-22-11-22-46.mat
+Applying heuristic filter to optimal ZUPT detector "ared" for correct stride detection.
+Detected 21/21 strides in the experiment 2.
+Processing file: data/vicon/processed\2017-11-22-11-22-03.mat
+Processing shoe detector for file: data/vicon/processed\2017-11-22-11-22-03.mat
+Applying heuristic filter to optimal ZUPT detector "shoe" for correct stride detection.
+Detected 22/22 strides in the experiment 1.
+Processing file: data/vicon/processed\2017-11-22-11-22-46.mat
+Processing ared detector for file: data/vicon/processed\2017-11-22-11-22-46.mat
+Applying heuristic filter to optimal ZUPT detector "ared" for correct stride detection.
+Detected 21/21 strides in the experiment 2.

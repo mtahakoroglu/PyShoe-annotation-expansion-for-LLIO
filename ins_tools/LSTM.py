@@ -53,7 +53,7 @@ class BiLSTM(torch.nn.Module):
             dropout=0.1,
             bidirectional=True,
         )  
-        self.fc = torch.nn.Linear(128 * 2, 2)
+        self.fc = torch.nn.Linear(128*2, 2) # Double hidden size for BiLSTM (128*2)
         self.dropout = torch.nn.Dropout(0.1)
         self.batch_norm = torch.nn.BatchNorm1d(128 * 2)
 
@@ -66,18 +66,27 @@ class BiLSTM(torch.nn.Module):
 
     def forward(self, x, h=None):
         x = torch.FloatTensor(x).view((1, -1, 6))
+
         if h is None:
-            h_n = x.data.new(10, x.size(0), 128).normal_(0, 0.1)
-            h_c = x.data.new(10, x.size(0), 128).normal_(0, 0.1)
+            # Bidirectional LSTM: Hidden state has 2x the number of layers
+            h_n = x.data.new(5*2, x.size(0), 128).normal_(0, 0.1)  # 10 layers: 5 layers * 2 directions
+            h_c = x.data.new(5*2, x.size(0), 128).normal_(0, 0.1)
         else:
-            h_n, h_c = h
+            h_n, h_c = h  # Unpacking hidden states
 
         self.lstm.flatten_parameters()
+
+        # Forward pass through BiLSTM
         r_out, (h_n, h_c) = self.lstm(x, (h_n, h_c))
-        r_out = self.batch_norm(r_out[:, -1, :])
-        r_out = self.dropout(r_out)
-        output = self.fc(r_out)
+        
+        # Fully connected layer and softmax
+        output = torch.softmax(self.fc(r_out[0, :, :]), dim=1)  # Project to 2 classes
+        
+        # Get zero-velocity detection (zv) output
         zv_bilstm = torch.max(output.cpu().data, 1)[1].numpy()
         prob = torch.max(output.cpu().data, 1)[0].numpy()
+        
+        # Apply threshold (probability must be > 0.85 to be considered non-zero velocity)
         zv_bilstm[np.where(prob <= 0.85)] = 0
+        
         return zv_bilstm
