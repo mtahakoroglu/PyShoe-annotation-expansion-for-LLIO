@@ -2147,3 +2147,21 @@ Processing vicon detector for file: data/vicon/processed\2018-02-22-10-10-56.mat
 Applying heuristic filter to optimal ZUPT detector "vicon" for correct stride detection.
 Detected 9/9 strides in the experiment 56.
 Processing complete for all files.
+Processing file: data/vicon/processed\2017-11-22-11-22-03.mat
+Processing shoe detector for file: data/vicon/processed\2017-11-22-11-22-03.mat
+Applying heuristic filter to optimal ZUPT detector "shoe" for correct stride detection.
+Detected 22/22 strides in the experiment 1.
+Processing file: data/vicon/processed\2017-11-22-11-22-46.mat
+Processing ared detector for file: data/vicon/processed\2017-11-22-11-22-46.mat
+Applying heuristic filter to optimal ZUPT detector "ared" for correct stride detection.
+Detected 21/21 strides in the experiment 2.
+Processing file: data/vicon/processed\2017-11-22-11-23-25.mat
+Processing shoe detector for file: data/vicon/processed\2017-11-22-11-23-25.mat
+Applying heuristic filter to optimal ZUPT detector "shoe" for correct stride detection.
+Detected 21/21 strides in the experiment 3.
+Processing file: data/vicon/processed\2017-11-22-11-25-20.mat
+Processing shoe detector for file: data/vicon/processed\2017-11-22-11-25-20.mat
+Applying heuristic filter to optimal ZUPT detector "shoe" for correct stride detection.
+Detected 17/18 strides in the experiment 4.
+Applying stride detection to the combined zero velocity detection results for experiment 4.
+Detected 18/18 strides detected with the combined ZV detector in the experiment 4.

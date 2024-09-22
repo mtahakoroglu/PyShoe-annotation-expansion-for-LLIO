@@ -200,6 +200,11 @@ class Localizer():
         zv_lstm = lstm_detector(self.imudata)
         return zv_lstm
     
+    def BiLSTM(self):
+        bilstm_detector = lstm.BiLSTM()
+        zv_bilstm = bilstm_detector(self.imudata)
+        return zv_bilstm
+    
     def adaptive_zv(self, W=5, G=[1e7, 35e7]): #specify [G_walk, G_run]
         G_walk = G[0]
         G_run = G[1]
@@ -240,6 +245,8 @@ class Localizer():
             zv = self.MBGTD(W=W)
         if detector == 'lstm':
             return self.LSTM()
+        if detector == 'bilstm':
+            return self.BiLSTM()  # Use the BiLSTM method
         if detector == 'adaptive':
             return self.adaptive_zv(W,G)
         if detector == 'vicon':

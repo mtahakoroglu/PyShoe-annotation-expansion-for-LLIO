@@ -115,7 +115,9 @@ nGT = [22, 21, 21, 18, 26, 24, 18, 20, 28, 35, 29, 22, 30, 34, 24, 36, 20, 15, 1
        22, 19, 13, 16, 17, 21, 20, 28, 18, 12, 13, 26, 34, 25, 24, 24, 43, 42, 15, 12, 
        13, 14, 24, 27, 25, 26, 0, 28, 13, 41, 33, 26, 16, 16, 11, 9] # number of actual strides
 training_data_tag = [abs(x) for x in training_data_tag]
-extract_lstm_retraining_data = False # used to save csv files for zv and stride detection training
+extract_bilstm_training_data = True # used to save csv files for zv and stride detection training
+if sum(training_data_tag) == 56: # if total of 56 experiments are plotted (5 of them is not training data)
+    extract_bilstm_training_data = False # then do not write imu and zv data to file for BiLSTM training
 
 # Process each VICON room training data file
 for file in vicon_data_files:
@@ -136,6 +138,7 @@ for file in vicon_data_files:
         ins.Localizer.set_ts(timestamps)  # Set the sampling time required by 'vicon' detector
         zv = ins.Localizer.compute_zv_lrt(W=5 if detector[i] != 'mbgtd' else 2, G=thresh[i], detector=detector[i])
         zv_lstm = ins.Localizer.compute_zv_lrt(W=0, G=0, detector='lstm')
+        zv_bilstm = ins.Localizer.compute_zv_lrt(W=0, G=0, detector='bilstm')
         x = ins.baseline(zv=zv)
 
         # Apply filter to zero velocity detection results for stride detection corrections
@@ -147,6 +150,7 @@ for file in vicon_data_files:
         #     k = 85
         zv_filtered, n, strideIndex = heuristic_zv_filter_and_stride_detector(zv, k)
         zv_lstm_filtered, n_lstm_filtered, strideIndexLSTMfiltered = heuristic_zv_filter_and_stride_detector(zv_lstm, k)
+        zv_bilstm_filtered, n_bilstm_filtered, strideIndexBiLSTMfiltered = heuristic_zv_filter_and_stride_detector(zv_bilstm, k)
         # zv_filtered = medfilt(zv_filtered, 15)
         # n, strideIndex = count_one_to_zero_transitions(zv_filtered)
         # strideIndex = strideIndex - 1 # make all stride indexes the last samples of the respective ZUPT phase
@@ -154,6 +158,7 @@ for file in vicon_data_files:
         # strideIndex = np.append(strideIndex, len(timestamps)-1) # last sample is the last stride index
         logging.info(f"Detected {n}/{nGT[i]} strides in the experiment {i+1}.")
         print(f"LSTM filtered ZV detector found {n_lstm_filtered}/{nGT[i]} strides in the experiment {i+1}.")
+        print(f"BiLSTM filtered ZV detector found {n_bilstm_filtered}/{nGT[i]} strides in the experiment {i+1}.")
         # Calculate displacement and heading changes between stride points based on ground truth
         displacements, heading_changes = calculate_displacement_and_heading(gt[:, :2], strideIndex)
         # Reconstruct the trajectory from displacements and heading changes
@@ -218,6 +223,19 @@ for file in vicon_data_files:
         plt.legend()
         plt.yticks([0,1])
         plt.savefig(os.path.join(output_dir, f'zv_labels_exp_{i+1}_lstm.png'), dpi=600, bbox_inches='tight')
+
+        # Plotting the zero velocity detection for LSTM filtered data
+        plt.figure()
+        plt.plot(timestamps[:len(zv_bilstm)], zv_bilstm, label='Raw')
+        plt.plot(timestamps[:len(zv_bilstm_filtered)], zv_bilstm_filtered, label='Filtered')
+        plt.scatter(timestamps[strideIndexBiLSTMfiltered], zv_lstm_filtered[strideIndexBiLSTMfiltered], c='r', marker='x')
+        plt.title(f'Exp#{i+1} ({base_filename}) {n_bilstm_filtered}/{nGT[i]} strides detected ("BiLSTM")')
+        plt.xlabel('Time [s]')
+        plt.ylabel('Zero Velocity')
+        plt.grid(True, which='both', linestyle='--', linewidth=1.5)
+        plt.legend()
+        plt.yticks([0,1])
+        plt.savefig(os.path.join(output_dir, f'zv_labels_exp_{i+1}_lstm_bidirectional.png'), dpi=600, bbox_inches='tight')
 
         # while some experiments are excluded due to being non bipedal locomotion motion (i.e., crawling experiments)
         # some other bipedal locomotion experimental data requires correction for some ZV labels and stride detections 
@@ -315,7 +333,7 @@ for file in vicon_data_files:
             plt.savefig(os.path.join(output_dir, f'zv_labels_exp_{i+1}_corrected.png'), dpi=600, bbox_inches='tight')
         
         #################### SAVE TRAINING DATA RIGHT AT THIS SPOT for LSTM RETRAINING #################
-        if extract_lstm_retraining_data:
+        if extract_bilstm_training_data:
             # Combine IMU data and ZV data into one array
             combined_data = np.column_stack((timestamps, imu_data, zv))
 

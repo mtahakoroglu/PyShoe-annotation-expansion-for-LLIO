@@ -42,7 +42,7 @@ class INS():
         
         self.Localizer = Localizer(self.config, imudata)
         
-    def baseline(self,W=5, G=5e8, detector='shoe', zv=None):
+    def baseline(self, W=5, G=5e8, detector='shoe', zv=None):
         imudata = self.imudata
         
         x_check,q, P = self.Localizer.init() #initialize state
