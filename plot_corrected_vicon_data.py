@@ -105,7 +105,7 @@ def heuristic_zv_filter_and_stride_detector(zv, k):
     return zv, n, strideIndexFall
 
 i = 0  # experiment index
-training_data_tag = [1]*55
+training_data_tag = [1]*1
 training_data_tag.append(1)
 # training_data_tag = [1, 1, 1, -1, 1, -1, 1, 1, 1, 1, -1, 1, 0, 1, 1, 1, 1, -1, 1, 1, 
 #                     1, 1, 1, 1, 1, 1, -1, 1, 1, -1, 1, -1, 1, 1, 1, -1, 1, -1, 1, 1, 
@@ -151,6 +151,12 @@ for file in vicon_data_files:
         zv_filtered, n, strideIndex = heuristic_zv_filter_and_stride_detector(zv, k)
         zv_lstm_filtered, n_lstm_filtered, strideIndexLSTMfiltered = heuristic_zv_filter_and_stride_detector(zv_lstm, k)
         zv_bilstm_filtered, n_bilstm_filtered, strideIndexBiLSTMfiltered = heuristic_zv_filter_and_stride_detector(zv_bilstm, k)
+        print(f"zv = {zv} \t len(zv) = {len(zv)}")
+        print(f"zv_filtered = {zv_filtered} \t len(zv_filtered) = {len(zv_filtered)}")
+        print(f"zv_lstm = {zv_lstm} \t len(zv_lstm) = {len(zv_lstm)}")
+        print(f"zv_lstm_filtered = {zv_lstm_filtered}  \t len(zv_lstm_filtered) = {len(zv_lstm_filtered)}")
+        print(f"zv_bilstm = {zv_bilstm} \t len(zv_bilstm) = {len(zv_bilstm)}")
+        print(f"zv_bilstm_filtered = {zv_bilstm_filtered} \t len(zv_bilstm_filtered) = {len(zv_bilstm_filtered)}")
         # zv_filtered = medfilt(zv_filtered, 15)
         # n, strideIndex = count_one_to_zero_transitions(zv_filtered)
         # strideIndex = strideIndex - 1 # make all stride indexes the last samples of the respective ZUPT phase
