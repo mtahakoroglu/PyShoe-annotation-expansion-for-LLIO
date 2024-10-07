@@ -5,6 +5,7 @@ import ins_tools.SVM as SVM # remove if there is no sci-kit-learn installation
 from ins_tools.util import *
 from ins_tools.geometry_helpers import quat2mat, mat2quat, euler2quat, quat2euler
 from sklearn.externals import joblib
+from ins_tools.LSTM import BiLSTM
 import sys
 sys.path.append('../')
 
@@ -15,6 +16,7 @@ class Localizer():
         self.gt = None  # Initialize gt to None
         self.ts = None
         self.count=1
+        self.bilstm_model = BiLSTM()
 
     def set_gt(self, gt):
         self.gt = gt  # Method to set the gt attribute later
@@ -255,7 +257,7 @@ class Localizer():
         if detector == 'lstm':
             return self.LSTM()
         if detector == 'bilstm':
-            return self.BiLSTM()  # Use the BiLSTM method
+            return self.bilstm_model.compute_zv_lrt(self.imudata)
         if detector == 'adaptive':
             return self.adaptive_zv(W,G)
         if detector == 'vicon':

@@ -1,7 +1,7 @@
-<h2>Improved PyShoe - ZV and Stride Detection Corrections</h2>
-<p align="justify">Just like in <a href="https://github.com/mtahakoroglu/OpenShoe-PyShoe-DeepShoe-FuseShoe">LLIO-aided-iPyShoe</a> repo, one needs the following installations to run the scripts and obtain the results shown here and in the paper.</p>
+<h2>PyShoe Dataset Annotation for Loose Learned Inertial Odometry (LLIO)</h2>
+<p align="justify">Just like in <a href="https://github.com/mtahakoroglu/LLIO-aied-PyShoe">LLIO-aided-PyShoe</a> repo, one needs the following installations to run the scripts and obtain the results shown here and in the paper.</p>
 
-<h3>Creating iPyShoe Virtual Environment in Anaconda</h3>
+<h3>Creating <b>pyshoe</b> Virtual Environment in Anaconda</h3>
 <p align="justify">After installing Anaconda, launch <b>Anaconda PowerShell</b> and then type</p>
 
 ```
@@ -11,10 +11,10 @@ conda create --name pyshoe python=3.7
 <p align="justify">to create <b>ipyshoe</b> virtual environment (venv). Subsequently, type</p>
 
 ```
-conda activate ipyshoe
+conda activate pyshoe
 ```
 
-<p align="justify">to activate <b>ipyshoe</b> venv.</p>
+<p align="justify">to activate <b>pyshoe</b> venv.</p>
 
 <h3>Installing Required Packages</h3>
 <p align="justify">Type and enter the following commands in Anaconda PS terminal to install the required packages and libraries to run PyShoe codes and reproduce the results in the page and the paper. We thank <a href="https://scholar.google.com.tr/citations?user=F2NkKNAAAAAJ&hl=tr">Dr. Ramazan Özgür Doğan</a> for the assistance in setting up the environment.</p>
@@ -54,40 +54,79 @@ pip install pandas==1.1.5
 <p align="justify">After cloning this repository to your local computer, you must install <b><a href="https://github.com/utiasSTARS/liegroups" target="_blank">liegroups</a></b> package to run the code if you would like to reproduce the results shown here in this repo or the paper.</p>
 
 <h3>Example Results (Own Sensor Data)</h3>
-<p align="justify">We first used the pre-trained LSTM ZUPT detector based robust pedestrian INS on our own-collected data (where our sensor is 3DM-GX5-25). In two of five experiments conducted, we noticed that one stride is missed in each one after manual examination (we counted actual number of strides made in the experiments for checking if number of strides are correctly detected or not). The failure of detection of any stride would definitely affect the performance of the foot-mounted INS as the ZUPT could not be made in the respective ZV phases. The performance of the pre-trained LSTM ZUPT detector on self-collected inertial data can be seen below.</p>
+<p align="justify">Here the pre-trained LSTM ZUPT detector based robust pedestrian INS is applied on our own-collected data (where our sensor is 3DM-GX5-25).</p>
 
-<h4>Experiment 1 (74/75 strides detected) - Failure (First ZUPT phase (and stride) is missed)</h4>
+<p align="justify">We assume the start point is numbered as stride #0, i.e., initial stride. Note that ZV labels are filtered for accurate stride detection but the filtered ZV values are not used in the trajectory generation in the associated trajectory plot. In other words, the trajectory is obtained with raw (not filtered) LSTM ZUPT detected ZV labels while the strides (visualized on the trajectory with x) are marked at the indices shown in filtered LSTM generated ZV plots.</p>
 
-<p align="justify">We see the very first stride (we assume the start point is numbered as stride #0, i.e., initial stride) is not detected in the figure. Note that ZV labels are filtered for accurate stride detection but the filtered ZV values are not used in trajectory generation in the second figure. In other words, in the trajectory plot, the red trajectory is obtained with raw (not filtered) LSTM ZUPT detected ZV labels, which sometimes misses some strides, while the strides (visualized on the trajectory as red color cross signs and labeled as "LSTM") are extracted from filtered LSTM ZUPT labels given in the first graph.</p>
+<p align="justify">Note that experiments start from $#15$ because previous ones do not contain GCP.</p>
 
-<img src="results/figs/own/zv_lstm_heuristically_filtered_SensorConnectData_16.png" alt="ZV labels for robust ZUPT (LSTM filtered) detector method - experiment 16" width=%100 height=auto>
+<h4>Experiment 15</h4>
 
-<img src="results/figs/own/SensorConnectData_16.png" alt="experiment 16 trajectories obtained with (various) ZUPT (detectors) aided (Error-State Kalman Filter based) foot-mounted INS" width=%100 height=auto>
+<img src="results/figs/own/SensorConnectData_15.png" alt="trajectory obtained with robust ZUPT detector (LSTM) aided (Error-State Kalman Filter based) foot-mounted INS" width=%100 height=auto>
 
-<h4>Experiment 2 (24/24 strides detected) - Success</h4>
+<img src="results/figs/own/SensorConnectData_15_ZV_LSTM_filtered.png" alt="ZV labels produced with robust ZUPT (LSTM filtered) detector" width=%100 height=auto>
 
-<img src="results/figs/own/zv_lstm_heuristically_filtered_SensorConnectData_17.png" alt="ZV labels for adaptive ZUPT (LSTM filtered) detector method - experiment 17" width=%100 height=auto>
+<img src="results/figs/own/SensorConnectData_15_SHS.png" alt="trajectory obtained with robust ZUPT detector (LSTM) aided (Error-State Kalman Filter based) foot-mounted INS" width=%100 height=auto>
 
-<img src="results/figs/own/SensorConnectData_17.png" alt="experiment 17 trajectories obtained with (various) ZUPT (detectors) aided (Error-State Kalman Filter based) foot-mounted INS" width=%100 height=auto>
+<h4>Experiment 16</h4>
 
-<h4>Experiment 3 (28/28 strides detected) - Success</h4>
+<img src="results/figs/own/SensorConnectData_16.png" alt="trajectory obtained with robust ZUPT detector (LSTM) aided (Error-State Kalman Filter based) foot-mounted INS" width=%100 height=auto>
 
-<img src="results/figs/own/zv_lstm_heuristically_filtered_SensorConnectData_18.png" alt="ZV labels for adaptive ZUPT (LSTM filtered) detector method - experiment 18" width=%100 height=auto>
+<img src="results/figs/own/SensorConnectData_16_ZV_LSTM_filtered.png" alt="ZV labels produced with robust ZUPT (LSTM filtered) detector" width=%100 height=auto>
 
-<img src="results/figs/own/SensorConnectData_18.png" alt="experiment 18 trajectories obtained with (various) ZUPT (detectors) aided (Error-State Kalman Filter based) foot-mounted INS" width=%100 height=auto>
+<img src="results/figs/own/SensorConnectData_16_SHS.png" alt="trajectory obtained with robust ZUPT detector (LSTM) aided (Error-State Kalman Filter based) foot-mounted INS" width=%100 height=auto>
 
-<h4>Experiment 4 (28/28 strides detected) - Success</h4>
+<h4>Experiment 17</h4>
 
-<img src="results/figs/own/zv_lstm_heuristically_filtered_SensorConnectData_19.png" alt="ZV labels for adaptive ZUPT (LSTM filtered) detector method - experiment 19" width=%100 height=auto>
+<img src="results/figs/own/SensorConnectData_17.png" alt="trajectory obtained with robust ZUPT detector (LSTM) aided (Error-State Kalman Filter based) foot-mounted INS" width=%100 height=auto>
 
-<img src="results/figs/own/SensorConnectData_19.png" alt="experiment 18 trajectories obtained with (various) ZUPT (detectors) aided (Error-State Kalman Filter based) foot-mounted INS" width=%100 height=auto>
+<img src="results/figs/own/SensorConnectData_17_ZV_LSTM_filtered.png" alt="ZV labels produced with robust ZUPT (LSTM filtered) detector" width=%100 height=auto>
 
-<h4>Experiment 5 (64/65 strides detected) - Failure (33<sup>rd</sup> ZUPT phase (and stride) is missed)</h4>
+<img src="results/figs/own/SensorConnectData_17_SHS.png" alt="trajectory obtained with robust ZUPT detector (LSTM) aided (Error-State Kalman Filter based) foot-mounted INS" width=%100 height=auto>
 
-<p align=""justify>If the reader carefully examines the second plot (i.e., the trajectory), it is not hard to notice that the 33<sup>rd</sup> stride is not detected (the pedestrian made 24 strides in the first side of the rectangle, after a CCW 90 degree turn at the corner, 8 more strides in the second that makes a total of 32 strides, and the very first stride on the third side is missed).</p>
-<img src="results/figs/own/zv_lstm_heuristically_filtered_SensorConnectData_20.png" alt="ZV labels for adaptive ZUPT (LSTM filtered) detector method - experiment 20" width=%100 height=auto>
+<h4>Experiment 18</h4>
 
-<img src="results/figs/own/SensorConnectData_20.png" alt="experiment 20 trajectories obtained with (various) ZUPT (detectors) aided (Error-State Kalman Filter based) foot-mounted INS" width=%100 height=auto>
+<img src="results/figs/own/SensorConnectData_18.png" alt="trajectory obtained with robust ZUPT detector (LSTM) aided (Error-State Kalman Filter based) foot-mounted INS" width=%100 height=auto>
+
+<img src="results/figs/own/SensorConnectData_18_ZV_LSTM_filtered.png" alt="ZV labels produced with robust ZUPT (LSTM filtered) detector" width=%100 height=auto>
+
+<img src="results/figs/own/SensorConnectData_18_SHS.png" alt="trajectory obtained with robust ZUPT detector (LSTM) aided (Error-State Kalman Filter based) foot-mounted INS" width=%100 height=auto>
+
+<h4>Experiment 19</h4>
+
+<img src="results/figs/own/SensorConnectData_19.png" alt="trajectory obtained with robust ZUPT detector (LSTM) aided (Error-State Kalman Filter based) foot-mounted INS" width=%100 height=auto>
+
+<img src="results/figs/own/SensorConnectData_19_ZV_LSTM_filtered.png" alt="ZV labels produced with robust ZUPT (LSTM filtered) detector" width=%100 height=auto>
+
+<img src="results/figs/own/SensorConnectData_19_SHS.png" alt="trajectory obtained with robust ZUPT detector (LSTM) aided (Error-State Kalman Filter based) foot-mounted INS" width=%100 height=auto>
+
+<h4>Experiment 20</h4>
+
+<img src="results/figs/own/SensorConnectData_20.png" alt="trajectory obtained with robust ZUPT detector (LSTM) aided (Error-State Kalman Filter based) foot-mounted INS" width=%100 height=auto>
+
+<img src="results/figs/own/SensorConnectData_20_ZV_LSTM_filtered.png" alt="ZV labels produced with robust ZUPT (LSTM filtered) detector" width=%100 height=auto>
+
+<img src="results/figs/own/SensorConnectData_20_SHS.png" alt="trajectory obtained with robust ZUPT detector (LSTM) aided (Error-State Kalman Filter based) foot-mounted INS" width=%100 height=auto>
+
+<h4>Experiment 21 (42/43 strides detected) - Failure (23<sup>rd</sup> ZV interval (and the corresponding stride) is missed)</h4>
+
+<img src="results/figs/own/SensorConnectData_21.png" alt="trajectory obtained with robust ZUPT detector (LSTM) aided (Error-State Kalman Filter based) foot-mounted INS" width=%100 height=auto>
+
+<p align=""justify>If the reader carefully examines the plots below the 23<sup>rd</sup> stride is not detected (the pedestrian made 24 strides in the straight path where $24^{th}$ stride is the first GCP).</p>
+
+<img src="results/figs/own/SensorConnectData_21_ZV_LSTM_filtered.png" alt="ZV labels produced with robust ZUPT (LSTM filtered) detector" width=%100 height=auto>
+
+<img src="results/figs/own/SensorConnectData_21_SHS.png" alt="trajectory obtained with robust ZUPT detector (LSTM) aided (Error-State Kalman Filter based) foot-mounted INS" width=%100 height=auto>
+
+
+<h4>Experiment 22</h4>
+
+<img src="results/figs/own/SensorConnectData_22.png" alt="trajectory obtained with robust ZUPT detector (LSTM) aided (Error-State Kalman Filter based) foot-mounted INS" width=%100 height=auto>
+
+<img src="results/figs/own/SensorConnectData_22_ZV_LSTM_filtered.png" alt="ZV labels produced with robust ZUPT (LSTM filtered) detector" width=%100 height=auto>
+
+<img src="results/figs/own/SensorConnectData_22_SHS.png" alt="trajectory obtained with robust ZUPT detector (LSTM) aided (Error-State Kalman Filter based) foot-mounted INS" width=%100 height=auto>
+
 
 <p align="justify">At this point, before checking the performance of LSTM ZUPT detector on VICON training data, for all five experiments, we examined other ZUPT detectors' results to see if they are able to detect missed steps. Qualitately speaking, for missed ZUPT phase regions, other detectors such as SHOE and ARED were able to produce 1s in some cases. This observation gave us the idea of using ARED, SHOE or other ZUPT detectors as supplementary detectors to include the missed stride into the set of strides detected by LSTM ZUPT detector. However, we did not use this idea on own collected data. Instead, we first visited VICON training dataset to see how LSTM ZUPT detector performed there. Then, in case of missed strides in some experiments, mentioned supplementary ZUPT detectors can be used for including missed strides. The ultimate goal is to extract a gait-driven system (stride & heading system) from VICON training dataset, which is a sampling-frequency driven system (sample-wise INS), by generating displacement and heading change values at each stride. Subsequently, produced displacement and heading change values will be used to train deep neural network or a time-series predictor that acts as an end-to-end modern INS, which will function as learned inertial odometry and eventually aid the traditional INS (i.e., robust ZUPT aided Error-State Kalman Filter).</p>
 

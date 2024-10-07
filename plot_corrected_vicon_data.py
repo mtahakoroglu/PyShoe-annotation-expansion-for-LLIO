@@ -8,6 +8,7 @@ import logging
 import glob
 import scipy.io as sio
 from scipy.signal import medfilt
+from scipy.linalg import orthogonal_procrustes
 
 # Directory containing your Vicon data files
 vicon_data_dir = 'data/vicon/processed/'
@@ -104,9 +105,47 @@ def heuristic_zv_filter_and_stride_detector(zv, k):
     strideIndexFall = np.append(strideIndexFall, len(zv)-1) # last sample is the last stride index
     return zv, n, strideIndexFall
 
+# Function to align trajectories using Procrustes analysis with scaling
+def align_trajectories(traj_est, traj_gt):
+    traj_est_2d = traj_est[:, :2]
+    traj_gt_2d = traj_gt[:, :2]
+
+    # Trim both trajectories to the same length
+    min_length = min(len(traj_est_2d), len(traj_gt_2d))
+    traj_est_trimmed = traj_est_2d[:min_length]
+    traj_gt_trimmed = traj_gt_2d[:min_length]
+
+    # Center the trajectories
+    traj_est_mean = np.mean(traj_est_trimmed, axis=0)
+    traj_gt_mean = np.mean(traj_gt_trimmed, axis=0)
+    traj_est_centered = traj_est_trimmed - traj_est_mean
+    traj_gt_centered = traj_gt_trimmed - traj_gt_mean
+
+    # Compute scaling factor
+    norm_est = np.linalg.norm(traj_est_centered)
+    norm_gt = np.linalg.norm(traj_gt_centered)
+    scale = norm_gt / norm_est
+
+    # Apply scaling
+    traj_est_scaled = traj_est_centered * scale
+
+    # Compute the optimal rotation matrix
+    R, _ = orthogonal_procrustes(traj_est_scaled, traj_gt_centered)
+
+    # Apply rotation
+    traj_est_rotated = np.dot(traj_est_scaled, R)
+
+    # Translate back
+    traj_est_aligned = traj_est_rotated + traj_gt_mean
+
+    return traj_est_aligned, traj_gt_trimmed, scale
+
+
 i = 0  # experiment index
-training_data_tag = [1]*1
+# following two lines are used to run selected experiment results
+training_data_tag = [1]*55
 training_data_tag.append(1)
+# training_data_tag are the experiments to be used to extract displacement and heading change info for LLIO training
 # training_data_tag = [1, 1, 1, -1, 1, -1, 1, 1, 1, 1, -1, 1, 0, 1, 1, 1, 1, -1, 1, 1, 
 #                     1, 1, 1, 1, 1, 1, -1, 1, 1, -1, 1, -1, 1, 1, 1, -1, 1, -1, 1, 1, 
 #                     1, 1, -1, 1, 1, 1, 0, 0, -1, 0, 1, 1, 1, 1, 0, 1]
@@ -115,9 +154,9 @@ nGT = [22, 21, 21, 18, 26, 24, 18, 20, 28, 35, 29, 22, 30, 34, 24, 36, 20, 15, 1
        22, 19, 13, 16, 17, 21, 20, 28, 18, 12, 13, 26, 34, 25, 24, 24, 43, 42, 15, 12, 
        13, 14, 24, 27, 25, 26, 0, 28, 13, 41, 33, 26, 16, 16, 11, 9] # number of actual strides
 training_data_tag = [abs(x) for x in training_data_tag]
-extract_bilstm_training_data = True # used to save csv files for zv and stride detection training
-if sum(training_data_tag) == 56: # if total of 56 experiments are plotted (5 of them is not training data)
-    extract_bilstm_training_data = False # then do not write imu and zv data to file for BiLSTM training
+extract_bilstm_training_data = False # used to save csv files for zv and stride detection training
+# if sum(training_data_tag) == 56: # if total of 56 experiments are plotted (5 of them is not training data)
+#     extract_bilstm_training_data = False # then do not write imu and zv data to file for BiLSTM training
 
 # Process each VICON room training data file
 for file in vicon_data_files:
@@ -138,8 +177,12 @@ for file in vicon_data_files:
         ins.Localizer.set_ts(timestamps)  # Set the sampling time required by 'vicon' detector
         zv = ins.Localizer.compute_zv_lrt(W=5 if detector[i] != 'mbgtd' else 2, G=thresh[i], detector=detector[i])
         zv_lstm = ins.Localizer.compute_zv_lrt(W=0, G=0, detector='lstm')
-        zv_bilstm = ins.Localizer.compute_zv_lrt(W=0, G=0, detector='bilstm')
+        # zv_bilstm = ins.Localizer.compute_zv_lrt(W=0, G=0, detector='bilstm')
+        # print(f"zv_bilstm = {zv_bilstm} \t len(zv_bilstm) = {len(zv_bilstm)}")
         x = ins.baseline(zv=zv)
+        x_lstm = ins.baseline(zv=zv_lstm)
+        # Align trajectories using Procrustes analysis with scaling
+        aligned_x_lstm, aligned_gt, scale_lstm = align_trajectories(x_lstm, gt)
 
         # Apply filter to zero velocity detection results for stride detection corrections
         logging.info(f'Applying heuristic filter to optimal ZUPT detector "{detector[i]}" for correct stride detection.')
@@ -150,13 +193,7 @@ for file in vicon_data_files:
         #     k = 85
         zv_filtered, n, strideIndex = heuristic_zv_filter_and_stride_detector(zv, k)
         zv_lstm_filtered, n_lstm_filtered, strideIndexLSTMfiltered = heuristic_zv_filter_and_stride_detector(zv_lstm, k)
-        zv_bilstm_filtered, n_bilstm_filtered, strideIndexBiLSTMfiltered = heuristic_zv_filter_and_stride_detector(zv_bilstm, k)
-        print(f"zv = {zv} \t len(zv) = {len(zv)}")
-        print(f"zv_filtered = {zv_filtered} \t len(zv_filtered) = {len(zv_filtered)}")
-        print(f"zv_lstm = {zv_lstm} \t len(zv_lstm) = {len(zv_lstm)}")
-        print(f"zv_lstm_filtered = {zv_lstm_filtered}  \t len(zv_lstm_filtered) = {len(zv_lstm_filtered)}")
-        print(f"zv_bilstm = {zv_bilstm} \t len(zv_bilstm) = {len(zv_bilstm)}")
-        print(f"zv_bilstm_filtered = {zv_bilstm_filtered} \t len(zv_bilstm_filtered) = {len(zv_bilstm_filtered)}")
+        # zv_bilstm_filtered, n_bilstm_filtered, strideIndexBiLSTMfiltered = heuristic_zv_filter_and_stride_detector(zv_bilstm, k)
         # zv_filtered = medfilt(zv_filtered, 15)
         # n, strideIndex = count_one_to_zero_transitions(zv_filtered)
         # strideIndex = strideIndex - 1 # make all stride indexes the last samples of the respective ZUPT phase
@@ -164,7 +201,7 @@ for file in vicon_data_files:
         # strideIndex = np.append(strideIndex, len(timestamps)-1) # last sample is the last stride index
         logging.info(f"Detected {n}/{nGT[i]} strides in the experiment {i+1}.")
         print(f"LSTM filtered ZV detector found {n_lstm_filtered}/{nGT[i]} strides in the experiment {i+1}.")
-        print(f"BiLSTM filtered ZV detector found {n_bilstm_filtered}/{nGT[i]} strides in the experiment {i+1}.")
+        # print(f"BiLSTM filtered ZV detector found {n_bilstm_filtered}/{nGT[i]} strides in the experiment {i+1}.")
         # Calculate displacement and heading changes between stride points based on ground truth
         displacements, heading_changes = calculate_displacement_and_heading(gt[:, :2], strideIndex)
         # Reconstruct the trajectory from displacements and heading changes
@@ -192,17 +229,24 @@ for file in vicon_data_files:
         plt.scatter(reconstructed_traj[:, 0], reconstructed_traj[:, 1], c='b', marker='o')
         plt.savefig(os.path.join(output_dir, f'trajectory_exp_{i+1}.png'), dpi=600, bbox_inches='tight')
 
-        # # plotting vertical trajectories
-        # plt.figure()
-        # plt.plot(timestamps[:len(gt)], gt[:, 2], label='GT (sample-wise)')  # Plot GT Z positions
-        # plt.plot(timestamps[:len(reconstructed_traj)], reconstructed_traj[:, 1],
-        #         label='Stride & Heading')  # Plot reconstructed Z positions (use Y axis for visualization)
-        # plt.title(f'Vertical Trajectories - {base_filename} - ZUPT detector={detector[i]} for exp#{i+1}')
-        # plt.grid(True, which='both', linestyle='--', linewidth=1.5)
-        # plt.xlabel('Time [s]')
-        # plt.ylabel('Z Position')
-        # plt.legend()
-        # plt.savefig(os.path.join(output_dir, f'vertical_{base_filename}.png'), dpi=600, bbox_inches='tight')
+        # Plot LSTM trajectory results
+        plt.figure()
+        visualize.plot_topdown([aligned_x_lstm, aligned_gt[:, :2]], title=f"Exp#{i+1} ({base_filename}) - LSTM", 
+                               legend=['LSTM', 'GT'])
+        plt.scatter(aligned_x_lstm[strideIndexLSTMfiltered, 0], aligned_x_lstm[strideIndexLSTMfiltered, 1], c='b', marker='o')
+        plt.savefig(os.path.join(output_dir, f'trajectory_exp_{i+1}_lstm.png'), dpi=600, bbox_inches='tight')
+
+        # plotting vertical trajectories
+        plt.figure()
+        plt.plot(timestamps[:len(gt)], gt[:, 2], label='GT (sample-wise)')  # Plot GT Z positions
+        plt.plot(timestamps[:len(reconstructed_traj)], reconstructed_traj[:, 1],
+                label='Stride & Heading')  # Plot reconstructed Z positions (use Y axis for visualization)
+        plt.title(f'Vertical Trajectories - {base_filename} - ZUPT detector={detector[i]} for exp#{i+1}')
+        plt.grid(True, which='both', linestyle='--', linewidth=1.5)
+        plt.xlabel('Time [s]')
+        plt.ylabel('Z Position')
+        plt.legend()
+        plt.savefig(os.path.join(output_dir, f'vertical_{base_filename}.png'), dpi=600, bbox_inches='tight')
 
         # Plotting the zero velocity detection for filtered data without stride indices
         plt.figure()
@@ -229,19 +273,6 @@ for file in vicon_data_files:
         plt.legend()
         plt.yticks([0,1])
         plt.savefig(os.path.join(output_dir, f'zv_labels_exp_{i+1}_lstm.png'), dpi=600, bbox_inches='tight')
-
-        # Plotting the zero velocity detection for LSTM filtered data
-        plt.figure()
-        plt.plot(timestamps[:len(zv_bilstm)], zv_bilstm, label='Raw')
-        plt.plot(timestamps[:len(zv_bilstm_filtered)], zv_bilstm_filtered, label='Filtered')
-        plt.scatter(timestamps[strideIndexBiLSTMfiltered], zv_bilstm_filtered[strideIndexBiLSTMfiltered], c='r', marker='x')
-        plt.title(f'Exp#{i+1} ({base_filename}) {n_bilstm_filtered}/{nGT[i]} strides detected ("BiLSTM")')
-        plt.xlabel('Time [s]')
-        plt.ylabel('Zero Velocity')
-        plt.grid(True, which='both', linestyle='--', linewidth=1.5)
-        plt.legend()
-        plt.yticks([0,1])
-        plt.savefig(os.path.join(output_dir, f'zv_labels_exp_{i+1}_lstm_bidirectional.png'), dpi=600, bbox_inches='tight')
 
         # while some experiments are excluded due to being non bipedal locomotion motion (i.e., crawling experiments)
         # some other bipedal locomotion experimental data requires correction for some ZV labels and stride detections 
