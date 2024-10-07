@@ -58,7 +58,7 @@ pip install pandas==1.1.5
 
 <p align="justify">We assume the start point is numbered as stride #0, i.e., initial stride. Note that ZV labels are filtered for accurate stride detection but the filtered ZV values are not used in the trajectory generation in the associated trajectory plot. In other words, the trajectory is obtained with raw (not filtered) LSTM ZUPT detected ZV labels while the strides (visualized on the trajectory with x) are marked at the indices shown in filtered LSTM generated ZV plots.</p>
 
-<p align="justify">Note that experiments start from $#15$ because previous ones do not contain GCP.</p>
+<p align="justify">Note that experiments start from #15 because previous ones do not contain GCP.</p>
 
 <h4>Experiment 15</h4>
 
