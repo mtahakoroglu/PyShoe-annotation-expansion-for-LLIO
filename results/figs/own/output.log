@@ -609,3 +609,455 @@ Processing LSTM detector for file SensorConnectData_21.
 Plotting zero velocity detection for LSTM detector for file SensorConnectData_21.
 There are 42/43 strides detected in experiment #21.
 File SensorConnectData_21, i.e., experiment 21 will not be used in performance evaluation.
+===================================================================================================================
+Processing file data/own\SensorConnectData_06.csv
+GCP are either not available or not correct for file SensorConnectData_06.
+Processing LSTM detector for file SensorConnectData_06.
+Plotting zero velocity detection for LSTM detector for file SensorConnectData_06.
+There are 76/76 strides detected in experiment #6.
+File SensorConnectData_06, i.e., experiment 6 will not be used in performance evaluation.
+===================================================================================================================
+Processing file data/own\SensorConnectData_11.csv
+GCP are either not available or not correct for file SensorConnectData_11.
+Processing LSTM detector for file SensorConnectData_11.
+===================================================================================================================
+Processing file data/own\SensorConnectData_06.csv
+GCP are either not available or not correct for file SensorConnectData_06.
+Processing LSTM detector for file SensorConnectData_06.
+Plotting zero velocity detection for LSTM detector for file SensorConnectData_06.
+There are 76/76 strides detected in experiment #6.
+File SensorConnectData_06, i.e., experiment 6 will not be used in performance evaluation.
+===================================================================================================================
+Processing file data/own\SensorConnectData_11.csv
+GCP are either not available or not correct for file SensorConnectData_11.
+Processing LSTM detector for file SensorConnectData_11.
+Plotting zero velocity detection for LSTM detector for file SensorConnectData_11.
+There are 28/28 strides detected in experiment #11.
+File SensorConnectData_11, i.e., experiment 11 will not be used in performance evaluation.
+===================================================================================================================
+Processing file data/own\SensorConnectData_13.csv
+GCP are either not available or not correct for file SensorConnectData_13.
+Processing LSTM detector for file SensorConnectData_13.
+Plotting zero velocity detection for LSTM detector for file SensorConnectData_13.
+There are 25/25 strides detected in experiment #13.
+File SensorConnectData_13, i.e., experiment 13 will not be used in performance evaluation.
+===================================================================================================================
+Processing file data/own\SensorConnectData_14.csv
+GCP are either not available or not correct for file SensorConnectData_14.
+Processing LSTM detector for file SensorConnectData_14.
+Plotting zero velocity detection for LSTM detector for file SensorConnectData_14.
+There are 78/78 strides detected in experiment #14.
+File SensorConnectData_14, i.e., experiment 14 will not be used in performance evaluation.
+===================================================================================================================
+Processing file data/own\SensorConnectData_15.csv
+GCP are available & correct for file SensorConnectData_15.
+Processing LSTM detector for file SensorConnectData_15.
+Plotting zero velocity detection for LSTM detector for file SensorConnectData_15.
+There are 73/73 strides detected in experiment #15.
+File SensorConnectData_15, i.e., experiment 15 will be used in performance evaluation.
+===================================================================================================================
+Processing file data/own\SensorConnectData_16.csv
+GCP are either not available or not correct for file SensorConnectData_16.
+Processing LSTM detector for file SensorConnectData_16.
+Plotting zero velocity detection for LSTM detector for file SensorConnectData_16.
+There are 75/75 strides detected in experiment #16.
+File SensorConnectData_16, i.e., experiment 16 will not be used in performance evaluation.
+===================================================================================================================
+Processing file data/own\SensorConnectData_17.csv
+GCP are available & correct for file SensorConnectData_17.
+Processing LSTM detector for file SensorConnectData_17.
+Plotting zero velocity detection for LSTM detector for file SensorConnectData_17.
+There are 24/24 strides detected in experiment #17.
+File SensorConnectData_17, i.e., experiment 17 will be used in performance evaluation.
+===================================================================================================================
+Processing file data/own\SensorConnectData_18.csv
+GCP are available & correct for file SensorConnectData_18.
+Processing LSTM detector for file SensorConnectData_18.
+Plotting zero velocity detection for LSTM detector for file SensorConnectData_18.
+There are 28/28 strides detected in experiment #18.
+File SensorConnectData_18, i.e., experiment 18 will be used in performance evaluation.
+===================================================================================================================
+Processing file data/own\SensorConnectData_19.csv
+GCP are available & correct for file SensorConnectData_19.
+Processing LSTM detector for file SensorConnectData_19.
+Plotting zero velocity detection for LSTM detector for file SensorConnectData_19.
+There are 28/28 strides detected in experiment #19.
+File SensorConnectData_19, i.e., experiment 19 will be used in performance evaluation.
+===================================================================================================================
+Processing file data/own\SensorConnectData_20.csv
+GCP are available & correct for file SensorConnectData_20.
+Processing LSTM detector for file SensorConnectData_20.
+Plotting zero velocity detection for LSTM detector for file SensorConnectData_20.
+There are 65/65 strides detected in experiment #20.
+File SensorConnectData_20, i.e., experiment 20 will be used in performance evaluation.
+===================================================================================================================
+Processing file data/own\SensorConnectData_21.csv
+GCP are available & correct for file SensorConnectData_21.
+Processing LSTM detector for file SensorConnectData_21.
+Plotting zero velocity detection for LSTM detector for file SensorConnectData_21.
+There are 42/43 strides detected in experiment #21.
+File SensorConnectData_21, i.e., experiment 21 will not be used in performance evaluation.
+===================================================================================================================
+Processing file data/own\SensorConnectData_20.csv
+GCP are available & correct for file SensorConnectData_20.
+Processing LSTM detector for file SensorConnectData_20.
+Plotting zero velocity detection for LSTM detector for file SensorConnectData_20.
+There are 65/65 strides detected in experiment #20.
+File SensorConnectData_20, i.e., experiment 20 will be used in performance evaluation.
+===================================================================================================================
+Processing file data/own\SensorConnectData_21.csv
+GCP are available & correct for file SensorConnectData_21.
+Processing LSTM detector for file SensorConnectData_21.
+Plotting zero velocity detection for LSTM detector for file SensorConnectData_21.
+There are 42/43 strides detected in experiment #21.
+File SensorConnectData_21, i.e., experiment 21 will not be used in performance evaluation.
+===================================================================================================================
+Processing file data/own\SensorConnectData_20.csv
+GCP are available & correct for file SensorConnectData_20.
+Processing LSTM detector for file SensorConnectData_20.
+Plotting zero velocity detection for LSTM detector for file SensorConnectData_20.
+There are 65/65 strides detected in experiment #20.
+File SensorConnectData_20, i.e., experiment 20 will be used in performance evaluation.
+===================================================================================================================
+Processing file data/own\SensorConnectData_21.csv
+GCP are available & correct for file SensorConnectData_21.
+Processing LSTM detector for file SensorConnectData_21.
+Plotting zero velocity detection for LSTM detector for file SensorConnectData_21.
+There are 42/43 strides detected in experiment #21.
+File SensorConnectData_21, i.e., experiment 21 will not be used in performance evaluation.
+===================================================================================================================
+Processing file data/own\SensorConnectData_22.csv
+GCP are available & correct for file SensorConnectData_22.
+Processing LSTM detector for file SensorConnectData_22.
+Plotting zero velocity detection for LSTM detector for file SensorConnectData_22.
+There are 53/53 strides detected in experiment #22.
+File SensorConnectData_22, i.e., experiment 22 will be used in performance evaluation.
+===================================================================================================================
+Processing file data/own\SensorConnectData_23.csv
+GCP are available & correct for file SensorConnectData_23.
+Processing LSTM detector for file SensorConnectData_23.
+Plotting zero velocity detection for LSTM detector for file SensorConnectData_23.
+There are 109/110 strides detected in experiment #23.
+File SensorConnectData_23, i.e., experiment 23 will not be used in performance evaluation.
+===================================================================================================================
+Processing file data/own\SensorConnectData_24.csv
+GCP are available & correct for file SensorConnectData_24.
+Processing LSTM detector for file SensorConnectData_24.
+===================================================================================================================
+Processing file data/own\SensorConnectData_20.csv
+GCP are available & correct for file SensorConnectData_20.
+Processing LSTM detector for file SensorConnectData_20.
+Plotting zero velocity detection for LSTM detector for file SensorConnectData_20.
+There are 65/65 strides detected in experiment #20.
+File SensorConnectData_20, i.e., experiment 20 will be used in performance evaluation.
+===================================================================================================================
+Processing file data/own\SensorConnectData_21.csv
+GCP are available & correct for file SensorConnectData_21.
+Processing LSTM detector for file SensorConnectData_21.
+Plotting zero velocity detection for LSTM detector for file SensorConnectData_21.
+There are 42/43 strides detected in experiment #21.
+File SensorConnectData_21, i.e., experiment 21 will not be used in performance evaluation.
+===================================================================================================================
+Processing file data/own\SensorConnectData_06.csv
+GCP are either not available or not correct for file SensorConnectData_06.
+Processing LSTM detector for file SensorConnectData_06.
+Plotting zero velocity detection for LSTM detector for file SensorConnectData_06.
+There are 76/76 strides detected in experiment #6.
+File SensorConnectData_06, i.e., experiment 6 will not be used in performance evaluation.
+===================================================================================================================
+Processing file data/own\SensorConnectData_11.csv
+GCP are either not available or not correct for file SensorConnectData_11.
+Processing LSTM detector for file SensorConnectData_11.
+Plotting zero velocity detection for LSTM detector for file SensorConnectData_11.
+There are 28/28 strides detected in experiment #11.
+File SensorConnectData_11, i.e., experiment 11 will not be used in performance evaluation.
+===================================================================================================================
+Processing file data/own\SensorConnectData_13.csv
+GCP are either not available or not correct for file SensorConnectData_13.
+Processing LSTM detector for file SensorConnectData_13.
+Plotting zero velocity detection for LSTM detector for file SensorConnectData_13.
+There are 25/25 strides detected in experiment #13.
+File SensorConnectData_13, i.e., experiment 13 will not be used in performance evaluation.
+===================================================================================================================
+Processing file data/own\SensorConnectData_14.csv
+GCP are either not available or not correct for file SensorConnectData_14.
+Processing LSTM detector for file SensorConnectData_14.
+===================================================================================================================
+Processing file data/own\SensorConnectData_06.csv
+GCP are either not available or not correct for file SensorConnectData_06.
+Processing LSTM detector for file SensorConnectData_06.
+Plotting zero velocity detection for LSTM detector for file SensorConnectData_06.
+There are 76/76 strides detected in experiment #6.
+File SensorConnectData_06, i.e., experiment 6 will not be used in performance evaluation.
+===================================================================================================================
+Processing file data/own\SensorConnectData_11.csv
+GCP are either not available or not correct for file SensorConnectData_11.
+Processing LSTM detector for file SensorConnectData_11.
+Plotting zero velocity detection for LSTM detector for file SensorConnectData_11.
+There are 28/28 strides detected in experiment #11.
+File SensorConnectData_11, i.e., experiment 11 will not be used in performance evaluation.
+===================================================================================================================
+Processing file data/own\SensorConnectData_13.csv
+GCP are either not available or not correct for file SensorConnectData_13.
+Processing LSTM detector for file SensorConnectData_13.
+Plotting zero velocity detection for LSTM detector for file SensorConnectData_13.
+There are 25/25 strides detected in experiment #13.
+File SensorConnectData_13, i.e., experiment 13 will not be used in performance evaluation.
+===================================================================================================================
+Processing file data/own\SensorConnectData_14.csv
+GCP are either not available or not correct for file SensorConnectData_14.
+Processing LSTM detector for file SensorConnectData_14.
+Plotting zero velocity detection for LSTM detector for file SensorConnectData_14.
+There are 78/78 strides detected in experiment #14.
+File SensorConnectData_14, i.e., experiment 14 will not be used in performance evaluation.
+===================================================================================================================
+Processing file data/own\SensorConnectData_15.csv
+GCP are available & correct for file SensorConnectData_15.
+Processing LSTM detector for file SensorConnectData_15.
+Plotting zero velocity detection for LSTM detector for file SensorConnectData_15.
+There are 73/73 strides detected in experiment #15.
+File SensorConnectData_15, i.e., experiment 15 will be used in performance evaluation.
+===================================================================================================================
+Processing file data/own\SensorConnectData_16.csv
+GCP are either not available or not correct for file SensorConnectData_16.
+Processing LSTM detector for file SensorConnectData_16.
+Plotting zero velocity detection for LSTM detector for file SensorConnectData_16.
+There are 75/75 strides detected in experiment #16.
+File SensorConnectData_16, i.e., experiment 16 will not be used in performance evaluation.
+===================================================================================================================
+Processing file data/own\SensorConnectData_17.csv
+GCP are available & correct for file SensorConnectData_17.
+Processing LSTM detector for file SensorConnectData_17.
+Plotting zero velocity detection for LSTM detector for file SensorConnectData_17.
+There are 24/24 strides detected in experiment #17.
+File SensorConnectData_17, i.e., experiment 17 will be used in performance evaluation.
+===================================================================================================================
+Processing file data/own\SensorConnectData_18.csv
+GCP are available & correct for file SensorConnectData_18.
+Processing LSTM detector for file SensorConnectData_18.
+Plotting zero velocity detection for LSTM detector for file SensorConnectData_18.
+There are 28/28 strides detected in experiment #18.
+File SensorConnectData_18, i.e., experiment 18 will be used in performance evaluation.
+===================================================================================================================
+Processing file data/own\SensorConnectData_19.csv
+GCP are available & correct for file SensorConnectData_19.
+Processing LSTM detector for file SensorConnectData_19.
+Plotting zero velocity detection for LSTM detector for file SensorConnectData_19.
+There are 28/28 strides detected in experiment #19.
+File SensorConnectData_19, i.e., experiment 19 will be used in performance evaluation.
+===================================================================================================================
+Processing file data/own\SensorConnectData_20.csv
+GCP are available & correct for file SensorConnectData_20.
+Processing LSTM detector for file SensorConnectData_20.
+Plotting zero velocity detection for LSTM detector for file SensorConnectData_20.
+There are 65/65 strides detected in experiment #20.
+File SensorConnectData_20, i.e., experiment 20 will be used in performance evaluation.
+===================================================================================================================
+Processing file data/own\SensorConnectData_21.csv
+GCP are available & correct for file SensorConnectData_21.
+Processing LSTM detector for file SensorConnectData_21.
+Plotting zero velocity detection for LSTM detector for file SensorConnectData_21.
+There are 42/43 strides detected in experiment #21.
+File SensorConnectData_21, i.e., experiment 21 will not be used in performance evaluation.
+===================================================================================================================
+Processing file data/own\SensorConnectData_06.csv
+GCP are either not available or not correct for file SensorConnectData_06.
+Processing LSTM detector for file SensorConnectData_06.
+Plotting zero velocity detection for LSTM detector for file SensorConnectData_06.
+There are 76/76 strides detected in experiment #6.
+File SensorConnectData_06, i.e., experiment 6 will not be used in performance evaluation.
+===================================================================================================================
+Processing file data/own\SensorConnectData_11.csv
+GCP are either not available or not correct for file SensorConnectData_11.
+Processing LSTM detector for file SensorConnectData_11.
+Plotting zero velocity detection for LSTM detector for file SensorConnectData_11.
+There are 28/28 strides detected in experiment #11.
+File SensorConnectData_11, i.e., experiment 11 will not be used in performance evaluation.
+===================================================================================================================
+Processing file data/own\SensorConnectData_13.csv
+GCP are either not available or not correct for file SensorConnectData_13.
+Processing LSTM detector for file SensorConnectData_13.
+Plotting zero velocity detection for LSTM detector for file SensorConnectData_13.
+There are 25/25 strides detected in experiment #13.
+File SensorConnectData_13, i.e., experiment 13 will not be used in performance evaluation.
+===================================================================================================================
+Processing file data/own\SensorConnectData_14.csv
+GCP are either not available or not correct for file SensorConnectData_14.
+Processing LSTM detector for file SensorConnectData_14.
+Plotting zero velocity detection for LSTM detector for file SensorConnectData_14.
+There are 78/78 strides detected in experiment #14.
+File SensorConnectData_14, i.e., experiment 14 will not be used in performance evaluation.
+===================================================================================================================
+Processing file data/own\SensorConnectData_15.csv
+GCP are available & correct for file SensorConnectData_15.
+Processing LSTM detector for file SensorConnectData_15.
+Plotting zero velocity detection for LSTM detector for file SensorConnectData_15.
+There are 73/73 strides detected in experiment #15.
+File SensorConnectData_15, i.e., experiment 15 will be used in performance evaluation.
+===================================================================================================================
+Processing file data/own\SensorConnectData_16.csv
+GCP are either not available or not correct for file SensorConnectData_16.
+Processing LSTM detector for file SensorConnectData_16.
+Plotting zero velocity detection for LSTM detector for file SensorConnectData_16.
+There are 75/75 strides detected in experiment #16.
+File SensorConnectData_16, i.e., experiment 16 will not be used in performance evaluation.
+===================================================================================================================
+Processing file data/own\SensorConnectData_17.csv
+GCP are available & correct for file SensorConnectData_17.
+Processing LSTM detector for file SensorConnectData_17.
+Plotting zero velocity detection for LSTM detector for file SensorConnectData_17.
+There are 24/24 strides detected in experiment #17.
+File SensorConnectData_17, i.e., experiment 17 will be used in performance evaluation.
+===================================================================================================================
+Processing file data/own\SensorConnectData_18.csv
+GCP are available & correct for file SensorConnectData_18.
+Processing LSTM detector for file SensorConnectData_18.
+Plotting zero velocity detection for LSTM detector for file SensorConnectData_18.
+There are 28/28 strides detected in experiment #18.
+File SensorConnectData_18, i.e., experiment 18 will be used in performance evaluation.
+===================================================================================================================
+Processing file data/own\SensorConnectData_19.csv
+GCP are available & correct for file SensorConnectData_19.
+Processing LSTM detector for file SensorConnectData_19.
+Plotting zero velocity detection for LSTM detector for file SensorConnectData_19.
+There are 28/28 strides detected in experiment #19.
+File SensorConnectData_19, i.e., experiment 19 will be used in performance evaluation.
+===================================================================================================================
+Processing file data/own\SensorConnectData_20.csv
+GCP are available & correct for file SensorConnectData_20.
+Processing LSTM detector for file SensorConnectData_20.
+Plotting zero velocity detection for LSTM detector for file SensorConnectData_20.
+There are 65/65 strides detected in experiment #20.
+File SensorConnectData_20, i.e., experiment 20 will be used in performance evaluation.
+===================================================================================================================
+Processing file data/own\SensorConnectData_21.csv
+GCP are available & correct for file SensorConnectData_21.
+Processing LSTM detector for file SensorConnectData_21.
+Plotting zero velocity detection for LSTM detector for file SensorConnectData_21.
+There are 42/43 strides detected in experiment #21.
+File SensorConnectData_21, i.e., experiment 21 will not be used in performance evaluation.
+===================================================================================================================
+Processing file data/own\SensorConnectData_22.csv
+GCP are available & correct for file SensorConnectData_22.
+Processing LSTM detector for file SensorConnectData_22.
+Plotting zero velocity detection for LSTM detector for file SensorConnectData_22.
+There are 53/53 strides detected in experiment #22.
+File SensorConnectData_22, i.e., experiment 22 will be used in performance evaluation.
+===================================================================================================================
+Processing file data/own\SensorConnectData_23.csv
+GCP are available & correct for file SensorConnectData_23.
+Processing LSTM detector for file SensorConnectData_23.
+Plotting zero velocity detection for LSTM detector for file SensorConnectData_23.
+There are 109/110 strides detected in experiment #23.
+File SensorConnectData_23, i.e., experiment 23 will not be used in performance evaluation.
+===================================================================================================================
+Processing file data/own\SensorConnectData_24.csv
+GCP are available & correct for file SensorConnectData_24.
+Processing LSTM detector for file SensorConnectData_24.
+Plotting zero velocity detection for LSTM detector for file SensorConnectData_24.
+There are 48/48 strides detected in experiment #24.
+File SensorConnectData_24, i.e., experiment 24 will be used in performance evaluation.
+===================================================================================================================
+There are 14 experiments processed.
+Processing complete for all files.
+===================================================================================================================
+Processing file data/own\SensorConnectData_06.csv
+GCP are either not available or not correct for file SensorConnectData_06.
+Processing LSTM detector for file SensorConnectData_06.
+Plotting zero velocity detection for LSTM detector for file SensorConnectData_06.
+There are 76/76 strides detected in experiment #6.
+File SensorConnectData_06, i.e., experiment 6 will not be used in performance evaluation.
+===================================================================================================================
+Processing file data/own\SensorConnectData_11.csv
+GCP are either not available or not correct for file SensorConnectData_11.
+Processing LSTM detector for file SensorConnectData_11.
+Plotting zero velocity detection for LSTM detector for file SensorConnectData_11.
+There are 28/28 strides detected in experiment #11.
+File SensorConnectData_11, i.e., experiment 11 will not be used in performance evaluation.
+===================================================================================================================
+Processing file data/own\SensorConnectData_13.csv
+GCP are either not available or not correct for file SensorConnectData_13.
+Processing LSTM detector for file SensorConnectData_13.
+Plotting zero velocity detection for LSTM detector for file SensorConnectData_13.
+There are 25/25 strides detected in experiment #13.
+File SensorConnectData_13, i.e., experiment 13 will not be used in performance evaluation.
+===================================================================================================================
+Processing file data/own\SensorConnectData_14.csv
+GCP are either not available or not correct for file SensorConnectData_14.
+Processing LSTM detector for file SensorConnectData_14.
+Plotting zero velocity detection for LSTM detector for file SensorConnectData_14.
+There are 78/78 strides detected in experiment #14.
+File SensorConnectData_14, i.e., experiment 14 will not be used in performance evaluation.
+===================================================================================================================
+Processing file data/own\SensorConnectData_15.csv
+GCP are available & correct for file SensorConnectData_15.
+Processing LSTM detector for file SensorConnectData_15.
+Plotting zero velocity detection for LSTM detector for file SensorConnectData_15.
+There are 73/73 strides detected in experiment #15.
+File SensorConnectData_15, i.e., experiment 15 will be used in performance evaluation.
+===================================================================================================================
+Processing file data/own\SensorConnectData_16.csv
+GCP are either not available or not correct for file SensorConnectData_16.
+Processing LSTM detector for file SensorConnectData_16.
+Plotting zero velocity detection for LSTM detector for file SensorConnectData_16.
+There are 75/75 strides detected in experiment #16.
+File SensorConnectData_16, i.e., experiment 16 will not be used in performance evaluation.
+===================================================================================================================
+Processing file data/own\SensorConnectData_17.csv
+GCP are available & correct for file SensorConnectData_17.
+Processing LSTM detector for file SensorConnectData_17.
+Plotting zero velocity detection for LSTM detector for file SensorConnectData_17.
+There are 24/24 strides detected in experiment #17.
+File SensorConnectData_17, i.e., experiment 17 will be used in performance evaluation.
+===================================================================================================================
+Processing file data/own\SensorConnectData_18.csv
+GCP are available & correct for file SensorConnectData_18.
+Processing LSTM detector for file SensorConnectData_18.
+Plotting zero velocity detection for LSTM detector for file SensorConnectData_18.
+There are 28/28 strides detected in experiment #18.
+File SensorConnectData_18, i.e., experiment 18 will be used in performance evaluation.
+===================================================================================================================
+Processing file data/own\SensorConnectData_19.csv
+GCP are available & correct for file SensorConnectData_19.
+Processing LSTM detector for file SensorConnectData_19.
+Plotting zero velocity detection for LSTM detector for file SensorConnectData_19.
+There are 28/28 strides detected in experiment #19.
+File SensorConnectData_19, i.e., experiment 19 will be used in performance evaluation.
+===================================================================================================================
+Processing file data/own\SensorConnectData_20.csv
+GCP are available & correct for file SensorConnectData_20.
+Processing LSTM detector for file SensorConnectData_20.
+Plotting zero velocity detection for LSTM detector for file SensorConnectData_20.
+There are 65/65 strides detected in experiment #20.
+File SensorConnectData_20, i.e., experiment 20 will be used in performance evaluation.
+===================================================================================================================
+Processing file data/own\SensorConnectData_21.csv
+GCP are available & correct for file SensorConnectData_21.
+Processing LSTM detector for file SensorConnectData_21.
+Plotting zero velocity detection for LSTM detector for file SensorConnectData_21.
+There are 42/43 strides detected in experiment #21.
+File SensorConnectData_21, i.e., experiment 21 will not be used in performance evaluation.
+===================================================================================================================
+Processing file data/own\SensorConnectData_22.csv
+GCP are available & correct for file SensorConnectData_22.
+Processing LSTM detector for file SensorConnectData_22.
+Plotting zero velocity detection for LSTM detector for file SensorConnectData_22.
+There are 53/53 strides detected in experiment #22.
+File SensorConnectData_22, i.e., experiment 22 will be used in performance evaluation.
+===================================================================================================================
+Processing file data/own\SensorConnectData_23.csv
+GCP are available & correct for file SensorConnectData_23.
+Processing LSTM detector for file SensorConnectData_23.
+Plotting zero velocity detection for LSTM detector for file SensorConnectData_23.
+There are 109/110 strides detected in experiment #23.
+File SensorConnectData_23, i.e., experiment 23 will not be used in performance evaluation.
+===================================================================================================================
+Processing file data/own\SensorConnectData_24.csv
+GCP are available & correct for file SensorConnectData_24.
+Processing LSTM detector for file SensorConnectData_24.
+Plotting zero velocity detection for LSTM detector for file SensorConnectData_24.
+There are 48/48 strides detected in experiment #24.
+File SensorConnectData_24, i.e., experiment 24 will be used in performance evaluation.
+===================================================================================================================
+There are 14 experiments processed.
+Processing complete for all files.

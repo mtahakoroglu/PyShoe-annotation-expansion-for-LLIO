@@ -193,11 +193,12 @@ for file in sensor_data_files:
         logging.info(f"File {base_filename}, i.e., experiment {expNumber} will not be used in performance evaluation.")
     
     plt.figure()
-    if GCP_data['GCP_exist_and_correct'].item() and n == numberOfStrides:
+    if GCP_data['GCP_exist_and_correct'].item():
         plt.scatter(GCP[:,0], GCP[:,1], color='r', s=30, label="GCP")
-    plt.plot(aligned_trajectory_INS[:,0], aligned_trajectory_INS[:,1], linewidth = 1.5, color='b', label=legend[-1])
-    plt.scatter(aligned_trajectory_SHS[GCP_stride_numbers,0], aligned_trajectory_SHS[GCP_stride_numbers,1], color='r', s=45, 
+    if n == numberOfStrides:
+        plt.scatter(aligned_trajectory_SHS[GCP_stride_numbers,0], aligned_trajectory_SHS[GCP_stride_numbers,1], color='r', s=45, 
                     marker='o', facecolor='none', linewidths=1.5, label="GCP stride")
+    plt.plot(aligned_trajectory_INS[:,0], aligned_trajectory_INS[:,1], linewidth = 1.5, color='b', label=legend[-1])
     plt.legend(fontsize=15); plt.xlabel('x [m]', fontsize=22); plt.ylabel('y [m]', fontsize=22)
     plt.title(f'{base_filename}', fontsize=22)
     plt.tick_params(labelsize=22)
@@ -207,10 +208,11 @@ for file in sensor_data_files:
 
     plt.figure()
     plt.plot(aligned_trajectory_SHS[:,0], aligned_trajectory_SHS[:,1], 'bx-', linewidth = 1.4, markersize=6, markeredgewidth=1.5, label="PyShoe (LSTM) SHS")
-    if GCP_data['GCP_exist_and_correct'].item() and n == numberOfStrides:
+    if GCP_data['GCP_exist_and_correct'].item():
         plt.scatter(GCP[:,0], GCP[:,1], color='r', s=30, label="GCP")
-    plt.scatter(aligned_trajectory_SHS[GCP_stride_numbers,0], aligned_trajectory_SHS[GCP_stride_numbers,1], color='r', s=45, 
-                    marker='o', facecolor='none', linewidths=1.5, label="GCP stride")
+    if n == numberOfStrides:
+        plt.scatter(aligned_trajectory_SHS[GCP_stride_numbers,0], aligned_trajectory_SHS[GCP_stride_numbers,1], color='r', s=45, 
+                marker='o', facecolor='none', linewidths=1.5, label="GCP stride")
     plt.legend(fontsize=15); plt.xlabel('x [m]', fontsize=22); plt.ylabel('y [m]', fontsize=22)
     plt.title(f'{n}/{numberOfStrides} strides detected', fontsize=22)
     plt.tick_params(labelsize=22)
