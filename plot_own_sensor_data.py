@@ -98,6 +98,7 @@ def rotate_trajectory(trajectory, theta):
 g = 9.8029
 # processing zero velocity labels to turn a sampling frequency driven system into gait driven system (stride and heading system)
 expCount = 0 # experiment index
+dpi = 400 # for figure resolution
 # Process each sensor data file
 for file in sensor_data_files:
     logging.info(f"===================================================================================================================")
@@ -166,7 +167,7 @@ for file in sensor_data_files:
             plt.scatter(timestamps[strideIndex], zv_lstm_filtered[strideIndex], c='r', marker='x')
             plt.title(f'LSTM filtered ({n}/{numberOfStrides}) - {base_filename}')
             plt.xlabel('Time [s]'); plt.ylabel('Zero Velocity')
-            plt.savefig(os.path.join(output_dir, f'{base_filename}_ZV_{det_list[i].upper()}_filtered.png'), dpi=600, bbox_inches='tight')
+            plt.savefig(os.path.join(output_dir, f'{base_filename}_ZV_{det_list[i].upper()}_filtered.png'), dpi=dpi, bbox_inches='tight')
 
     # Reconstruct the trajectory from displacements and heading changes to build a Stride & Heading INS (SHS)
     displacements, heading_changes = calculate_displacement_and_heading(traj_list[-1][:, :2], strideIndex)
@@ -202,7 +203,7 @@ for file in sensor_data_files:
     plt.tick_params(labelsize=22)
     plt.axis('tight'); plt.axis('equal')
     plt.grid(True, which='both', linestyle='--', linewidth=1.5)
-    plt.savefig(os.path.join(output_dir, f'{base_filename}.png'), dpi=600, bbox_inches='tight')
+    plt.savefig(os.path.join(output_dir, f'{base_filename}.png'), dpi=dpi, bbox_inches='tight')
 
     plt.figure()
     plt.plot(aligned_trajectory_SHS[:,0], aligned_trajectory_SHS[:,1], 'bx-', linewidth = 1.4, markersize=6, markeredgewidth=1.5, label="PyShoe (LSTM) SHS")
@@ -215,7 +216,7 @@ for file in sensor_data_files:
     plt.tick_params(labelsize=22)
     plt.axis('tight'); plt.axis('equal')
     plt.grid(True, which='both', linestyle='--', linewidth=1.5)
-    plt.savefig(os.path.join(output_dir, f'{base_filename}_SHS.png'), dpi=600, bbox_inches='tight')
+    plt.savefig(os.path.join(output_dir, f'{base_filename}_SHS.png'), dpi=dpi, bbox_inches='tight')
 
 logging.info(f"===================================================================================================================")
 logging.info(f"There are {expCount} experiments processed.")
