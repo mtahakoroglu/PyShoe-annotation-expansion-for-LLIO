@@ -97,12 +97,15 @@ def rotate_trajectory(trajectory, theta):
 # gravity contant
 g = 9.8029
 # processing zero velocity labels to turn a sampling frequency driven system into gait driven system (stride and heading system)
-j = 0 # experiment index
+expCount = 0 # experiment index
 # Process each sensor data file
 for file in sensor_data_files:
-    logging.info(f"Processing file: {file}")
-    sensor_data = pd.read_csv(file)
+    logging.info(f"===================================================================================================================")
+    logging.info(f"Processing file {file}")
+    expCount = expCount+1 # next experiment
 
+    sensor_data = pd.read_csv(file)
+    
     # Remove the '.csv' extension from the filename
     base_filename = os.path.splitext(os.path.basename(file))[0]
     GCP_data = sio.loadmat(sensor_data_dir + '/' + base_filename + '.mat')
@@ -124,10 +127,17 @@ for file in sensor_data_files:
               'inertial-6253.76535:scaledAccelY',
               'inertial-6253.76535:scaledAccelZ']] *= g
     
-    # Extract GCP info from mat files
-    # imu_data = np.column_stack((data['imu'][:, :3], data['imu'][:, 3:6]))  # Accel and Gyro data
-    GCP = GCP_data['GCP_meters']
-    numberOfStrides = GCP_data['n'].item()
+    # Extract Ground Control Points (GCP) info from mat files
+    # logging.info(f"Keys in GCP_data: {list(GCP_data.keys())}")
+    expNumber = GCP_data['expID'].item()
+    if GCP_data['GCP_exist_and_correct'].item() == True:
+        logging.info(f"GCP are available & correct for file {base_filename}.")
+        GCP = GCP_data['GCP_meters']
+    else:
+        logging.info(f"GCP are either not available or not correct for file {base_filename}.")
+    GCP_stride_numbers = np.squeeze(GCP_data['GCP_stride_numbers'])
+    numberOfStrides =  GCP_data['numberOfStrides'].item() # total number of strides is equal to the last GCP stride number, i.e., GCP_stride_numbers[-1]
+        
 
     # Initialize INS object with correct parameters
     ins = INS(imu_data.values, sigma_a=0.00098, sigma_w=8.7266463e-5, T=1.0/200)
@@ -136,20 +146,21 @@ for file in sensor_data_files:
     zv_list = []
 
     for i, detector in enumerate(det_list):
-        logging.info(f"Processing {detector} detector for file: {file}")
+        logging.info(f"Processing {detector.upper()} detector for file {base_filename}.")
         zv = ins.Localizer.compute_zv_lrt(W=W_list[i], G=thresh_list[i], detector=detector)
         x = ins.baseline(zv=zv)
         traj_list.append(x)
         zv_list.append(zv)
 
     for i, zv in enumerate(zv_list):
-        logging.info(f"Plotting zero velocity detection for {det_list[i]} detector for file: {file}")
+        logging.info(f"Plotting zero velocity detection for {det_list[i].upper()} detector for file {base_filename}.")
         # Apply a heuristic filter to zero velocity labels (via LSTM) to eliminate undesired jumps & achieve correct stride detection
         if det_list[i] == 'lstm':
+            
             k = 75 # temporal window size for checking if detected strides are too close or not
             zv_lstm_filtered, n, strideIndex = heuristic_zv_filter_and_stride_detector(zv, k)
-            if n == numberOfStrides:
-                print(f"There are {n}/{numberOfStrides} strides correctly detected in experiment #{j+1}.")
+            logging.info(f"There are {n}/{numberOfStrides} strides detected in experiment #{expNumber}.")
+
             plt.figure()
             plt.plot(timestamps[:len(zv_lstm_filtered)], zv_lstm_filtered)
             plt.scatter(timestamps[strideIndex], zv_lstm_filtered[strideIndex], c='r', marker='x')
@@ -173,9 +184,16 @@ for file in sensor_data_files:
     # reverse data in x direction to match with GCP and better illustration in the paper
     aligned_trajectory_INS[:,0] = -aligned_trajectory_INS[:,0]
     aligned_trajectory_SHS[:,0] = -aligned_trajectory_SHS[:,0]
+
+    # PERFORMANCE EVALUTATION via METRICS
+    if GCP_data['GCP_exist_and_correct'].item() and n == numberOfStrides:
+        logging.info(f"File {base_filename}, i.e., experiment {expNumber} will be used in performance evaluation.")
+    else:
+        logging.info(f"File {base_filename}, i.e., experiment {expNumber} will not be used in performance evaluation.")
     
     plt.figure()
-    plt.scatter(GCP[:,0], GCP[:,1], color='r', s=28, label="GCP")
+    if GCP_data['GCP_exist_and_correct'].item() and n == numberOfStrides:
+        plt.scatter(GCP[:,0], GCP[:,1], color='r', s=30, label="GCP")
     plt.plot(aligned_trajectory_INS[:,0], aligned_trajectory_INS[:,1], linewidth = 1.5, color='b', label=legend[-1])
     plt.legend(fontsize=15); plt.xlabel('x [m]', fontsize=22); plt.ylabel('y [m]', fontsize=22)
     plt.title(f'{base_filename}', fontsize=22)
@@ -185,8 +203,11 @@ for file in sensor_data_files:
     plt.savefig(os.path.join(output_dir, f'{base_filename}.png'), dpi=600, bbox_inches='tight')
 
     plt.figure()
-    plt.scatter(GCP[:,0], GCP[:,1], color='r', s=28, label="GCP")
-    plt.plot(aligned_trajectory_SHS[:,0], aligned_trajectory_SHS[:,1], 'bx-', linewidth = 1.5, markersize=7, markeredgewidth=1.5, label="PyShoe (LSTM) SHS")
+    plt.plot(aligned_trajectory_SHS[:,0], aligned_trajectory_SHS[:,1], 'bx-', linewidth = 1.4, markersize=6, markeredgewidth=1.5, label="PyShoe (LSTM) SHS")
+    if GCP_data['GCP_exist_and_correct'].item() and n == numberOfStrides:
+        plt.scatter(GCP[:,0], GCP[:,1], color='r', s=30, label="GCP")
+    plt.scatter(aligned_trajectory_SHS[GCP_stride_numbers,0], aligned_trajectory_SHS[GCP_stride_numbers,1], color='r', s=45, 
+                    marker='o', facecolor='none', linewidths=1.5, label="GCP stride")
     plt.legend(fontsize=15); plt.xlabel('x [m]', fontsize=22); plt.ylabel('y [m]', fontsize=22)
     plt.title(f'{n}/{numberOfStrides} strides detected', fontsize=22)
     plt.tick_params(labelsize=22)
@@ -194,7 +215,6 @@ for file in sensor_data_files:
     plt.grid(True, which='both', linestyle='--', linewidth=1.5)
     plt.savefig(os.path.join(output_dir, f'{base_filename}_SHS.png'), dpi=600, bbox_inches='tight')
 
-    j = j+1 # next experiment
-    print(f"There are {j} experiments conducted.")
-
+logging.info(f"===================================================================================================================")
+logging.info(f"There are {expCount} experiments processed.")
 logging.info("Processing complete for all files.")

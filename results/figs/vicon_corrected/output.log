@@ -8,38 +8,6 @@ Applying heuristic filter to optimal ZUPT detector "ared" for correct stride det
 Detected 21/21 strides in the experiment 2.
 Processing file: data/vicon/processed\2017-11-22-11-23-25.mat
 Processing shoe detector for file: data/vicon/processed\2017-11-22-11-23-25.mat
-Applying heuristic filter to optimal ZUPT detector "shoe" for correct stride detection.
-Detected 21/21 strides in the experiment 3.
-Processing file: data/vicon/processed\2017-11-22-11-25-20.mat
-Processing shoe detector for file: data/vicon/processed\2017-11-22-11-25-20.mat
-Applying heuristic filter to optimal ZUPT detector "shoe" for correct stride detection.
-Detected 17/18 strides in the experiment 4.
-Applying stride detection to the combined zero velocity detection results for experiment 4.
-Detected 18/18 strides detected with the combined ZV detector in the experiment 4.
-Processing file: data/vicon/processed\2017-11-22-11-26-05.mat
-Processing shoe detector for file: data/vicon/processed\2017-11-22-11-26-05.mat
-Processing file: data/vicon/processed\2017-11-22-11-22-03.mat
-Processing shoe detector for file: data/vicon/processed\2017-11-22-11-22-03.mat
-Applying heuristic filter to optimal ZUPT detector "shoe" for correct stride detection.
-Detected 22/22 strides in the experiment 1.
-Processing file: data/vicon/processed\2017-11-22-11-22-46.mat
-Processing ared detector for file: data/vicon/processed\2017-11-22-11-22-46.mat
-Applying heuristic filter to optimal ZUPT detector "ared" for correct stride detection.
-Detected 21/21 strides in the experiment 2.
-Processing file: data/vicon/processed\2017-11-22-11-23-25.mat
-Processing shoe detector for file: data/vicon/processed\2017-11-22-11-23-25.mat
-Applying heuristic filter to optimal ZUPT detector "shoe" for correct stride detection.
-Detected 21/21 strides in the experiment 3.
-Processing file: data/vicon/processed\2017-11-22-11-25-20.mat
-Processing shoe detector for file: data/vicon/processed\2017-11-22-11-25-20.mat
-Applying heuristic filter to optimal ZUPT detector "shoe" for correct stride detection.
-Detected 17/18 strides in the experiment 4.
-Applying stride detection to the combined zero velocity detection results for experiment 4.
-Detected 18/18 strides detected with the combined ZV detector in the experiment 4.
-Processing file: data/vicon/processed\2017-11-22-11-26-05.mat
-Processing shoe detector for file: data/vicon/processed\2017-11-22-11-26-05.mat
-Applying heuristic filter to optimal ZUPT detector "shoe" for correct stride detection.
-Detected 26/26 strides in the experiment 5.
 Processing file: data/vicon/processed\2017-11-22-11-22-03.mat
 Processing shoe detector for file: data/vicon/processed\2017-11-22-11-22-03.mat
 Applying heuristic filter to optimal ZUPT detector "shoe" for correct stride detection.
@@ -94,10 +62,6 @@ Processing file: data/vicon/processed\2017-11-22-11-36-45.mat
 Processing vicon detector for file: data/vicon/processed\2017-11-22-11-36-45.mat
 Applying heuristic filter to optimal ZUPT detector "vicon" for correct stride detection.
 Detected 22/22 strides in the experiment 12.
-Processing file: data/vicon/processed\2017-11-22-11-37-47.mat
-Processing vicon detector for file: data/vicon/processed\2017-11-22-11-37-47.mat
-Applying heuristic filter to optimal ZUPT detector "vicon" for correct stride detection.
-Detected 30/30 strides in the experiment 13.
 Processing file: data/vicon/processed\2017-11-22-11-38-45.mat
 Processing shoe detector for file: data/vicon/processed\2017-11-22-11-38-45.mat
 Applying heuristic filter to optimal ZUPT detector "shoe" for correct stride detection.
@@ -244,24 +208,12 @@ Processing file: data/vicon/processed\2017-12-15-18-03-05.mat
 Processing shoe detector for file: data/vicon/processed\2017-12-15-18-03-05.mat
 Applying heuristic filter to optimal ZUPT detector "shoe" for correct stride detection.
 Detected 26/26 strides in the experiment 46.
-Processing file: data/vicon/processed\2018-02-09-11-16-53.mat
-Processing ared detector for file: data/vicon/processed\2018-02-09-11-16-53.mat
-Applying heuristic filter to optimal ZUPT detector "ared" for correct stride detection.
-Detected 0/0 strides in the experiment 47.
-Processing file: data/vicon/processed\2018-02-09-11-18-04.mat
-Processing shoe detector for file: data/vicon/processed\2018-02-09-11-18-04.mat
-Applying heuristic filter to optimal ZUPT detector "shoe" for correct stride detection.
-Detected 28/28 strides in the experiment 48.
 Processing file: data/vicon/processed\2018-02-09-11-19-39.mat
 Processing shoe detector for file: data/vicon/processed\2018-02-09-11-19-39.mat
 Applying heuristic filter to optimal ZUPT detector "shoe" for correct stride detection.
 Detected 17/13 strides in the experiment 49.
 Applying stride detection to the combined zero velocity detection results for experiment 49.
 Detected 13/13 strides detected with the combined ZV detector in the experiment 49.
-Processing file: data/vicon/processed\2018-02-09-11-22-01.mat
-Processing ared detector for file: data/vicon/processed\2018-02-09-11-22-01.mat
-Applying heuristic filter to optimal ZUPT detector "ared" for correct stride detection.
-Detected 41/41 strides in the experiment 50.
 Processing file: data/vicon/processed\2018-02-09-11-29-43.mat
 Processing vicon detector for file: data/vicon/processed\2018-02-09-11-29-43.mat
 Applying heuristic filter to optimal ZUPT detector "vicon" for correct stride detection.
@@ -278,12 +230,34 @@ Processing file: data/vicon/processed\2018-02-22-10-09-36.mat
 Processing shoe detector for file: data/vicon/processed\2018-02-22-10-09-36.mat
 Applying heuristic filter to optimal ZUPT detector "shoe" for correct stride detection.
 Detected 16/16 strides in the experiment 54.
-Processing file: data/vicon/processed\2018-02-22-10-10-29.mat
-Processing shoe detector for file: data/vicon/processed\2018-02-22-10-10-29.mat
-Applying heuristic filter to optimal ZUPT detector "shoe" for correct stride detection.
-Detected 11/11 strides in the experiment 55.
 Processing file: data/vicon/processed\2018-02-22-10-10-56.mat
 Processing vicon detector for file: data/vicon/processed\2018-02-22-10-10-56.mat
 Applying heuristic filter to optimal ZUPT detector "vicon" for correct stride detection.
 Detected 9/9 strides in the experiment 56.
 Processing complete for all files.
+Processing file: data/vicon/processed\2017-11-22-11-22-03.mat
+Processing shoe detector for file: data/vicon/processed\2017-11-22-11-22-03.mat
+Applying heuristic filter to optimal ZUPT detector "shoe" for correct stride detection.
+Detected 22/22 strides in the experiment 1.
+Processing file: data/vicon/processed\2017-11-22-11-22-03.mat
+Processing shoe detector for file: data/vicon/processed\2017-11-22-11-22-03.mat
+Applying heuristic filter to optimal ZUPT detector "shoe" for correct stride detection.
+Detected 22/22 strides in the experiment 1.
+Processing file: data/vicon/processed\2017-11-22-11-22-03.mat
+Processing shoe detector for file: data/vicon/processed\2017-11-22-11-22-03.mat
+Applying heuristic filter to optimal ZUPT detector "shoe" for correct stride detection.
+Detected 22/22 strides in the experiment 1.
+Processing file: data/vicon/processed\2017-11-22-11-22-46.mat
+Processing ared detector for file: data/vicon/processed\2017-11-22-11-22-46.mat
+Applying heuristic filter to optimal ZUPT detector "ared" for correct stride detection.
+Detected 21/21 strides in the experiment 2.
+Processing file: data/vicon/processed\2017-11-22-11-23-25.mat
+Processing shoe detector for file: data/vicon/processed\2017-11-22-11-23-25.mat
+Applying heuristic filter to optimal ZUPT detector "shoe" for correct stride detection.
+Detected 21/21 strides in the experiment 3.
+Processing file: data/vicon/processed\2017-11-22-11-25-20.mat
+Processing shoe detector for file: data/vicon/processed\2017-11-22-11-25-20.mat
+Applying heuristic filter to optimal ZUPT detector "shoe" for correct stride detection.
+Detected 17/18 strides in the experiment 4.
+Applying stride detection to the combined zero velocity detection results for experiment 4.
+Detected 18/18 strides detected with the combined ZV detector in the experiment 4.

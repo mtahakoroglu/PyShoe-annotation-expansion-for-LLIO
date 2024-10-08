@@ -10,16 +10,16 @@ import scipy.io as sio
 from scipy.signal import medfilt
 from scipy.linalg import orthogonal_procrustes
 
-# Directory containing your Vicon data files
-vicon_data_dir = 'data/vicon/processed/'
+vicon_data_dir = 'data/vicon/processed/' # Directory containing Vicon data files
 vicon_data_files = glob.glob(os.path.join(vicon_data_dir, '*.mat'))
 
-# Set up logging
-output_dir = "results/figs/vicon_corrected/"
+output_dir = "results/figs/vicon_corrected/" # Set up logging and output directory
 os.makedirs(output_dir, exist_ok=True)
 log_file = os.path.join(output_dir, 'output.log')
 logging.basicConfig(level=logging.INFO, format='%(message)s',
                     handlers=[logging.FileHandler(log_file), logging.StreamHandler()])
+
+extracted_training_data_dir = "data/" # training data (imu, zv) for LSTM retraining & (displacement, heading change) for LLIO training
 
 # 16th experiment: Despite showing MBGTD is the optimal detector in the mat file, VICON & ARED performs a lot better. Optimal detector is selected as ARED.
 # 51st experiment: Optimal detector is changed from MBGTD to VICON
@@ -126,29 +126,22 @@ def align_trajectories(traj_est, traj_gt):
     norm_gt = np.linalg.norm(traj_gt_centered)
     scale = norm_gt / norm_est
 
-    # Apply scaling
-    traj_est_scaled = traj_est_centered * scale
-
-    # Compute the optimal rotation matrix
-    R, _ = orthogonal_procrustes(traj_est_scaled, traj_gt_centered)
-
-    # Apply rotation
-    traj_est_rotated = np.dot(traj_est_scaled, R)
-
-    # Translate back
-    traj_est_aligned = traj_est_rotated + traj_gt_mean
+    traj_est_scaled = traj_est_centered * scale # Apply scaling
+    R, _ = orthogonal_procrustes(traj_est_scaled, traj_gt_centered) # Compute the optimal rotation matrix
+    traj_est_rotated = np.dot(traj_est_scaled, R) # Apply rotation
+    traj_est_aligned = traj_est_rotated + traj_gt_mean # Translate back
 
     return traj_est_aligned, traj_gt_trimmed, scale
 
 
 i = 0  # experiment index
 # following two lines are used to run selected experiment results
-training_data_tag = [1]*55
-training_data_tag.append(1)
-# training_data_tag are the experiments to be used to extract displacement and heading change info for LLIO training
-# training_data_tag = [1, 1, 1, -1, 1, -1, 1, 1, 1, 1, -1, 1, 0, 1, 1, 1, 1, -1, 1, 1, 
-#                     1, 1, 1, 1, 1, 1, -1, 1, 1, -1, 1, -1, 1, 1, 1, -1, 1, -1, 1, 1, 
-#                     1, 1, -1, 1, 1, 1, 0, 0, -1, 0, 1, 1, 1, 1, 0, 1]
+# training_data_tag = [1]*55
+# training_data_tag.append(1)
+# training_data_tag are the experiments to be used in extracting displacement and heading change data for LLIO training
+training_data_tag = [1, 1, 1, -1, 1, -1, 1, 1, 1, 1, -1, 1, 0, 1, 1, 1, 1, -1, 1, 1, 
+                    1, 1, 1, 1, 1, 1, -1, 1, 1, -1, 1, -1, 1, 1, 1, -1, 1, -1, 1, 1, 
+                    1, 1, -1, 1, 1, 1, 0, 0, -1, 0, 1, 1, 1, 1, 0, 1]
 corrected_data_index = [4, 6, 11, 18, 27, 30, 32, 36, 38, 43, 49] # corrected experiment indexes
 nGT = [22, 21, 21, 18, 26, 24, 18, 20, 28, 35, 29, 22, 30, 34, 24, 36, 20, 15, 10, 33, 
        22, 19, 13, 16, 17, 21, 20, 28, 18, 12, 13, 26, 34, 25, 24, 24, 43, 42, 15, 12, 
@@ -207,6 +200,11 @@ for file in vicon_data_files:
         # Reconstruct the trajectory from displacements and heading changes
         initial_position = gt[strideIndex[0], :2]  # Starting point from the GT trajectory
         reconstructed_traj = reconstruct_trajectory(displacements, heading_changes, initial_position)
+
+        # reverse data in x direction to match with GCP and better illustration in the paper
+        aligned_x_lstm[:,0] = -aligned_x_lstm[:,0]
+        aligned_gt[:,0] = -aligned_gt[:,0]
+        reconstructed_traj[:,0] = -reconstructed_traj[:,0]
 
         # Remove the '.mat' suffix from the filename
         base_filename = os.path.splitext(os.path.basename(file))[0]
@@ -376,7 +374,7 @@ for file in vicon_data_files:
 
             # Save the combined IMU and ZV data to a CSV file
             base_filename = os.path.splitext(os.path.basename(file))[0]
-            combined_csv_filename = os.path.join(output_dir, f'lstm_zv_detector_training_data/{base_filename}_imu_zv.csv')
+            combined_csv_filename = os.path.join(extracted_training_data_dir, f'lstm_zv_detector_training_data/{base_filename}_imu_zv.csv')
 
             np.savetxt(combined_csv_filename, combined_data, delimiter=',',
                     header='t,ax,ay,az,wx,wy,wz,zv', comments='')

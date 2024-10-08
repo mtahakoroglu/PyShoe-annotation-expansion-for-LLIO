@@ -39,7 +39,7 @@ class LSTM(torch.nn.Module):
         output = self.softmax(self.fc(r_out[0, :, :]))
         zv_lstm = torch.max(output.cpu().data, 1)[1].numpy()
         prob = torch.max(output.cpu().data, 1)[0].numpy()
-        zv_lstm[np.where(prob <= 0.5)] = 0
+        zv_lstm[np.where(prob <= 0.0)] = 0
         return zv_lstm
 
 
