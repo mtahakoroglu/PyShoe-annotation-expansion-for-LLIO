@@ -195,6 +195,8 @@ for file in sensor_data_files:
     if GCP_data['GCP_exist_and_correct'].item() and n == numberOfStrides:
         plt.scatter(GCP[:,0], GCP[:,1], color='r', s=30, label="GCP")
     plt.plot(aligned_trajectory_INS[:,0], aligned_trajectory_INS[:,1], linewidth = 1.5, color='b', label=legend[-1])
+    plt.scatter(aligned_trajectory_SHS[GCP_stride_numbers,0], aligned_trajectory_SHS[GCP_stride_numbers,1], color='r', s=45, 
+                    marker='o', facecolor='none', linewidths=1.5, label="GCP stride")
     plt.legend(fontsize=15); plt.xlabel('x [m]', fontsize=22); plt.ylabel('y [m]', fontsize=22)
     plt.title(f'{base_filename}', fontsize=22)
     plt.tick_params(labelsize=22)
