@@ -60,97 +60,131 @@ pip install pandas==1.1.5
 
 <p align="justify">Note that experiments start from #15 because previous ones do not contain GCP.</p>
 
-<h4>Experiment 14</h4>
+<h4>Experiment 6 (GCP not available)</h4>
 
-<img src="results/figs/own/SensorConnectData_14.png" alt="trajectory obtained with robust ZUPT detector (LSTM) aided (Error-State Kalman Filter based) foot-mounted INS" width=300 height=auto>
+<img src="results/figs/own/SensorConnectData_06.png" alt="trajectory obtained with robust ZUPT detector (LSTM) aided (Error-State Kalman Filter based) foot-mounted INS" width=400 height=auto>
 
 
 | Zero Velocity |  Trajectory  |
 |  :---:  |  :---:  |
-| <img src="results/figs/own/SensorConnectData_14_ZV_LSTM_filtered.png" alt="ZV labels produced with robust ZUPT (LSTM filtered) detector" width=300 height=auto> | <img src="results/figs/own/SensorConnectData_14_SHS.png" alt="trajectory obtained with robust ZUPT detector (LSTM) aided (Error-State Kalman Filter based) foot-mounted INS" width=300 height=auto> |
+| <img src="results/figs/own/SensorConnectData_06_ZV_LSTM_filtered.png" alt="ZV labels produced with robust ZUPT (LSTM filtered) detector" width=400 height=auto> | <img src="results/figs/own/SensorConnectData_06_SHS.png" alt="trajectory obtained with robust ZUPT detector (LSTM) aided (Error-State Kalman Filter based) foot-mounted INS" width=400 height=auto> |
+
+<h4>Experiment 11 (GCP not available)</h4>
+
+<img src="results/figs/own/SensorConnectData_11.png" alt="trajectory obtained with robust ZUPT detector (LSTM) aided (Error-State Kalman Filter based) foot-mounted INS" width=400 height=auto>
+
+
+| Zero Velocity |  Trajectory  |
+|  :---:  |  :---:  |
+| <img src="results/figs/own/SensorConnectData_11_ZV_LSTM_filtered.png" alt="ZV labels produced with robust ZUPT (LSTM filtered) detector" width=400 height=auto> | <img src="results/figs/own/SensorConnectData_11_SHS.png" alt="trajectory obtained with robust ZUPT detector (LSTM) aided (Error-State Kalman Filter based) foot-mounted INS" width=400 height=auto> |
+
+<h4>Experiment 13 (GCP not available)</h4>
+
+<img src="results/figs/own/SensorConnectData_13.png" alt="trajectory obtained with robust ZUPT detector (LSTM) aided (Error-State Kalman Filter based) foot-mounted INS" width=400 height=auto>
+
+
+| Zero Velocity |  Trajectory  |
+|  :---:  |  :---:  |
+| <img src="results/figs/own/SensorConnectData_13_ZV_LSTM_filtered.png" alt="ZV labels produced with robust ZUPT (LSTM filtered) detector" width=400 height=auto> | <img src="results/figs/own/SensorConnectData_13_SHS.png" alt="trajectory obtained with robust ZUPT detector (LSTM) aided (Error-State Kalman Filter based) foot-mounted INS" width=400 height=auto> |
+
+<h4>Experiment 14 (GCP not available)</h4>
+
+<img src="results/figs/own/SensorConnectData_14.png" alt="trajectory obtained with robust ZUPT detector (LSTM) aided (Error-State Kalman Filter based) foot-mounted INS" width=400 height=auto>
+
+
+| Zero Velocity |  Trajectory  |
+|  :---:  |  :---:  |
+| <img src="results/figs/own/SensorConnectData_14_ZV_LSTM_filtered.png" alt="ZV labels produced with robust ZUPT (LSTM filtered) detector" width=400 height=auto> | <img src="results/figs/own/SensorConnectData_14_SHS.png" alt="trajectory obtained with robust ZUPT detector (LSTM) aided (Error-State Kalman Filter based) foot-mounted INS" width=400 height=auto> |
 
 <h4>Experiment 15</h4>
 
-<img src="results/figs/own/SensorConnectData_15.png" alt="trajectory obtained with robust ZUPT detector (LSTM) aided (Error-State Kalman Filter based) foot-mounted INS" width=%20 height=auto>
+<img src="results/figs/own/SensorConnectData_15.png" alt="trajectory obtained with robust ZUPT detector (LSTM) aided (Error-State Kalman Filter based) foot-mounted INS" width=400 height=auto>
 
-<img src="results/figs/own/SensorConnectData_15_ZV_LSTM_filtered.png" alt="ZV labels produced with robust ZUPT (LSTM filtered) detector" width=%20 height=auto>
 
-<img src="results/figs/own/SensorConnectData_15_SHS.png" alt="trajectory obtained with robust ZUPT detector (LSTM) aided (Error-State Kalman Filter based) foot-mounted INS" width=%50 height=auto>
+| Zero Velocity |  Trajectory  |
+|  :---:  |  :---:  |
+| <img src="results/figs/own/SensorConnectData_15_ZV_LSTM_filtered.png" alt="ZV labels produced with robust ZUPT (LSTM filtered) detector" width=400 height=auto> | <img src="results/figs/own/SensorConnectData_15_SHS.png" alt="trajectory obtained with robust ZUPT detector (LSTM) aided (Error-State Kalman Filter based) foot-mounted INS" width=400 height=auto> |
 
 <h4>Experiment 16</h4>
 
-<img src="results/figs/own/SensorConnectData_16.png" alt="trajectory obtained with robust ZUPT detector (LSTM) aided (Error-State Kalman Filter based) foot-mounted INS" width=%60 height=auto>
+<img src="results/figs/own/SensorConnectData_16.png" alt="trajectory obtained with robust ZUPT detector (LSTM) aided (Error-State Kalman Filter based) foot-mounted INS" width=400 height=auto>
 
-<img src="results/figs/own/SensorConnectData_16_ZV_LSTM_filtered.png" alt="ZV labels produced with robust ZUPT (LSTM filtered) detector" width=%60 height=auto>
 
-<img src="results/figs/own/SensorConnectData_16_SHS.png" alt="trajectory obtained with robust ZUPT detector (LSTM) aided (Error-State Kalman Filter based) foot-mounted INS" width=%60 height=auto>
+| Zero Velocity |  Trajectory  |
+|  :---:  |  :---:  |
+| <img src="results/figs/own/SensorConnectData_16_ZV_LSTM_filtered.png" alt="ZV labels produced with robust ZUPT (LSTM filtered) detector" width=400 height=auto> | <img src="results/figs/own/SensorConnectData_16_SHS.png" alt="trajectory obtained with robust ZUPT detector (LSTM) aided (Error-State Kalman Filter based) foot-mounted INS" width=400 height=auto> |
 
 <h4>Experiment 17</h4>
 
-<img src="results/figs/own/SensorConnectData_17.png" alt="trajectory obtained with robust ZUPT detector (LSTM) aided (Error-State Kalman Filter based) foot-mounted INS" width=%70 height=auto>
+<img src="results/figs/own/SensorConnectData_17.png" alt="trajectory obtained with robust ZUPT detector (LSTM) aided (Error-State Kalman Filter based) foot-mounted INS" width=400 height=auto>
 
-<img src="results/figs/own/SensorConnectData_17_ZV_LSTM_filtered.png" alt="ZV labels produced with robust ZUPT (LSTM filtered) detector" width=%70 height=auto>
 
-<img src="results/figs/own/SensorConnectData_17_SHS.png" alt="trajectory obtained with robust ZUPT detector (LSTM) aided (Error-State Kalman Filter based) foot-mounted INS" width=%70 height=auto>
+| Zero Velocity |  Trajectory  |
+|  :---:  |  :---:  |
+| <img src="results/figs/own/SensorConnectData_17_ZV_LSTM_filtered.png" alt="ZV labels produced with robust ZUPT (LSTM filtered) detector" width=400 height=auto> | <img src="results/figs/own/SensorConnectData_17_SHS.png" alt="trajectory obtained with robust ZUPT detector (LSTM) aided (Error-State Kalman Filter based) foot-mounted INS" width=400 height=auto> |
 
 <h4>Experiment 18</h4>
 
-<img src="results/figs/own/SensorConnectData_18.png" alt="trajectory obtained with robust ZUPT detector (LSTM) aided (Error-State Kalman Filter based) foot-mounted INS" width=%100 height=auto>
+<img src="results/figs/own/SensorConnectData_18.png" alt="trajectory obtained with robust ZUPT detector (LSTM) aided (Error-State Kalman Filter based) foot-mounted INS" width=400 height=auto>
 
-<img src="results/figs/own/SensorConnectData_18_ZV_LSTM_filtered.png" alt="ZV labels produced with robust ZUPT (LSTM filtered) detector" width=%100 height=auto>
 
-<img src="results/figs/own/SensorConnectData_18_SHS.png" alt="trajectory obtained with robust ZUPT detector (LSTM) aided (Error-State Kalman Filter based) foot-mounted INS" width=%100 height=auto>
+| Zero Velocity |  Trajectory  |
+|  :---:  |  :---:  |
+| <img src="results/figs/own/SensorConnectData_18_ZV_LSTM_filtered.png" alt="ZV labels produced with robust ZUPT (LSTM filtered) detector" width=400 height=auto> | <img src="results/figs/own/SensorConnectData_18_SHS.png" alt="trajectory obtained with robust ZUPT detector (LSTM) aided (Error-State Kalman Filter based) foot-mounted INS" width=400 height=auto> |
 
 <h4>Experiment 19</h4>
 
-<img src="results/figs/own/SensorConnectData_19.png" alt="trajectory obtained with robust ZUPT detector (LSTM) aided (Error-State Kalman Filter based) foot-mounted INS" width=%100 height=auto>
+<img src="results/figs/own/SensorConnectData_19.png" alt="trajectory obtained with robust ZUPT detector (LSTM) aided (Error-State Kalman Filter based) foot-mounted INS" width=400 height=auto>
 
-<img src="results/figs/own/SensorConnectData_19_ZV_LSTM_filtered.png" alt="ZV labels produced with robust ZUPT (LSTM filtered) detector" width=%100 height=auto>
 
-<img src="results/figs/own/SensorConnectData_19_SHS.png" alt="trajectory obtained with robust ZUPT detector (LSTM) aided (Error-State Kalman Filter based) foot-mounted INS" width=%100 height=auto>
+| Zero Velocity |  Trajectory  |
+|  :---:  |  :---:  |
+| <img src="results/figs/own/SensorConnectData_19_ZV_LSTM_filtered.png" alt="ZV labels produced with robust ZUPT (LSTM filtered) detector" width=400 height=auto> | <img src="results/figs/own/SensorConnectData_19_SHS.png" alt="trajectory obtained with robust ZUPT detector (LSTM) aided (Error-State Kalman Filter based) foot-mounted INS" width=400 height=auto> |
 
 <h4>Experiment 20</h4>
 
-<img src="results/figs/own/SensorConnectData_20.png" alt="trajectory obtained with robust ZUPT detector (LSTM) aided (Error-State Kalman Filter based) foot-mounted INS" width=%100 height=auto>
+<img src="results/figs/own/SensorConnectData_20.png" alt="trajectory obtained with robust ZUPT detector (LSTM) aided (Error-State Kalman Filter based) foot-mounted INS" width=400 height=auto>
 
-<img src="results/figs/own/SensorConnectData_20_ZV_LSTM_filtered.png" alt="ZV labels produced with robust ZUPT (LSTM filtered) detector" width=%100 height=auto>
 
-<img src="results/figs/own/SensorConnectData_20_SHS.png" alt="trajectory obtained with robust ZUPT detector (LSTM) aided (Error-State Kalman Filter based) foot-mounted INS" width=%100 height=auto>
+| Zero Velocity |  Trajectory  |
+|  :---:  |  :---:  |
+| <img src="results/figs/own/SensorConnectData_20_ZV_LSTM_filtered.png" alt="ZV labels produced with robust ZUPT (LSTM filtered) detector" width=400 height=auto> | <img src="results/figs/own/SensorConnectData_20_SHS.png" alt="trajectory obtained with robust ZUPT detector (LSTM) aided (Error-State Kalman Filter based) foot-mounted INS" width=400 height=auto> |
 
 <h4>Experiment 21 (42/43 strides detected) - Failure (23<sup>rd</sup> ZV interval (and the corresponding stride) is missed)</h4>
 
-<img src="results/figs/own/SensorConnectData_21.png" alt="trajectory obtained with robust ZUPT detector (LSTM) aided (Error-State Kalman Filter based) foot-mounted INS" width=%100 height=auto>
+<img src="results/figs/own/SensorConnectData_21.png" alt="trajectory obtained with robust ZUPT detector (LSTM) aided (Error-State Kalman Filter based) foot-mounted INS" width=400 height=auto>
 
-<p align=""justify>If the reader carefully examines the plots below the 23<sup>rd</sup> stride is not detected (the pedestrian made 24 strides in the straight path where $24^{th}$ stride is the first GCP).</p>
 
-<img src="results/figs/own/SensorConnectData_21_ZV_LSTM_filtered.png" alt="ZV labels produced with robust ZUPT (LSTM filtered) detector" width=%100 height=auto>
-
-<img src="results/figs/own/SensorConnectData_21_SHS.png" alt="trajectory obtained with robust ZUPT detector (LSTM) aided (Error-State Kalman Filter based) foot-mounted INS" width=%100 height=auto>
-
+| Zero Velocity |  Trajectory  |
+|  :---:  |  :---:  |
+| <img src="results/figs/own/SensorConnectData_21_ZV_LSTM_filtered.png" alt="ZV labels produced with robust ZUPT (LSTM filtered) detector" width=400 height=auto> | <img src="results/figs/own/SensorConnectData_21_SHS.png" alt="trajectory obtained with robust ZUPT detector (LSTM) aided (Error-State Kalman Filter based) foot-mounted INS" width=400 height=auto> |
 
 <h4>Experiment 22</h4>
 
-<img src="results/figs/own/SensorConnectData_22.png" alt="trajectory obtained with robust ZUPT detector (LSTM) aided (Error-State Kalman Filter based) foot-mounted INS" width=%100 height=auto>
+<img src="results/figs/own/SensorConnectData_22.png" alt="trajectory obtained with robust ZUPT detector (LSTM) aided (Error-State Kalman Filter based) foot-mounted INS" width=400 height=auto>
 
-<img src="results/figs/own/SensorConnectData_22_ZV_LSTM_filtered.png" alt="ZV labels produced with robust ZUPT (LSTM filtered) detector" width=%100 height=auto>
 
-<img src="results/figs/own/SensorConnectData_22_SHS.png" alt="trajectory obtained with robust ZUPT detector (LSTM) aided (Error-State Kalman Filter based) foot-mounted INS" width=%100 height=auto>
+| Zero Velocity |  Trajectory  |
+|  :---:  |  :---:  |
+| <img src="results/figs/own/SensorConnectData_22_ZV_LSTM_filtered.png" alt="ZV labels produced with robust ZUPT (LSTM filtered) detector" width=400 height=auto> | <img src="results/figs/own/SensorConnectData_22_SHS.png" alt="trajectory obtained with robust ZUPT detector (LSTM) aided (Error-State Kalman Filter based) foot-mounted INS" width=400 height=auto> |
 
 <h4>Experiment 23</h4>
 
-<img src="results/figs/own/SensorConnectData_23.png" alt="trajectory obtained with robust ZUPT detector (LSTM) aided (Error-State Kalman Filter based) foot-mounted INS" width=%100 height=auto>
+<img src="results/figs/own/SensorConnectData_23.png" alt="trajectory obtained with robust ZUPT detector (LSTM) aided (Error-State Kalman Filter based) foot-mounted INS" width=400 height=auto>
 
-<img src="results/figs/own/SensorConnectData_23_ZV_LSTM_filtered.png" alt="ZV labels produced with robust ZUPT (LSTM filtered) detector" width=%100 height=auto>
 
-<img src="results/figs/own/SensorConnectData_23_SHS.png" alt="trajectory obtained with robust ZUPT detector (LSTM) aided (Error-State Kalman Filter based) foot-mounted INS" width=%100 height=auto>
+| Zero Velocity |  Trajectory  |
+|  :---:  |  :---:  |
+| <img src="results/figs/own/SensorConnectData_23_ZV_LSTM_filtered.png" alt="ZV labels produced with robust ZUPT (LSTM filtered) detector" width=400 height=auto> | <img src="results/figs/own/SensorConnectData_23_SHS.png" alt="trajectory obtained with robust ZUPT detector (LSTM) aided (Error-State Kalman Filter based) foot-mounted INS" width=400 height=auto> |
 
 <h4>Experiment 24</h4>
 
-<img src="results/figs/own/SensorConnectData_24.png" alt="trajectory obtained with robust ZUPT detector (LSTM) aided (Error-State Kalman Filter based) foot-mounted INS" width=%100 height=auto>
+<img src="results/figs/own/SensorConnectData_24.png" alt="trajectory obtained with robust ZUPT detector (LSTM) aided (Error-State Kalman Filter based) foot-mounted INS" width=400 height=auto>
 
-<img src="results/figs/own/SensorConnectData_24_ZV_LSTM_filtered.png" alt="ZV labels produced with robust ZUPT (LSTM filtered) detector" width=%100 height=auto>
 
-<img src="results/figs/own/SensorConnectData_24_SHS.png" alt="trajectory obtained with robust ZUPT detector (LSTM) aided (Error-State Kalman Filter based) foot-mounted INS" width=%100 height=auto>
+| Zero Velocity |  Trajectory  |
+|  :---:  |  :---:  |
+| <img src="results/figs/own/SensorConnectData_24_ZV_LSTM_filtered.png" alt="ZV labels produced with robust ZUPT (LSTM filtered) detector" width=400 height=auto> | <img src="results/figs/own/SensorConnectData_24_SHS.png" alt="trajectory obtained with robust ZUPT detector (LSTM) aided (Error-State Kalman Filter based) foot-mounted INS" width=400 height=auto> |
 
 <h3>VICON Training Manual Annotation (Corrections)</h3>
 
