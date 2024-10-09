@@ -158,7 +158,7 @@ for file in sensor_data_files:
         # Apply a heuristic filter to zero velocity labels (via LSTM) to eliminate undesired jumps & achieve correct stride detection
         if det_list[i] == 'lstm':
             
-            k = 75 # temporal window size for checking if detected strides are too close or not
+            k = 75 # temporal window size for checking if detected strides are too close
             zv_lstm_filtered, n, strideIndex = heuristic_zv_filter_and_stride_detector(zv, k)
             logging.info(f"There are {n}/{numberOfStrides} strides detected in experiment #{expNumber}.")
 
@@ -189,6 +189,12 @@ for file in sensor_data_files:
     # PERFORMANCE EVALUTATION via METRICS
     if GCP_data['GCP_exist_and_correct'].item() and n == numberOfStrides:
         logging.info(f"File {base_filename}, i.e., experiment {expNumber} will be used in performance evaluation.")
+        # Calculate the RMSE between the GCP and GCP stride in SHS trajectories
+        rmse_GCP = np.sqrt(np.sum((aligned_trajectory_SHS[GCP_stride_numbers] - GCP)**2, axis=1))
+        logging.info(f"There are {rmse_GCP.shape[0]} GCP for file {base_filename}, i.e., experiment {expNumber}.")
+        for i in range(rmse_GCP.shape[0]):
+            logging.info(f"RMSE for GCP stride {GCP_stride_numbers[i]}: {rmse_GCP[i]}")
+        logging.info(f"Average RMSE for all GCP strides in experiment {expNumber}: {np.mean(rmse_GCP)}")
     else:
         logging.info(f"File {base_filename}, i.e., experiment {expNumber} will not be used in performance evaluation.")
     
