@@ -148,14 +148,19 @@ nGT = [22, 21, 21, 18, 26, 24, 18, 20, 28, 35, 29, 22, 30, 34, 24, 36, 20, 15, 1
        13, 14, 24, 27, 25, 26, 0, 28, 13, 41, 33, 26, 16, 16, 11, 9] # number of actual strides
 training_data_tag = [abs(x) for x in training_data_tag]
 extract_bilstm_training_data = False # used to save csv files for zv and stride detection training
+extract_LLIO_training_data = True # used to save csv files for displacement and heading change training
 # if sum(training_data_tag) == 56: # if total of 56 experiments are plotted (5 of them is not training data)
 #     extract_bilstm_training_data = False # then do not write imu and zv data to file for BiLSTM training
 
 # Process each VICON room training data file
 for file in vicon_data_files:
     if training_data_tag[i]:
-        logging.info(f"Processing file: {file}")
+        logging.info(f"===================================================================================================================")
+        logging.info(f"Processing file {file}")
         data = sio.loadmat(file)
+
+        # Remove the '.mat' suffix from the filename
+        base_filename = os.path.splitext(os.path.basename(file))[0]
 
         # Extract the relevant columns
         imu_data = np.column_stack((data['imu'][:, :3], data['imu'][:, 3:6]))  # Accel and Gyro data
@@ -165,7 +170,7 @@ for file in vicon_data_files:
         # Initialize INS object with correct parameters
         ins = INS(imu_data, sigma_a=0.00098, sigma_w=8.7266463e-5, T=1.0 / 200)
 
-        logging.info(f"Processing {detector[i]} detector for file: {file}")
+        logging.info(f"Processing {detector[i]} detector for file {file}")
         ins.Localizer.set_gt(gt)  # Set the ground truth data required by 'vicon' detector
         ins.Localizer.set_ts(timestamps)  # Set the sampling time required by 'vicon' detector
         zv = ins.Localizer.compute_zv_lrt(W=5 if detector[i] != 'mbgtd' else 2, G=thresh[i], detector=detector[i])
@@ -178,7 +183,7 @@ for file in vicon_data_files:
         aligned_x_lstm, aligned_gt, scale_lstm = align_trajectories(x_lstm, gt)
 
         # Apply filter to zero velocity detection results for stride detection corrections
-        logging.info(f'Applying heuristic filter to optimal ZUPT detector "{detector[i]}" for correct stride detection.')
+        logging.info(f'Applying heuristic filter to optimal ZUPT detector {detector[i].upper()} for correct stride detection.')
         k = 75 # temporal window size for checking if detected strides are too close or not
         if i+1 == 54: # remove false positive by changing filter size for experiment 54
             k = 95
@@ -192,8 +197,8 @@ for file in vicon_data_files:
         # strideIndex = strideIndex - 1 # make all stride indexes the last samples of the respective ZUPT phase
         # strideIndex[0] = 0 # first sample is the first stride index
         # strideIndex = np.append(strideIndex, len(timestamps)-1) # last sample is the last stride index
-        logging.info(f"Detected {n}/{nGT[i]} strides in the experiment {i+1}.")
-        print(f"LSTM filtered ZV detector found {n_lstm_filtered}/{nGT[i]} strides in the experiment {i+1}.")
+        logging.info(f"Detected {n}/{nGT[i]} strides with (filtered) optimal detector {detector[i].upper} in experiment {i+1}.")
+        print(f"Detected {n_lstm_filtered}/{nGT[i]} strides with (filtered) LSTM ZV detector in experiment {i+1}.")
         # print(f"BiLSTM filtered ZV detector found {n_bilstm_filtered}/{nGT[i]} strides in the experiment {i+1}.")
         # Calculate displacement and heading changes between stride points based on ground truth
         displacements, heading_changes = calculate_displacement_and_heading(gt[:, :2], strideIndex)
@@ -206,8 +211,6 @@ for file in vicon_data_files:
         aligned_gt[:,0] = -aligned_gt[:,0]
         reconstructed_traj[:,0] = -reconstructed_traj[:,0]
 
-        # Remove the '.mat' suffix from the filename
-        base_filename = os.path.splitext(os.path.basename(file))[0]
         # Plotting the reconstructed trajectory and the ground truth without stride indices
         plt.figure()
         visualize.plot_topdown([reconstructed_traj, gt[:, :2]], title=f"Exp#{i+1} ({base_filename}) - {detector[i].upper()}", 
@@ -373,14 +376,23 @@ for file in vicon_data_files:
             combined_data = np.column_stack((timestamps, imu_data, zv))
 
             # Save the combined IMU and ZV data to a CSV file
-            base_filename = os.path.splitext(os.path.basename(file))[0]
             combined_csv_filename = os.path.join(extracted_training_data_dir, f'lstm_zv_detector_training_data/{base_filename}_imu_zv.csv')
 
             np.savetxt(combined_csv_filename, combined_data, delimiter=',',
                     header='t,ax,ay,az,wx,wy,wz,zv', comments='')
-        
         #################### SAVE TRAINING DATA for LLIO TRAINING #################
-        # saving commands will be added here for future LLIO research
+        if extract_LLIO_training_data:
+            # Combine displacement and heading change data into one array
+            combined_data = np.column_stack((displacements, heading_changes))
+            combined_data2 = np.column_stack((strideIndex, timestamps[strideIndex]))
+
+            # Save the combined displacement and heading change data to a CSV file
+            combined_csv_filename = os.path.join(extracted_training_data_dir, f'LLIO_training_data/{base_filename}_displacement_heading_change.csv')
+            combined_csv_filename2 = os.path.join(extracted_training_data_dir, f'LLIO_training_data/{base_filename}_strideIndex_timestamp.csv')
+
+            # print(f"strideIndex.shape = {strideIndex.shape}")
+            np.savetxt(combined_csv_filename, combined_data, delimiter=',', header='displacement,heading_change', comments='')
+            np.savetxt(combined_csv_filename2, combined_data2, delimiter=',', header='strideIndex,timestamp', comments='')
         
     else:
         print(f"Experiment {i+1} data is not considered as bipedal locomotion data for the retraining process.".upper())
