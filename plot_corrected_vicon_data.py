@@ -135,6 +135,7 @@ def align_trajectories(traj_est, traj_gt):
 
 
 i = 0  # experiment index
+count_training_exp = 0
 # following two lines are used to run selected experiment results
 # training_data_tag = [1]*55
 # training_data_tag.append(1)
@@ -148,7 +149,7 @@ nGT = [22, 21, 21, 18, 26, 24, 18, 20, 28, 35, 29, 22, 30, 34, 24, 36, 20, 15, 1
        13, 14, 24, 27, 25, 26, 0, 28, 13, 41, 33, 26, 16, 16, 11, 9] # number of actual strides
 training_data_tag = [abs(x) for x in training_data_tag]
 extract_bilstm_training_data = False # used to save csv files for zv and stride detection training
-extract_LLIO_training_data = True # used to save csv files for displacement and heading change training
+extract_LLIO_training_data = False # used to save csv files for displacement and heading change training
 # if sum(training_data_tag) == 56: # if total of 56 experiments are plotted (5 of them is not training data)
 #     extract_bilstm_training_data = False # then do not write imu and zv data to file for BiLSTM training
 
@@ -197,7 +198,7 @@ for file in vicon_data_files:
         # strideIndex = strideIndex - 1 # make all stride indexes the last samples of the respective ZUPT phase
         # strideIndex[0] = 0 # first sample is the first stride index
         # strideIndex = np.append(strideIndex, len(timestamps)-1) # last sample is the last stride index
-        logging.info(f"Detected {n}/{nGT[i]} strides with (filtered) optimal detector {detector[i].upper} in experiment {i+1}.")
+        logging.info(f"Detected {n}/{nGT[i]} strides with (filtered) optimal detector {detector[i].upper()} in experiment {i+1}.")
         print(f"Detected {n_lstm_filtered}/{nGT[i]} strides with (filtered) LSTM ZV detector in experiment {i+1}.")
         # print(f"BiLSTM filtered ZV detector found {n_bilstm_filtered}/{nGT[i]} strides in the experiment {i+1}.")
         # Calculate displacement and heading changes between stride points based on ground truth
@@ -376,7 +377,7 @@ for file in vicon_data_files:
             combined_data = np.column_stack((timestamps, imu_data, zv))
 
             # Save the combined IMU and ZV data to a CSV file
-            combined_csv_filename = os.path.join(extracted_training_data_dir, f'lstm_zv_detector_training_data/{base_filename}_imu_zv.csv')
+            combined_csv_filename = os.path.join(extracted_training_data_dir, f'LSTM_ZV_detector_training_data/{base_filename}_imu_zv.csv')
 
             np.savetxt(combined_csv_filename, combined_data, delimiter=',',
                     header='t,ax,ay,az,wx,wy,wz,zv', comments='')
@@ -394,7 +395,11 @@ for file in vicon_data_files:
             np.savetxt(combined_csv_filename, combined_data, delimiter=',', header='displacement,heading_change', comments='')
             np.savetxt(combined_csv_filename2, combined_data2, delimiter=',', header='strideIndex,timestamp', comments='')
         
+        count_training_exp += 1
+
     else:
+        logging.info(f"===================================================================================================================")
+        logging.info(f"Processing file {file}")
         print(f"Experiment {i+1} data is not considered as bipedal locomotion data for the retraining process.".upper())
         # 13th experiment shows a lot of 180° turns, which causes multiple ZV phase and stride detections during the turns.
         # Labeled as 0, i.e., non bi-pedal locomotion data, temporarily. It will be included in future for further research. 
@@ -405,7 +410,9 @@ for file in vicon_data_files:
         # 50th experiment: shows a lot of 180° turns, which causes multiple ZV phase and stride detections during the turns.
         # Labeled as 0, i.e., non bi-pedal locomotion data, temporarily. It will be included in future for further research.
         # 55 needs cropping at the beginning or the end - left out of the training dataset yet will be considered as training data in future
+         
     i += 1  # Move to the next experiment
 
-# print(f"Out of {i} experiments, {len(target_zv)} of them will be used in retraining LSTM robust ZV detector.")
+logging.info(f"===================================================================================================================")
+print(f"Out of {i} experiments, {count_training_exp} of them will be used in retraining LSTM robust ZV detector.")
 logging.info("Processing complete for all files.")
