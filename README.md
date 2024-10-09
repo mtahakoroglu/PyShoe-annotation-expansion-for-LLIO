@@ -58,7 +58,9 @@ pip install pandas==1.1.5
 
 <p align="justify">We assume the start point is numbered as stride #0, i.e., initial stride. Note that ZV labels are filtered for accurate stride detection but the filtered ZV values are not used in the trajectory generation in the associated trajectory plot. In other words, the trajectory is obtained with raw (not filtered) LSTM ZUPT detected ZV labels while the strides (visualized on the trajectory with x) are marked at the indices shown in filtered LSTM generated ZV plots.</p>
 
-<p align="justify">Note that experiments start from #15 because previous ones do not contain GCP.</p>
+<p align="justify">Note that some experiments do not contain GCP or contain incorrectly documented GCP and thereby are not considered in performance evaluation. Also, in some experiments correct number of strides are not detected (with LSTM based robust ZV detector). These experiments are not used in evalation as well. However, in future, if a better ZV interval detector can be developed and detect all strides without missing any, then mentioned experiments could be involved in evaluation process.</p>
+
+<p align="justify"><b>Note:</b> One can run <b>plot_own_sensor_data.py</b> to obtain the same results shown below. To learn more about experiment info and results, one can view <b>output.txt</b> log file (located at <b>results/figs/own</b>) recorded while the code was running.</p>
 
 <h4>Experiment 6 (GCP not available)</h4>
 
@@ -96,7 +98,7 @@ pip install pandas==1.1.5
 |  :---:  |  :---:  |
 | <img src="results/figs/own/SensorConnectData_14_ZV_LSTM_filtered.png" alt="ZV labels produced with robust ZUPT (LSTM filtered) detector" width=400 height=auto> | <img src="results/figs/own/SensorConnectData_14_SHS.png" alt="trajectory obtained with robust ZUPT detector (LSTM) aided (Error-State Kalman Filter based) foot-mounted INS" width=400 height=auto> |
 
-<h4>Experiment 15</h4>
+<h4>Experiment 15 (GCP available & all strides detected correctly)</h4>
 
 <img src="results/figs/own/SensorConnectData_15.png" alt="trajectory obtained with robust ZUPT detector (LSTM) aided (Error-State Kalman Filter based) foot-mounted INS" width=400 height=auto>
 
@@ -105,7 +107,9 @@ pip install pandas==1.1.5
 |  :---:  |  :---:  |
 | <img src="results/figs/own/SensorConnectData_15_ZV_LSTM_filtered.png" alt="ZV labels produced with robust ZUPT (LSTM filtered) detector" width=400 height=auto> | <img src="results/figs/own/SensorConnectData_15_SHS.png" alt="trajectory obtained with robust ZUPT detector (LSTM) aided (Error-State Kalman Filter based) foot-mounted INS" width=400 height=auto> |
 
-<h4>Experiment 16</h4>
+<h4>Experiment 16 (GCP available but not correct)</h4>
+
+<p align="justify">Despite correct detection of all strides, due to errors in GCP documentation, this experiment is not considered in performance evaluation.</p>
 
 <img src="results/figs/own/SensorConnectData_16.png" alt="trajectory obtained with robust ZUPT detector (LSTM) aided (Error-State Kalman Filter based) foot-mounted INS" width=400 height=auto>
 
