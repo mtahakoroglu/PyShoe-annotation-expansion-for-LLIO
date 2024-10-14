@@ -215,7 +215,7 @@ for file in vicon_data_files:
         # Plotting the reconstructed trajectory and the ground truth without stride indices
         plt.figure()
         visualize.plot_topdown([reconstructed_traj, gt[:, :2]], title=f"Exp#{i+1} ({base_filename}) - {detector[i].upper()}", 
-                               legend=['Stride & Heading', 'GT (sample-wise)'])
+                               legend=['GT (stride & heading)', 'GT (sample-wise)'])
         # to visualize selected stides from the experiment of interest, change the parameters below
         # if i+1==49:
         #     # plt.plot(gt[-5:,0], gt[-5:,1], c='r')
@@ -234,21 +234,21 @@ for file in vicon_data_files:
         # Plot LSTM trajectory results
         plt.figure()
         visualize.plot_topdown([aligned_x_lstm, aligned_gt[:, :2]], title=f"Exp#{i+1} ({base_filename}) - LSTM", 
-                               legend=['LSTM', 'GT'])
+                               legend=['LSTM INS', 'GT'])
         plt.scatter(aligned_x_lstm[strideIndexLSTMfiltered, 0], aligned_x_lstm[strideIndexLSTMfiltered, 1], c='b', marker='o')
-        plt.savefig(os.path.join(output_dir, f'trajectory_exp_{i+1}_lstm.png'), dpi=600, bbox_inches='tight')
+        plt.savefig(os.path.join(output_dir, f'trajectory_exp_{i+1}_lstm_ins.png'), dpi=600, bbox_inches='tight')
 
-        # plotting vertical trajectories
-        plt.figure()
-        plt.plot(timestamps[:len(gt)], gt[:, 2], label='GT (sample-wise)')  # Plot GT Z positions
-        plt.plot(timestamps[:len(reconstructed_traj)], reconstructed_traj[:, 1],
-                label='Stride & Heading')  # Plot reconstructed Z positions (use Y axis for visualization)
-        plt.title(f'Vertical Trajectories - {base_filename} - ZUPT detector={detector[i]} for exp#{i+1}')
-        plt.grid(True, which='both', linestyle='--', linewidth=1.5)
-        plt.xlabel('Time [s]')
-        plt.ylabel('Z Position')
-        plt.legend()
-        plt.savefig(os.path.join(output_dir, f'vertical_{base_filename}.png'), dpi=600, bbox_inches='tight')
+        # # plotting vertical trajectories
+        # plt.figure()
+        # plt.plot(timestamps[:len(gt)], gt[:, 2], label='GT (sample-wise)')  # Plot GT Z positions
+        # plt.plot(timestamps[:len(reconstructed_traj)], reconstructed_traj[:, 1],
+        #         label='Stride & Heading')  # Plot reconstructed Z positions (use Y axis for visualization)
+        # plt.title(f'Vertical Trajectories - {base_filename} - ZUPT detector={detector[i]} for exp#{i+1}')
+        # plt.grid(True, which='both', linestyle='--', linewidth=1.5)
+        # plt.xlabel('Time [s]')
+        # plt.ylabel('Z Position')
+        # plt.legend()
+        # plt.savefig(os.path.join(output_dir, f'vertical_{base_filename}.png'), dpi=600, bbox_inches='tight')
 
         # Plotting the zero velocity detection for filtered data without stride indices
         plt.figure()
@@ -344,7 +344,7 @@ for file in vicon_data_files:
             zv_filtered, n, strideIndex = heuristic_zv_filter_and_stride_detector(zv_filtered, 1)
             logging.info(f"Detected {n}/{nGT[i]} strides detected with the combined ZV detector in the experiment {i+1}.")
 
-            # Calculate displacement and heading changes between stride points based on ground truth
+            # Calculate displacement and heading changes between stride points ground truth data
             displacements, heading_changes = calculate_displacement_and_heading(gt[:, :2], strideIndex)
 
             # Reconstruct the trajectory from displacements and heading changes
