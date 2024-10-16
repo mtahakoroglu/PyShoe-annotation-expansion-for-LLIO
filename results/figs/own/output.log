@@ -1581,3 +1581,744 @@ Average RMSE for all GCP strides in experiment 25: 1.811721551361006
 ===================================================================================================================
 There are 1 experiments processed.
 Processing complete for all files.
+===================================================================================================================
+Processing file data/own\SensorConnectData_25.csv
+GCP are available & correct for file SensorConnectData_25.
+Processing LSTM detector for file SensorConnectData_25.
+Plotting zero velocity detection for LSTM detector for file SensorConnectData_25.
+There are 85/85 strides detected in experiment #25.
+File SensorConnectData_25, i.e., experiment 25 will be used in performance evaluation.
+There are 12 GCP for file SensorConnectData_25, i.e., experiment 25.
+RMSE for GCP 1 corresponding to stride 0 is 0.0007
+RMSE for GCP 2 corresponding to stride 9 is 0.3377
+RMSE for GCP 3 corresponding to stride 13 is 0.3524
+RMSE for GCP 4 corresponding to stride 28 is 1.2391
+RMSE for GCP 5 corresponding to stride 32 is 1.2541
+RMSE for GCP 6 corresponding to stride 38 is 0.4189
+RMSE for GCP 7 corresponding to stride 46 is 1.9201
+RMSE for GCP 8 corresponding to stride 54 is 2.9527
+RMSE for GCP 9 corresponding to stride 57 is 3.6025
+RMSE for GCP 10 corresponding to stride 73 is 4.3467
+RMSE for GCP 11 corresponding to stride 76 is 3.7120
+RMSE for GCP 12 corresponding to stride 85 is 1.6038
+Average RMSE for all GCP strides in experiment 25 is 1.8117
+===================================================================================================================
+There are 1 experiments processed.
+Processing complete for all files.
+===================================================================================================================
+Processing file data/own\SensorConnectData_25.csv
+GCP are available & correct for file SensorConnectData_25.
+Processing LSTM detector for file SensorConnectData_25.
+Plotting zero velocity detection for LSTM detector for file SensorConnectData_25.
+There are 85/85 strides detected in experiment #25.
+File SensorConnectData_25, i.e., experiment 25 will be used in performance evaluation.
+There are 12 GCP for file SensorConnectData_25, i.e., experiment 25.
+RMSE for GCP 1 stepped on at stride 0 is 0.0007
+RMSE for GCP 2 stepped on at stride 9 is 0.3377
+RMSE for GCP 3 stepped on at stride 13 is 0.3524
+RMSE for GCP 4 stepped on at stride 28 is 1.2391
+RMSE for GCP 5 stepped on at stride 32 is 1.2541
+RMSE for GCP 6 stepped on at stride 38 is 0.4189
+RMSE for GCP 7 stepped on at stride 46 is 1.9201
+RMSE for GCP 8 stepped on at stride 54 is 2.9527
+RMSE for GCP 9 stepped on at stride 57 is 3.6025
+RMSE for GCP 10 stepped on at stride 73 is 4.3467
+RMSE for GCP 11 stepped on at stride 76 is 3.7120
+RMSE for GCP 12 stepped on at stride 85 is 1.6038
+Average RMSE for all GCP strides in experiment 25 is 1.8117
+===================================================================================================================
+There are 1 experiments processed.
+Processing complete for all files.
+===================================================================================================================
+Processing file data/own\SensorConnectData_26.csv
+GCP are available & correct for file SensorConnectData_26.
+Processing LSTM detector for file SensorConnectData_26.
+Plotting zero velocity detection for LSTM detector for file SensorConnectData_26.
+There are 46/46 strides detected in experiment #26.
+File SensorConnectData_26, i.e., experiment 26 will be used in performance evaluation.
+There are 5 GCP for file SensorConnectData_26, i.e., experiment 26.
+RMSE for GCP 1 stepped on at stride 0 is 0.0005
+RMSE for GCP 2 stepped on at stride 21 is 0.8160
+RMSE for GCP 3 stepped on at stride 23 is 0.8046
+RMSE for GCP 4 stepped on at stride 44 is 1.0742
+RMSE for GCP 5 stepped on at stride 46 is 1.0478
+Average RMSE for all GCP strides in experiment 26 is 0.7486
+===================================================================================================================
+There are 1 experiments processed.
+Processing complete for all files.
+===================================================================================================================
+Processing file data/own\SensorConnectData_26.csv
+GCP are available & correct for file SensorConnectData_26.
+Processing LSTM detector for file SensorConnectData_26.
+Plotting zero velocity detection for LSTM detector for file SensorConnectData_26.
+There are 46/46 strides detected in experiment #26.
+File SensorConnectData_26, i.e., experiment 26 will be used in performance evaluation.
+There are 5 GCP for file SensorConnectData_26, i.e., experiment 26.
+RMSE for GCP 1 stepped on at stride 0 is 0.0005
+RMSE for GCP 2 stepped on at stride 21 is 0.8160
+RMSE for GCP 3 stepped on at stride 23 is 0.8046
+RMSE for GCP 4 stepped on at stride 44 is 1.0742
+RMSE for GCP 5 stepped on at stride 46 is 1.0478
+Average RMSE for all GCP strides in experiment 26 is 0.7486
+===================================================================================================================
+Processing file data/own\SensorConnectData_27.csv
+GCP are available & correct for file SensorConnectData_27.
+Processing LSTM detector for file SensorConnectData_27.
+Plotting zero velocity detection for LSTM detector for file SensorConnectData_27.
+There are 62/46 strides detected in experiment #27.
+File SensorConnectData_27, i.e., experiment 27 will not be used in performance evaluation.
+===================================================================================================================
+There are 2 experiments processed.
+Processing complete for all files.
+===================================================================================================================
+Processing file data/own\SensorConnectData_26.csv
+GCP are available & correct for file SensorConnectData_26.
+Processing LSTM detector for file SensorConnectData_26.
+Plotting zero velocity detection for LSTM detector for file SensorConnectData_26.
+There are 46/46 strides detected in experiment #26.
+File SensorConnectData_26, i.e., experiment 26 will be used in performance evaluation.
+There are 5 GCP for file SensorConnectData_26, i.e., experiment 26.
+RMSE for GCP 1 stepped on at stride 0 is 0.0005
+RMSE for GCP 2 stepped on at stride 21 is 0.8160
+RMSE for GCP 3 stepped on at stride 23 is 0.8046
+RMSE for GCP 4 stepped on at stride 44 is 1.0742
+RMSE for GCP 5 stepped on at stride 46 is 1.0478
+Average RMSE for all GCP strides in experiment 26 is 0.7486
+===================================================================================================================
+Processing file data/own\SensorConnectData_27.csv
+GCP are available & correct for file SensorConnectData_27.
+Processing LSTM detector for file SensorConnectData_27.
+Plotting zero velocity detection for LSTM detector for file SensorConnectData_27.
+There are 62/62 strides detected in experiment #27.
+File SensorConnectData_27, i.e., experiment 27 will be used in performance evaluation.
+There are 5 GCP for file SensorConnectData_27, i.e., experiment 27.
+RMSE for GCP 1 stepped on at stride 0 is 0.0005
+RMSE for GCP 2 stepped on at stride 28 is 0.9598
+RMSE for GCP 3 stepped on at stride 30 is 0.9304
+RMSE for GCP 4 stepped on at stride 60 is 1.8933
+RMSE for GCP 5 stepped on at stride 62 is 1.9529
+Average RMSE for all GCP strides in experiment 27 is 1.1474
+===================================================================================================================
+There are 2 experiments processed.
+Processing complete for all files.
+===================================================================================================================
+Processing file data/own\SensorConnectData_26.csv
+GCP are available & correct for file SensorConnectData_26.
+Processing LSTM detector for file SensorConnectData_26.
+Plotting zero velocity detection for LSTM detector for file SensorConnectData_26.
+There are 46/46 strides detected in experiment #26.
+File SensorConnectData_26, i.e., experiment 26 will be used in performance evaluation.
+There are 5 GCP for file SensorConnectData_26, i.e., experiment 26.
+RMSE for GCP 1 stepped on at stride 0 is 0.0005
+RMSE for GCP 2 stepped on at stride 21 is 0.8160
+RMSE for GCP 3 stepped on at stride 23 is 0.8046
+RMSE for GCP 4 stepped on at stride 44 is 1.0742
+RMSE for GCP 5 stepped on at stride 46 is 1.0478
+Average RMSE for all GCP strides in experiment 26 is 0.7486
+===================================================================================================================
+Processing file data/own\SensorConnectData_27.csv
+GCP are available & correct for file SensorConnectData_27.
+Processing LSTM detector for file SensorConnectData_27.
+Plotting zero velocity detection for LSTM detector for file SensorConnectData_27.
+There are 62/62 strides detected in experiment #27.
+File SensorConnectData_27, i.e., experiment 27 will be used in performance evaluation.
+There are 5 GCP for file SensorConnectData_27, i.e., experiment 27.
+RMSE for GCP 1 stepped on at stride 0 is 0.0005
+RMSE for GCP 2 stepped on at stride 28 is 0.9598
+RMSE for GCP 3 stepped on at stride 30 is 0.9304
+RMSE for GCP 4 stepped on at stride 60 is 1.8933
+RMSE for GCP 5 stepped on at stride 62 is 1.9529
+Average RMSE for all GCP strides in experiment 27 is 1.1474
+===================================================================================================================
+There are 2 experiments processed.
+Processing complete for all files.
+===================================================================================================================
+Processing file data/own\SensorConnectData_26.csv
+GCP are available & correct for file SensorConnectData_26.
+Processing LSTM detector for file SensorConnectData_26.
+Plotting zero velocity detection for LSTM detector for file SensorConnectData_26.
+There are 46/46 strides detected in experiment #26.
+File SensorConnectData_26, i.e., experiment 26 will be used in performance evaluation.
+There are 5 GCP for file SensorConnectData_26, i.e., experiment 26.
+RMSE for GCP 1 stepped on at stride 0 is 0.0005
+RMSE for GCP 2 stepped on at stride 21 is 0.8160
+RMSE for GCP 3 stepped on at stride 23 is 0.8046
+RMSE for GCP 4 stepped on at stride 44 is 1.0742
+RMSE for GCP 5 stepped on at stride 46 is 1.0478
+Average RMSE for all GCP strides in experiment 26 is 0.7486
+===================================================================================================================
+Processing file data/own\SensorConnectData_27.csv
+GCP are available & correct for file SensorConnectData_27.
+Processing LSTM detector for file SensorConnectData_27.
+Plotting zero velocity detection for LSTM detector for file SensorConnectData_27.
+There are 62/62 strides detected in experiment #27.
+File SensorConnectData_27, i.e., experiment 27 will be used in performance evaluation.
+There are 5 GCP for file SensorConnectData_27, i.e., experiment 27.
+RMSE for GCP 1 stepped on at stride 0 is 0.0005
+RMSE for GCP 2 stepped on at stride 28 is 0.9598
+RMSE for GCP 3 stepped on at stride 30 is 0.9304
+RMSE for GCP 4 stepped on at stride 60 is 1.8933
+RMSE for GCP 5 stepped on at stride 62 is 1.9529
+Average RMSE for all GCP strides in experiment 27 is 1.1474
+===================================================================================================================
+There are 2 experiments processed.
+Processing complete for all files.
+===================================================================================================================
+Processing file data/own\SensorConnectData_26.csv
+GCP are available & correct for file SensorConnectData_26.
+Processing LSTM detector for file SensorConnectData_26.
+Plotting zero velocity detection for LSTM detector for file SensorConnectData_26.
+There are 46/46 strides detected in experiment #26.
+File SensorConnectData_26, i.e., experiment 26 will be used in performance evaluation.
+There are 5 GCP for file SensorConnectData_26, i.e., experiment 26.
+RMSE for GCP 1 stepped on at stride 0 is 0.0005
+RMSE for GCP 2 stepped on at stride 21 is 0.8160
+RMSE for GCP 3 stepped on at stride 23 is 0.8046
+RMSE for GCP 4 stepped on at stride 44 is 1.0742
+RMSE for GCP 5 stepped on at stride 46 is 1.0478
+Average RMSE for all GCP strides in experiment 26 is 0.7486
+===================================================================================================================
+Processing file data/own\SensorConnectData_26.csv
+GCP are available & correct for file SensorConnectData_26.
+Processing LSTM detector for file SensorConnectData_26.
+Plotting zero velocity detection for LSTM detector for file SensorConnectData_26.
+There are 46/46 strides detected in experiment #26.
+File SensorConnectData_26, i.e., experiment 26 will be used in performance evaluation.
+There are 5 GCP for file SensorConnectData_26, i.e., experiment 26.
+RMSE for GCP 1 stepped on at stride 0 is 0.0005
+RMSE for GCP 2 stepped on at stride 21 is 0.8160
+RMSE for GCP 3 stepped on at stride 23 is 0.8046
+RMSE for GCP 4 stepped on at stride 44 is 1.0742
+RMSE for GCP 5 stepped on at stride 46 is 1.0478
+Average RMSE for all GCP strides in experiment 26 is 0.7486
+===================================================================================================================
+Processing file data/own\SensorConnectData_26.csv
+GCP are available & correct for file SensorConnectData_26.
+Processing LSTM detector for file SensorConnectData_26.
+Plotting zero velocity detection for LSTM detector for file SensorConnectData_26.
+There are 46/46 strides detected in experiment #26.
+File SensorConnectData_26, i.e., experiment 26 will be used in performance evaluation.
+There are 5 GCP for file SensorConnectData_26, i.e., experiment 26.
+RMSE for GCP 1 stepped on at stride 0 is 0.0005
+RMSE for GCP 2 stepped on at stride 21 is 0.8160
+RMSE for GCP 3 stepped on at stride 23 is 0.8046
+RMSE for GCP 4 stepped on at stride 44 is 1.0742
+RMSE for GCP 5 stepped on at stride 46 is 1.0478
+Average RMSE for all GCP strides in experiment 26 is 0.7486
+===================================================================================================================
+Processing file data/own\SensorConnectData_27.csv
+GCP are available & correct for file SensorConnectData_27.
+Processing LSTM detector for file SensorConnectData_27.
+Plotting zero velocity detection for LSTM detector for file SensorConnectData_27.
+There are 62/62 strides detected in experiment #27.
+File SensorConnectData_27, i.e., experiment 27 will be used in performance evaluation.
+There are 5 GCP for file SensorConnectData_27, i.e., experiment 27.
+RMSE for GCP 1 stepped on at stride 0 is 0.0005
+RMSE for GCP 2 stepped on at stride 28 is 0.9598
+RMSE for GCP 3 stepped on at stride 30 is 0.9304
+RMSE for GCP 4 stepped on at stride 60 is 1.8933
+RMSE for GCP 5 stepped on at stride 62 is 1.9529
+Average RMSE for all GCP strides in experiment 27 is 1.1474
+===================================================================================================================
+There are 2 experiments processed.
+Processing complete for all files.
+===================================================================================================================
+Processing file data/own\SensorConnectData_26.csv
+GCP are available & correct for file SensorConnectData_26.
+Processing LSTM detector for file SensorConnectData_26.
+Plotting zero velocity detection for LSTM detector for file SensorConnectData_26.
+There are 46/46 strides detected in experiment #26.
+File SensorConnectData_26, i.e., experiment 26 will be used in performance evaluation.
+There are 5 GCP for file SensorConnectData_26, i.e., experiment 26.
+RMSE for GCP 1 stepped on at stride 0 is 0.0005
+RMSE for GCP 2 stepped on at stride 21 is 0.8160
+RMSE for GCP 3 stepped on at stride 23 is 0.8046
+RMSE for GCP 4 stepped on at stride 44 is 1.0742
+RMSE for GCP 5 stepped on at stride 46 is 1.0478
+Average RMSE for all GCP strides in experiment 26 is 0.7486
+===================================================================================================================
+Processing file data/own\SensorConnectData_27.csv
+GCP are available & correct for file SensorConnectData_27.
+Processing LSTM detector for file SensorConnectData_27.
+Plotting zero velocity detection for LSTM detector for file SensorConnectData_27.
+There are 62/62 strides detected in experiment #27.
+File SensorConnectData_27, i.e., experiment 27 will be used in performance evaluation.
+There are 5 GCP for file SensorConnectData_27, i.e., experiment 27.
+RMSE for GCP 1 stepped on at stride 0 is 0.0005
+RMSE for GCP 2 stepped on at stride 28 is 0.9598
+RMSE for GCP 3 stepped on at stride 30 is 0.9304
+RMSE for GCP 4 stepped on at stride 60 is 1.8933
+RMSE for GCP 5 stepped on at stride 62 is 1.9529
+Average RMSE for all GCP strides in experiment 27 is 1.1474
+===================================================================================================================
+There are 2 experiments processed.
+Processing complete for all files.
+===================================================================================================================
+Processing file data/own\SensorConnectData_26.csv
+GCP are available & correct for file SensorConnectData_26.
+Processing LSTM detector for file SensorConnectData_26.
+Plotting zero velocity detection for LSTM detector for file SensorConnectData_26.
+There are 46/46 strides detected in experiment #26.
+File SensorConnectData_26, i.e., experiment 26 will be used in performance evaluation.
+There are 5 GCP for file SensorConnectData_26, i.e., experiment 26.
+RMSE for GCP 1 stepped on at stride 0 is 0.0005
+RMSE for GCP 2 stepped on at stride 21 is 0.8160
+RMSE for GCP 3 stepped on at stride 23 is 0.8046
+RMSE for GCP 4 stepped on at stride 44 is 1.0742
+RMSE for GCP 5 stepped on at stride 46 is 1.0478
+Average RMSE for all GCP strides in experiment 26 is 0.7486
+===================================================================================================================
+Processing file data/own\SensorConnectData_26.csv
+GCP are available & correct for file SensorConnectData_26.
+Processing LSTM detector for file SensorConnectData_26.
+Plotting zero velocity detection for LSTM detector for file SensorConnectData_26.
+There are 46/46 strides detected in experiment #26.
+File SensorConnectData_26, i.e., experiment 26 will be used in performance evaluation.
+There are 5 GCP for file SensorConnectData_26, i.e., experiment 26.
+RMSE for GCP 1 stepped on at stride 0 is 0.0005
+RMSE for GCP 2 stepped on at stride 21 is 0.8160
+RMSE for GCP 3 stepped on at stride 23 is 0.8046
+RMSE for GCP 4 stepped on at stride 44 is 1.0742
+RMSE for GCP 5 stepped on at stride 46 is 1.0478
+Average RMSE for all GCP strides in experiment 26 is 0.7486
+===================================================================================================================
+Processing file data/own\SensorConnectData_27.csv
+GCP are available & correct for file SensorConnectData_27.
+Processing LSTM detector for file SensorConnectData_27.
+Plotting zero velocity detection for LSTM detector for file SensorConnectData_27.
+There are 62/62 strides detected in experiment #27.
+File SensorConnectData_27, i.e., experiment 27 will be used in performance evaluation.
+There are 5 GCP for file SensorConnectData_27, i.e., experiment 27.
+RMSE for GCP 1 stepped on at stride 0 is 0.0005
+RMSE for GCP 2 stepped on at stride 28 is 0.9598
+RMSE for GCP 3 stepped on at stride 30 is 0.9304
+RMSE for GCP 4 stepped on at stride 60 is 1.8933
+RMSE for GCP 5 stepped on at stride 62 is 1.9529
+Average RMSE for all GCP strides in experiment 27 is 1.1474
+===================================================================================================================
+There are 2 experiments processed.
+Processing complete for all files.
+===================================================================================================================
+Processing file data/own\SensorConnectData_26.csv
+GCP are available & correct for file SensorConnectData_26.
+Processing LSTM detector for file SensorConnectData_26.
+Plotting zero velocity detection for LSTM detector for file SensorConnectData_26.
+There are 46/46 strides detected in experiment #26.
+File SensorConnectData_26, i.e., experiment 26 will be used in performance evaluation.
+There are 5 GCP for file SensorConnectData_26, i.e., experiment 26.
+RMSE for GCP 1 stepped on at stride 0 is 0.0005
+RMSE for GCP 2 stepped on at stride 21 is 0.8160
+RMSE for GCP 3 stepped on at stride 23 is 0.8046
+RMSE for GCP 4 stepped on at stride 44 is 1.0742
+RMSE for GCP 5 stepped on at stride 46 is 1.0478
+Average RMSE for all GCP strides in experiment 26 is 0.7486
+===================================================================================================================
+Processing file data/own\SensorConnectData_27.csv
+GCP are available & correct for file SensorConnectData_27.
+Processing LSTM detector for file SensorConnectData_27.
+Plotting zero velocity detection for LSTM detector for file SensorConnectData_27.
+There are 62/62 strides detected in experiment #27.
+File SensorConnectData_27, i.e., experiment 27 will be used in performance evaluation.
+There are 5 GCP for file SensorConnectData_27, i.e., experiment 27.
+RMSE for GCP 1 stepped on at stride 0 is 0.0005
+RMSE for GCP 2 stepped on at stride 28 is 0.9598
+RMSE for GCP 3 stepped on at stride 30 is 0.9304
+RMSE for GCP 4 stepped on at stride 60 is 1.8933
+RMSE for GCP 5 stepped on at stride 62 is 1.9529
+Average RMSE for all GCP strides in experiment 27 is 1.1474
+===================================================================================================================
+There are 2 experiments processed.
+Processing complete for all files.
+===================================================================================================================
+Processing file data/own\SensorConnectData_26.csv
+GCP are available & correct for file SensorConnectData_26.
+Processing LSTM detector for file SensorConnectData_26.
+Plotting zero velocity detection for LSTM detector for file SensorConnectData_26.
+There are 46/46 strides detected in experiment #26.
+File SensorConnectData_26, i.e., experiment 26 will be used in performance evaluation.
+There are 5 GCP for file SensorConnectData_26, i.e., experiment 26.
+RMSE for GCP 1 stepped on at stride 0 is 0.0005
+RMSE for GCP 2 stepped on at stride 21 is 0.8160
+RMSE for GCP 3 stepped on at stride 23 is 0.8046
+RMSE for GCP 4 stepped on at stride 44 is 1.0742
+RMSE for GCP 5 stepped on at stride 46 is 1.0478
+Average RMSE for all GCP strides in experiment 26 is 0.7486
+===================================================================================================================
+Processing file data/own\SensorConnectData_27.csv
+GCP are available & correct for file SensorConnectData_27.
+Processing LSTM detector for file SensorConnectData_27.
+Plotting zero velocity detection for LSTM detector for file SensorConnectData_27.
+There are 62/62 strides detected in experiment #27.
+File SensorConnectData_27, i.e., experiment 27 will be used in performance evaluation.
+There are 5 GCP for file SensorConnectData_27, i.e., experiment 27.
+RMSE for GCP 1 stepped on at stride 0 is 0.0005
+RMSE for GCP 2 stepped on at stride 28 is 0.9598
+RMSE for GCP 3 stepped on at stride 30 is 0.9304
+RMSE for GCP 4 stepped on at stride 60 is 1.8933
+RMSE for GCP 5 stepped on at stride 62 is 1.9529
+Average RMSE for all GCP strides in experiment 27 is 1.1474
+===================================================================================================================
+There are 2 experiments processed.
+Processing complete for all files.
+===================================================================================================================
+Processing file data/own\SensorConnectData_26.csv
+GCP are available & correct for file SensorConnectData_26.
+Processing LSTM detector for file SensorConnectData_26.
+Plotting zero velocity detection for LSTM detector for file SensorConnectData_26.
+There are 46/46 strides detected in experiment #26.
+File SensorConnectData_26, i.e., experiment 26 will be used in performance evaluation.
+There are 5 GCP for file SensorConnectData_26, i.e., experiment 26.
+RMSE for GCP 1 stepped on at stride 0 is 0.0005
+RMSE for GCP 2 stepped on at stride 21 is 0.8160
+RMSE for GCP 3 stepped on at stride 23 is 0.8046
+RMSE for GCP 4 stepped on at stride 44 is 1.0742
+RMSE for GCP 5 stepped on at stride 46 is 1.0478
+Average RMSE for all GCP strides in experiment 26 is 0.7486
+===================================================================================================================
+Processing file data/own\SensorConnectData_27.csv
+GCP are available & correct for file SensorConnectData_27.
+Processing LSTM detector for file SensorConnectData_27.
+Plotting zero velocity detection for LSTM detector for file SensorConnectData_27.
+There are 62/62 strides detected in experiment #27.
+File SensorConnectData_27, i.e., experiment 27 will be used in performance evaluation.
+There are 5 GCP for file SensorConnectData_27, i.e., experiment 27.
+RMSE for GCP 1 stepped on at stride 0 is 0.0005
+RMSE for GCP 2 stepped on at stride 28 is 0.9598
+RMSE for GCP 3 stepped on at stride 30 is 0.9304
+RMSE for GCP 4 stepped on at stride 60 is 1.8933
+RMSE for GCP 5 stepped on at stride 62 is 1.9529
+Average RMSE for all GCP strides in experiment 27 is 1.1474
+===================================================================================================================
+There are 2 experiments processed.
+Processing complete for all files.
+===================================================================================================================
+Processing file data/own\SensorConnectData_26.csv
+GCP are available & correct for file SensorConnectData_26.
+Processing LSTM detector for file SensorConnectData_26.
+Plotting zero velocity detection for LSTM detector for file SensorConnectData_26.
+There are 46/46 strides detected in experiment #26.
+File SensorConnectData_26, i.e., experiment 26 will be used in performance evaluation.
+There are 5 GCP for file SensorConnectData_26, i.e., experiment 26.
+RMSE for GCP 1 stepped on at stride 0 is 0.0005
+RMSE for GCP 2 stepped on at stride 21 is 0.8160
+RMSE for GCP 3 stepped on at stride 23 is 0.8046
+RMSE for GCP 4 stepped on at stride 44 is 1.0742
+RMSE for GCP 5 stepped on at stride 46 is 1.0478
+Average RMSE for all GCP strides in experiment 26 is 0.7486
+===================================================================================================================
+Processing file data/own\SensorConnectData_27.csv
+GCP are available & correct for file SensorConnectData_27.
+Processing LSTM detector for file SensorConnectData_27.
+Plotting zero velocity detection for LSTM detector for file SensorConnectData_27.
+There are 62/62 strides detected in experiment #27.
+File SensorConnectData_27, i.e., experiment 27 will be used in performance evaluation.
+There are 5 GCP for file SensorConnectData_27, i.e., experiment 27.
+RMSE for GCP 1 stepped on at stride 0 is 0.0005
+RMSE for GCP 2 stepped on at stride 28 is 0.9598
+RMSE for GCP 3 stepped on at stride 30 is 0.9304
+RMSE for GCP 4 stepped on at stride 60 is 1.8933
+RMSE for GCP 5 stepped on at stride 62 is 1.9529
+Average RMSE for all GCP strides in experiment 27 is 1.1474
+===================================================================================================================
+There are 2 experiments processed.
+Processing complete for all files.
+===================================================================================================================
+Processing file data/own\SensorConnectData_26.csv
+GCP are available & correct for file SensorConnectData_26.
+Processing LSTM detector for file SensorConnectData_26.
+Plotting zero velocity detection for LSTM detector for file SensorConnectData_26.
+There are 46/46 strides detected in experiment #26.
+File SensorConnectData_26, i.e., experiment 26 will be used in performance evaluation.
+There are 5 GCP for file SensorConnectData_26, i.e., experiment 26.
+RMSE for GCP 1 stepped on at stride 0 is 0.0005
+RMSE for GCP 2 stepped on at stride 21 is 0.8160
+RMSE for GCP 3 stepped on at stride 23 is 0.8046
+RMSE for GCP 4 stepped on at stride 44 is 1.0742
+RMSE for GCP 5 stepped on at stride 46 is 1.0478
+Average RMSE for all GCP strides in experiment 26 is 0.7486
+===================================================================================================================
+Processing file data/own\SensorConnectData_27.csv
+GCP are available & correct for file SensorConnectData_27.
+Processing LSTM detector for file SensorConnectData_27.
+Plotting zero velocity detection for LSTM detector for file SensorConnectData_27.
+There are 62/62 strides detected in experiment #27.
+File SensorConnectData_27, i.e., experiment 27 will be used in performance evaluation.
+There are 5 GCP for file SensorConnectData_27, i.e., experiment 27.
+RMSE for GCP 1 stepped on at stride 0 is 0.0005
+RMSE for GCP 2 stepped on at stride 28 is 0.9598
+RMSE for GCP 3 stepped on at stride 30 is 0.9304
+RMSE for GCP 4 stepped on at stride 60 is 1.8933
+RMSE for GCP 5 stepped on at stride 62 is 1.9529
+Average RMSE for all GCP strides in experiment 27 is 1.1474
+===================================================================================================================
+There are 2 experiments processed.
+Processing complete for all files.
+===================================================================================================================
+Processing file data/own\SensorConnectData_26.csv
+GCP are available & correct for file SensorConnectData_26.
+Processing LSTM detector for file SensorConnectData_26.
+Plotting zero velocity detection for LSTM detector for file SensorConnectData_26.
+There are 46/46 strides detected in experiment #26.
+File SensorConnectData_26, i.e., experiment 26 will be used in performance evaluation.
+There are 5 GCP for file SensorConnectData_26, i.e., experiment 26.
+RMSE for GCP 1 stepped on at stride 0 is 0.0005
+RMSE for GCP 2 stepped on at stride 21 is 0.8160
+RMSE for GCP 3 stepped on at stride 23 is 0.8046
+RMSE for GCP 4 stepped on at stride 44 is 1.0742
+RMSE for GCP 5 stepped on at stride 46 is 1.0478
+Average RMSE for all GCP strides in experiment 26 is 0.7486
+===================================================================================================================
+Processing file data/own\SensorConnectData_27.csv
+GCP are available & correct for file SensorConnectData_27.
+Processing LSTM detector for file SensorConnectData_27.
+Plotting zero velocity detection for LSTM detector for file SensorConnectData_27.
+There are 62/62 strides detected in experiment #27.
+File SensorConnectData_27, i.e., experiment 27 will be used in performance evaluation.
+There are 5 GCP for file SensorConnectData_27, i.e., experiment 27.
+RMSE for GCP 1 stepped on at stride 0 is 0.0005
+RMSE for GCP 2 stepped on at stride 28 is 0.9598
+RMSE for GCP 3 stepped on at stride 30 is 0.9304
+RMSE for GCP 4 stepped on at stride 60 is 1.8933
+RMSE for GCP 5 stepped on at stride 62 is 1.9529
+Average RMSE for all GCP strides in experiment 27 is 1.1474
+===================================================================================================================
+There are 2 experiments processed.
+Processing complete for all files.
+===================================================================================================================
+Processing file data/own\SensorConnectData_26.csv
+GCP are available & correct for file SensorConnectData_26.
+Processing LSTM detector for file SensorConnectData_26.
+Plotting zero velocity detection for LSTM detector for file SensorConnectData_26.
+There are 46/46 strides detected in experiment #26.
+File SensorConnectData_26, i.e., experiment 26 will be used in performance evaluation.
+There are 5 GCP for file SensorConnectData_26, i.e., experiment 26.
+RMSE for GCP 1 stepped on at stride 0 is 0.0005
+RMSE for GCP 2 stepped on at stride 21 is 0.8160
+RMSE for GCP 3 stepped on at stride 23 is 0.8046
+RMSE for GCP 4 stepped on at stride 44 is 1.0742
+RMSE for GCP 5 stepped on at stride 46 is 1.0478
+Average RMSE for all GCP strides in experiment 26 is 0.7486
+===================================================================================================================
+Processing file data/own\SensorConnectData_27.csv
+GCP are available & correct for file SensorConnectData_27.
+Processing LSTM detector for file SensorConnectData_27.
+Plotting zero velocity detection for LSTM detector for file SensorConnectData_27.
+There are 62/62 strides detected in experiment #27.
+File SensorConnectData_27, i.e., experiment 27 will be used in performance evaluation.
+There are 5 GCP for file SensorConnectData_27, i.e., experiment 27.
+RMSE for GCP 1 stepped on at stride 0 is 0.0005
+RMSE for GCP 2 stepped on at stride 28 is 0.9598
+RMSE for GCP 3 stepped on at stride 30 is 0.9304
+RMSE for GCP 4 stepped on at stride 60 is 1.8933
+RMSE for GCP 5 stepped on at stride 62 is 1.9529
+Average RMSE for all GCP strides in experiment 27 is 1.1474
+===================================================================================================================
+There are 2 experiments processed.
+Processing complete for all files.
+===================================================================================================================
+Processing file data/own\SensorConnectData_06.csv
+GCP are either not available or not correct for file SensorConnectData_06.
+Processing LSTM detector for file SensorConnectData_06.
+Plotting zero velocity detection for LSTM detector for file SensorConnectData_06.
+There are 76/76 strides detected in experiment #6.
+File SensorConnectData_06, i.e., experiment 6 will not be used in performance evaluation.
+===================================================================================================================
+Processing file data/own\SensorConnectData_11.csv
+GCP are either not available or not correct for file SensorConnectData_11.
+Processing LSTM detector for file SensorConnectData_11.
+Plotting zero velocity detection for LSTM detector for file SensorConnectData_11.
+There are 28/28 strides detected in experiment #11.
+File SensorConnectData_11, i.e., experiment 11 will not be used in performance evaluation.
+===================================================================================================================
+Processing file data/own\SensorConnectData_13.csv
+GCP are either not available or not correct for file SensorConnectData_13.
+Processing LSTM detector for file SensorConnectData_13.
+Plotting zero velocity detection for LSTM detector for file SensorConnectData_13.
+There are 25/25 strides detected in experiment #13.
+File SensorConnectData_13, i.e., experiment 13 will not be used in performance evaluation.
+===================================================================================================================
+Processing file data/own\SensorConnectData_14.csv
+GCP are either not available or not correct for file SensorConnectData_14.
+Processing LSTM detector for file SensorConnectData_14.
+Plotting zero velocity detection for LSTM detector for file SensorConnectData_14.
+There are 78/78 strides detected in experiment #14.
+File SensorConnectData_14, i.e., experiment 14 will not be used in performance evaluation.
+===================================================================================================================
+Processing file data/own\SensorConnectData_15.csv
+GCP are available & correct for file SensorConnectData_15.
+Processing LSTM detector for file SensorConnectData_15.
+Plotting zero velocity detection for LSTM detector for file SensorConnectData_15.
+There are 73/73 strides detected in experiment #15.
+File SensorConnectData_15, i.e., experiment 15 will be used in performance evaluation.
+There are 7 GCP for file SensorConnectData_15, i.e., experiment 15.
+RMSE for GCP 1 stepped on at stride 0 is 0.0002
+RMSE for GCP 2 stepped on at stride 16 is 0.5765
+RMSE for GCP 3 stepped on at stride 30 is 1.8324
+RMSE for GCP 4 stepped on at stride 36 is 1.7251
+RMSE for GCP 5 stepped on at stride 50 is 0.6630
+RMSE for GCP 6 stepped on at stride 67 is 4.2621
+RMSE for GCP 7 stepped on at stride 73 is 4.3256
+Average RMSE for all GCP strides in experiment 15 is 1.9121
+===================================================================================================================
+Processing file data/own\SensorConnectData_16.csv
+GCP are either not available or not correct for file SensorConnectData_16.
+Processing LSTM detector for file SensorConnectData_16.
+Plotting zero velocity detection for LSTM detector for file SensorConnectData_16.
+There are 75/75 strides detected in experiment #16.
+File SensorConnectData_16, i.e., experiment 16 will not be used in performance evaluation.
+===================================================================================================================
+Processing file data/own\SensorConnectData_17.csv
+GCP are available & correct for file SensorConnectData_17.
+Processing LSTM detector for file SensorConnectData_17.
+Plotting zero velocity detection for LSTM detector for file SensorConnectData_17.
+There are 24/24 strides detected in experiment #17.
+File SensorConnectData_17, i.e., experiment 17 will be used in performance evaluation.
+There are 5 GCP for file SensorConnectData_17, i.e., experiment 17.
+RMSE for GCP 1 stepped on at stride 0 is 0.0003
+RMSE for GCP 2 stepped on at stride 5 is 0.1551
+RMSE for GCP 3 stepped on at stride 12 is 0.1950
+RMSE for GCP 4 stepped on at stride 17 is 0.1234
+RMSE for GCP 5 stepped on at stride 24 is 0.5126
+Average RMSE for all GCP strides in experiment 17 is 0.1973
+===================================================================================================================
+Processing file data/own\SensorConnectData_18.csv
+GCP are available & correct for file SensorConnectData_18.
+Processing LSTM detector for file SensorConnectData_18.
+Plotting zero velocity detection for LSTM detector for file SensorConnectData_18.
+There are 28/28 strides detected in experiment #18.
+File SensorConnectData_18, i.e., experiment 18 will be used in performance evaluation.
+There are 5 GCP for file SensorConnectData_18, i.e., experiment 18.
+RMSE for GCP 1 stepped on at stride 0 is 0.0007
+RMSE for GCP 2 stepped on at stride 8 is 0.2947
+RMSE for GCP 3 stepped on at stride 14 is 0.3052
+RMSE for GCP 4 stepped on at stride 22 is 0.3863
+RMSE for GCP 5 stepped on at stride 28 is 0.6711
+Average RMSE for all GCP strides in experiment 18 is 0.3316
+===================================================================================================================
+Processing file data/own\SensorConnectData_19.csv
+GCP are available & correct for file SensorConnectData_19.
+Processing LSTM detector for file SensorConnectData_19.
+Plotting zero velocity detection for LSTM detector for file SensorConnectData_19.
+There are 28/28 strides detected in experiment #19.
+File SensorConnectData_19, i.e., experiment 19 will be used in performance evaluation.
+There are 5 GCP for file SensorConnectData_19, i.e., experiment 19.
+RMSE for GCP 1 stepped on at stride 0 is 0.0006
+RMSE for GCP 2 stepped on at stride 8 is 0.2704
+RMSE for GCP 3 stepped on at stride 14 is 0.2097
+RMSE for GCP 4 stepped on at stride 22 is 0.3651
+RMSE for GCP 5 stepped on at stride 28 is 0.6666
+Average RMSE for all GCP strides in experiment 19 is 0.3025
+===================================================================================================================
+Processing file data/own\SensorConnectData_20.csv
+GCP are available & correct for file SensorConnectData_20.
+Processing LSTM detector for file SensorConnectData_20.
+Plotting zero velocity detection for LSTM detector for file SensorConnectData_20.
+There are 65/65 strides detected in experiment #20.
+File SensorConnectData_20, i.e., experiment 20 will be used in performance evaluation.
+There are 7 GCP for file SensorConnectData_20, i.e., experiment 20.
+RMSE for GCP 1 stepped on at stride 0 is 0.0011
+RMSE for GCP 2 stepped on at stride 24 is 0.9330
+RMSE for GCP 3 stepped on at stride 32 is 1.2335
+RMSE for GCP 4 stepped on at stride 38 is 0.8407
+RMSE for GCP 5 stepped on at stride 45 is 0.3354
+RMSE for GCP 6 stepped on at stride 64 is 4.2524
+RMSE for GCP 7 stepped on at stride 65 is 4.2294
+Average RMSE for all GCP strides in experiment 20 is 1.6894
+===================================================================================================================
+Processing file data/own\SensorConnectData_21.csv
+GCP are available & correct for file SensorConnectData_21.
+Processing LSTM detector for file SensorConnectData_21.
+Plotting zero velocity detection for LSTM detector for file SensorConnectData_21.
+There are 42/43 strides detected in experiment #21.
+File SensorConnectData_21, i.e., experiment 21 will not be used in performance evaluation.
+===================================================================================================================
+Processing file data/own\SensorConnectData_22.csv
+GCP are available & correct for file SensorConnectData_22.
+Processing LSTM detector for file SensorConnectData_22.
+Plotting zero velocity detection for LSTM detector for file SensorConnectData_22.
+There are 53/53 strides detected in experiment #22.
+File SensorConnectData_22, i.e., experiment 22 will be used in performance evaluation.
+There are 5 GCP for file SensorConnectData_22, i.e., experiment 22.
+RMSE for GCP 1 stepped on at stride 0 is 0.0002
+RMSE for GCP 2 stepped on at stride 21 is 1.2359
+RMSE for GCP 3 stepped on at stride 27 is 1.1848
+RMSE for GCP 4 stepped on at stride 48 is 2.9158
+RMSE for GCP 5 stepped on at stride 53 is 3.0848
+Average RMSE for all GCP strides in experiment 22 is 1.6843
+===================================================================================================================
+Processing file data/own\SensorConnectData_23.csv
+GCP are available & correct for file SensorConnectData_23.
+Processing LSTM detector for file SensorConnectData_23.
+Plotting zero velocity detection for LSTM detector for file SensorConnectData_23.
+There are 109/110 strides detected in experiment #23.
+File SensorConnectData_23, i.e., experiment 23 will not be used in performance evaluation.
+===================================================================================================================
+Processing file data/own\SensorConnectData_24.csv
+GCP are available & correct for file SensorConnectData_24.
+Processing LSTM detector for file SensorConnectData_24.
+Plotting zero velocity detection for LSTM detector for file SensorConnectData_24.
+There are 48/48 strides detected in experiment #24.
+File SensorConnectData_24, i.e., experiment 24 will be used in performance evaluation.
+There are 9 GCP for file SensorConnectData_24, i.e., experiment 24.
+RMSE for GCP 1 stepped on at stride 0 is 0.0008
+RMSE for GCP 2 stepped on at stride 6 is 0.2246
+RMSE for GCP 3 stepped on at stride 12 is 0.2106
+RMSE for GCP 4 stepped on at stride 18 is 0.0865
+RMSE for GCP 5 stepped on at stride 24 is 0.3758
+RMSE for GCP 6 stepped on at stride 30 is 0.5417
+RMSE for GCP 7 stepped on at stride 36 is 0.3756
+RMSE for GCP 8 stepped on at stride 42 is 0.2766
+RMSE for GCP 9 stepped on at stride 48 is 0.6827
+Average RMSE for all GCP strides in experiment 24 is 0.3083
+===================================================================================================================
+Processing file data/own\SensorConnectData_25.csv
+GCP are available & correct for file SensorConnectData_25.
+Processing LSTM detector for file SensorConnectData_25.
+Plotting zero velocity detection for LSTM detector for file SensorConnectData_25.
+There are 85/85 strides detected in experiment #25.
+File SensorConnectData_25, i.e., experiment 25 will be used in performance evaluation.
+There are 12 GCP for file SensorConnectData_25, i.e., experiment 25.
+RMSE for GCP 1 stepped on at stride 0 is 0.0007
+RMSE for GCP 2 stepped on at stride 9 is 0.3377
+RMSE for GCP 3 stepped on at stride 13 is 0.3524
+RMSE for GCP 4 stepped on at stride 28 is 1.2391
+RMSE for GCP 5 stepped on at stride 32 is 1.2541
+RMSE for GCP 6 stepped on at stride 38 is 0.4189
+RMSE for GCP 7 stepped on at stride 46 is 1.9201
+RMSE for GCP 8 stepped on at stride 54 is 2.9527
+RMSE for GCP 9 stepped on at stride 57 is 3.6025
+RMSE for GCP 10 stepped on at stride 73 is 4.3467
+RMSE for GCP 11 stepped on at stride 76 is 3.7120
+RMSE for GCP 12 stepped on at stride 85 is 1.6038
+Average RMSE for all GCP strides in experiment 25 is 1.8117
+===================================================================================================================
+Processing file data/own\SensorConnectData_26.csv
+GCP are available & correct for file SensorConnectData_26.
+Processing LSTM detector for file SensorConnectData_26.
+Plotting zero velocity detection for LSTM detector for file SensorConnectData_26.
+There are 46/46 strides detected in experiment #26.
+File SensorConnectData_26, i.e., experiment 26 will be used in performance evaluation.
+There are 5 GCP for file SensorConnectData_26, i.e., experiment 26.
+RMSE for GCP 1 stepped on at stride 0 is 0.0005
+RMSE for GCP 2 stepped on at stride 21 is 0.8160
+RMSE for GCP 3 stepped on at stride 23 is 0.8046
+RMSE for GCP 4 stepped on at stride 44 is 1.0742
+RMSE for GCP 5 stepped on at stride 46 is 1.0478
+Average RMSE for all GCP strides in experiment 26 is 0.7486
+===================================================================================================================
+Processing file data/own\SensorConnectData_27.csv
+GCP are available & correct for file SensorConnectData_27.
+Processing LSTM detector for file SensorConnectData_27.
+Plotting zero velocity detection for LSTM detector for file SensorConnectData_27.
+There are 62/62 strides detected in experiment #27.
+File SensorConnectData_27, i.e., experiment 27 will be used in performance evaluation.
+There are 5 GCP for file SensorConnectData_27, i.e., experiment 27.
+RMSE for GCP 1 stepped on at stride 0 is 0.0005
+RMSE for GCP 2 stepped on at stride 28 is 0.9598
+RMSE for GCP 3 stepped on at stride 30 is 0.9304
+RMSE for GCP 4 stepped on at stride 60 is 1.8933
+RMSE for GCP 5 stepped on at stride 62 is 1.9529
+Average RMSE for all GCP strides in experiment 27 is 1.1474
+===================================================================================================================
+There are 17 experiments processed.
+Processing complete for all files.

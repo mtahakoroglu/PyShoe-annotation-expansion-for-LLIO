@@ -188,19 +188,21 @@ for file in sensor_data_files:
 
     # PERFORMANCE EVALUTATION via METRICS
     if GCP_data['GCP_exist_and_correct'].item() and n == numberOfStrides:
+        k, number_of_GCP = 0, GCP.shape[0]
         logging.info(f"File {base_filename}, i.e., experiment {expNumber} will be used in performance evaluation.")
         # Calculate the RMSE between the GCP and GCP stride in SHS trajectories
         rmse_GCP = np.sqrt(np.sum((aligned_trajectory_SHS[GCP_stride_numbers] - GCP)**2, axis=1))
         logging.info(f"There are {rmse_GCP.shape[0]} GCP for file {base_filename}, i.e., experiment {expNumber}.")
         for i in range(rmse_GCP.shape[0]):
-            logging.info(f"RMSE for GCP stride {GCP_stride_numbers[i]}: {rmse_GCP[i]}")
-        logging.info(f"Average RMSE for all GCP strides in experiment {expNumber}: {np.mean(rmse_GCP)}")
+            k += 1 # GCP index
+            logging.info(f"RMSE for GCP {k} stepped on at stride {GCP_stride_numbers[i]} is {rmse_GCP[i]:.4f}")
+        logging.info(f"Average RMSE for all GCP strides in experiment {expNumber} is {np.mean(rmse_GCP):.4f}")
     else:
         logging.info(f"File {base_filename}, i.e., experiment {expNumber} will not be used in performance evaluation.")
     
     plt.figure()
     if GCP_data['GCP_exist_and_correct'].item():
-        plt.scatter(GCP[:,0], GCP[:,1], color='r', s=30, label="GCP")
+        plt.scatter(GCP[:,0], GCP[:,1], color='r', s=30, marker='s', edgecolors='k', label="GCP")
     if n == numberOfStrides:
         plt.scatter(aligned_trajectory_SHS[GCP_stride_numbers,0], aligned_trajectory_SHS[GCP_stride_numbers,1], color='r', s=45, 
                     marker='o', facecolor='none', linewidths=1.5, label="GCP stride")
@@ -208,21 +210,21 @@ for file in sensor_data_files:
     plt.legend(fontsize=15); plt.xlabel('x [m]', fontsize=22); plt.ylabel('y [m]', fontsize=22)
     plt.title(f'{base_filename}', fontsize=22)
     plt.tick_params(labelsize=22)
-    plt.axis('tight'); plt.axis('equal')
+    plt.axis('equal')
     plt.grid(True, which='both', linestyle='--', linewidth=1.5)
     plt.savefig(os.path.join(output_dir, f'{base_filename}.png'), dpi=dpi, bbox_inches='tight')
 
     plt.figure()
-    plt.plot(aligned_trajectory_SHS[:,0], aligned_trajectory_SHS[:,1], 'bx-', linewidth = 1.4, markersize=6, markeredgewidth=1.5, label="PyShoe (LSTM) SHS")
+    plt.plot(aligned_trajectory_SHS[:,0], aligned_trajectory_SHS[:,1], 'b.-', linewidth = 1.4, markersize=5, markeredgewidth=1.2, label="PyShoe (LSTM) SHS")
     if GCP_data['GCP_exist_and_correct'].item():
-        plt.scatter(GCP[:,0], GCP[:,1], color='r', s=30, label="GCP")
+        plt.scatter(GCP[:,0], GCP[:,1], color='r', s=30, marker='s', edgecolors='k', label="GCP")
     if n == numberOfStrides:
         plt.scatter(aligned_trajectory_SHS[GCP_stride_numbers,0], aligned_trajectory_SHS[GCP_stride_numbers,1], color='r', s=45, 
                 marker='o', facecolor='none', linewidths=1.5, label="GCP stride")
     plt.legend(fontsize=15); plt.xlabel('x [m]', fontsize=22); plt.ylabel('y [m]', fontsize=22)
     plt.title(f'{n}/{numberOfStrides} strides detected', fontsize=22)
     plt.tick_params(labelsize=22)
-    plt.axis('tight'); plt.axis('equal')
+    plt.axis('equal')
     plt.grid(True, which='both', linestyle='--', linewidth=1.5)
     plt.savefig(os.path.join(output_dir, f'{base_filename}_SHS.png'), dpi=dpi, bbox_inches='tight')
 
