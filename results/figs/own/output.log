@@ -2322,3 +2322,73 @@ Average RMSE for all GCP strides in experiment 27 is 1.1474
 ===================================================================================================================
 There are 17 experiments processed.
 Processing complete for all files.
+===================================================================================================================
+Processing file data/own\SensorConnectData_28.csv
+GCP are available & correct for file SensorConnectData_28.
+Processing LSTM detector for file SensorConnectData_28.
+Plotting zero velocity detection for LSTM detector for file SensorConnectData_28.
+There are 120/110 strides detected in experiment #28.
+File SensorConnectData_28, i.e., experiment 28 will not be used in performance evaluation.
+===================================================================================================================
+There are 1 experiments processed.
+Processing complete for all files.
+===================================================================================================================
+Processing file data/own\SensorConnectData_28.csv
+GCP are available & correct for file SensorConnectData_28.
+Processing LSTM detector for file SensorConnectData_28.
+Plotting zero velocity detection for LSTM detector for file SensorConnectData_28.
+There are 120/120 strides detected in experiment #28.
+File SensorConnectData_28, i.e., experiment 28 will be used in performance evaluation.
+There are 9 GCP for file SensorConnectData_28, i.e., experiment 28.
+RMSE for GCP 1 stepped on at stride 0 is 0.0005
+RMSE for GCP 2 stepped on at stride 7 is 17.8305
+RMSE for GCP 3 stepped on at stride 13 is 23.0229
+RMSE for GCP 4 stepped on at stride 20 is 14.8334
+RMSE for GCP 5 stepped on at stride 43 is 71.6543
+RMSE for GCP 6 stepped on at stride 44 is 71.7727
+RMSE for GCP 7 stepped on at stride 96 is 55.8700
+RMSE for GCP 8 stepped on at stride 97 is 55.6908
+RMSE for GCP 9 stepped on at stride 120 is 2.1897
+Average RMSE for all GCP strides in experiment 28 is 34.7627
+===================================================================================================================
+There are 1 experiments processed.
+Processing complete for all files.
+===================================================================================================================
+Processing file data/own\SensorConnectData_28.csv
+GCP are available & correct for file SensorConnectData_28.
+Processing LSTM detector for file SensorConnectData_28.
+Plotting zero velocity detection for LSTM detector for file SensorConnectData_28.
+There are 120/120 strides detected in experiment #28.
+File SensorConnectData_28, i.e., experiment 28 will be used in performance evaluation.
+There are 9 GCP for file SensorConnectData_28, i.e., experiment 28.
+RMSE for GCP 1 stepped on at stride 0 is 0.0005
+RMSE for GCP 2 stepped on at stride 7 is 17.8305
+RMSE for GCP 3 stepped on at stride 13 is 23.0229
+RMSE for GCP 4 stepped on at stride 20 is 14.8334
+RMSE for GCP 5 stepped on at stride 43 is 71.6543
+RMSE for GCP 6 stepped on at stride 44 is 71.7727
+RMSE for GCP 7 stepped on at stride 96 is 55.8700
+RMSE for GCP 8 stepped on at stride 97 is 55.6908
+RMSE for GCP 9 stepped on at stride 120 is 2.1897
+Average RMSE for all GCP strides in experiment 28 is 34.7627
+===================================================================================================================
+Processing file data/own\SensorConnectData_28.csv
+GCP are available & correct for file SensorConnectData_28.
+Processing LSTM detector for file SensorConnectData_28.
+Plotting zero velocity detection for LSTM detector for file SensorConnectData_28.
+There are 120/120 strides detected in experiment #28.
+File SensorConnectData_28, i.e., experiment 28 will be used in performance evaluation.
+There are 9 GCP for file SensorConnectData_28, i.e., experiment 28.
+RMSE for GCP 1 stepped on at stride 0 is 0.0005
+RMSE for GCP 2 stepped on at stride 7 is 17.8305
+RMSE for GCP 3 stepped on at stride 13 is 23.0229
+RMSE for GCP 4 stepped on at stride 20 is 14.8334
+RMSE for GCP 5 stepped on at stride 43 is 71.6543
+RMSE for GCP 6 stepped on at stride 44 is 71.7727
+RMSE for GCP 7 stepped on at stride 96 is 55.8700
+RMSE for GCP 8 stepped on at stride 97 is 55.6908
+RMSE for GCP 9 stepped on at stride 120 is 2.1897
+Average RMSE for all GCP strides in experiment 28 is 34.7627
+===================================================================================================================
+There are 1 experiments processed.
+Processing complete for all files.

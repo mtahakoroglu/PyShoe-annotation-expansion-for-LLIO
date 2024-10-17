@@ -178,6 +178,8 @@ for file in sensor_data_files:
     strideAlign = 5
     _, theta = calculate_displacement_and_heading(traj_list[-1][:, :2], strideIndex[np.array([0,strideAlign])])
     theta = theta - np.pi
+    if expNumber == 28:
+        theta = theta - np.pi/2
     # Apply the rotation
     aligned_trajectory_INS = np.squeeze(rotate_trajectory(traj_list[-1][:,:2], -theta))
     aligned_trajectory_SHS = np.squeeze(rotate_trajectory(reconstructed_traj, -theta))
@@ -211,6 +213,8 @@ for file in sensor_data_files:
     plt.title(f'{base_filename}', fontsize=22)
     plt.tick_params(labelsize=22)
     plt.axis('equal')
+    if expNumber == 28:
+        plt.ylim(-10,20)
     plt.grid(True, which='both', linestyle='--', linewidth=1.5)
     plt.savefig(os.path.join(output_dir, f'{base_filename}.png'), dpi=dpi, bbox_inches='tight')
 
@@ -225,6 +229,8 @@ for file in sensor_data_files:
     plt.title(f'{n}/{numberOfStrides} strides detected', fontsize=22)
     plt.tick_params(labelsize=22)
     plt.axis('equal')
+    if expNumber == 28:
+        plt.ylim(-10,20)
     plt.grid(True, which='both', linestyle='--', linewidth=1.5)
     plt.savefig(os.path.join(output_dir, f'{base_filename}_SHS.png'), dpi=dpi, bbox_inches='tight')
 
