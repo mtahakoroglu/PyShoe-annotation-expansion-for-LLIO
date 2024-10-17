@@ -213,7 +213,7 @@ pip install pandas==1.1.5
 
 <h3>VICON Training Manual Annotation (Corrections)</h3>
 
-<h4>Experiment 28</h4>
+<h4>Experiment 28 (a longer pedestrian traverse)</h4>
 
 <img src="results/figs/own/SensorConnectData_28.png" alt="trajectory obtained with robust ZUPT detector (LSTM) aided (Error-State Kalman Filter based) foot-mounted INS" width=400 height=auto>
 
