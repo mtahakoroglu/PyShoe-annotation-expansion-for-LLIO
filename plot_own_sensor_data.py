@@ -178,7 +178,7 @@ for file in sensor_data_files:
     strideAlign = 5
     _, theta = calculate_displacement_and_heading(traj_list[-1][:, :2], strideIndex[np.array([0,strideAlign])])
     theta = theta - np.pi
-    if expNumber == 28:
+    if expNumber in [28, 29, 30]:
         theta = theta - 3*np.pi/2
     # Apply the rotation
     aligned_trajectory_INS = np.squeeze(rotate_trajectory(traj_list[-1][:,:2], -theta))
