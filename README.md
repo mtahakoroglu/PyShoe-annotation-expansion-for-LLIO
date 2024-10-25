@@ -248,7 +248,7 @@ pip install pandas==1.1.5
 
 <p align="justify"><b>Note:</b> One can run <b>plot_own_sensor_data.py</b> to obtain the same results shown below. To learn more about experiment info and results, one can view <b>output.txt</b> log file (located at <b>results/figs/own</b>) recorded while the code was running.</p>
 
-<h4>Experiment 6 (GCP not available)</h4>
+<h4>Experiment 6 (GCP not available - not used for performance evaluation)</h4>
 
 <img src="results/figs/own/SensorConnectData_06.png" alt="trajectory obtained with robust ZUPT detector (LSTM) aided (Error-State Kalman Filter based) foot-mounted INS" width=400 height=auto>
 
@@ -257,7 +257,7 @@ pip install pandas==1.1.5
 |  :---:  |  :---:  |
 | <img src="results/figs/own/SensorConnectData_06_ZV_LSTM_filtered.png" alt="ZV labels produced with robust ZUPT (LSTM filtered) detector" width=400 height=auto> | <img src="results/figs/own/SensorConnectData_06_SHS.png" alt="trajectory obtained with robust ZUPT detector (LSTM) aided (Error-State Kalman Filter based) foot-mounted INS" width=400 height=auto> |
 
-<h4>Experiment 11 (GCP not available)</h4>
+<h4>Experiment 11 (GCP not available - not used for performance evaluation)</h4>
 
 <img src="results/figs/own/SensorConnectData_11.png" alt="trajectory obtained with robust ZUPT detector (LSTM) aided (Error-State Kalman Filter based) foot-mounted INS" width=400 height=auto>
 
@@ -266,7 +266,7 @@ pip install pandas==1.1.5
 |  :---:  |  :---:  |
 | <img src="results/figs/own/SensorConnectData_11_ZV_LSTM_filtered.png" alt="ZV labels produced with robust ZUPT (LSTM filtered) detector" width=400 height=auto> | <img src="results/figs/own/SensorConnectData_11_SHS.png" alt="trajectory obtained with robust ZUPT detector (LSTM) aided (Error-State Kalman Filter based) foot-mounted INS" width=400 height=auto> |
 
-<h4>Experiment 13 (GCP not available)</h4>
+<h4>Experiment 13 (GCP not available - not used for performance evaluation)</h4>
 
 <img src="results/figs/own/SensorConnectData_13.png" alt="trajectory obtained with robust ZUPT detector (LSTM) aided (Error-State Kalman Filter based) foot-mounted INS" width=400 height=auto>
 
@@ -275,7 +275,7 @@ pip install pandas==1.1.5
 |  :---:  |  :---:  |
 | <img src="results/figs/own/SensorConnectData_13_ZV_LSTM_filtered.png" alt="ZV labels produced with robust ZUPT (LSTM filtered) detector" width=400 height=auto> | <img src="results/figs/own/SensorConnectData_13_SHS.png" alt="trajectory obtained with robust ZUPT detector (LSTM) aided (Error-State Kalman Filter based) foot-mounted INS" width=400 height=auto> |
 
-<h4>Experiment 14 (GCP not available)</h4>
+<h4>Experiment 14 (GCP not available - not used for performance evaluation)</h4>
 
 <img src="results/figs/own/SensorConnectData_14.png" alt="trajectory obtained with robust ZUPT detector (LSTM) aided (Error-State Kalman Filter based) foot-mounted INS" width=400 height=auto>
 
@@ -284,7 +284,7 @@ pip install pandas==1.1.5
 |  :---:  |  :---:  |
 | <img src="results/figs/own/SensorConnectData_14_ZV_LSTM_filtered.png" alt="ZV labels produced with robust ZUPT (LSTM filtered) detector" width=400 height=auto> | <img src="results/figs/own/SensorConnectData_14_SHS.png" alt="trajectory obtained with robust ZUPT detector (LSTM) aided (Error-State Kalman Filter based) foot-mounted INS" width=400 height=auto> |
 
-<h4>Experiment 15 (GCP available & all strides detected correctly)</h4>
+<h4>Experiment 15 (GCP available & all strides detected correctly - can be used for performance evaluation)</h4>
 
 <img src="results/figs/own/SensorConnectData_15.png" alt="trajectory obtained with robust ZUPT detector (LSTM) aided (Error-State Kalman Filter based) foot-mounted INS" width=400 height=auto>
 
@@ -293,7 +293,7 @@ pip install pandas==1.1.5
 |  :---:  |  :---:  |
 | <img src="results/figs/own/SensorConnectData_15_ZV_LSTM_filtered.png" alt="ZV labels produced with robust ZUPT (LSTM filtered) detector" width=400 height=auto> | <img src="results/figs/own/SensorConnectData_15_SHS.png" alt="trajectory obtained with robust ZUPT detector (LSTM) aided (Error-State Kalman Filter based) foot-mounted INS" width=400 height=auto> |
 
-<h4>Experiment 16 (GCP available but not correct)</h4>
+<h4>Experiment 16 (GCP available but not correct - not used for performance evaluation)</h4>
 
 <p align="justify">Despite correct detection of all strides, due to errors in GCP documentation, this experiment is not considered in performance evaluation.</p>
 
@@ -304,7 +304,7 @@ pip install pandas==1.1.5
 |  :---:  |  :---:  |
 | <img src="results/figs/own/SensorConnectData_16_ZV_LSTM_filtered.png" alt="ZV labels produced with robust ZUPT (LSTM filtered) detector" width=400 height=auto> | <img src="results/figs/own/SensorConnectData_16_SHS.png" alt="trajectory obtained with robust ZUPT detector (LSTM) aided (Error-State Kalman Filter based) foot-mounted INS" width=400 height=auto> |
 
-<h4>Experiment 17</h4>
+<h4>Experiment 17 (can be used for performance evaluation)</h4>
 
 <img src="results/figs/own/SensorConnectData_17.png" alt="trajectory obtained with robust ZUPT detector (LSTM) aided (Error-State Kalman Filter based) foot-mounted INS" width=400 height=auto>
 
@@ -313,7 +313,7 @@ pip install pandas==1.1.5
 |  :---:  |  :---:  |
 | <img src="results/figs/own/SensorConnectData_17_ZV_LSTM_filtered.png" alt="ZV labels produced with robust ZUPT (LSTM filtered) detector" width=400 height=auto> | <img src="results/figs/own/SensorConnectData_17_SHS.png" alt="trajectory obtained with robust ZUPT detector (LSTM) aided (Error-State Kalman Filter based) foot-mounted INS" width=400 height=auto> |
 
-<h4>Experiment 18</h4>
+<h4>Experiment 18 (can be used for performance evaluation)</h4>
 
 <img src="results/figs/own/SensorConnectData_18.png" alt="trajectory obtained with robust ZUPT detector (LSTM) aided (Error-State Kalman Filter based) foot-mounted INS" width=400 height=auto>
 
@@ -322,7 +322,7 @@ pip install pandas==1.1.5
 |  :---:  |  :---:  |
 | <img src="results/figs/own/SensorConnectData_18_ZV_LSTM_filtered.png" alt="ZV labels produced with robust ZUPT (LSTM filtered) detector" width=400 height=auto> | <img src="results/figs/own/SensorConnectData_18_SHS.png" alt="trajectory obtained with robust ZUPT detector (LSTM) aided (Error-State Kalman Filter based) foot-mounted INS" width=400 height=auto> |
 
-<h4>Experiment 19</h4>
+<h4>Experiment 19 (can be used for performance evaluation)</h4>
 
 <img src="results/figs/own/SensorConnectData_19.png" alt="trajectory obtained with robust ZUPT detector (LSTM) aided (Error-State Kalman Filter based) foot-mounted INS" width=400 height=auto>
 
@@ -331,7 +331,7 @@ pip install pandas==1.1.5
 |  :---:  |  :---:  |
 | <img src="results/figs/own/SensorConnectData_19_ZV_LSTM_filtered.png" alt="ZV labels produced with robust ZUPT (LSTM filtered) detector" width=400 height=auto> | <img src="results/figs/own/SensorConnectData_19_SHS.png" alt="trajectory obtained with robust ZUPT detector (LSTM) aided (Error-State Kalman Filter based) foot-mounted INS" width=400 height=auto> |
 
-<h4>Experiment 20</h4>
+<h4>Experiment 20 (can be used for performance evaluation)</h4>
 
 <img src="results/figs/own/SensorConnectData_20.png" alt="trajectory obtained with robust ZUPT detector (LSTM) aided (Error-State Kalman Filter based) foot-mounted INS" width=400 height=auto>
 
@@ -340,7 +340,7 @@ pip install pandas==1.1.5
 |  :---:  |  :---:  |
 | <img src="results/figs/own/SensorConnectData_20_ZV_LSTM_filtered.png" alt="ZV labels produced with robust ZUPT (LSTM filtered) detector" width=400 height=auto> | <img src="results/figs/own/SensorConnectData_20_SHS.png" alt="trajectory obtained with robust ZUPT detector (LSTM) aided (Error-State Kalman Filter based) foot-mounted INS" width=400 height=auto> |
 
-<h4>Experiment 21 (42/43 strides detected) - Failure (23<sup>rd</sup> ZV interval (and the corresponding stride) is missed)</h4>
+<h4>Experiment 21 (42/43 strides detected - not used for performance evaluation) - Failure (23<sup>rd</sup> ZV interval (and the corresponding stride) is missed)</h4>
 
 <img src="results/figs/own/SensorConnectData_21.png" alt="trajectory obtained with robust ZUPT detector (LSTM) aided (Error-State Kalman Filter based) foot-mounted INS" width=400 height=auto>
 
@@ -358,7 +358,7 @@ pip install pandas==1.1.5
 |  :---:  |  :---:  |
 | <img src="results/figs/own/SensorConnectData_22_ZV_LSTM_filtered.png" alt="ZV labels produced with robust ZUPT (LSTM filtered) detector" width=400 height=auto> | <img src="results/figs/own/SensorConnectData_22_SHS.png" alt="trajectory obtained with robust ZUPT detector (LSTM) aided (Error-State Kalman Filter based) foot-mounted INS" width=400 height=auto> |
 
-<h4>Experiment 23</h4>
+<h4>Experiment 23 (109/110 strides detected - not used for performance evaluation)</h4>
 
 <img src="results/figs/own/SensorConnectData_23.png" alt="trajectory obtained with robust ZUPT detector (LSTM) aided (Error-State Kalman Filter based) foot-mounted INS" width=400 height=auto>
 
@@ -367,7 +367,7 @@ pip install pandas==1.1.5
 |  :---:  |  :---:  |
 | <img src="results/figs/own/SensorConnectData_23_ZV_LSTM_filtered.png" alt="ZV labels produced with robust ZUPT (LSTM filtered) detector" width=400 height=auto> | <img src="results/figs/own/SensorConnectData_23_SHS.png" alt="trajectory obtained with robust ZUPT detector (LSTM) aided (Error-State Kalman Filter based) foot-mounted INS" width=400 height=auto> |
 
-<h4>Experiment 24</h4>
+<h4>Experiment 24 (can be used for performance evaluation)</h4>
 
 <img src="results/figs/own/SensorConnectData_24.png" alt="trajectory obtained with robust ZUPT detector (LSTM) aided (Error-State Kalman Filter based) foot-mounted INS" width=400 height=auto>
 
@@ -376,7 +376,7 @@ pip install pandas==1.1.5
 |  :---:  |  :---:  |
 | <img src="results/figs/own/SensorConnectData_24_ZV_LSTM_filtered.png" alt="ZV labels produced with robust ZUPT (LSTM filtered) detector" width=400 height=auto> | <img src="results/figs/own/SensorConnectData_24_SHS.png" alt="trajectory obtained with robust ZUPT detector (LSTM) aided (Error-State Kalman Filter based) foot-mounted INS" width=400 height=auto> |
 
-<h4>Experiment 25</h4>
+<h4>Experiment 25 (can be used for performance evaluation)</h4>
 
 <img src="results/figs/own/SensorConnectData_25.png" alt="trajectory obtained with robust ZUPT detector (LSTM) aided (Error-State Kalman Filter based) foot-mounted INS" width=400 height=auto>
 
@@ -385,7 +385,7 @@ pip install pandas==1.1.5
 |  :---:  |  :---:  |
 | <img src="results/figs/own/SensorConnectData_25_ZV_LSTM_filtered.png" alt="ZV labels produced with robust ZUPT (LSTM filtered) detector" width=400 height=auto> | <img src="results/figs/own/SensorConnectData_25_SHS.png" alt="trajectory obtained with robust ZUPT detector (LSTM) aided (Error-State Kalman Filter based) foot-mounted INS" width=400 height=auto> |
 
-<h4>Experiment 26</h4>
+<h4>Experiment 26 (can be used for performance evaluation)</h4>
 
 <img src="results/figs/own/SensorConnectData_26.png" alt="trajectory obtained with robust ZUPT detector (LSTM) aided (Error-State Kalman Filter based) foot-mounted INS" width=400 height=auto>
 
@@ -394,7 +394,7 @@ pip install pandas==1.1.5
 |  :---:  |  :---:  |
 | <img src="results/figs/own/SensorConnectData_26_ZV_LSTM_filtered.png" alt="ZV labels produced with robust ZUPT (LSTM filtered) detector" width=400 height=auto> | <img src="results/figs/own/SensorConnectData_26_SHS.png" alt="trajectory obtained with robust ZUPT detector (LSTM) aided (Error-State Kalman Filter based) foot-mounted INS" width=400 height=auto> |
 
-<h4>Experiment 27</h4>
+<h4>Experiment 27 (can be used for performance evaluation)</h4>
 
 <img src="results/figs/own/SensorConnectData_27.png" alt="trajectory obtained with robust ZUPT detector (LSTM) aided (Error-State Kalman Filter based) foot-mounted INS" width=400 height=auto>
 
@@ -405,7 +405,7 @@ pip install pandas==1.1.5
 
 <h3>VICON Training Manual Annotation (Corrections)</h3>
 
-<h4>Experiment 28 (a longer pedestrian traverse)</h4>
+<h4>Experiment 28  - a longer pedestrian traverse (can be used for performance evaluation)</h4>
 
 <img src="results/figs/own/SensorConnectData_28.png" alt="trajectory obtained with robust ZUPT detector (LSTM) aided (Error-State Kalman Filter based) foot-mounted INS" width=400 height=auto>
 
@@ -414,7 +414,7 @@ pip install pandas==1.1.5
 |  :---:  |  :---:  |
 | <img src="results/figs/own/SensorConnectData_28_ZV_LSTM_filtered.png" alt="ZV labels produced with robust ZUPT (LSTM filtered) detector" width=400 height=auto> | <img src="results/figs/own/SensorConnectData_28_SHS.png" alt="trajectory obtained with robust ZUPT detector (LSTM) aided (Error-State Kalman Filter based) foot-mounted INS" width=400 height=auto> |
 
-<h4>Experiment 29 (same path with exp 28 but at a higher pace)</h4>
+<h4>Experiment 29 - same path with exp 28 but at a higher pace (can be used for performance evaluation)</h4>
 
 <img src="results/figs/own/SensorConnectData_29.png" alt="trajectory obtained with robust ZUPT detector (LSTM) aided (Error-State Kalman Filter based) foot-mounted INS" width=400 height=auto>
 
@@ -423,7 +423,7 @@ pip install pandas==1.1.5
 |  :---:  |  :---:  |
 | <img src="results/figs/own/SensorConnectData_29_ZV_LSTM_filtered.png" alt="ZV labels produced with robust ZUPT (LSTM filtered) detector" width=400 height=auto> | <img src="results/figs/own/SensorConnectData_29_SHS.png" alt="trajectory obtained with robust ZUPT detector (LSTM) aided (Error-State Kalman Filter based) foot-mounted INS" width=400 height=auto> |
 
-<h4>Experiment 30 (same path with exp 28-29 but at the highest pace, i.e., almost running)</h4>
+<h4>Experiment 30 - same path with exp 28-29 but at the highest pace, i.e., almost running (54/85 strides detected - not used for performance evaluation)</h4>
 
 <img src="results/figs/own/SensorConnectData_30.png" alt="trajectory obtained with robust ZUPT detector (LSTM) aided (Error-State Kalman Filter based) foot-mounted INS" width=400 height=auto>
 
