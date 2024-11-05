@@ -161,6 +161,8 @@ for file in sensor_data_files:
             k = 75 # temporal window size for checking if detected strides are too close
             zv_lstm_filtered, n, strideIndex = heuristic_zv_filter_and_stride_detector(zv, k)
             logging.info(f"There are {n}/{numberOfStrides} strides detected in experiment #{expNumber}.")
+            # print(f"Stride indexes: {strideIndex}")
+            # print(f"Time indexes: {timestamps[strideIndex]}")
 
             plt.figure()
             plt.plot(timestamps[:len(zv_lstm_filtered)], zv_lstm_filtered)
@@ -205,7 +207,7 @@ for file in sensor_data_files:
     plt.figure()
     if GCP_data['GCP_exist_and_correct'].item():
         plt.scatter(GCP[:,0], GCP[:,1], color='r', s=30, marker='s', edgecolors='k', label="GCP")
-    if n == numberOfStrides:
+    if n == numberOfStrides and expNumber <= 30: # experiments after 30 are conducted for expanding/enlarging LLIO training dataset
         plt.scatter(aligned_trajectory_SHS[GCP_stride_numbers,0], aligned_trajectory_SHS[GCP_stride_numbers,1], color='r', s=45, 
                     marker='o', facecolor='none', linewidths=1.5, label="GCP stride")
     plt.plot(aligned_trajectory_INS[:,0], aligned_trajectory_INS[:,1], linewidth = 1.5, color='b', label=legend[-1])
@@ -220,9 +222,10 @@ for file in sensor_data_files:
 
     plt.figure()
     plt.plot(aligned_trajectory_SHS[:,0], aligned_trajectory_SHS[:,1], 'b.-', linewidth = 1.4, markersize=5, markeredgewidth=1.2, label="PyShoe (LSTM) SHS")
+    # plt.plot(aligned_trajectory_SHS[-3:,0], aligned_trajectory_SHS[-3:,1], 'bx-', linewidth = 1.4, markersize=5, markeredgewidth=1.2, label="PyShoe (LSTM) SHS last three")
     if GCP_data['GCP_exist_and_correct'].item():
         plt.scatter(GCP[:,0], GCP[:,1], color='r', s=30, marker='s', edgecolors='k', label="GCP")
-    if n == numberOfStrides:
+    if n == numberOfStrides and expNumber <= 30: # experiments after 30 are conducted for expanding/enlarging LLIO training dataset
         plt.scatter(aligned_trajectory_SHS[GCP_stride_numbers,0], aligned_trajectory_SHS[GCP_stride_numbers,1], color='r', s=45, 
                 marker='o', facecolor='none', linewidths=1.5, label="GCP stride")
     plt.legend(fontsize=15); plt.xlabel('x [m]', fontsize=22); plt.ylabel('y [m]', fontsize=22)

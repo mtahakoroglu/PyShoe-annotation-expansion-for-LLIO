@@ -1,4 +1,4 @@
-<h2>PyShoe Dataset Annotation for Loose Learned Inertial Odometry (LLIO)</h2>
+<h2>PyShoe Dataset Annotation & Expansion/Enlargement for Loose Learned Inertial Odometry (LLIO)</h2>
 <p align="justify">Just like in <a href="https://github.com/mtahakoroglu/LLIO-aied-PyShoe">LLIO-aided-PyShoe</a> repo, one needs the following installations to run the scripts and obtain the results shown here and in the paper.</p>
 
 <h3>Creating <b>pyshoe</b> Virtual Environment in Anaconda</h3>
@@ -46,7 +46,7 @@ pip install pandas==1.1.5
 
 <p align="justify">After cloning this repository to your local computer, you must install <b><a href="https://github.com/utiasSTARS/liegroups" target="_blank">liegroups</a></b> package to run the code if you would like to reproduce the results shown here in this repo or the paper.</p>
 
-<h3>VICON Training Manual Annotation (Corrections)</h3>
+<h3>VICON Training Data  - Manual Annotation (Corrections)</h3>
 
 <p align="justify">To extract a gait-driven system (stride & heading system - SHS) from VICON training dataset, which is a sampling-frequency driven system (sample-wise INS), displacement and heading change values at <b>each</b> stride must be generated. Subsequently, produced displacement and heading change values will be used in training a data-driven (also called modern) SHS, which will function as learned inertial odometry and eventually aid the traditional dead reckoning system (i.e., robust ZUPT aided Error-State Kalman Filter based pedestrian INS).</p>
 
@@ -379,6 +379,17 @@ pip install pandas==1.1.5
 |  :---:  |  :---:  |
 | <img src="results/figs/own/SensorConnectData_30_ZV_LSTM_filtered.png" alt="ZV labels produced with robust ZUPT (LSTM filtered) detector" width=400 height=auto> | <img src="results/figs/own/SensorConnectData_30_SHS.png" alt="trajectory obtained with robust ZUPT detector (LSTM) aided (Error-State Kalman Filter based) foot-mounted INS" width=400 height=auto> |
 
+<h3>PyShoe Training Dataset Expansion/Enlargement</h3>
+
+<p align="justify">Experiments conducted here are manually annotated by using ruler. As the VICON room walks/experiments of PyShoe dataset is very different than hallways walks/experiments, proposed LLIO SHS system required dataset enlargement that models gait characteristics observe din hallway like walks.</p>
+
+<h4>Experiment 31</h4>
+
+<img src="results/figs/own/SensorConnectData_31.png" alt="trajectory obtained with robust ZUPT detector (LSTM) aided (Error-State Kalman Filter based) foot-mounted INS" width=400 height=auto>
+
+| Zero Velocity |  Trajectory  |
+|  :---:  |  :---:  |
+| <img src="results/figs/own/SensorConnectData_31_ZV_LSTM_filtered.png" alt="ZV labels produced with robust ZUPT (LSTM filtered) detector" width=400 height=auto> | <img src="results/figs/own/SensorConnectData_31_SHS.png" alt="trajectory obtained with robust ZUPT detector (LSTM) aided (Error-State Kalman Filter based) foot-mounted INS" width=400 height=auto> |
 
 <h2>REFERENCES</h2>
 <p align="justify" id="ref1"><a href="#gobacktoref1">[1]</a> X. Liu, N. Li and Y. Zhang, <a href="https://ieeexplore.ieee.org/document/9956821" target="_blank">"A Novel Adaptive Zero Velocity Detection Algorithm Based on Improved General Likelihood Ratio Test Detector,"</a> in <i>IEEE Sensors Journal</i>, vol. 22, no. 24, pp. 24479-24492, 2022.</p>
