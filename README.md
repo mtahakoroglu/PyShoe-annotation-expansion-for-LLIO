@@ -381,7 +381,7 @@ pip install pandas==1.1.5
 
 <h3>PyShoe Training Dataset Expansion/Enlargement</h3>
 
-<p align="justify">Experiments conducted here are manually annotated by using ruler. As the VICON room walks/experiments of PyShoe dataset is very different than hallways walks/experiments, proposed LLIO SHS system required dataset enlargement that models gait characteristics observe din hallway like walks.</p>
+<p align="justify">Experiments conducted here are manually annotated by using ruler. As the VICON room walks/experiments of PyShoe dataset is very different than hallways walks/experiments, proposed LLIO SHS system required a bigger dataset accounts for of straight walk (at various walking paces) gait characteristics, which can be observed in hallway walk motions.</p>
 
 <h4>Experiment 31</h4>
 
@@ -390,6 +390,14 @@ pip install pandas==1.1.5
 | Zero Velocity |  Trajectory  |
 |  :---:  |  :---:  |
 | <img src="results/figs/own/SensorConnectData_31_ZV_LSTM_filtered.png" alt="ZV labels produced with robust ZUPT (LSTM filtered) detector" width=400 height=auto> | <img src="results/figs/own/SensorConnectData_31_SHS.png" alt="trajectory obtained with robust ZUPT detector (LSTM) aided (Error-State Kalman Filter based) foot-mounted INS" width=400 height=auto> |
+
+<h4>Experiment 32</h4>
+
+<img src="results/figs/own/SensorConnectData_32.png" alt="trajectory obtained with robust ZUPT detector (LSTM) aided (Error-State Kalman Filter based) foot-mounted INS" width=400 height=auto>
+
+| Zero Velocity |  Trajectory  |
+|  :---:  |  :---:  |
+| <img src="results/figs/own/SensorConnectData_32_ZV_LSTM_filtered.png" alt="ZV labels produced with robust ZUPT (LSTM filtered) detector" width=400 height=auto> | <img src="results/figs/own/SensorConnectData_32_SHS.png" alt="trajectory obtained with robust ZUPT detector (LSTM) aided (Error-State Kalman Filter based) foot-mounted INS" width=400 height=auto> |
 
 <h2>REFERENCES</h2>
 <p align="justify" id="ref1"><a href="#gobacktoref1">[1]</a> X. Liu, N. Li and Y. Zhang, <a href="https://ieeexplore.ieee.org/document/9956821" target="_blank">"A Novel Adaptive Zero Velocity Detection Algorithm Based on Improved General Likelihood Ratio Test Detector,"</a> in <i>IEEE Sensors Journal</i>, vol. 22, no. 24, pp. 24479-24492, 2022.</p>
