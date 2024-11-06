@@ -19,7 +19,7 @@ log_file = os.path.join(output_dir, 'output.log')
 logging.basicConfig(level=logging.INFO, format='%(message)s',
                     handlers=[logging.FileHandler(log_file), logging.StreamHandler()])
 
-extracted_training_data_dir = "data/" # training data (imu, zv) for LSTM retraining & (displacement, heading change) for LLIO training
+extracted_training_data_dir = "data/" # training data (imu, zv) for LSTM retraining & (displacement, heading change, stride indexes, timestamps) for LLIO training
 
 # 16th experiment: Despite showing MBGTD is the optimal detector in the mat file, VICON & ARED performs a lot better. Optimal detector is selected as ARED.
 # 51st experiment: Optimal detector is changed from MBGTD to VICON
@@ -149,7 +149,7 @@ nGT = [22, 21, 21, 18, 26, 24, 18, 20, 28, 35, 29, 22, 30, 34, 24, 36, 20, 15, 1
        13, 14, 24, 27, 25, 26, 0, 28, 13, 41, 33, 26, 16, 16, 11, 9] # number of actual strides
 training_data_tag = [abs(x) for x in training_data_tag]
 extract_bilstm_training_data = False # used to save csv files for zv and stride detection training
-extract_LLIO_training_data = False # used to save csv files for displacement and heading change training
+extract_LLIO_training_data = False # used to save csv files for LLIO SHS training - (displacement, heading change) and (stride indexes, timestamps)
 # if sum(training_data_tag) == 56: # if total of 56 experiments are plotted (5 of them is not training data)
 #     extract_bilstm_training_data = False # then do not write imu and zv data to file for BiLSTM training
 
@@ -383,12 +383,13 @@ for file in vicon_data_files:
                     header='t,ax,ay,az,wx,wy,wz,zv', comments='')
         #################### SAVE TRAINING DATA for LLIO TRAINING #################
         if extract_LLIO_training_data:
-            # Combine displacement and heading change data into one array
-            combined_data = np.column_stack((displacements, heading_changes))
-            combined_data2 = np.column_stack((strideIndex, timestamps[strideIndex]))
+            # Stride indexes and timestamps will be used to calculate (dx,dy) in Gradient Boosting (LLIO) training yet we saved other for completeness
+            combined_data = np.column_stack((displacements, heading_changes)) # Combine displacement and heading change data into one array
+            combined_data2 = np.column_stack((strideIndex, timestamps[strideIndex])) # Combine stride indexes and timestamps into one array
 
             # Save the combined displacement and heading change data to a CSV file
             combined_csv_filename = os.path.join(extracted_training_data_dir, f'LLIO_training_data/{base_filename}_displacement_heading_change.csv')
+            # Save the combined stride indexes and timestamps data to a CSV file
             combined_csv_filename2 = os.path.join(extracted_training_data_dir, f'LLIO_training_data/{base_filename}_strideIndex_timestamp.csv')
 
             # print(f"strideIndex.shape = {strideIndex.shape}")

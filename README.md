@@ -381,7 +381,7 @@ pip install pandas==1.1.5
 
 <h3>PyShoe Training Dataset Expansion/Enlargement</h3>
 
-<p align="justify">Experiments conducted here are manually annotated by using ruler. As the VICON room walks/experiments of PyShoe dataset is very different than hallways walks/experiments, proposed LLIO SHS system required a bigger dataset accounts for of straight walk (at various walking paces) gait characteristics, which can be observed in hallway walk motions.</p>
+<p align="justify">Experiments conducted here are manually annotated by using a ruler (see the paper for more details). As the VICON room walks/experiments of PyShoe dataset is very different than hallways walks/experiments, proposed LLIO SHS system required a bigger dataset accounts for of straight walk (at various walking paces) gait characteristics, which can be observed in hallway walk motions.</p>
 
 <h4>Experiment 31</h4>
 

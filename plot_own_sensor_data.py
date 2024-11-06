@@ -21,6 +21,8 @@ log_file = os.path.join(output_dir, 'output.log')
 logging.basicConfig(level=logging.INFO, format='%(message)s',
                     handlers=[logging.FileHandler(log_file), logging.StreamHandler()])
 
+extracted_training_data_dir = "data/" # training data (imu, zv) for LSTM retraining & (displacement, heading change, stride indexes, timestamps) for LLIO training
+
 # Detectors and labels
 det_list = ['lstm'] # 'ared', 'shoe'
 # Define thresholds for each detector
@@ -94,6 +96,9 @@ def rotate_trajectory(trajectory, theta):
                                 [np.sin(theta), np.cos(theta)]])
     return trajectory @ rotation_matrix.T
 
+# Flag to save LLIO training data
+extract_LLIO_training_data = False # used to save csv files for LLIO SHS training - (displacement, heading change) and (stride indexes, timestamps)
+
 # gravity contant
 g = 9.8029
 # processing zero velocity labels to turn a sampling frequency driven system into gait driven system (stride and heading system)
@@ -138,7 +143,9 @@ for file in sensor_data_files:
         logging.info(f"GCP are either not available or not correct for file {base_filename}.")
     GCP_stride_numbers = np.squeeze(GCP_data['GCP_stride_numbers'])
     numberOfStrides =  GCP_data['numberOfStrides'].item() # total number of strides is equal to the last GCP stride number, i.e., GCP_stride_numbers[-1]
-        
+    
+    if expNumber > 30: # update this statement later to include only the experiments that are manually annotated for LLIO training
+        extract_LLIO_training_data = True
 
     # Initialize INS object with correct parameters
     ins = INS(imu_data.values, sigma_a=0.00098, sigma_w=8.7266463e-5, T=1.0/200)
@@ -207,7 +214,7 @@ for file in sensor_data_files:
     plt.figure()
     if GCP_data['GCP_exist_and_correct'].item():
         plt.scatter(GCP[:,0], GCP[:,1], color='r', s=30, marker='s', edgecolors='k', label="GCP")
-    if n == numberOfStrides and expNumber <= 30: # experiments after 30 are conducted for expanding/enlarging LLIO training dataset
+    if n == numberOfStrides and not extract_LLIO_training_data: # experiments after 30 are conducted for expanding/enlarging LLIO training dataset
         plt.scatter(aligned_trajectory_SHS[GCP_stride_numbers,0], aligned_trajectory_SHS[GCP_stride_numbers,1], color='r', s=45, 
                     marker='o', facecolor='none', linewidths=1.5, label="GCP stride")
     plt.plot(aligned_trajectory_INS[:,0], aligned_trajectory_INS[:,1], linewidth = 1.5, color='b', label=legend[-1])
@@ -225,7 +232,7 @@ for file in sensor_data_files:
     # plt.plot(aligned_trajectory_SHS[-3:,0], aligned_trajectory_SHS[-3:,1], 'bx-', linewidth = 1.4, markersize=5, markeredgewidth=1.2, label="PyShoe (LSTM) SHS last three")
     if GCP_data['GCP_exist_and_correct'].item():
         plt.scatter(GCP[:,0], GCP[:,1], color='r', s=30, marker='s', edgecolors='k', label="GCP")
-    if n == numberOfStrides and expNumber <= 30: # experiments after 30 are conducted for expanding/enlarging LLIO training dataset
+    if n == numberOfStrides and not extract_LLIO_training_data: # experiments after 30 are conducted for expanding/enlarging LLIO training dataset
         plt.scatter(aligned_trajectory_SHS[GCP_stride_numbers,0], aligned_trajectory_SHS[GCP_stride_numbers,1], color='r', s=45, 
                 marker='o', facecolor='none', linewidths=1.5, label="GCP stride")
     plt.legend(fontsize=15); plt.xlabel('x [m]', fontsize=22); plt.ylabel('y [m]', fontsize=22)
@@ -236,6 +243,21 @@ for file in sensor_data_files:
         plt.ylim(-10,20)
     plt.grid(True, which='both', linestyle='--', linewidth=1.5)
     plt.savefig(os.path.join(output_dir, f'{base_filename}_SHS.png'), dpi=dpi, bbox_inches='tight')
+
+    #################### SAVE TRAINING DATA for LLIO TRAINING #################
+    if extract_LLIO_training_data:
+        # Stride indexes and timestamps will be used to calculate (dx,dy) in Gradient Boosting (LLIO) training yet we saved other for completeness
+        combined_data = np.column_stack((displacements, heading_changes)) # Combine displacement and heading change data into one array
+        combined_data2 = np.column_stack((strideIndex, timestamps[strideIndex])) # Combine stride indexes and timestamps into one array
+
+        # Save the combined displacement and heading change data to a CSV file
+        combined_csv_filename = os.path.join(extracted_training_data_dir, f'LLIO_training_data/{base_filename}_displacement_heading_change.csv')
+        # Save the combined stride indexes and timestamps data to a CSV file
+        combined_csv_filename2 = os.path.join(extracted_training_data_dir, f'LLIO_training_data/{base_filename}_strideIndex_timestamp.csv')
+
+        # print(f"strideIndex.shape = {strideIndex.shape}")
+        np.savetxt(combined_csv_filename, combined_data, delimiter=',', header='displacement,heading_change', comments='')
+        np.savetxt(combined_csv_filename2, combined_data2, delimiter=',', header='strideIndex,timestamp', comments='')
 
 logging.info(f"===================================================================================================================")
 logging.info(f"There are {expCount} experiments processed.")
