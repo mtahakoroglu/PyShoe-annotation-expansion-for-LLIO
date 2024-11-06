@@ -248,16 +248,16 @@ for file in sensor_data_files:
     if extract_LLIO_training_data:
         # Stride indexes and timestamps will be used to calculate (dx,dy) in Gradient Boosting (LLIO) training yet we saved other for completeness
         combined_data = np.column_stack((displacements, heading_changes)) # Combine displacement and heading change data into one array
-        combined_data2 = np.column_stack((strideIndex, timestamps[strideIndex])) # Combine stride indexes and timestamps into one array
+        combined_data2 = np.column_stack((strideIndex, timestamps[strideIndex], GCP[:,0], GCP[:,0])) # Combine stride indexes, timestamps & GCP into one array
 
         # Save the combined displacement and heading change data to a CSV file
         combined_csv_filename = os.path.join(extracted_training_data_dir, f'LLIO_training_data/{base_filename}_displacement_heading_change.csv')
-        # Save the combined stride indexes and timestamps data to a CSV file
-        combined_csv_filename2 = os.path.join(extracted_training_data_dir, f'LLIO_training_data/{base_filename}_strideIndex_timestamp.csv')
-
+        # Save the combined stride indexes, timestamps & GCP data to a CSV file
+        combined_csv_filename2 = os.path.join(extracted_training_data_dir, f'LLIO_training_data/{base_filename}_strideIndex_timestamp_gcpX_gcpY.csv')
+        
         # print(f"strideIndex.shape = {strideIndex.shape}")
         np.savetxt(combined_csv_filename, combined_data, delimiter=',', header='displacement,heading_change', comments='')
-        np.savetxt(combined_csv_filename2, combined_data2, delimiter=',', header='strideIndex,timestamp', comments='')
+        np.savetxt(combined_csv_filename2, combined_data2, delimiter=',', header='strideIndex,timestamp,gcpX,gcpY', comments='')
 
 logging.info(f"===================================================================================================================")
 logging.info(f"There are {expCount} experiments processed.")
