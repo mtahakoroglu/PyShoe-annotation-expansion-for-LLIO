@@ -1,0 +1,2 @@
+<h2>PyShoe Dataset Annotation & Expansion/Enlargement for Loose Learned Inertial Odometry (LLIO)</h2>
+<p align="justify">All saved data can be found in the <a href="https://github.com/mtahakoroglu/LLIO">main repo</a> of the paper. If extract_LLIO_training_data = True in <b>plot_vicon_data.py</b> and <b>plot_own_sensor_data.py</b>, then training data will be saved in here as csv files.</p>

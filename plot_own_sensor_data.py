@@ -102,7 +102,7 @@ def pad_lists(*lists, pad_value=np.nan):
     padded_lists = [np.pad(lst.astype(float), (0, max_length - len(lst)), mode='constant', constant_values=pad_value) for lst in lists]
     return padded_lists
 
-# Flag to save LLIO training data
+# Flag to save LLIO training data - DO NOT CHANGE THIS VALUE AS IT IS AUTOMATICALLY UPDATED BELOW
 extract_LLIO_training_data = False # used to save csv files for LLIO SHS training (displacement, heading change) and (stride indexes, timestamps, GCP stride coordinates)
 
 # gravity contant
