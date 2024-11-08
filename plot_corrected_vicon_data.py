@@ -133,6 +133,12 @@ def align_trajectories(traj_est, traj_gt):
 
     return traj_est_aligned, traj_gt_trimmed, scale
 
+# Function to pad lists to the same length
+def pad_lists(*lists, pad_value=np.nan):
+    max_length = max(len(lst) for lst in lists)
+    padded_lists = [np.pad(lst.astype(float), (0, max_length - len(lst)), mode='constant', constant_values=pad_value) for lst in lists]
+    return padded_lists
+
 
 i = 0  # experiment index
 count_training_exp = 0
@@ -386,17 +392,36 @@ for file in vicon_data_files:
             # Stride coordinates (GCP) is the target in Gradient Boosting (LLIO) training yet we can save polar coordinates for the sake of completeness
             # combined_data = np.column_stack((displacements, heading_changes)) # Combine displacement and heading change data into one array
             GCP = gt[strideIndex, :2] # extract the stride coordinates (GCP) from the ground truth data
+            print(f"strideIndex.shape = {strideIndex.shape}")
             print(f"GCP.shape = {GCP.shape}")
-            combined_data = np.column_stack((strideIndex, timestamps[strideIndex], GCP[:,0], GCP[:,1])) # Combine stride indexes, timestamps & GCP into one array
+            print(f"imu_data shape: {imu_data.shape}")
+            accX = imu_data[:,0]; accY = imu_data[:,1]; accZ = imu_data[:,2]
+            omegaX = imu_data[:,3]; omegaY = imu_data[:,4]; omegaZ = imu_data[:,5]
             
-            # Save the combined displacement and heading change data to a CSV file
-            # combined_csv_filename = os.path.join(extracted_training_data_dir, f'LLIO_training_data/{base_filename}_displacement_heading_change.csv')
-            # Save the combined stride indexes, timestamps & GCP data to a CSV file
-            combined_csv_filename = os.path.join(extracted_training_data_dir, f'LLIO_training_data/{base_filename}_strideIndex_timestamp_gcpX_gcpY.csv')
+            # Pad lists to the same length
+            pstrideIndex, ptimestamps, pgcpX, pgcpY, paccX, paccY, paccZ, pomegaX, pomegaY, pomegaZ = pad_lists(
+                strideIndex, timestamps[strideIndex], GCP[:,0], GCP[:,1], accX, accY, accZ, omegaX, omegaY, omegaZ)
+            
+            # Combine padded lists into one array
+            combined_data = np.column_stack((pstrideIndex, ptimestamps, pgcpX, pgcpY, paccX, paccY, paccZ, pomegaX, pomegaY, pomegaZ))
 
-            # print(f"strideIndex.shape = {strideIndex.shape}")
-            # np.savetxt(combined_csv_filename, combined_data, delimiter=',', header='displacement,heading_change', comments='')
-            np.savetxt(combined_csv_filename, combined_data, delimiter=',', header='strideIndex,timestamp,gcpX,gcpY', comments='')
+            # Save the combined data to a CSV file
+            combined_csv_filename = os.path.join(extracted_training_data_dir, f'LLIO_training_data/{base_filename}_strideIndex_timestamp_gcpX_gcpY_imu.csv')
+            np.savetxt(combined_csv_filename, combined_data, delimiter=',', header='strideIndex,timestamp,gcpX,gcpY,accX,accY,accZ,omegaX,omegaY,omegaZ', comments='')
+
+            # # Combine stride indexes, timestamps, GCP (stride coordinates) & imu data into one array
+            # combined_data = np.column_stack((strideIndex, timestamps[strideIndex], GCP[:,0], GCP[:,1], 
+            #                                  accX, accY, accZ, omegaX, omegaY, omegaZ))
+            
+            # # Save the combined displacement and heading change data to a CSV file
+            # # combined_csv_filename = os.path.join(extracted_training_data_dir, f'LLIO_training_data/{base_filename}_displacement_heading_change.csv')
+            # # Save the combined stride indexes, timestamps & GCP data to a CSV file
+            # combined_csv_filename = os.path.join(extracted_training_data_dir, f'LLIO_training_data/{base_filename}_strideIndex_timestamp_gcpX_gcpY_imu.csv')
+
+            # # print(f"strideIndex.shape = {strideIndex.shape}")
+            # # np.savetxt(combined_csv_filename, combined_data, delimiter=',', header='displacement,heading_change', comments='')
+            # np.savetxt(combined_csv_filename, combined_data, delimiter=',', 
+            #            header='strideIndex,timestamp,gcpX,gcpY,accX,accY,accZ,omegaX,omegaY,omegaZ', comments='')
         
         count_training_exp += 1
 

@@ -1,5 +1,5 @@
 <h2>PyShoe Dataset Annotation & Expansion/Enlargement for Loose Learned Inertial Odometry (LLIO)</h2>
-<p align="justify">Just like in <a href="https://github.com/mtahakoroglu/LLIO-aied-PyShoe">LLIO-aided-PyShoe</a> repo, one needs the following installations to run the scripts and obtain the results shown here and in the paper.</p>
+<p align="justify">Just like in <a href="https://github.com/mtahakoroglu/LLIO-aided-PyShoe">LLIO</a> repo, one needs the following installations to run the scripts and obtain the results shown here and in the paper.</p>
 
 <h3>Creating <b>pyshoe</b> Virtual Environment in Anaconda</h3>
 <p align="justify">After installing Anaconda, launch <b>Anaconda PowerShell</b> and then type</p>
