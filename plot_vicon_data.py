@@ -405,7 +405,7 @@ for file in vicon_data_files:
 
             # Save stride indexes, timestamps, GCP stride coordinates and IMU data to mat file
             sio.savemat(os.path.join(extracted_training_data_dir, f'LLIO_training_data/{base_filename}_LLIO_training_data.mat'),
-                        {'strideIndex': strideIndex+1, 'timestamps': timestamps[strideIndex], 'GCP': GCP, 'imu_data': imu_data})
+                        {'strideIndex': strideIndex, 'timestamps': timestamps[strideIndex], 'GCP': GCP, 'imu_data': imu_data})
         
         count_training_exp += 1
 
