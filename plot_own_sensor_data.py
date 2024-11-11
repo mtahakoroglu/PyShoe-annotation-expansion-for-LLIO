@@ -96,14 +96,9 @@ def rotate_trajectory(trajectory, theta):
                                 [np.sin(theta), np.cos(theta)]])
     return trajectory @ rotation_matrix.T
 
-# Function to pad lists to the same length
-def pad_lists(*lists, pad_value=np.nan):
-    max_length = max(len(lst) for lst in lists)
-    padded_lists = [np.pad(lst.astype(float), (0, max_length - len(lst)), mode='constant', constant_values=pad_value) for lst in lists]
-    return padded_lists
-
 # Flag to save LLIO training data - DO NOT CHANGE THIS VALUE AS IT IS AUTOMATICALLY UPDATED BELOW
 extract_LLIO_training_data = False # used to save csv files for LLIO SHS training (displacement, heading change) and (stride indexes, timestamps, GCP stride coordinates)
+traveled_distances = [] # to keep track of the traveled distances in each experiment for LLIO training data
 
 # gravity contant
 g = 9.8029
@@ -172,6 +167,8 @@ for file in sensor_data_files:
         if det_list[i] == 'lstm':
             
             k = 75 # temporal window size for checking if detected strides are too close
+            if expNumber in [33]:
+                k = 100
             zv_lstm_filtered, n, strideIndex = heuristic_zv_filter_and_stride_detector(zv, k)
             logging.info(f"There are {n}/{numberOfStrides} strides detected in experiment #{expNumber}.")
             # print(f"Stride indexes: {strideIndex}")
@@ -190,7 +187,7 @@ for file in sensor_data_files:
     reconstructed_traj = reconstruct_trajectory(displacements, heading_changes, initial_position)
 
     # Align the trajectory wrt the selected stride (assuming it and the past strides are linear, i.e., no change in heading)
-    strideAlign = 5
+    strideAlign = 4
     _, theta = calculate_displacement_and_heading(traj_list[-1][:, :2], strideIndex[np.array([0,strideAlign])])
     theta = theta - np.pi
     if expNumber in [28, 29, 30]:
@@ -257,30 +254,36 @@ for file in sensor_data_files:
         print(f"strideIndex.shape = {strideIndex.shape}")
         print(f"GCP.shape = {GCP.shape}")
         print(f"imu_data shape: {imu_data.shape}")
+        print(f"strideIndex = {strideIndex}")
+        print(f"timestamps(strideIndex) = {timestamps[strideIndex]}")
+        if expNumber == 32 and strideIndex[-2] == 14203:
+            strideIndex[-2] = 14130
+            print(f"strideIndex[-2] is manually corrected for experiment #{expNumber} after MATLAB inspection.")
+        elif expNumber == 33 and strideIndex[12] == 2979:
+            strideIndex[12] = 2920
+            print(f"strideIndex[12] is manually corrected for experiment #{expNumber} after MATLAB inspection.")
+        logging.info(f"Experiment #{expNumber} is annotated stride-wise & going to be used in LLIO training/testing.")
+        # compute stride distances and sum them up to get the traveled distance made in the current walk
+        traveled_distance = np.sum(np.linalg.norm(np.diff(GCP, axis=0), axis=1))
+        logging.info(f"Traveled distance is {traveled_distance:.3f} meters in experiment #{expNumber}.")
+        # after experiment 30, sum all traveled distances cumulatively to get the total distance made in the experiments for LLIO training
+        traveled_distances.append(traveled_distance)
         
         imu_data = imu_data.values
         accX = imu_data[:,0]; accY = imu_data[:,1]; accZ = imu_data[:,2]
         omegaX = imu_data[:,3]; omegaY = imu_data[:,4]; omegaZ = imu_data[:,5]
         
-        # Pad lists to the same length
-        pstrideIndex, ptimestamps, pgcpX, pgcpY, paccX, paccY, paccZ, pomegaX, pomegaY, pomegaZ = pad_lists(
-            strideIndex, timestamps[strideIndex], GCP[:,0], GCP[:,1], accX, accY, accZ, omegaX, omegaY, omegaZ)
-        
-        # Combine padded lists into one array
-        combined_data = np.column_stack((pstrideIndex, ptimestamps, pgcpX, pgcpY, paccX, paccY, paccZ, pomegaX, pomegaY, pomegaZ))
+        combined_data = np.column_stack((strideIndex, timestamps[strideIndex], GCP[:,0], GCP[:,1]))
+        combined_csv_filename = os.path.join(extracted_training_data_dir, f'LLIO_training_data/{base_filename}_strideIndex_timestamp_gcpX_gcpY.csv')
+        np.savetxt(combined_csv_filename, combined_data, delimiter=',', header='strideIndex,timestamp,gcpX,gcpY', comments='')
 
-        # Save the combined data to a CSV file
-        combined_csv_filename = os.path.join(extracted_training_data_dir, f'LLIO_training_data/{base_filename}_strideIndex_timestamp_gcpX_gcpY_imu.csv')
-        np.savetxt(combined_csv_filename, combined_data, delimiter=',', header='strideIndex,timestamp,gcpX,gcpY,accX,accY,accZ,omegaX,omegaY,omegaZ', comments='')
+        # save stride indexes, timestamps, GCP stride coordinates and IMU data to mat file
+        sio.savemat(os.path.join(extracted_training_data_dir, f'LLIO_training_data/{base_filename}_LLIO_training_data.mat'), 
+                    {'strideIndex': strideIndex+1, 'timestamps': timestamps, 'GCP': GCP, 'imu_data': imu_data})
 
-        # # Save the combined displacement and heading change data to a CSV file
-        # # combined_csv_filename = os.path.join(extracted_training_data_dir, f'LLIO_training_data/{base_filename}_displacement_heading_change.csv')
-        # # Save the combined stride indexes, timestamps & GCP data to a CSV file
-        # combined_csv_filename = os.path.join(extracted_training_data_dir, f'LLIO_training_data/{base_filename}_strideIndex_timestamp_gcpX_gcpY.csv')
-        
-        # # print(f"strideIndex.shape = {strideIndex.shape}")
-        # # np.savetxt(combined_csv_filename, combined_data, delimiter=',', header='displacement,heading_change', comments='')
-        # np.savetxt(combined_csv_filename, combined_data, delimiter=',', header='strideIndex,timestamp,gcpX,gcpY', comments='')
+total_distance = sum(traveled_distances)
+logging.info(f"===================================================================================================================")
+logging.info(f"Total distance traveled in LLIO training data extraction experiments is {total_distance:.3f} meters.")
 
 logging.info(f"===================================================================================================================")
 logging.info(f"There are {expCount} experiments processed.")

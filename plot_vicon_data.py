@@ -397,31 +397,15 @@ for file in vicon_data_files:
             print(f"imu_data shape: {imu_data.shape}")
             accX = imu_data[:,0]; accY = imu_data[:,1]; accZ = imu_data[:,2]
             omegaX = imu_data[:,3]; omegaY = imu_data[:,4]; omegaZ = imu_data[:,5]
-            
-            # Pad lists to the same length
-            pstrideIndex, ptimestamps, pgcpX, pgcpY, paccX, paccY, paccZ, pomegaX, pomegaY, pomegaZ = pad_lists(
-                strideIndex, timestamps[strideIndex], GCP[:,0], GCP[:,1], accX, accY, accZ, omegaX, omegaY, omegaZ)
-            
-            # Combine padded lists into one array
-            combined_data = np.column_stack((pstrideIndex, ptimestamps, pgcpX, pgcpY, paccX, paccY, paccZ, pomegaX, pomegaY, pomegaZ))
 
             # Save the combined data to a CSV file
-            combined_csv_filename = os.path.join(extracted_training_data_dir, f'LLIO_training_data/{base_filename}_strideIndex_timestamp_gcpX_gcpY_imu.csv')
-            np.savetxt(combined_csv_filename, combined_data, delimiter=',', header='strideIndex,timestamp,gcpX,gcpY,accX,accY,accZ,omegaX,omegaY,omegaZ', comments='')
+            combined_data = np.column_stack((strideIndex, timestamps[strideIndex], GCP[:,0], GCP[:,1]))
+            combined_csv_filename = os.path.join(extracted_training_data_dir, f'LLIO_training_data/{base_filename}_strideIndex_timestamp_gcpX_gcpY.csv')
+            np.savetxt(combined_csv_filename, combined_data, delimiter=',', header='strideIndex,timestamp,gcpX,gcpY', comments='')
 
-            # # Combine stride indexes, timestamps, GCP (stride coordinates) & imu data into one array
-            # combined_data = np.column_stack((strideIndex, timestamps[strideIndex], GCP[:,0], GCP[:,1], 
-            #                                  accX, accY, accZ, omegaX, omegaY, omegaZ))
-            
-            # # Save the combined displacement and heading change data to a CSV file
-            # # combined_csv_filename = os.path.join(extracted_training_data_dir, f'LLIO_training_data/{base_filename}_displacement_heading_change.csv')
-            # # Save the combined stride indexes, timestamps & GCP data to a CSV file
-            # combined_csv_filename = os.path.join(extracted_training_data_dir, f'LLIO_training_data/{base_filename}_strideIndex_timestamp_gcpX_gcpY_imu.csv')
-
-            # # print(f"strideIndex.shape = {strideIndex.shape}")
-            # # np.savetxt(combined_csv_filename, combined_data, delimiter=',', header='displacement,heading_change', comments='')
-            # np.savetxt(combined_csv_filename, combined_data, delimiter=',', 
-            #            header='strideIndex,timestamp,gcpX,gcpY,accX,accY,accZ,omegaX,omegaY,omegaZ', comments='')
+            # Save stride indexes, timestamps, GCP stride coordinates and IMU data to mat file
+            sio.savemat(os.path.join(extracted_training_data_dir, f'LLIO_training_data/{base_filename}_LLIO_training_data.mat'),
+                        {'strideIndex': strideIndex+1, 'timestamps': timestamps[strideIndex], 'GCP': GCP, 'imu_data': imu_data})
         
         count_training_exp += 1
 
