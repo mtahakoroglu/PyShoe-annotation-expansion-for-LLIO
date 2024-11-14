@@ -68,11 +68,13 @@ pip install pandas==1.1.5
 
 <p align="justify">Integration of filtered optimal ZUPT detector SHOE with the supplementary ZUPT detector (i.e., filtered VICON) enabled successfull detection of the missed stride as shown in the combined ZUPT detector plot above (located at the bottom). The corrected stride & heading system trajectory and ZV labels can be seen below for the experiment 4. Note that the correction is only going to be used in extracting displacement and heading change values for further research on Deep Learning based modern INS development; therefore, corrected ZV labels are not used in any INS generation.</p>
 
-<img src="results/figs/vicon/exp4_corrected.jpg" alt="corrected results for experiment 4 (2017-11-22-11-25-20) VICON dataset" width=%100 height=auto>
+<img src="results/figs/vicon/exp4_corrected.jpg" alt="corrected results for experiment 4 of VICON dataset" width=%100 height=auto>
 
 <p align="justify">The gif file inserted below shows the correction explicitly.</p>
 
 <img src="results/figs/vicon/gif/exp4.gif" alt="experiment 4 results after ZV correction" width=%100 height=auto>
+
+<img src="results/figs/vicon/stride_detection_exp_4.png" alt="stride deetction results on imu data for experiment 4 of VICON dataset">
 
 <h4>Experiment 6 (2017-11-22-11-26-46) - VICON training dataset</h4>
 

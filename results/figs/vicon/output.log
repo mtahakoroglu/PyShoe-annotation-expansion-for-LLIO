@@ -1734,3 +1734,248 @@ Applying heuristic filter to optimal ZUPT detector VICON for correct stride dete
 Detected 9/9 strides with (filtered) optimal detector VICON in experiment 56.
 ===================================================================================================================
 Processing complete for all files.
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-22-03.mat
+Processing shoe detector for file data/vicon/processed\2017-11-22-11-22-03.mat
+Applying heuristic filter to optimal ZUPT detector SHOE for correct stride detection.
+Detected 22/22 strides with (filtered) optimal detector SHOE in experiment 1.
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-22-03.mat
+Processing shoe detector for file data/vicon/processed\2017-11-22-11-22-03.mat
+Applying heuristic filter to optimal ZUPT detector SHOE generated ZV values for correct stride detection.
+Detected 22/22 strides with (filtered) optimal detector SHOE in experiment 1.
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-22-46.mat
+Processing ared detector for file data/vicon/processed\2017-11-22-11-22-46.mat
+Applying heuristic filter to optimal ZUPT detector ARED generated ZV values for correct stride detection.
+Detected 21/21 strides with (filtered) optimal detector ARED in experiment 2.
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-23-25.mat
+Processing shoe detector for file data/vicon/processed\2017-11-22-11-23-25.mat
+Applying heuristic filter to optimal ZUPT detector SHOE generated ZV values for correct stride detection.
+Detected 21/21 strides with (filtered) optimal detector SHOE in experiment 3.
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-25-20.mat
+Processing shoe detector for file data/vicon/processed\2017-11-22-11-25-20.mat
+Applying heuristic filter to optimal ZUPT detector SHOE generated ZV values for correct stride detection.
+Detected 17/18 strides with (filtered) optimal detector SHOE in experiment 4.
+Applying stride detection to the combined zero velocity detection results for experiment 4.
+Detected 18/18 strides detected with the combined ZV detector in the experiment 4.
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-22-03.mat
+Processing shoe detector for file data/vicon/processed\2017-11-22-11-22-03.mat
+Applying heuristic filter to optimal ZUPT detector SHOE generated ZV values for correct stride detection.
+Detected 22/22 strides with (filtered) optimal detector SHOE in experiment 1.
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-22-46.mat
+Processing ared detector for file data/vicon/processed\2017-11-22-11-22-46.mat
+Applying heuristic filter to optimal ZUPT detector ARED generated ZV values for correct stride detection.
+Detected 21/21 strides with (filtered) optimal detector ARED in experiment 2.
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-23-25.mat
+Processing shoe detector for file data/vicon/processed\2017-11-22-11-23-25.mat
+Applying heuristic filter to optimal ZUPT detector SHOE generated ZV values for correct stride detection.
+Detected 21/21 strides with (filtered) optimal detector SHOE in experiment 3.
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-25-20.mat
+Processing shoe detector for file data/vicon/processed\2017-11-22-11-25-20.mat
+Applying heuristic filter to optimal ZUPT detector SHOE generated ZV values for correct stride detection.
+Detected 17/18 strides with (filtered) optimal detector SHOE in experiment 4.
+Applying stride detection to the combined zero velocity detection results for experiment 4.
+Detected 18/18 strides detected with the combined ZV detector in the experiment 4.
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-22-03.mat
+Processing shoe detector for file data/vicon/processed\2017-11-22-11-22-03.mat
+Applying heuristic filter to optimal ZUPT detector SHOE generated ZV values for correct stride detection.
+Detected 22/22 strides with (filtered) optimal detector SHOE in experiment 1.
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-22-46.mat
+Processing ared detector for file data/vicon/processed\2017-11-22-11-22-46.mat
+Applying heuristic filter to optimal ZUPT detector ARED generated ZV values for correct stride detection.
+Detected 21/21 strides with (filtered) optimal detector ARED in experiment 2.
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-23-25.mat
+Processing shoe detector for file data/vicon/processed\2017-11-22-11-23-25.mat
+Applying heuristic filter to optimal ZUPT detector SHOE generated ZV values for correct stride detection.
+Detected 21/21 strides with (filtered) optimal detector SHOE in experiment 3.
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-25-20.mat
+Processing shoe detector for file data/vicon/processed\2017-11-22-11-25-20.mat
+Applying heuristic filter to optimal ZUPT detector SHOE generated ZV values for correct stride detection.
+Detected 17/18 strides with (filtered) optimal detector SHOE in experiment 4.
+Applying stride detection to the combined zero velocity detection results for experiment 4.
+Detected 18/18 strides detected with the combined ZV detector in the experiment 4.
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-22-03.mat
+Processing shoe detector for file data/vicon/processed\2017-11-22-11-22-03.mat
+Applying heuristic filter to optimal ZUPT detector SHOE generated ZV values for correct stride detection.
+Detected 22/22 strides with (filtered) optimal detector SHOE in experiment 1.
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-22-46.mat
+Processing ared detector for file data/vicon/processed\2017-11-22-11-22-46.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-22-03.mat
+Processing shoe detector for file data/vicon/processed\2017-11-22-11-22-03.mat
+Applying heuristic filter to optimal ZUPT detector SHOE generated ZV values for correct stride detection.
+Detected 22/22 strides with (filtered) optimal detector SHOE in experiment 1.
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-22-46.mat
+Processing ared detector for file data/vicon/processed\2017-11-22-11-22-46.mat
+Applying heuristic filter to optimal ZUPT detector ARED generated ZV values for correct stride detection.
+Detected 21/21 strides with (filtered) optimal detector ARED in experiment 2.
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-23-25.mat
+Processing shoe detector for file data/vicon/processed\2017-11-22-11-23-25.mat
+Applying heuristic filter to optimal ZUPT detector SHOE generated ZV values for correct stride detection.
+Detected 21/21 strides with (filtered) optimal detector SHOE in experiment 3.
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-25-20.mat
+Processing shoe detector for file data/vicon/processed\2017-11-22-11-25-20.mat
+Applying heuristic filter to optimal ZUPT detector SHOE generated ZV values for correct stride detection.
+Detected 17/18 strides with (filtered) optimal detector SHOE in experiment 4.
+Applying stride detection to the combined zero velocity detection results for experiment 4.
+Detected 18/18 strides detected with the combined ZV detector in the experiment 4.
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-22-03.mat
+Processing shoe detector for file data/vicon/processed\2017-11-22-11-22-03.mat
+Applying heuristic filter to optimal ZUPT detector SHOE generated ZV values for correct stride detection.
+Detected 22/22 strides with (filtered) optimal detector SHOE in experiment 1.
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-22-46.mat
+Processing ared detector for file data/vicon/processed\2017-11-22-11-22-46.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-22-03.mat
+Processing shoe detector for file data/vicon/processed\2017-11-22-11-22-03.mat
+Applying heuristic filter to optimal ZUPT detector SHOE generated ZV values for correct stride detection.
+Detected 22/22 strides with (filtered) optimal detector SHOE in experiment 1.
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-22-46.mat
+Processing ared detector for file data/vicon/processed\2017-11-22-11-22-46.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-22-03.mat
+Processing shoe detector for file data/vicon/processed\2017-11-22-11-22-03.mat
+Applying heuristic filter to optimal ZUPT detector SHOE generated ZV values for correct stride detection.
+Detected 22/22 strides with (filtered) optimal detector SHOE in experiment 1.
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-22-46.mat
+Processing ared detector for file data/vicon/processed\2017-11-22-11-22-46.mat
+Applying heuristic filter to optimal ZUPT detector ARED generated ZV values for correct stride detection.
+Detected 21/21 strides with (filtered) optimal detector ARED in experiment 2.
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-23-25.mat
+Processing shoe detector for file data/vicon/processed\2017-11-22-11-23-25.mat
+Applying heuristic filter to optimal ZUPT detector SHOE generated ZV values for correct stride detection.
+Detected 21/21 strides with (filtered) optimal detector SHOE in experiment 3.
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-25-20.mat
+Processing shoe detector for file data/vicon/processed\2017-11-22-11-25-20.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-22-03.mat
+Processing shoe detector for file data/vicon/processed\2017-11-22-11-22-03.mat
+Applying heuristic filter to optimal ZUPT detector SHOE generated ZV values for correct stride detection.
+Detected 22/22 strides with (filtered) optimal detector SHOE in experiment 1.
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-22-46.mat
+Processing ared detector for file data/vicon/processed\2017-11-22-11-22-46.mat
+Applying heuristic filter to optimal ZUPT detector ARED generated ZV values for correct stride detection.
+Detected 21/21 strides with (filtered) optimal detector ARED in experiment 2.
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-23-25.mat
+Processing shoe detector for file data/vicon/processed\2017-11-22-11-23-25.mat
+Applying heuristic filter to optimal ZUPT detector SHOE generated ZV values for correct stride detection.
+Detected 21/21 strides with (filtered) optimal detector SHOE in experiment 3.
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-25-20.mat
+Processing shoe detector for file data/vicon/processed\2017-11-22-11-25-20.mat
+Applying heuristic filter to optimal ZUPT detector SHOE generated ZV values for correct stride detection.
+Detected 17/18 strides with (filtered) optimal detector SHOE in experiment 4.
+Applying stride detection to the combined zero velocity detection results for experiment 4.
+Detected 18/18 strides detected with the combined ZV detector in the experiment 4.
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-22-03.mat
+Processing shoe detector for file data/vicon/processed\2017-11-22-11-22-03.mat
+Applying heuristic filter to optimal ZUPT detector SHOE generated ZV values for correct stride detection.
+Detected 22/22 strides with (filtered) optimal detector SHOE in experiment 1.
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-22-46.mat
+Processing ared detector for file data/vicon/processed\2017-11-22-11-22-46.mat
+Applying heuristic filter to optimal ZUPT detector ARED generated ZV values for correct stride detection.
+Detected 21/21 strides with (filtered) optimal detector ARED in experiment 2.
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-23-25.mat
+Processing shoe detector for file data/vicon/processed\2017-11-22-11-23-25.mat
+Applying heuristic filter to optimal ZUPT detector SHOE generated ZV values for correct stride detection.
+Detected 21/21 strides with (filtered) optimal detector SHOE in experiment 3.
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-25-20.mat
+Processing shoe detector for file data/vicon/processed\2017-11-22-11-25-20.mat
+Applying heuristic filter to optimal ZUPT detector SHOE generated ZV values for correct stride detection.
+Detected 17/18 strides with (filtered) optimal detector SHOE in experiment 4.
+Applying stride detection to the combined zero velocity detection results for experiment 4.
+Detected 18/18 strides detected with the combined ZV detector in the experiment 4.
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-22-03.mat
+Processing shoe detector for file data/vicon/processed\2017-11-22-11-22-03.mat
+Applying heuristic filter to optimal ZUPT detector SHOE generated ZV values for correct stride detection.
+Detected 22/22 strides with (filtered) optimal detector SHOE in experiment 1.
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-22-46.mat
+Processing ared detector for file data/vicon/processed\2017-11-22-11-22-46.mat
+Applying heuristic filter to optimal ZUPT detector ARED generated ZV values for correct stride detection.
+Detected 21/21 strides with (filtered) optimal detector ARED in experiment 2.
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-23-25.mat
+Processing shoe detector for file data/vicon/processed\2017-11-22-11-23-25.mat
+Applying heuristic filter to optimal ZUPT detector SHOE generated ZV values for correct stride detection.
+Detected 21/21 strides with (filtered) optimal detector SHOE in experiment 3.
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-25-20.mat
+Processing shoe detector for file data/vicon/processed\2017-11-22-11-25-20.mat
+Applying heuristic filter to optimal ZUPT detector SHOE generated ZV values for correct stride detection.
+Detected 17/18 strides with (filtered) optimal detector SHOE in experiment 4.
+Applying stride detection to the combined zero velocity detection results for experiment 4.
+Detected 18/18 strides detected with the combined ZV detector in the experiment 4.
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-22-03.mat
+Processing shoe detector for file data/vicon/processed\2017-11-22-11-22-03.mat
+Applying heuristic filter to optimal ZUPT detector SHOE generated ZV values for correct stride detection.
+Detected 22/22 strides with (filtered) optimal detector SHOE in experiment 1.
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-22-46.mat
+Processing ared detector for file data/vicon/processed\2017-11-22-11-22-46.mat
+Applying heuristic filter to optimal ZUPT detector ARED generated ZV values for correct stride detection.
+Detected 21/21 strides with (filtered) optimal detector ARED in experiment 2.
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-23-25.mat
+Processing shoe detector for file data/vicon/processed\2017-11-22-11-23-25.mat
+Applying heuristic filter to optimal ZUPT detector SHOE generated ZV values for correct stride detection.
+Detected 21/21 strides with (filtered) optimal detector SHOE in experiment 3.
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-25-20.mat
+Processing shoe detector for file data/vicon/processed\2017-11-22-11-25-20.mat
+Applying heuristic filter to optimal ZUPT detector SHOE generated ZV values for correct stride detection.
+Detected 17/18 strides with (filtered) optimal detector SHOE in experiment 4.
+Applying stride detection to the combined zero velocity detection results for experiment 4.
+Detected 18/18 strides detected with the combined ZV detector in the experiment 4.
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-22-03.mat
+Processing shoe detector for file data/vicon/processed\2017-11-22-11-22-03.mat
+Applying heuristic filter to optimal ZUPT detector SHOE generated ZV values for correct stride detection.
+Detected 22/22 strides with (filtered) optimal detector SHOE in experiment 1.
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-22-46.mat
+Processing ared detector for file data/vicon/processed\2017-11-22-11-22-46.mat
+Applying heuristic filter to optimal ZUPT detector ARED generated ZV values for correct stride detection.
+Detected 21/21 strides with (filtered) optimal detector ARED in experiment 2.
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-23-25.mat
+Processing shoe detector for file data/vicon/processed\2017-11-22-11-23-25.mat
+Applying heuristic filter to optimal ZUPT detector SHOE generated ZV values for correct stride detection.
+Detected 21/21 strides with (filtered) optimal detector SHOE in experiment 3.
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-25-20.mat
+Processing shoe detector for file data/vicon/processed\2017-11-22-11-25-20.mat
+Applying heuristic filter to optimal ZUPT detector SHOE generated ZV values for correct stride detection.
+Detected 17/18 strides with (filtered) optimal detector SHOE in experiment 4.
+Applying stride detection to the combined zero velocity detection results for experiment 4.
+Detected 18/18 strides detected with the combined ZV detector in the experiment 4.

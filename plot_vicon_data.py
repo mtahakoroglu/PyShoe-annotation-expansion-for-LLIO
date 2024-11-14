@@ -30,7 +30,8 @@ detector = ['shoe', 'ared', 'shoe', 'shoe', 'shoe', 'ared', 'shoe', 'shoe',
             'shoe', 'vicon', 'vicon', 'shoe', 'shoe', 'shoe', 'shoe', 'ared',
             'shoe', 'shoe', 'ared', 'shoe', 'shoe', 'shoe', 'ared', 'shoe',
             'shoe', 'ared', 'vicon', 'shoe', 'vicon', 'shoe', 'shoe', 'vicon']
-# corresponding thresholds are changed (#16 and #51)
+
+# thresholds of experiments (#16 and #51) are changed  - there are more inconsistencies in PyShoe dataset
 thresh = [2750000, 0.1, 6250000, 15000000, 5500000, 0.08, 3000000, 3250000,
           0.02, 97500000, 20000000, 0.0825, 0.1, 30000000, 0.0625, 0.1250,
           92500000, 9000000, 0.015, 0.05, 3250000, 4500000, 0.1, 100000000,
@@ -41,8 +42,7 @@ thresh = [2750000, 0.1, 6250000, 15000000, 5500000, 0.08, 3000000, 3250000,
 
 # Function to calculate displacement and heading change between stride points
 def calculate_displacement_and_heading(gt, strideIndex):
-    displacements = []
-    heading_changes = []
+    displacements, heading_changes = [], []
     for j in range(1, len(strideIndex)):
         delta_position = gt[strideIndex[j], :2] - gt[strideIndex[j - 1], :2]
         displacement = np.linalg.norm(delta_position)
@@ -133,22 +133,16 @@ def align_trajectories(traj_est, traj_gt):
 
     return traj_est_aligned, traj_gt_trimmed, scale
 
-# Function to pad lists to the same length
-def pad_lists(*lists, pad_value=np.nan):
-    max_length = max(len(lst) for lst in lists)
-    padded_lists = [np.pad(lst.astype(float), (0, max_length - len(lst)), mode='constant', constant_values=pad_value) for lst in lists]
-    return padded_lists
-
 
 i = 0  # experiment index
 count_training_exp = 0
 # following two lines are used to run selected experiment results
-# training_data_tag = [1]*55
+training_data_tag = [1]*4 # [1]*55
 # training_data_tag.append(1)
 # training_data_tag are the experiments to be used in extracting displacement and heading change data for LLIO training
-training_data_tag = [1, 1, 1, -1, 1, -1, 1, 1, 1, 1, -1, 1, 0, 1, 1, 1, 1, -1, 1, 1, 
-                    1, 1, 1, 1, 1, 1, -1, 1, 1, -1, 1, -1, 1, 1, 1, -1, 1, -1, 1, 1, 
-                    1, 1, -1, 1, 1, 1, 0, 0, -1, 0, 1, 1, 1, 1, 0, 1]
+# training_data_tag = [1, 1, 1, -1, 1, -1, 1, 1, 1, 1, -1, 1, 0, 1, 1, 1, 1, -1, 1, 1, 
+#                     1, 1, 1, 1, 1, 1, -1, 1, 1, -1, 1, -1, 1, 1, 1, -1, 1, -1, 1, 1, 
+#                     1, 1, -1, 1, 1, 1, 0, 0, -1, 0, 1, 1, 1, 1, 0, 1]
 corrected_data_index = [4, 6, 11, 18, 27, 30, 32, 36, 38, 43, 49] # corrected experiment indexes
 nGT = [22, 21, 21, 18, 26, 24, 18, 20, 28, 35, 29, 22, 30, 34, 24, 36, 20, 15, 10, 33, 
        22, 19, 13, 16, 17, 21, 20, 28, 18, 12, 13, 26, 34, 25, 24, 24, 43, 42, 15, 12, 
@@ -190,7 +184,7 @@ for file in vicon_data_files:
         aligned_x_lstm, aligned_gt, scale_lstm = align_trajectories(x_lstm, gt)
 
         # Apply filter to zero velocity detection results for stride detection corrections
-        logging.info(f'Applying heuristic filter to optimal ZUPT detector {detector[i].upper()} for correct stride detection.')
+        logging.info(f'Applying heuristic filter to optimal ZUPT detector {detector[i].upper()} generated ZV values for correct stride detection.')
         k = 75 # temporal window size for checking if detected strides are too close or not
         if i+1 == 54: # remove false positive by changing filter size for experiment 54
             k = 95
@@ -221,7 +215,7 @@ for file in vicon_data_files:
         # Plotting the reconstructed trajectory and the ground truth without stride indices
         plt.figure()
         visualize.plot_topdown([reconstructed_traj, gt[:, :2]], title=f"Exp#{i+1} ({base_filename}) - {detector[i].upper()}", 
-                               legend=['GT (stride & heading)', 'GT (sample-wise)'])
+                               legend=[f'GT (stride) - {n}/{nGT[i]}', 'GT (sample)'])
         # to visualize selected stides from the experiment of interest, change the parameters below
         # if i+1==49:
         #     # plt.plot(gt[-5:,0], gt[-5:,1], c='r')
@@ -239,8 +233,7 @@ for file in vicon_data_files:
 
         # Plot LSTM trajectory results
         plt.figure()
-        visualize.plot_topdown([aligned_x_lstm, aligned_gt[:, :2]], title=f"Exp#{i+1} ({base_filename}) - LSTM", 
-                               legend=['LSTM INS', 'GT'])
+        visualize.plot_topdown([aligned_x_lstm, aligned_gt[:, :2]], title=f"Exp#{i+1} ({base_filename}) - PyShoe (LSTM)", legend=['PyShoe (LSTM)', 'GT'])
         plt.scatter(aligned_x_lstm[strideIndexLSTMfiltered, 0], aligned_x_lstm[strideIndexLSTMfiltered, 1], c='b', marker='o')
         plt.savefig(os.path.join(output_dir, f'trajectory_exp_{i+1}_lstm_ins.png'), dpi=600, bbox_inches='tight')
 
@@ -350,7 +343,7 @@ for file in vicon_data_files:
             zv_filtered, n, strideIndex = heuristic_zv_filter_and_stride_detector(zv_filtered, 1)
             logging.info(f"Detected {n}/{nGT[i]} strides detected with the combined ZV detector in the experiment {i+1}.")
 
-            # Calculate displacement and heading changes between stride points ground truth data
+            # Calculate displacement and heading changes between ground truth values of stride points
             displacements, heading_changes = calculate_displacement_and_heading(gt[:, :2], strideIndex)
 
             # Reconstruct the trajectory from displacements and heading changes
@@ -360,7 +353,7 @@ for file in vicon_data_files:
             # Plotting the reconstructed trajectory and the ground truth without stride indices
             plt.figure()
             visualize.plot_topdown([reconstructed_traj, gt[:, :2]], title=f"Exp#{i+1} ({base_filename}) - Combined",
-                                legend=['Stride & Heading', 'GT (sample-wise)']) 
+                                legend=[f'GT (stride-wise) - {n}/{nGT[i]}', 'GT (sample-wise)']) 
             plt.scatter(reconstructed_traj[:, 0], reconstructed_traj[:, 1], c='b', marker='o')
             plt.savefig(os.path.join(output_dir, f'trajectory_exp_{i+1}_corrected.png'), dpi=600, bbox_inches='tight')
 
@@ -370,12 +363,23 @@ for file in vicon_data_files:
             plt.plot(timestamps, zv_filtered, label='Filtered')
             plt.scatter(timestamps[strideIndex], zv_filtered[strideIndex], c='r', marker='x')
             plt.title(f'Exp#{i+1} ({base_filename}) {n}/{nGT[i]} strides detected (combined)')
-            plt.xlabel('Time [s]')
-            plt.ylabel('Zero Velocity')
+            plt.xlabel('Time [s]'); plt.ylabel('Zero Velocity')
             plt.grid(True, which='both', linestyle='--', linewidth=1.5)
-            plt.legend()
-            plt.yticks([0,1])
+            plt.legend(); plt.yticks([0,1])
             plt.savefig(os.path.join(output_dir, f'zv_labels_exp_{i+1}_corrected.png'), dpi=600, bbox_inches='tight')
+
+        # Plot stride indexes on IMU data, i.e., the magnitudes of acceleration and angular velocity
+        plt.figure()
+        plt.plot(timestamps, np.linalg.norm(imu_data[:, :3], axis=1), label=r'$\Vert\mathbf{a}\Vert$')
+        plt.plot(timestamps, np.linalg.norm(imu_data[:, 3:], axis=1), label=r'$\Vert\mathbf{\omega}\Vert$')
+        plt.scatter(timestamps[strideIndex], np.linalg.norm(imu_data[strideIndex, :3], axis=1), 
+                    c='r', marker='x', label='Stride', zorder=3)
+        plt.scatter(timestamps[strideIndex], np.linalg.norm(imu_data[strideIndex, 3:], axis=1), 
+                    c='r', marker='x', zorder=3)
+        plt.title(f'Exp#{i+1} ({base_filename}) - Stride Detection on IMU Data')
+        plt.xlabel('Time [s]'); plt.ylabel(r'Magnitude'); plt.legend()
+        plt.grid(True, which='both', linestyle='--', linewidth=1.5)
+        plt.savefig(os.path.join(output_dir, f'stride_detection_exp_{i+1}.png'), dpi=800, bbox_inches='tight')
         
         #################### SAVE TRAINING DATA RIGHT AT THIS SPOT for LSTM RETRAINING #################
         if extract_bilstm_training_data:
@@ -395,8 +399,8 @@ for file in vicon_data_files:
             print(f"strideIndex.shape = {strideIndex.shape}")
             print(f"GCP.shape = {GCP.shape}")
             print(f"imu_data shape: {imu_data.shape}")
-            accX = imu_data[:,0]; accY = imu_data[:,1]; accZ = imu_data[:,2]
-            omegaX = imu_data[:,3]; omegaY = imu_data[:,4]; omegaZ = imu_data[:,5]
+            # accX = imu_data[:,0]; accY = imu_data[:,1]; accZ = imu_data[:,2]
+            # omegaX = imu_data[:,3]; omegaY = imu_data[:,4]; omegaZ = imu_data[:,5]
 
             # Save the combined data to a CSV file
             combined_data = np.column_stack((strideIndex, timestamps[strideIndex], GCP[:,0], GCP[:,1]))
