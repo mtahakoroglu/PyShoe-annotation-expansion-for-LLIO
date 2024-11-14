@@ -247,6 +247,19 @@ for file in sensor_data_files:
     plt.grid(True, which='both', linestyle='--', linewidth=1.5)
     plt.savefig(os.path.join(output_dir, f'{base_filename}_SHS.png'), dpi=dpi, bbox_inches='tight')
 
+    # Plot stride indexes on IMU data, i.e., the magnitudes of acceleration and angular velocity
+    plt.figure()
+    plt.plot(timestamps, np.linalg.norm(imu_data.iloc[:, :3].values, axis=1), label=r'$\Vert\mathbf{a}\Vert$')
+    plt.plot(timestamps, np.linalg.norm(imu_data.iloc[:, 3:].values, axis=1), label=r'$\Vert\mathbf{\omega}\Vert$')
+    plt.scatter(timestamps[strideIndex], np.linalg.norm(imu_data.iloc[strideIndex, :3].values, axis=1), 
+                c='r', marker='x', label='Stride', zorder=3)
+    plt.scatter(timestamps[strideIndex], np.linalg.norm(imu_data.iloc[strideIndex, 3:].values, axis=1), 
+                c='r', marker='x', zorder=3)
+    plt.title(f'Exp#{i+1} ({base_filename}) - Stride Detection on IMU Data')
+    plt.xlabel('Time [s]'); plt.ylabel(r'Magnitude'); plt.legend()
+    plt.grid(True, which='both', linestyle='--', linewidth=1.5)
+    plt.savefig(os.path.join(output_dir, f'{base_filename}_stride_detection.png'), dpi=600, bbox_inches='tight')
+
     #################### SAVE TRAINING DATA for LLIO TRAINING #################
     if extract_LLIO_training_data:
         # Stride coordinates (GCP) is the target in Gradient Boosting (LLIO) training yet we can save polar coordinates for the sake of completeness
@@ -280,6 +293,10 @@ for file in sensor_data_files:
         # save stride indexes, timestamps, GCP stride coordinates and IMU data to mat file
         sio.savemat(os.path.join(extracted_training_data_dir, f'LLIO_training_data/{base_filename}_LLIO_training_data.mat'), 
                     {'strideIndex': strideIndex, 'timestamps': timestamps, 'GCP': GCP, 'imu_data': imu_data})
+    else:
+        # still save the stride indexes and the associated timestamps for further analysis in MATLAB side
+        sio.savemat(os.path.join(extracted_training_data_dir, f'LLIO_nontraining_data/{base_filename}_strideIndex_timestamp.mat'), 
+                    {'strideIndex': strideIndex, 'timestamps': timestamps})
 
 total_distance = sum(traveled_distances)
 logging.info(f"===================================================================================================================")

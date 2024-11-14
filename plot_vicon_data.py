@@ -137,12 +137,12 @@ def align_trajectories(traj_est, traj_gt):
 i = 0  # experiment index
 count_training_exp = 0
 # following two lines are used to run selected experiment results
-training_data_tag = [1]*4 # [1]*55
+# training_data_tag = [1]*55
 # training_data_tag.append(1)
 # training_data_tag are the experiments to be used in extracting displacement and heading change data for LLIO training
-# training_data_tag = [1, 1, 1, -1, 1, -1, 1, 1, 1, 1, -1, 1, 0, 1, 1, 1, 1, -1, 1, 1, 
-#                     1, 1, 1, 1, 1, 1, -1, 1, 1, -1, 1, -1, 1, 1, 1, -1, 1, -1, 1, 1, 
-#                     1, 1, -1, 1, 1, 1, 0, 0, -1, 0, 1, 1, 1, 1, 0, 1]
+training_data_tag = [1, 1, 1, -1, 1, -1, 1, 1, 1, 1, -1, 1, 0, 1, 1, 1, 1, -1, 1, 1, 
+                    1, 1, 1, 1, 1, 1, -1, 1, 1, -1, 1, -1, 1, 1, 1, -1, 1, -1, 1, 1, 
+                    1, 1, -1, 1, 1, 1, 0, 0, -1, 0, 1, 1, 1, 1, 0, 1]
 corrected_data_index = [4, 6, 11, 18, 27, 30, 32, 36, 38, 43, 49] # corrected experiment indexes
 nGT = [22, 21, 21, 18, 26, 24, 18, 20, 28, 35, 29, 22, 30, 34, 24, 36, 20, 15, 10, 33, 
        22, 19, 13, 16, 17, 21, 20, 28, 18, 12, 13, 26, 34, 25, 24, 24, 43, 42, 15, 12, 
@@ -379,7 +379,7 @@ for file in vicon_data_files:
         plt.title(f'Exp#{i+1} ({base_filename}) - Stride Detection on IMU Data')
         plt.xlabel('Time [s]'); plt.ylabel(r'Magnitude'); plt.legend()
         plt.grid(True, which='both', linestyle='--', linewidth=1.5)
-        plt.savefig(os.path.join(output_dir, f'stride_detection_exp_{i+1}.png'), dpi=800, bbox_inches='tight')
+        plt.savefig(os.path.join(output_dir, f'stride_detection_exp_{i+1}.png'), dpi=600, bbox_inches='tight')
         
         #################### SAVE TRAINING DATA RIGHT AT THIS SPOT for LSTM RETRAINING #################
         if extract_bilstm_training_data:
