@@ -255,7 +255,7 @@ for file in sensor_data_files:
                 c='r', marker='x', label='Stride', zorder=3)
     plt.scatter(timestamps[strideIndex], np.linalg.norm(imu_data.iloc[strideIndex, 3:].values, axis=1), 
                 c='r', marker='x', zorder=3)
-    plt.title(f'Exp#{i+1} ({base_filename}) - Stride Detection on IMU Data')
+    plt.title(f'{base_filename} - Stride Detection on IMU Data')
     plt.xlabel('Time [s]'); plt.ylabel(r'Magnitude'); plt.legend()
     plt.grid(True, which='both', linestyle='--', linewidth=1.5)
     plt.savefig(os.path.join(output_dir, f'{base_filename}_stride_detection.png'), dpi=600, bbox_inches='tight')
