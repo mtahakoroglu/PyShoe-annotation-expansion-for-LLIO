@@ -74,7 +74,7 @@ pip install pandas==1.1.5
 
 <img src="results/figs/vicon/gif/exp4.gif" alt="experiment 4 results after ZV correction" width=%100 height=auto>
 
-<img src="results/figs/vicon/stride_detection_exp_4.png" alt="stride deetction results on imu data for experiment 4 of VICON dataset">
+<img src="results/figs/vicon/stride_detection_exp_4.png" alt="stride detection results on imu data for experiment 4 of VICON dataset">
 
 <h4>Experiment 6 (2017-11-22-11-26-46) - VICON training dataset</h4>
 
@@ -94,6 +94,8 @@ pip install pandas==1.1.5
 
 <img src="results/figs/vicon/gif/exp6.gif" alt="experiment 6 results after ZV correction" width=%100 height=auto>
 
+<img src="results/figs/vicon/stride_detection_exp_6.png" alt="stride detection results on imu data for experiment 6 of VICON dataset">
+
 <h4>Experiment 11 (2017-11-22-11-35-59) - VICON training dataset</h4>
 
 <p align="justify">We see that the 7th stride is not detected in the plots below.</p>
@@ -111,6 +113,8 @@ pip install pandas==1.1.5
 <p align="justify">To see the correction by the supplementary ZUPT detector, check the gif file inserted below.</p>
 
 <img src="results/figs/vicon/gif/exp11.gif" alt="experiment 11 results after ZV correction" width=%100 height=auto>
+
+<img src="results/figs/vicon/stride_detection_exp_11.png" alt="stride detection results on imu data for experiment 11 of VICON dataset">
 
 <h4>Experiment 18 (2017-11-22-11-48-35) - VICON training dataset</h4>
 
@@ -130,6 +134,8 @@ pip install pandas==1.1.5
 
 <img src="results/figs/vicon/gif/exp18.gif" alt="experiment 18 results after ZV correction" width=%100 height=auto>
 
+<img src="results/figs/vicon/stride_detection_exp_18.png" alt="stride detection results on imu data for experiment 18 of VICON dataset">
+
 <h4>Experiment 27 (2017-11-27-11-12-44) - VICON training dataset</h4>
 
 <p align="justify">We see that the strides {9, 16, 17, 18} are not detected in the plots below.</p>
@@ -147,6 +153,8 @@ pip install pandas==1.1.5
 <p align="justify">To see the correction by the supplementary ZUPT detectors, check the gif file inserted below.</p>
 
 <img src="results/figs/vicon/gif/exp27.gif" alt="experiment 27 results after ZV correction" width=%100 height=auto>
+
+<img src="results/figs/vicon/stride_detection_exp_27.png" alt="stride detection results on imu data for experiment 27 of VICON dataset">
 
 <h4>Experiment 30 (2017-11-27-11-14-03) - VICON training dataset</h4>
 
@@ -166,6 +174,8 @@ pip install pandas==1.1.5
 
 <img src="results/figs/vicon/gif/exp30.gif" alt="experiment 30 results after ZV correction" width=%100 height=auto>
 
+<img src="results/figs/vicon/stride_detection_exp_30.png" alt="stride detection results on imu data for experiment 30 of VICON dataset">
+
 <h4>Experiment 32 (2017-11-27-11-17-28) - VICON training dataset</h4>
 
 <p align="justify">We see that the strides {9, 11, 20} are not detected in the plots below.</p>
@@ -183,6 +193,8 @@ pip install pandas==1.1.5
 <p align="justify">To see the correction by the supplementary ZUPT detector, check the gif file inserted below.</p>
 
 <img src="results/figs/vicon/gif/exp32.gif" alt="experiment 32 results after ZV correction" width=%100 height=auto>
+
+<img src="results/figs/vicon/stride_detection_exp_32.png" alt="stride detection results on imu data for experiment 32 of VICON dataset">
 
 <h4>Experiment 36 (2017-11-27-11-23-18) - VICON training dataset</h4>
 
@@ -202,6 +214,8 @@ pip install pandas==1.1.5
 
 <img src="results/figs/vicon/gif/exp36.gif" alt="experiment 36 results after ZV correction" width=%100 height=auto>
 
+<img src="results/figs/vicon/stride_detection_exp_36.png" alt="stride detection results on imu data for experiment 36 of VICON dataset">
+
 <h4>Experiment 38 (2017-11-27-11-25-12) - VICON training dataset</h4>
 
 <p align="justify">We see that the strides {3, 27, 33} are not detected in the plots below.</p>
@@ -219,6 +233,8 @@ pip install pandas==1.1.5
 <p align="justify">To see the correction by the supplementary ZUPT detector, check the gif file inserted below.</p>
 
 <img src="results/figs/vicon/gif/exp38.gif" alt="experiment 38 results after ZV correction" width=%100 height=auto>
+
+<img src="results/figs/vicon/stride_detection_exp_38.png" alt="stride detection results on imu data for experiment 38 of VICON dataset">
 
 <h4>Experiment 43 (2017-12-15-18-01-18) - VICON training dataset</h4>
 
@@ -238,8 +254,9 @@ pip install pandas==1.1.5
 
 <img src="results/figs/vicon/gif/exp43.gif" alt="experiment 43 results after ZV correction" width=%100 height=auto>
 
-<p align="justify">Here, due to some undetected steps in VICON training data (recall that Wagstaff <i>et. al.</i> (i.e., the creator of PyShoe dataset) included crawling data) and self-collected data, we needed to go over the 56 experiments in the training dataset <i><b>(i)</b></i> to correct for undetected steps (they are classified as 0 in ZV signal plot despite them actually being 1, i.e., it is false-negative) and <i><b>(ii)</b></i> to exclude motions like crawling, which are not of type bipedal locomotion. For this reason, we had to retrain the bi-LSTM network proposed by Wagstaff <i>et. al.</i>. In order to use GPU in the training process, instead of the PyTorch installation command given above, we used the one below.</p>
+<img src="results/figs/vicon/stride_detection_exp_43.png" alt="stride detection results on imu data for experiment 43 of VICON dataset">
 
+<p align="justify">Here, due to some undetected steps in VICON training data (recall that Wagstaff <i>et. al.</i> (i.e., the creator of PyShoe dataset) included crawling data) and self-collected data, we needed to go over the 56 experiments in the training dataset <i><b>(i)</b></i> to correct for undetected steps (they are classified as 0 in ZV signal plot despite them actually being 1, i.e., it is false-negative) and <i><b>(ii)</b></i> to exclude motions like crawling, which are not of type bipedal locomotion. For this reason, we had to retrain the bi-LSTM network proposed by Wagstaff <i>et. al.</i>. In order to use GPU in the training process, instead of the PyTorch installation command given above, we used the one below.</p>
 
 <h3>Example Results with LSTM Based Robust ZUPT Method (Own Sensor Data)</h3>
 <p align="justify">Here robust pre-trained LSTM based ZV detector pedestrian INS is applied on our own-collected data (where our sensor is 3DM-GX5-25).</p>
@@ -453,8 +470,6 @@ pip install pandas==1.1.5
 <p align="justify">Experiments conducted here are manually annotated by using a ruler (see the paper for more details). As the VICON room walks/experiments of PyShoe dataset is very different than hallways walks/experiments, proposed LLIO SHS system required a bigger dataset accounts for of straight walk (at various walking paces) gait characteristics, which can be observed in hallway walk motions.</p>
 
 <h4>Experiment 31</h4>
-
-<img src="results/figs/own/SensorConnectData_31.png" alt="trajectory obtained with robust ZUPT detector (LSTM) aided (Error-State Kalman Filter based) foot-mounted INS" width=400 height=auto>
 
 | Stride Indexes |  Trajectory (INS)  |
 |  :---:  |  :---:  |
