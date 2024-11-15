@@ -282,9 +282,9 @@ for file in sensor_data_files:
         # after experiment 30, sum all traveled distances cumulatively to get the total distance made in the experiments for LLIO training
         traveled_distances.append(traveled_distance)
         
-        imu_data = imu_data.values
-        accX = imu_data[:,0]; accY = imu_data[:,1]; accZ = imu_data[:,2]
-        omegaX = imu_data[:,3]; omegaY = imu_data[:,4]; omegaZ = imu_data[:,5]
+        # imu_data = imu_data.values
+        # accX = imu_data[:,0]; accY = imu_data[:,1]; accZ = imu_data[:,2]
+        # omegaX = imu_data[:,3]; omegaY = imu_data[:,4]; omegaZ = imu_data[:,5]
         
         combined_data = np.column_stack((strideIndex, timestamps[strideIndex], GCP[:,0], GCP[:,1]))
         combined_csv_filename = os.path.join(extracted_training_data_dir, f'LLIO_training_data/{base_filename}_strideIndex_timestamp_gcpX_gcpY.csv')
@@ -292,11 +292,11 @@ for file in sensor_data_files:
 
         # save stride indexes, timestamps, GCP stride coordinates and IMU data to mat file
         sio.savemat(os.path.join(extracted_training_data_dir, f'LLIO_training_data/{base_filename}_LLIO_training_data.mat'), 
-                    {'strideIndex': strideIndex, 'timestamps': timestamps, 'GCP': GCP, 'imu_data': imu_data})
+                    {'strideIndex': strideIndex, 'timestamps': timestamps, 'GCP': GCP, 'imu_data': imu_data.values})
     else:
         # still save the stride indexes and the associated timestamps for further analysis in MATLAB side
-        sio.savemat(os.path.join(extracted_training_data_dir, f'LLIO_nontraining_data/{base_filename}_strideIndex_timestamp.mat'), 
-                    {'strideIndex': strideIndex, 'timestamps': timestamps})
+        sio.savemat(os.path.join(extracted_training_data_dir, f'LLIO_nontraining_data/{base_filename}_LLIO_nontraining_data.mat'), 
+                    {'strideIndex': strideIndex, 'timestamps': timestamps, 'imu_data': imu_data.values})
 
 total_distance = sum(traveled_distances)
 logging.info(f"===================================================================================================================")
