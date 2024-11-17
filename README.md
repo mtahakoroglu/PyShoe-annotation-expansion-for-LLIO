@@ -501,7 +501,7 @@ pip install pandas==1.1.5
 
 <h4>Experiment 34</h4>
 
-<p align="justify">Here, the motion speed varies during the experiment as can be seen in the <a href="youtube.com">video</a>. As it is a mixed motion experiment, PyShoe (LSTM based ZUPT aided ESKF) is able to detect only 22 of 24 strides.</p>
+<p align="justify">Here, the motion speed varies during the experiment as can be seen in the <a href="https://www.youtube.com/shorts/kLczRGQx4Ds">video</a>. PyShoe (LSTM based ZUPT aided ESKF) is able to detect only 22 of 24 strides as can be seen below.</p>
 
 | Stride Indexes |  Trajectory (INS)  |
 |  :---:  |  :---:  |
