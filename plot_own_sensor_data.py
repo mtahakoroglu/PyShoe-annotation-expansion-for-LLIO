@@ -98,10 +98,10 @@ def rotate_trajectory(trajectory, theta):
 
 # Flag to save LLIO training data - DO NOT CHANGE THIS VALUE AS IT IS AUTOMATICALLY UPDATED BELOW
 extract_LLIO_training_data = False # used to save csv files for LLIO SHS training (displacement, heading change) and (stride indexes, timestamps, GCP stride coordinates)
-traveled_distances = [] # to keep track of the traveled distances in each experiment for LLIO training data
+traveled_distances = [] # to keep track of the traveled distances in each experiment for LLIO training data generation
+traverse_times = [] # to keep track of experiment times and eventually total experiment time for LLIO training data generation
 
-# gravity contant
-g = 9.8029
+g = 9.8029 # gravity constant
 # processing zero velocity labels to turn a sampling frequency driven system into gait driven system (stride and heading system)
 expCount = 0 # experiment index
 dpi = 400 # for figure resolution
@@ -260,35 +260,58 @@ for file in sensor_data_files:
     plt.grid(True, which='both', linestyle='--', linewidth=1.5)
     plt.savefig(os.path.join(output_dir, f'{base_filename}_stride_detection.png'), dpi=600, bbox_inches='tight')
 
+    if expNumber == 32 and strideIndex[-2] == 14203:
+        strideIndex[-2] = 14130
+        print(f"strideIndex[-2] is manually corrected for experiment #{expNumber} after MATLAB inspection.")
+    elif expNumber == 33 and strideIndex[12] == 2979:
+        strideIndex[12] = 2920
+        print(f"strideIndex[12] is manually corrected for experiment #{expNumber} after MATLAB inspection.")
+    elif expNumber == 34: # Stride #7 and #15 are missed so at MATLAB side they are manually annotated and inserted into the list
+        strideIndex = np.insert(strideIndex, 7, 1705) # Stride #7 index is inserted
+        strideIndex = np.insert(strideIndex, 15, 3278) # Stride #15 index is inserted
+
+    if expNumber in [34]:
+        # Plot annotated stride indexes on IMU data, i.e., the magnitudes of acceleration and angular velocity
+        plt.figure()
+        plt.plot(timestamps, np.linalg.norm(imu_data.iloc[:, :3].values, axis=1), label=r'$\Vert\mathbf{a}\Vert$')
+        plt.plot(timestamps, np.linalg.norm(imu_data.iloc[:, 3:].values, axis=1), label=r'$\Vert\mathbf{\omega}\Vert$')
+        plt.scatter(timestamps[strideIndex], np.linalg.norm(imu_data.iloc[strideIndex, :3].values, axis=1), 
+                    c='r', marker='x', label='Stride', zorder=3)
+        plt.scatter(timestamps[strideIndex], np.linalg.norm(imu_data.iloc[strideIndex, 3:].values, axis=1), 
+                    c='r', marker='x', zorder=3)
+        plt.title(f'{base_filename} - Stride Detection on IMU Data')
+        plt.xlabel('Time [s]'); plt.ylabel(r'Magnitude'); plt.legend()
+        plt.grid(True, which='both', linestyle='--', linewidth=1.5)
+        plt.savefig(os.path.join(output_dir, f'{base_filename}_stride_annotation.png'), dpi=600, bbox_inches='tight')
+
     #################### SAVE TRAINING DATA for LLIO TRAINING #################
     if extract_LLIO_training_data:
         # Stride coordinates (GCP) is the target in Gradient Boosting (LLIO) training yet we can save polar coordinates for the sake of completeness
         # combined_data = np.column_stack((displacements, heading_changes)) # Combine displacement and heading change data into one array
-        print(f"strideIndex.shape = {strideIndex.shape}")
-        print(f"GCP.shape = {GCP.shape}")
-        print(f"imu_data shape: {imu_data.shape}")
+        print(f"strideIndex.shape = {strideIndex.shape} len(strideIndex) = {len(strideIndex)}")
         print(f"strideIndex = {strideIndex}")
         print(f"timestamps(strideIndex) = {timestamps[strideIndex]}")
-        if expNumber == 32 and strideIndex[-2] == 14203:
-            strideIndex[-2] = 14130
-            print(f"strideIndex[-2] is manually corrected for experiment #{expNumber} after MATLAB inspection.")
-        elif expNumber == 33 and strideIndex[12] == 2979:
-            strideIndex[12] = 2920
-            print(f"strideIndex[12] is manually corrected for experiment #{expNumber} after MATLAB inspection.")
+        print(f"GCP.shape = {GCP.shape}")
+        print(f"imu_data shape: {imu_data.shape}")
+        
+        if len(strideIndex)-1 == numberOfStrides:
+            logging.info(f"There are {len(strideIndex)-1}/{numberOfStrides} strides detected in experiment #{expNumber} now.")
+            combined_data = np.column_stack((strideIndex, timestamps[strideIndex], GCP[:,0], GCP[:,1]))
+            combined_csv_filename = os.path.join(extracted_training_data_dir, f'LLIO_training_data/{base_filename}_strideIndex_timestamp_gcpX_gcpY.csv')
+            np.savetxt(combined_csv_filename, combined_data, delimiter=',', header='strideIndex,timestamp,gcpX,gcpY', comments='')
+
         logging.info(f"Experiment #{expNumber} is annotated stride-wise & going to be used in LLIO training/testing.")
         # compute stride distances and sum them up to get the traveled distance made in the current walk
         traveled_distance = np.sum(np.linalg.norm(np.diff(GCP, axis=0), axis=1))
         logging.info(f"Traveled distance is {traveled_distance:.3f} meters in experiment #{expNumber}.")
-        # after experiment 30, sum all traveled distances cumulatively to get the total distance made in the experiments for LLIO training
-        traveled_distances.append(traveled_distance)
+        traverse_time = timestamps[-1] - timestamps[0]
+        logging.info(f"Travel time is {traverse_time:.3f} seconds in experiment #{expNumber}.")
+        traveled_distances.append(traveled_distance) # sum all traveled distances cumulatively to get the total distance made in the experiments for LLIO training
+        traverse_times.append(traverse_time) # sum all traversal times cumulatively to obtain the total experiment time for LLIO training
         
         # imu_data = imu_data.values
         # accX = imu_data[:,0]; accY = imu_data[:,1]; accZ = imu_data[:,2]
         # omegaX = imu_data[:,3]; omegaY = imu_data[:,4]; omegaZ = imu_data[:,5]
-        
-        combined_data = np.column_stack((strideIndex, timestamps[strideIndex], GCP[:,0], GCP[:,1]))
-        combined_csv_filename = os.path.join(extracted_training_data_dir, f'LLIO_training_data/{base_filename}_strideIndex_timestamp_gcpX_gcpY.csv')
-        np.savetxt(combined_csv_filename, combined_data, delimiter=',', header='strideIndex,timestamp,gcpX,gcpY', comments='')
 
         # save stride indexes, timestamps, GCP stride coordinates and IMU data to mat file
         sio.savemat(os.path.join(extracted_training_data_dir, f'LLIO_training_data/{base_filename}_LLIO_training_data.mat'), 
@@ -298,10 +321,10 @@ for file in sensor_data_files:
         sio.savemat(os.path.join(extracted_training_data_dir, f'LLIO_nontraining_data/{base_filename}_LLIO_nontraining_data.mat'), 
                     {'strideIndex': strideIndex, 'timestamps': timestamps, 'imu_data': imu_data.values})
 
-total_distance = sum(traveled_distances)
+total_distance, total_traverse_time = sum(traveled_distances), sum(traverse_times)
 logging.info(f"===================================================================================================================")
-logging.info(f"Total distance traveled in LLIO training data extraction experiments is {total_distance:.3f} meters.")
-
+logging.info(f"Total traveled distance in LLIO training data generation experiments is {total_distance:.3f} meters.")
+logging.info(f"Total experiment time in LLIO training data generation experiments is {total_traverse_time:.3f}s = {total_traverse_time/60:.3f}mins.")
 logging.info(f"===================================================================================================================")
 logging.info(f"There are {expCount} experiments processed.")
 logging.info("Processing complete for all files.")

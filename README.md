@@ -499,6 +499,8 @@ pip install pandas==1.1.5
 |  :---:  |  :---:  |
 | <img src="results/figs/own/SensorConnectData_33_ZV_LSTM_filtered.png" alt="ZV labels produced with robust ZUPT (LSTM filtered) detector" width=400 height=auto> | <img src="results/figs/own/SensorConnectData_33_SHS.png" alt="trajectory obtained with robust ZUPT detector (LSTM) aided (Error-State Kalman Filter based) foot-mounted INS" width=400 height=auto> |
 
+<img src="results/figs/own/SensorConnectData_33_stride_annotation.png" alt="Stride indexes plotted on top of IMU data" width=%100 height=auto>
+
 <h4>Experiment 34</h4>
 
 <p align="justify">Here, the motion speed varies during the experiment as can be seen in the <a href="https://www.youtube.com/shorts/kLczRGQx4Ds">video</a>. PyShoe (LSTM based ZUPT aided ESKF) is able to detect only 22 of 24 strides as can be seen below.</p>
@@ -510,6 +512,8 @@ pip install pandas==1.1.5
 | Zero Velocity |  Trajectory (SHS) |
 |  :---:  |  :---:  |
 | <img src="results/figs/own/SensorConnectData_34_ZV_LSTM_filtered.png" alt="ZV labels produced with robust ZUPT (LSTM filtered) detector" width=400 height=auto> | <img src="results/figs/own/SensorConnectData_34_SHS.png" alt="trajectory obtained with robust ZUPT detector (LSTM) aided (Error-State Kalman Filter based) foot-mounted INS" width=400 height=auto> |
+
+<img src="results/figs/own/SensorConnectData_34_stride_annotation.png" alt="Stride indexes plotted on top of IMU data" width=%100 height=auto>
 
 <h2>REFERENCES</h2>
 <p align="justify" id="ref1"><a href="#gobacktoref1">[1]</a> X. Liu, N. Li and Y. Zhang, <a href="https://ieeexplore.ieee.org/document/9956821" target="_blank">"A Novel Adaptive Zero Velocity Detection Algorithm Based on Improved General Likelihood Ratio Test Detector,"</a> in <i>IEEE Sensors Journal</i>, vol. 22, no. 24, pp. 24479-24492, 2022.</p>
