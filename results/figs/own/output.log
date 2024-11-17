@@ -9846,3 +9846,12 @@ Total distance traveled in LLIO training data extraction experiments is 191.604 
 ===================================================================================================================
 There are 23 experiments processed.
 Processing complete for all files.
+===================================================================================================================
+Processing file data/own\SensorConnectData_34.csv
+GCP are available & correct for file SensorConnectData_34.
+Processing LSTM detector for file SensorConnectData_34.
+Plotting zero velocity detection for LSTM detector for file SensorConnectData_34.
+There are 22/24 strides detected in experiment #34.
+File SensorConnectData_34, i.e., experiment 34 will not be used in performance evaluation.
+Experiment #34 is annotated stride-wise & going to be used in LLIO training/testing.
+Traveled distance is 39.845 meters in experiment #34.
