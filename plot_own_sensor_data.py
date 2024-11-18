@@ -261,16 +261,20 @@ for file in sensor_data_files:
     plt.savefig(os.path.join(output_dir, f'{base_filename}_stride_detection.png'), dpi=600, bbox_inches='tight')
 
     if expNumber == 32 and strideIndex[-2] == 14203:
-        strideIndex[-2] = 14130
+        strideIndex[-2] = 14131-1
         print(f"strideIndex[-2] is manually corrected for experiment #{expNumber} after MATLAB inspection.")
     elif expNumber == 33 and strideIndex[12] == 2979:
-        strideIndex[12] = 2920
+        strideIndex[12] = 2921-1
         print(f"strideIndex[12] is manually corrected for experiment #{expNumber} after MATLAB inspection.")
     elif expNumber == 34: # Stride #7 and #15 are missed so at MATLAB side they are manually annotated and inserted into the list
-        strideIndex = np.insert(strideIndex, 7, 1705) # Stride #7 index is inserted
-        strideIndex = np.insert(strideIndex, 15, 3278) # Stride #15 index is inserted
+        strideIndex = np.insert(strideIndex, 7, 1705-1) # Stride #7 index is inserted
+        strideIndex = np.insert(strideIndex, 15, 3278-1) # Stride #15 index is inserted
+    elif expNumber == 35: # Stride #{2, 5, 17, 18, 19} are missed so at MATLAB side they are manually annotated and inserted into the list
+        missedStride, missedStrideIndex = [2, 5, 17, 18, 19], [951-1, 1453-1, 3591-1, 3740-1, 3892-1]
+        for i in range(len(missedStride)):
+            strideIndex = np.insert(strideIndex, missedStride[i], missedStrideIndex[i]) # Stride #i index is inserted
 
-    if expNumber in [34]:
+    if expNumber in [34, 35]:
         # Plot annotated stride indexes on IMU data, i.e., the magnitudes of acceleration and angular velocity
         plt.figure()
         plt.plot(timestamps, np.linalg.norm(imu_data.iloc[:, :3].values, axis=1), label=r'$\Vert\mathbf{a}\Vert$')
@@ -282,7 +286,7 @@ for file in sensor_data_files:
         plt.title(f'{base_filename} - Stride Detection on IMU Data')
         plt.xlabel('Time [s]'); plt.ylabel(r'Magnitude'); plt.legend()
         plt.grid(True, which='both', linestyle='--', linewidth=1.5)
-        plt.savefig(os.path.join(output_dir, f'{base_filename}_stride_annotation.png'), dpi=600, bbox_inches='tight')
+        plt.savefig(os.path.join(output_dir, f'{base_filename}_stride_detection_annotation.png'), dpi=600, bbox_inches='tight')
 
     #################### SAVE TRAINING DATA for LLIO TRAINING #################
     if extract_LLIO_training_data:
