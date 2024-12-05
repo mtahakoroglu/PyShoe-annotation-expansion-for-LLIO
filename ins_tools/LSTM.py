@@ -20,7 +20,8 @@ class LSTM(torch.nn.Module):
         self.softmax = torch.nn.Softmax(dim=1) 
         self.fc = torch.nn.Linear(90, 2)
 
-        model = torch.load('results/pretrained-models/zv_lstm_model.tar')
+        # Load the model with map_location set to the appropriate device
+        model = torch.load('results/pretrained-models/zv_lstm_model.tar', map_location=device)
         my_dict = self.state_dict()
         for key, value in my_dict.items():
             my_dict[key] = model[key]
@@ -52,7 +53,7 @@ class BiLSTM(nn.Module):
 
         # Load the trained model
         model_path = 'results/pretrained-models/zv_bilstm_model.pth'
-        self.load_state_dict(torch.load(model_path))
+        self.load_state_dict(torch.load(model_path, map_location=device))
         self.eval()
 
     def forward(self, x):

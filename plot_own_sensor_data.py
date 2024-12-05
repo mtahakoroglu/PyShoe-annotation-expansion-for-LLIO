@@ -180,6 +180,7 @@ for file in sensor_data_files:
             plt.title(f'LSTM filtered ({n}/{numberOfStrides}) - {base_filename}')
             plt.xlabel('Time [s]'); plt.ylabel('Zero Velocity')
             plt.savefig(os.path.join(output_dir, f'{base_filename}_ZV_{det_list[i].upper()}_filtered.png'), dpi=dpi, bbox_inches='tight')
+            plt.close()
 
     # Reconstruct the trajectory from displacements and heading changes to build a Stride & Heading INS (SHS)
     displacements, heading_changes = calculate_displacement_and_heading(traj_list[-1][:, :2], strideIndex)
@@ -188,6 +189,8 @@ for file in sensor_data_files:
 
     # Align the trajectory wrt the selected stride (assuming it and the past strides are linear, i.e., no change in heading)
     strideAlign = 4
+    if expNumber == 37:
+        strideAlign = 1
     _, theta = calculate_displacement_and_heading(traj_list[-1][:, :2], strideIndex[np.array([0,strideAlign])])
     theta = theta - np.pi
     if expNumber in [28, 29, 30]:
@@ -229,6 +232,7 @@ for file in sensor_data_files:
         plt.ylim(-10,20)
     plt.grid(True, which='both', linestyle='--', linewidth=1.5)
     plt.savefig(os.path.join(output_dir, f'{base_filename}.png'), dpi=dpi, bbox_inches='tight')
+    plt.close()
 
     plt.figure()
     plt.plot(aligned_trajectory_SHS[:,0], aligned_trajectory_SHS[:,1], 'b.-', linewidth = 1.4, markersize=5, markeredgewidth=1.2, label="PyShoe (LSTM) SHS")
@@ -246,6 +250,7 @@ for file in sensor_data_files:
         plt.ylim(-10,20)
     plt.grid(True, which='both', linestyle='--', linewidth=1.5)
     plt.savefig(os.path.join(output_dir, f'{base_filename}_SHS.png'), dpi=dpi, bbox_inches='tight')
+    plt.close()
 
     # Plot stride indexes on IMU data, i.e., the magnitudes of acceleration and angular velocity
     plt.figure()
@@ -259,6 +264,7 @@ for file in sensor_data_files:
     plt.xlabel('Time [s]'); plt.ylabel(r'Magnitude'); plt.legend()
     plt.grid(True, which='both', linestyle='--', linewidth=1.5)
     plt.savefig(os.path.join(output_dir, f'{base_filename}_stride_detection.png'), dpi=600, bbox_inches='tight')
+    plt.close()
 
     if expNumber == 32 and strideIndex[-2] == 14203:
         strideIndex[-2] = 14131-1
@@ -273,8 +279,11 @@ for file in sensor_data_files:
         missedStride, missedStrideIndex = [2, 5, 17, 18, 19], [951-1, 1453-1, 3591-1, 3740-1, 3892-1]
         for i in range(len(missedStride)):
             strideIndex = np.insert(strideIndex, missedStride[i], missedStrideIndex[i]) # Stride #i index is inserted
+    elif expNumber == 36 and strideIndex[17] == 4470:
+        strideIndex[17] = 4416-1
+        print(f"strideIndex[17] is manually corrected for experiment #{expNumber} after MATLAB inspection.")
 
-    if expNumber in [34, 35]:
+    if expNumber in [32, 33, 34, 35, 36]:
         # Plot annotated stride indexes on IMU data, i.e., the magnitudes of acceleration and angular velocity
         plt.figure()
         plt.plot(timestamps, np.linalg.norm(imu_data.iloc[:, :3].values, axis=1), label=r'$\Vert\mathbf{a}\Vert$')
@@ -287,7 +296,7 @@ for file in sensor_data_files:
         plt.xlabel('Time [s]'); plt.ylabel(r'Magnitude'); plt.legend()
         plt.grid(True, which='both', linestyle='--', linewidth=1.5)
         plt.savefig(os.path.join(output_dir, f'{base_filename}_stride_detection_annotation.png'), dpi=600, bbox_inches='tight')
-
+        plt.close()
     #################### SAVE TRAINING DATA for LLIO TRAINING #################
     if extract_LLIO_training_data:
         # Stride coordinates (GCP) is the target in Gradient Boosting (LLIO) training yet we can save polar coordinates for the sake of completeness
@@ -318,8 +327,8 @@ for file in sensor_data_files:
         # omegaX = imu_data[:,3]; omegaY = imu_data[:,4]; omegaZ = imu_data[:,5]
 
         # save stride indexes, timestamps, GCP stride coordinates and IMU data to mat file
-        sio.savemat(os.path.join(extracted_training_data_dir, f'LLIO_training_data/{base_filename}_LLIO_training_data.mat'), 
-                    {'strideIndex': strideIndex, 'timestamps': timestamps, 'GCP': GCP, 'imu_data': imu_data.values})
+        sio.savemat(os.path.join(extracted_training_data_dir, f'LLIO_training_data/{base_filename}_LLIO.mat'), 
+                    {'strideIndex': strideIndex, 'timestamps': timestamps, 'GCP': GCP, 'imu_data': imu_data.values, 'pyshoeTrajectory': aligned_trajectory_INS})
     else:
         # still save the stride indexes and the associated timestamps for further analysis in MATLAB side
         sio.savemat(os.path.join(extracted_training_data_dir, f'LLIO_nontraining_data/{base_filename}_LLIO_nontraining_data.mat'), 
