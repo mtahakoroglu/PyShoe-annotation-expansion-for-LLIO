@@ -549,7 +549,7 @@ pip install pandas==1.1.5
 
 <h4>Experiment 37</h4>
 
-<p align="justify">Here, the pedestrian speed is normal (walking style) during the experiment</a>. The video of this experiment was recorded but due to a computer SSD hard disk failure, unfortunately it could not be retrieved. Stride#X annotation is slightly corrected after examination of detected stride indexes on IMU data, i.e., the magnitudes of acceleration and angular velocity vectors.</p>
+<p align="justify">Here, the pedestrian speed is normal (walking style) during the experiment</a>. The video of this experiment was recorded but due to a computer SSD hard disk failure, unfortunately it could not be retrieved. Stride #{33, 34, 41, 43, 60} annotations are slightly corrected after coarse examination of detected stride indexes on IMU data, i.e., the magnitudes of acceleration and angular velocity vectors.</p>
 
 | Stride Indexes |  Trajectory (INS)  |
 |  :---:  |  :---:  |
