@@ -1,7 +1,7 @@
 <h2>PyShoe Dataset Annotation & Expansion/Enlargement for Loose Learned Inertial Odometry (LLIO)</h2>
-<p align="justify">Similar to <a href="https://github.com/mtahakoroglu/gradient-boosting-based-LLIO">LLIO</a> repository, the following installations are required to run the scripts and reproduce the results presented here and in the paper. Please note that we are not experts in Python environment setup. The provided scripts for creating the <b>pyshoe</b> virtual environment have worked successfully on various Windows systems, although we cannot guarantee compatibility with all system configurations.</p>
+<p align="justify">Similar to <a href="https://github.com/mtahakoroglu/gradient-boosting-based-LLIO">LLIO</a> repository, the following installations are required to run the scripts and reproduce the results presented here and in the paper. Given scripts for creating the <b>pyshoe</b> virtual environment have worked successfully on various Windows systems, although we cannot guarantee compatibility with all system configurations.</p>
 
-<p align="justify"><b>Note:</b> The Anaconda virtual environment is named <b>pyshoe</b> because the research initially drew inspiration from <a href="https://scholar.google.ca/citations?user=I_x8PVcAAAAJ&hl=en">Brandon's PyShoe study</a> and <a href="https://ieee-dataport.org/open-access/university-toronto-foot-mounted-inertial-navigation-dataset">public dataset</a>. Although the project later transitioned to using exclusively self-collected data, the original name was retained.</p>
+<p align="justify"><b>Note:</b> The Anaconda virtual environment is named <b>pyshoe</b> because initially the research was completely based on <a href="https://scholar.google.ca/citations?user=I_x8PVcAAAAJ&hl=en">Brandon Wagstaff's PyShoe study</a> and <a href="https://ieee-dataport.org/open-access/university-toronto-foot-mounted-inertial-navigation-dataset">public dataset</a>. Despite the transition to using exclusively self-collected data and building own inertial odometry public dataset, the original name was retained.</p>
 
 <h3>Creating <b>pyshoe</b> Virtual Environment in Anaconda</h3>
 <p align="justify">After installing Anaconda, launch <b>Anaconda PowerShell</b> and then type</p>
@@ -533,7 +533,7 @@ pip install pandas==1.1.5
 
 <h4>Experiment 36</h4>
 
-<p align="justify">Here, the motion speed is slow and constant during the experiment as can be seen in the <a href="https://youtu.be/uT7wL-taX08">video</a>. PyShoe (LSTM based ZUPT aided ESKF) is able to detect all 58 strides successfully. Stride#17 annotation is slightly corrected after examnination at MATLAB side.</p>
+<p align="justify">Here, the motion speed is slow and constant during the experiment as can be seen in the <a href="https://youtu.be/uT7wL-taX08">video</a>. PyShoe (LSTM based ZUPT aided ESKF) is able to detect all 58 strides successfully. Stride#17 annotation is slightly corrected after examination of detected stride indexes on IMU data, i.e., the magnitudes of acceleration and angular velocity vectors.</p>
 
 | Stride Indexes |  Trajectory (INS)  |
 |  :---:  |  :---:  |
@@ -546,6 +546,22 @@ pip install pandas==1.1.5
 | Final Stride Indexes on IMU data |
 |  :---:  |
 | <img src="results/figs/own/SensorConnectData_36_stride_annotation.png" alt="Stride indexes plotted on top of IMU data" width=%100 height=auto> |
+
+<h4>Experiment 37</h4>
+
+<p align="justify">Here, the pedestrian speed is normal (walking style) during the experiment</a>. The video of this experiment was recorded but due to a computer SSD hard disk failure, unfortunately it could not be retrieved. Stride#X annotation is slightly corrected after examination of detected stride indexes on IMU data, i.e., the magnitudes of acceleration and angular velocity vectors.</p>
+
+| Stride Indexes |  Trajectory (INS)  |
+|  :---:  |  :---:  |
+| <img src="results/figs/own/SensorConnectData_37_stride_detection.png" alt="Stride indexes plotted on top of IMU data" width=400 height=auto> | <img src="results/figs/own/SensorConnectData_37.png" alt="trajectory obtained with robust ZUPT detector (LSTM) aided (Error-State Kalman Filter based) foot-mounted INS" width=400 height=auto> |
+
+| Zero Velocity |  Trajectory (SHS) |
+|  :---:  |  :---:  |
+| <img src="results/figs/own/SensorConnectData_37_ZV_LSTM_filtered.png" alt="ZV labels produced with robust ZUPT (LSTM filtered) detector" width=400 height=auto> | <img src="results/figs/own/SensorConnectData_37_SHS.png" alt="trajectory obtained with robust ZUPT detector (LSTM) aided (Error-State Kalman Filter based) foot-mounted INS" width=400 height=auto> |
+
+| Final Stride Indexes on IMU data |
+|  :---:  |
+| <img src="results/figs/own/SensorConnectData_37_stride_annotation.png" alt="Stride indexes plotted on top of IMU data" width=%100 height=auto> |
 
 <h2>REFERENCES</h2>
 <p align="justify" id="ref1"><a href="#gobacktoref1">[1]</a> X. Liu, N. Li and Y. Zhang, <a href="https://ieeexplore.ieee.org/document/9956821" target="_blank">"A Novel Adaptive Zero Velocity Detection Algorithm Based on Improved General Likelihood Ratio Test Detector,"</a> in <i>IEEE Sensors Journal</i>, vol. 22, no. 24, pp. 24479-24492, 2022.</p>
