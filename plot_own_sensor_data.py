@@ -282,8 +282,16 @@ for file in sensor_data_files:
     elif expNumber == 36 and strideIndex[17] == 4470:
         strideIndex[17] = 4416-1
         print(f"strideIndex[17] is manually corrected for experiment #{expNumber} after MATLAB inspection.")
+    elif expNumber == 37 and strideIndex[33] == 8776 and strideIndex[34] == 8998: # stride indexes are the same as MATLAB side
+        strideIndex[33], strideIndex[34] = 8722-1, 8942-1
+        if strideIndex[41] == 10548:
+            strideIndex[41] = 10500-1
+        if strideIndex[43] == 10979:
+            strideIndex[43] = 10933-1
+        if strideIndex[60] == 14765:
+            strideIndex[60] = 14710-1
 
-    if expNumber in [32, 33, 34, 35, 36]:
+    if expNumber in [32, 33, 34, 35, 36, 37]:
         # Plot annotated stride indexes on IMU data, i.e., the magnitudes of acceleration and angular velocity
         plt.figure()
         plt.plot(timestamps, np.linalg.norm(imu_data.iloc[:, :3].values, axis=1), label=r'$\Vert\mathbf{a}\Vert$')
@@ -308,7 +316,7 @@ for file in sensor_data_files:
         print(f"imu_data shape: {imu_data.shape}")
         
         if len(strideIndex)-1 == numberOfStrides:
-            logging.info(f"There are {len(strideIndex)-1}/{numberOfStrides} strides detected in experiment #{expNumber} now.")
+            logging.info(f"There are {len(strideIndex)-1}/{numberOfStrides} strides detected in experiment #{expNumber}.")
             combined_data = np.column_stack((strideIndex, timestamps[strideIndex], GCP[:,0], GCP[:,1]))
             combined_csv_filename = os.path.join(extracted_training_data_dir, f'LLIO_training_data/{base_filename}_strideIndex_timestamp_gcpX_gcpY.csv')
             np.savetxt(combined_csv_filename, combined_data, delimiter=',', header='strideIndex,timestamp,gcpX,gcpY', comments='')
