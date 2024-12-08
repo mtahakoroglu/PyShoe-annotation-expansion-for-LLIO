@@ -50,7 +50,7 @@ pip install pandas==1.1.5
 
 <h3>VICON Training Data - Manual Annotation (Corrections)</h3>
 
-<p align="justify">To extract a <b>gait-driven system</b> (in other words a <b>stride & heading system</b> - <b>SHS</b>) from VICON training dataset, which is a sampling-frequency driven system (sample-wise INS), displacement and heading change (or (dx, dy) relative position change) values at <b>each</b> stride must be extracted. Relative positioning, stride indexes and imu data will be used in training a data-driven (also called modern) INS that works stride-wise. Some researchers call a data-driven or modern INS as learned inertial odometry</p>
+<p align="justify">To extract a <b>gait-driven system</b> (in other words a <b>stride & heading system</b> - <b>SHS</b>) from VICON training dataset, which is a sampling-frequency driven system (sample-wise INS), displacement and heading change (or (dx, dy) relative position change) values at <b>each</b> stride must be extracted. In addition to relative positioning data, stride indexes and imu data will be used in training a data-driven (also called modern) INS that functions as a stride-wise dead-reckoning system. Some researchers call a data-driven or modern INS as learned inertial odometry.</p>
 
 <p align="justify">Here, some troublesome experiments are shown to understand Zero Velocity (ZV) interval and stride detection problems. The optimal ZV detectors are selected (e.g., SHOE for experiment 4, ARED for experiment 6) with the corresponding optimal threshold values (optimal values are supplied by Wagstaff <i>et. al.</i> in the structure of the mat files for VICON room experiments of PyShoe dataset).</p>
 
@@ -261,9 +261,14 @@ pip install pandas==1.1.5
 <p align="justify">Here, due to some undetected steps in VICON training data (recall that Wagstaff <i>et. al.</i> (i.e., the creator of PyShoe dataset) included crawling data) and self-collected data, we needed to go over the 56 experiments in the training dataset <i><b>(i)</b></i> to correct for undetected steps (they are classified as 0 in ZV signal plot despite them actually being 1, i.e., it is false-negative) and <i><b>(ii)</b></i> to exclude motions like crawling, which are not of type bipedal locomotion. For this reason, we had to retrain the bi-LSTM network proposed by Wagstaff <i>et. al.</i>. In order to use GPU in the training process, instead of the PyTorch installation command given above, we used the one below.</p>
 
 <h3>Example Results with LSTM Based Robust ZUPT Method (Own Sensor Data)</h3>
-<p align="justify">Here robust pre-trained LSTM based ZV detector pedestrian INS is applied on our own-collected data (where our sensor is 3DM-GX5-25).</p>
 
-<p align="justify">We assume the start point is numbered as stride #0, i.e., initial stride. Note that ZV labels are filtered for accurate stride detection but the filtered ZV values are not used in the trajectory generation in the associated trajectory plot. In other words, the trajectory is obtained with raw (not filtered) LSTM ZUPT detected ZV labels while the strides (visualized on the trajectory with x) are marked at the indices shown in filtered LSTM generated ZV plots.</p>
+<p align="justify">Here robust (pre-trained LSTM based ZV detector) pedestrian INS is applied on our own-collected data where our sensor is <a href="https://www.microstrain.com/sites/default/files/applications/files/3dm-gx5-25_datasheet_8400-0093_rev_n.pdf">3DM-GX5-25</a> and sensor data capture software is <a href="https://www.microstrain.com/software/sensorconnect">SensorConnect</a>.</p>
+
+| 3DM-GX5-25 Sensor | SensorConnect software screen |
+| :---: | :---: |
+| <img src="https://www.zse.de/db_pics/shop_content/500x500/3dm-gx5-25.png" alt="3DM-GX5-25" width=auto height=200> | <img src="https://www.microstrain.com/sites/default/files/bitmap.png" alt="SensorConnect" width=auto height=200> |
+
+<p align="justify">We name the start point as stride #0, i.e., initial stride. If you examine our code, you will notice that ZV labels are filtered for accurate stride index detection. However the filtered ZV values are not used in the trajectory generation. In other words, the trajectory is obtained with the raw (not filtered) LSTM based PyShoe generated ZV labels while the strides that are visualized on the trajectories with x correspond to the last index of the ZV intervals of the filtered ZV signals.</p>
 
 <p align="justify">Note that some experiments do not contain GCP or contain incorrectly documented GCP and thereby are not considered in performance evaluation. Also, in some experiments correct number of strides are not detected (with LSTM based robust ZV detector). These experiments are not used in evalation as well. However, in future, if a better ZV interval detector can be developed and detect all strides without missing any, then mentioned experiments could be involved in evaluation process.</p>
 
