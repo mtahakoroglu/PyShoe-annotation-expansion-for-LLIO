@@ -137,12 +137,11 @@ def align_trajectories(traj_est, traj_gt):
 i = 0  # experiment index
 count_training_exp = 0
 # following two lines are used to run selected experiment results
-# training_data_tag = [1]*55
-# training_data_tag.append(1)
+training_data_tag = [0]*56; training_data_tag[0] = 1
 # training_data_tag are the experiments to be used in extracting displacement and heading change data for LLIO training
-training_data_tag = [1, 1, 1, -1, 1, -1, 1, 1, 1, 1, -1, 1, 0, 1, 1, 1, 1, -1, 1, 1, 
-                    1, 1, 1, 1, 1, 1, -1, 1, 1, -1, 1, -1, 1, 1, 1, -1, 1, -1, 1, 1, 
-                    1, 1, -1, 1, 1, 1, 0, 0, -1, 0, 1, 1, 1, 1, 0, 1]
+# training_data_tag = [1, 1, 1, -1, 1, -1, 1, 1, 1, 1, -1, 1, 0, 1, 1, 1, 1, -1, 1, 1, 
+#                     1, 1, 1, 1, 1, 1, -1, 1, 1, -1, 1, -1, 1, 1, 1, -1, 1, -1, 1, 1, 
+#                     1, 1, -1, 1, 1, 1, 0, 0, -1, 0, 1, 1, 1, 1, 0, 1]
 corrected_data_index = [4, 6, 11, 18, 27, 30, 32, 36, 38, 43, 49] # corrected experiment indexes
 nGT = [22, 21, 21, 18, 26, 24, 18, 20, 28, 35, 29, 22, 30, 34, 24, 36, 20, 15, 10, 33, 
        22, 19, 13, 16, 17, 21, 20, 28, 18, 12, 13, 26, 34, 25, 24, 24, 43, 42, 15, 12, 
@@ -236,6 +235,7 @@ for file in vicon_data_files:
         visualize.plot_topdown([aligned_x_lstm, aligned_gt[:, :2]], title=f"Exp#{i+1} ({base_filename}) - PyShoe (LSTM)", legend=['PyShoe (LSTM)', 'GT'])
         plt.scatter(aligned_x_lstm[strideIndexLSTMfiltered, 0], aligned_x_lstm[strideIndexLSTMfiltered, 1], c='b', marker='o')
         plt.savefig(os.path.join(output_dir, f'trajectory_exp_{i+1}_lstm_ins.png'), dpi=600, bbox_inches='tight')
+        plt.close()
 
         # # plotting vertical trajectories
         # plt.figure()
@@ -261,6 +261,7 @@ for file in vicon_data_files:
         plt.legend()
         plt.yticks([0,1])
         plt.savefig(os.path.join(output_dir, f'zv_labels_exp_{i+1}.png'), dpi=600, bbox_inches='tight')
+        plt.close()
 
         # Plotting the zero velocity detection for LSTM filtered data
         plt.figure()
@@ -274,6 +275,7 @@ for file in vicon_data_files:
         plt.legend()
         plt.yticks([0,1])
         plt.savefig(os.path.join(output_dir, f'zv_labels_exp_{i+1}_lstm.png'), dpi=600, bbox_inches='tight')
+        plt.close()
 
         # while some experiments are excluded due to being non bipedal locomotion motion (i.e., crawling experiments)
         # some other bipedal locomotion experimental data requires correction for some ZV labels and stride detections 
@@ -367,6 +369,7 @@ for file in vicon_data_files:
             plt.grid(True, which='both', linestyle='--', linewidth=1.5)
             plt.legend(); plt.yticks([0,1])
             plt.savefig(os.path.join(output_dir, f'zv_labels_exp_{i+1}_corrected.png'), dpi=600, bbox_inches='tight')
+            plt.close()
 
         # Plot stride indexes on IMU data, i.e., the magnitudes of acceleration and angular velocity
         plt.figure()
@@ -380,6 +383,7 @@ for file in vicon_data_files:
         plt.xlabel('Time [s]'); plt.ylabel(r'Magnitude'); plt.legend()
         plt.grid(True, which='both', linestyle='--', linewidth=1.5)
         plt.savefig(os.path.join(output_dir, f'stride_detection_exp_{i+1}.png'), dpi=600, bbox_inches='tight')
+        plt.close()
         
         #################### SAVE TRAINING DATA RIGHT AT THIS SPOT for LSTM RETRAINING #################
         if extract_bilstm_training_data:
@@ -408,8 +412,9 @@ for file in vicon_data_files:
             np.savetxt(combined_csv_filename, combined_data, delimiter=',', header='strideIndex,timestamp,gcpX,gcpY', comments='')
 
             # Save stride indexes, timestamps, GCP stride coordinates and IMU data to mat file
-            sio.savemat(os.path.join(extracted_training_data_dir, f'LLIO_training_data/{base_filename}_LLIO_training_data.mat'),
-                        {'strideIndex': strideIndex, 'timestamps': timestamps[strideIndex], 'GCP': GCP, 'imu_data': imu_data})
+            sio.savemat(os.path.join(extracted_training_data_dir, f'LLIO_training_data/{base_filename}_LLIO.mat'),
+                        {'strideIndex': strideIndex, 'timestamps': timestamps[strideIndex], 'GCP': GCP, 'imu_data': imu_data, 
+                         'timestamps_all': timestamps})
         
         count_training_exp += 1
 

@@ -203,15 +203,15 @@ h = xlabel('Time [s]', 'FontSize', 14); set(h, 'Position', [20.2921   -0.1649   
 print(sprintf('-f%i', expIndex),sprintf('experiment%i_ZUPT_detectors_strides', expIndex),'-dpng','-r800');
 %% EXPERIMENT 18
 load('2017-11-22-11-48-35'); % misses 7th stride
-expIndex = 18; nGT = 14; % actual number of strides
-figure(expIndex); clf; set(gcf, 'position', [565 165 842 545]);
+expIndex = 18; nGT = 15; % actual number of strides
+figure(expIndex); clf; set(gcf, 'position', [796, 247, 641, 530]);
 subplot(4,1,1); % OPTIMAL DETECTOR (RAW DATA)
 [zv, n, strideIndex] = heuristic_zv_filter_and_stride_detector(zv_shoe_opt, 1);
 fprintf(sprintf('There are %i strides detected by (filtered) SHOE ZV detector in experiment %i.\n', n, expIndex));
 plot(ts, zv_shoe_opt, 'LineWidth', 1.5, 'Color', 'k'); hold on;
 plot(ts(strideIndex), zv(strideIndex), 'ko', 'LineWidth', 1.1, 'MarkerSize', 6, 'MarkerFaceColor', 'r');
 grid on; set(gca, 'GridLineStyle', '--'); axis tight;
-set(gca, 'position', [0.0437    0.77    0.948    0.17]);
+set(gca, 'position', [0.0574    0.7700    0.9343    0.1700]);
 h = legend('ZV labels', 'strides'); set(h, 'FontSize', 12, 'location', 'southeast');
 set(gca, 'YTick', [0,1], 'YTickLabel', {'0','1'}); 
 set(gca, 'XTickLabel', {'','','','','',''}); set(gca, 'FontSize', 12);
@@ -225,7 +225,7 @@ fprintf(sprintf('There are %i strides detected by (filtered) SHOE ZV detector in
 plot(ts, zv_shoe_opt_filtered, 'LineWidth', 1.5, 'Color', 'k'); hold on;
 plot(ts(strideIndex), zv_shoe_opt_filtered(strideIndex), 'ko', 'LineWidth', 1.1, 'MarkerSize', 6, 'MarkerFaceColor', 'r');
 grid on; set(gca, 'GridLineStyle', '--'); axis tight;
-set(gca, 'position', [0.0437    0.54    0.948    0.17]);
+set(gca, 'position', [0.0574    0.5400    0.9343    0.1700]);
 h = legend('ZV labels', 'strides'); set(h, 'FontSize', 12, 'location', 'southeast');
 set(gca, 'YTick', [0,1], 'YTickLabel', {'0','1'});
 set(gca, 'XTickLabel', {'','','','','',''}); set(gca, 'FontSize', 12);
@@ -240,7 +240,7 @@ plot(ts, zv, 'LineWidth', 1.5, 'Color', 'k');
 hold on;
 plot(ts(strideIndex), zv(strideIndex), 'ko', 'LineWidth', 1.1, 'MarkerSize', 6, 'MarkerFaceColor', 'r');
 grid on; set(gca, 'GridLineStyle', '--'); axis tight;
-set(gca, 'position', [0.0437    0.31    0.948    0.17]);
+set(gca, 'position', [0.0574    0.3100    0.9343    0.1700]);
 h = legend('ZV labels', 'strides'); set(h, 'FontSize', 12, 'location', 'southeast');
 set(gca, 'YTick', [0,1], 'YTickLabel', {'0','1'}); set(gca, 'FontSize', 12);
 set(gca, 'XTickLabel', {'','','','','',''}); set(gca, 'FontSize', 12);
@@ -260,7 +260,7 @@ plot(ts, zv, 'LineWidth', 1.5, 'Color', 'k');
 hold on;
 plot(ts(strideIndex), zv(strideIndex), 'ko', 'LineWidth', 1.1, 'MarkerSize', 6, 'MarkerFaceColor', 'r');
 grid on; set(gca, 'GridLineStyle', '--'); axis tight;
-set(gca, 'position', [0.0437    0.08    0.948    0.17]);
+set(gca, 'position', [0.0574    0.0800    0.9343    0.1700]);
 h = legend('ZV labels', 'strides'); set(h, 'FontSize', 12, 'location', 'southeast');
 set(gca, 'YTick', [0,1], 'YTickLabel', {'0','1'}); set(gca, 'FontSize', 12);
 ylabel('ZV labels', 'FontSize', 12, 'FontWeight', 'normal');
@@ -268,6 +268,8 @@ titleText = sprintf('Combined ZUPT Detector - %i/%i strides detected', n, nGT);
 h = title(titleText); set(h, 'position', [10.3280 1.0985 0]);
 h = xlabel('Time [s]', 'FontSize', 14); set(h, 'Position', [10.2921   -0.1949   -1.0000]);
 print(sprintf('-f%i', expIndex),sprintf('experiment%i_ZUPT_detectors_strides', expIndex),'-dpng','-r800');
+set(figure(expIndex), 'PaperSize', [6.70, 5.55]);
+print(sprintf('-f%i', expIndex),sprintf('experiment%i_ZUPT_detectors_strides', expIndex),'-dpdf','-r600');
 %% EXPERIMENT 27
 % first three strides can be retrieved by VICON zupt detector while 
 % the last one can be retrieved by MBGTD
