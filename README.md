@@ -48,7 +48,7 @@ pip install pandas==1.1.5
 
 <p align="justify">After cloning this repository to your local computer, you must install <b><a href="https://github.com/utiasSTARS/liegroups" target="_blank">liegroups</a></b> package to run the code if you would like to reproduce the results shown here in this repo or the paper.</p>
 
-<h3>VICON Training Data - Manual Annotation (Corrections) for LLIO</h3>
+<h3>VICON Room Experiments - Manual Annotation (Corrections) for LLIO</h3>
 
 <p align="justify">To extract a <b>gait-driven system</b> (in other words a <b>stride & heading system</b> - <b>SHS</b>) from VICON training dataset, which is a sampling-frequency driven system (sample-wise INS), displacement and heading change (or (dx, dy) relative position change) values at <b>each</b> stride must be extracted. In addition to relative positioning data, stride indexes and imu data will be used in training a data-driven (also called modern) INS that functions as a stride-wise dead-reckoning system. Some researchers call a data-driven or modern INS as learned inertial odometry.</p>
 
@@ -58,17 +58,17 @@ pip install pandas==1.1.5
 
 <p align="justify">Please use <b>detect_missed_strides.m</b> located at <b>data/vicon/processed</b> if you like to reproduce the figures related to training dataset correction.</p>
 
-<h4>Experiment 4 (2017-11-22-11-25-20) - VICON training dataset</h4>
+<h4>VICON Room Experiments - Experiment 4 (2017-11-22-11-25-20) Annotation</h4>
 
-<p align="justify">We see that the 10th stride is not detected in the plots below. It is more obvious to notice it in ZV plot yet one may detect the missed stride in the trajectory plot as well when carefully tracked strating from the initial stride.</p>
+<p align="justify">When carefully tracked starting from the initial stride, one can see that the 10<sup>th</sup> stride is not detected in the trajectory plot shown below. It is more obvious to notice the missed ZV interval and the stride index in ZV plot.</p>
 
 <img src="results/figs/vicon/exp4.jpg" alt="optimal detector results for experiment 4 (2017-11-22-11-25-20) VICON dataset" width=%100 height=auto>
 
-<p align="justify">As mentioned above, to detect the missed stride(s), supplementary detectors such as VICON, ARED, MBGTD or AMVD will be exploited. In general, VICON detector was able to generate ZV labels correctly; therefore, in many of the cases, we only used VICON ZUPT detector as the only supplementary detector.</p>
+<p align="justify">As mentioned above, to detect the missed ZV interval(s), supplementary ZUPT detectors such as VICON, ARED, MBGTD or AMVD can be utilized. In general, VICON detector was able to generate ZV labels correctly; therefore, in many of the cases, we only used VICON ZUPT detector as the only supplementary detector.</p>
 
 <img src="data/vicon/processed/experiment4_ZUPT_detectors_strides.png" alt="ZV labels for experiment 4 (2017-11-22-11-25-20) VICON dataset" width=%100 height=auto>
 
-<p align="justify">Integration of filtered optimal ZUPT detector SHOE with the supplementary ZUPT detector (i.e., filtered VICON) enabled successfull detection of the missed stride as shown in the combined ZUPT detector plot above (located at the bottom). The corrected stride & heading system trajectory and ZV labels can be seen below for the experiment 4. Note that the correction is only going to be used in extracting displacement and heading change values for further research on Deep Learning based modern INS development; therefore, corrected ZV labels are not used in any INS generation.</p>
+<p align="justify">Integration of filtered optimal ZUPT detector SHOE with the filtered supplementary ZUPT detector (i.e., VICON) enabled successful detection of the ZV interval as shown in the combined ZUPT detector plot above (located at the bottom). The corrected ground-truth data (as a sample-wise and a stride & heading system trajectory) and ZV signals can be seen below. Note that the annotation is only going to be used in extracting x-y axes displacement (or displacement and heading change) values for LLIO training dataset generation; therefore, corrected ZV labels are not used in any trajectory generation.</p>
 
 <img src="results/figs/vicon/exp4_corrected.jpg" alt="corrected results for experiment 4 of VICON dataset" width=%100 height=auto>
 

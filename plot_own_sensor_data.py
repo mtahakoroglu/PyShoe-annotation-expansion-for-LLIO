@@ -344,8 +344,8 @@ for file in sensor_data_files:
 
 total_distance, total_traverse_time = sum(traveled_distances), sum(traverse_times)
 logging.info(f"===================================================================================================================")
-logging.info(f"Total traveled distance in LLIO training data generation experiments is {total_distance:.3f} meters.")
-logging.info(f"Total experiment time in LLIO training data generation experiments is {total_traverse_time:.3f}s = {total_traverse_time/60:.3f}mins.")
+logging.info(f"Total traveled distance in hallway experiments (to be used for LLIO training/test) is {total_distance:.3f} meters.")
+logging.info(f"Total traveled distance in hallway experiments (to be used for LLIO training/test) is {total_traverse_time:.3f}s = {total_traverse_time/60:.3f}mins.")
 logging.info(f"===================================================================================================================")
 logging.info(f"There are {expCount} experiments processed.")
 logging.info("Processing complete for all files.")

@@ -137,12 +137,12 @@ def align_trajectories(traj_est, traj_gt):
 i = 0  # experiment index
 count_training_exp = 0
 # following two lines are used to run selected experiment results
-training_data_tag = [0]*56; training_data_tag[1] = 1
+training_data_tag = [0]*56; training_data_tag[0:2] = [1]*5 # we left off at exp#6
 # training_data_tag are the experiments to be used in extracting displacement and heading change data for LLIO training
 # training_data_tag = [1, 1, 1, -1, 1, -1, 1, 1, 1, 1, -1, 1, 0, 1, 1, 1, 1, -1, 1, 1, 
 #                     1, 1, 1, 1, 1, 1, -1, 1, 1, -1, 1, -1, 1, 1, 1, -1, 1, -1, 1, 1, 
 #                     1, 1, -1, 1, 1, 1, 0, 0, -1, 0, 1, 1, 1, 1, 0, 1]
-corrected_data_index = [4, 6, 11, 18, 27, 30, 32, 36, 38, 43, 49] # corrected experiment indexes
+annotated_experiment_index = [4, 6, 11, 18, 27, 30, 32, 36, 38, 43, 49]
 nGT = [22, 21, 21, 18, 26, 24, 18, 20, 28, 35, 29, 22, 30, 34, 24, 36, 20, 15, 10, 33, 
        22, 19, 13, 16, 17, 21, 20, 28, 18, 12, 13, 26, 34, 25, 24, 24, 43, 42, 15, 12, 
        13, 14, 24, 27, 25, 26, 0, 28, 13, 41, 33, 26, 16, 16, 11, 9] # number of actual strides
@@ -151,6 +151,8 @@ extract_bilstm_training_data = False # used to save csv files for zv and stride 
 extract_LLIO_training_data = True # used to save csv files for LLIO SHS training - (displacement, heading change) and (stride indexes, timestamps)
 # if sum(training_data_tag) == 56: # if total of 56 experiments are plotted (5 of them is not training data)
 #     extract_bilstm_training_data = False # then do not write imu and zv data to file for BiLSTM training
+traveled_distances = [] # to keep track of the traveled distances in each experiment for LLIO training data generation
+traverse_times = [] # to keep track of experiment times and eventually total experiment time for LLIO training data generation
 
 # Process each VICON room training data file
 for file in vicon_data_files:
@@ -170,7 +172,7 @@ for file in vicon_data_files:
         # Initialize INS object with correct parameters
         ins = INS(imu_data, sigma_a=0.00098, sigma_w=8.7266463e-5, T=1.0 / 200)
 
-        logging.info(f"Processing {detector[i]} detector for file {file}")
+        logging.info(f"Processing {detector[i].upper()} detector for file {file}")
         ins.Localizer.set_gt(gt)  # Set the ground truth data required by 'vicon' detector
         ins.Localizer.set_ts(timestamps)  # Set the sampling time required by 'vicon' detector
         zv = ins.Localizer.compute_zv_lrt(W=5 if detector[i] != 'mbgtd' else 2, G=thresh[i], detector=detector[i])
@@ -277,6 +279,20 @@ for file in vicon_data_files:
         plt.savefig(os.path.join(output_dir, f'zv_labels_exp_{i+1}_lstm.png'), dpi=600, bbox_inches='tight')
         plt.close()
 
+        # Plot stride indexes on IMU data, i.e., the magnitudes of acceleration and angular velocity
+        plt.figure()
+        plt.plot(timestamps, np.linalg.norm(imu_data[:, :3], axis=1), label=r'$\Vert\mathbf{a}\Vert$')
+        plt.plot(timestamps, np.linalg.norm(imu_data[:, 3:], axis=1), label=r'$\Vert\mathbf{\omega}\Vert$')
+        plt.scatter(timestamps[strideIndex], np.linalg.norm(imu_data[strideIndex, :3], axis=1), 
+                    c='r', marker='x', label='Stride', zorder=3)
+        plt.scatter(timestamps[strideIndex], np.linalg.norm(imu_data[strideIndex, 3:], axis=1), 
+                    c='r', marker='x', zorder=3)
+        plt.title(f'Exp#{i+1} ({base_filename}) - Stride Detection on IMU Data')
+        plt.xlabel('Time [s]'); plt.ylabel(r'Magnitude'); plt.legend()
+        plt.grid(True, which='both', linestyle='--', linewidth=1.5)
+        plt.savefig(os.path.join(output_dir, f'stride_detection_exp_{i+1}.png'), dpi=600, bbox_inches='tight')
+        plt.close()
+
         # while some experiments are excluded due to being non bipedal locomotion motion (i.e., crawling experiments)
         # some other bipedal locomotion experimental data requires correction for some ZV labels and stride detections 
         # correction indexes are extracted manually (see detect_missed_strides.m for details)
@@ -339,7 +355,7 @@ for file in vicon_data_files:
             imu_data = imu_data[0:13070,:]
 
         # PRODUCE CORRECTED ZV and TRAJECTORY PLOTS
-        if i+1 in corrected_data_index:
+        if i+1 in annotated_experiment_index:
             # Apply filter to zero velocity detection
             logging.info(f"Applying stride detection to the combined zero velocity detection results for experiment {i+1}.")
             zv_filtered, n, strideIndex = heuristic_zv_filter_and_stride_detector(zv_filtered, 1)
@@ -358,6 +374,7 @@ for file in vicon_data_files:
                                 legend=[f'GT (stride-wise) - {n}/{nGT[i]}', 'GT (sample-wise)']) 
             plt.scatter(reconstructed_traj[:, 0], reconstructed_traj[:, 1], c='b', marker='o')
             plt.savefig(os.path.join(output_dir, f'trajectory_exp_{i+1}_corrected.png'), dpi=600, bbox_inches='tight')
+            plt.close()
 
             # Plotting the zero velocity detection for the combined ZV detector without stride indices
             plt.figure()
@@ -371,19 +388,19 @@ for file in vicon_data_files:
             plt.savefig(os.path.join(output_dir, f'zv_labels_exp_{i+1}_corrected.png'), dpi=600, bbox_inches='tight')
             plt.close()
 
-        # Plot stride indexes on IMU data, i.e., the magnitudes of acceleration and angular velocity
-        plt.figure()
-        plt.plot(timestamps, np.linalg.norm(imu_data[:, :3], axis=1), label=r'$\Vert\mathbf{a}\Vert$')
-        plt.plot(timestamps, np.linalg.norm(imu_data[:, 3:], axis=1), label=r'$\Vert\mathbf{\omega}\Vert$')
-        plt.scatter(timestamps[strideIndex], np.linalg.norm(imu_data[strideIndex, :3], axis=1), 
-                    c='r', marker='x', label='Stride', zorder=3)
-        plt.scatter(timestamps[strideIndex], np.linalg.norm(imu_data[strideIndex, 3:], axis=1), 
-                    c='r', marker='x', zorder=3)
-        plt.title(f'Exp#{i+1} ({base_filename}) - Stride Detection on IMU Data')
-        plt.xlabel('Time [s]'); plt.ylabel(r'Magnitude'); plt.legend()
-        plt.grid(True, which='both', linestyle='--', linewidth=1.5)
-        plt.savefig(os.path.join(output_dir, f'stride_detection_exp_{i+1}.png'), dpi=600, bbox_inches='tight')
-        plt.close()
+            # Plot stride indexes on IMU data, i.e., the magnitudes of acceleration and angular velocity
+            plt.figure()
+            plt.plot(timestamps, np.linalg.norm(imu_data[:, :3], axis=1), label=r'$\Vert\mathbf{a}\Vert$')
+            plt.plot(timestamps, np.linalg.norm(imu_data[:, 3:], axis=1), label=r'$\Vert\mathbf{\omega}\Vert$')
+            plt.scatter(timestamps[strideIndex], np.linalg.norm(imu_data[strideIndex, :3], axis=1), 
+                        c='r', marker='x', label='Stride', zorder=3)
+            plt.scatter(timestamps[strideIndex], np.linalg.norm(imu_data[strideIndex, 3:], axis=1), 
+                        c='r', marker='x', zorder=3)
+            plt.title(f'Exp#{i+1} ({base_filename}) - Stride Annotation on IMU Data')
+            plt.xlabel('Time [s]'); plt.ylabel(r'Magnitude'); plt.legend()
+            plt.grid(True, which='both', linestyle='--', linewidth=1.5)
+            plt.savefig(os.path.join(output_dir, f'stride_detection_exp_{i+1}_corrected.png'), dpi=600, bbox_inches='tight')
+            plt.close()
         
         #################### SAVE TRAINING DATA RIGHT AT THIS SPOT for LSTM RETRAINING #################
         if extract_bilstm_training_data:
@@ -415,9 +432,17 @@ for file in vicon_data_files:
             sio.savemat(os.path.join(extracted_training_data_dir, f'LLIO_training_data/{base_filename}_LLIO.mat'),
                         {'strideIndex': strideIndex, 'timestamps': timestamps[strideIndex], 'GCP': GCP, 'imu_data': imu_data, 
                          'timestamps_all': timestamps})
+            
+        logging.info(f"Experiment #{i+1} is annotated stride-wise & going to be used in LLIO training/testing.")
+        # compute stride distances and sum them up to get the traveled distance made in the current walk
+        traveled_distance = np.sum(np.linalg.norm(np.diff(GCP, axis=0), axis=1))
+        logging.info(f"Traveled distance is {traveled_distance:.3f} meters in experiment #{i+1}.")
+        traverse_time = timestamps[-1] - timestamps[0]
+        logging.info(f"Travel time is {traverse_time:.3f} seconds in experiment #{i+1}.")
+        traveled_distances.append(traveled_distance) # sum all traveled distances cumulatively to get the total distance made in the experiments for LLIO training
+        traverse_times.append(traverse_time) # sum all traversal times cumulatively to obtain the total experiment time for LLIO training
         
         count_training_exp += 1
-
     else:
         logging.info(f"===================================================================================================================")
         logging.info(f"Processing file {file}")
@@ -434,6 +459,10 @@ for file in vicon_data_files:
          
     i += 1  # Move to the next experiment
 
+total_distance, total_traverse_time = sum(traveled_distances), sum(traverse_times)
+logging.info(f"===================================================================================================================")
+logging.info(f"Total traveled distance in VICON room experiments (to be used for LLIO training/test) is {total_distance:.3f} meters.")
+logging.info(f"Total experiment time in VICON room experiments (to be used for LLIO training/test) is {total_traverse_time:.3f}s = {total_traverse_time/60:.3f}mins.")
 logging.info(f"===================================================================================================================")
 print(f"Out of {i} experiments, {count_training_exp} of them will be used in retraining LSTM robust ZV detector.")
 logging.info("Processing complete for all files.")
