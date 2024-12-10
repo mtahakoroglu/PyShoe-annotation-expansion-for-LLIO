@@ -48,7 +48,7 @@ pip install pandas==1.1.5
 
 <p align="justify">After cloning this repository to your local computer, you must install <b><a href="https://github.com/utiasSTARS/liegroups" target="_blank">liegroups</a></b> package to run the code if you would like to reproduce the results shown here in this repo or the paper.</p>
 
-<h3>VICON Training Data - Manual Annotation (Corrections)</h3>
+<h3>VICON Training Data - Manual Annotation (Corrections) for LLIO</h3>
 
 <p align="justify">To extract a <b>gait-driven system</b> (in other words a <b>stride & heading system</b> - <b>SHS</b>) from VICON training dataset, which is a sampling-frequency driven system (sample-wise INS), displacement and heading change (or (dx, dy) relative position change) values at <b>each</b> stride must be extracted. In addition to relative positioning data, stride indexes and imu data will be used in training a data-driven (also called modern) INS that functions as a stride-wise dead-reckoning system. Some researchers call a data-driven or modern INS as learned inertial odometry.</p>
 
@@ -258,9 +258,24 @@ pip install pandas==1.1.5
 
 <img src="results/figs/vicon/stride_detection_exp_43.png" alt="stride detection results on imu data for experiment 43 of VICON dataset">
 
-<p align="justify">Here, due to some undetected steps in VICON training data (recall that Wagstaff <i>et. al.</i> (i.e., the creator of PyShoe dataset) included crawling data) and self-collected data, we needed to go over the 56 experiments in the training dataset <i><b>(i)</b></i> to correct for undetected steps (they are classified as 0 in ZV signal plot despite them actually being 1, i.e., it is false-negative) and <i><b>(ii)</b></i> to exclude motions like crawling, which are not of type bipedal locomotion. For this reason, we had to retrain the bi-LSTM network proposed by Wagstaff <i>et. al.</i>. In order to use GPU in the training process, instead of the PyTorch installation command given above, we used the one below.</p>
+<p align="justify">Thus far, due to some undetected steps in VICON room experiments data (recall that Wagstaff <i>et. al.</i> conducted crawling motion experiments in PyShoe) and self-collected data, we examined 56 experiments coarsely in the training dataset <i><b>(i)</b></i> to correct for undetected steps (they are classified as 0 in ZV signal plot despite them actually being 1, i.e., it is false-negative) and <i><b>(ii)</b></i> to exclude motions like crawling, which are not of type bipedal locomotion. As can be seen above, experiments {4, 6, 11, 18, 27, 30, 32, 36, 38, 43} are corrected with manual ZV interval and stride index annotations by utilizing supplementary detectors. In <b>plot_vicon_data.py</b> file, right before processing experimental data in a loop, annotated experiments are tagged as -1 as follows:</p>
 
-<h3>Example Results with LSTM Based Robust ZUPT Method (Own Sensor Data)</h3>
+```
+training_data_tag = [1, 1, 1, -1, 1, -1, 1, 1, 1, 1, -1, 1, 0, 1, 1, 1, 1, -1, 1, 1, 
+                    1, 1, 1, 1, 1, 1, -1, 1, 1, -1, 1, -1, 1, 1, 1, -1, 1, -1, 1, 1, 
+                    1, 1, -1, 1, 1, 1, 0, 0, -1, 0, 1, 1, 1, 1, 0, 1]
+```
+
+<p align="justify">where</p>
+
+```
+len(training_data_tag) = 56
+```
+
+<p align="justify">In the signal processing main loop (where the loop visits each experiment one by one), experiments are accepted as training data for LLIO according to the absolute values of given tags. In other words, experiments labeled as 1's directly satisfy conditions while the ones labeled as -1s needed corrections on ZV intervals and stride indexes to be included in LLIO training dataset. On the other hand, 0s stand for eliminated experiments due to being nonbipedal locomotion data or unrecoverable errors in ZV intervals and/or stride indexes (we actually emailed Brandon Wagstaff about motion types of experiments yet no documentation was made regarding the motion types (e.g., walking, running, crawling) in the experiments at the time of PyShoe dataset generation). In the decision of labeling an experiment as 0, trajectory (spatial) plots along with IMU data (time series) plots with stride indexes are coarsely examined by the second author of the paper by using MATLAB and Python environments. Eventually, the elimination of VICON room data yielded shrink in the traveled distance by the pedestrian, which negatively affcets LLIO training to produce a data-driven INS. Therefore, additional training data was required in LLIO training. The next section describes dataset expansion/enlargement process.</p>
+
+
+<h3>Training Dataset Expansion/Enlargement for LLIO</h3>
 
 <p align="justify">Here robust (pre-trained LSTM based ZV detector) pedestrian INS is applied on our own-collected data where our sensor is <a href="https://www.microstrain.com/sites/default/files/applications/files/3dm-gx5-25_datasheet_8400-0093_rev_n.pdf">3DM-GX5-25</a> and sensor data capture software is <a href="https://www.microstrain.com/software/sensorconnect">SensorConnect</a>.</p>
 
@@ -268,7 +283,109 @@ pip install pandas==1.1.5
 | :---: | :---: |
 | <img src="https://www.zse.de/db_pics/shop_content/500x500/3dm-gx5-25.png" alt="3DM-GX5-25" width=auto height=200> | <img src="https://www.microstrain.com/sites/default/files/bitmap.png" alt="SensorConnect" width=auto height=200> |
 
-<p align="justify">We name the start point as stride #0, i.e., initial stride. If you examine our code, you will notice that ZV labels are filtered for accurate stride index detection. However the filtered ZV values are not used in the trajectory generation. In other words, the trajectory is obtained with the raw (not filtered) LSTM based PyShoe generated ZV labels while the strides that are visualized on the trajectories with x correspond to the last index of the ZV intervals of the filtered ZV signals.</p>
+
+<p align="justify">Experiments conducted here are manually annotated by using a ruler (see the paper for more details). As the VICON room walks/experiments of PyShoe dataset is very different than hallway traversals, proposed <a href="https://github.com/mtahakoroglu/LLIO">LLIO</a> system required a bigger dataset that accounts for straight walk gait characteristics (at various walking paces). Additionally, faster motion experiments are conducted to make the dataset diverse.</p>
+
+<p align="justify">Similar to the notation used for VICON room experiments, the start point is called as stride #0, i.e., initial stride. If <b>plot_vicon_data.py</b> is checked, one can see that ZV labels are filtered for accurate stride index detection. However the filtered ZV values are not used in the trajectory generation. In other words, the pedestrian trajectories are obtained with the raw (not filtered) LSTM based PyShoe generated ZV labels while the strides that are visualized on the trajectories with x correspond to the last index of the ZV intervals of the filtered ZV signals (i.e., stride index).</p>
+
+<p align="justify">As all strides produced a foot-print on the ground thar are later measured to form ground-truth data for the experiments, each stride location is called a Ground Control Point (GCP).</p>
+
+<p align="justify"><b>Note:</b> One can run <b>plot_own_sensor_data.py</b> to obtain the same results shown below. To learn more about experiment info and results, one can view <b>output.txt</b> log file (located at <b>results/figs/own</b>) recorded while the code was running.</p>
+
+<h4>Experiment 31</h4>
+
+| Stride Indexes |  Trajectory (INS)  |
+|  :---:  |  :---:  |
+| <img src="results/figs/own/SensorConnectData_31_stride_detection.png" alt="Stride indexes plotted on top of IMU data" width=400 height=auto> | <img src="results/figs/own/SensorConnectData_31.png" alt="trajectory obtained with robust ZUPT detector (LSTM) aided (Error-State Kalman Filter based) foot-mounted INS" width=400 height=auto> |
+
+| Zero Velocity |  Trajectory (SHS) |
+|  :---:  |  :---:  |
+| <img src="results/figs/own/SensorConnectData_31_ZV_LSTM_filtered.png" alt="ZV labels produced with robust ZUPT (LSTM filtered) detector" width=400 height=auto> | <img src="results/figs/own/SensorConnectData_31_SHS.png" alt="trajectory obtained with robust ZUPT detector (LSTM) aided (Error-State Kalman Filter based) foot-mounted INS" width=400 height=auto> |
+
+<h4>Experiment 32</h4>
+
+| Stride Indexes |  Trajectory (INS)  |
+|  :---:  |  :---:  |
+| <img src="results/figs/own/SensorConnectData_32_stride_detection.png" alt="Stride indexes plotted on top of IMU data" width=400 height=auto> | <img src="results/figs/own/SensorConnectData_32.png" alt="trajectory obtained with robust ZUPT detector (LSTM) aided (Error-State Kalman Filter based) foot-mounted INS" width=400 height=auto> |
+
+| Zero Velocity |  Trajectory (SHS) |
+|  :---:  |  :---:  |
+| <img src="results/figs/own/SensorConnectData_32_ZV_LSTM_filtered.png" alt="ZV labels produced with robust ZUPT (LSTM filtered) detector" width=400 height=auto> | <img src="results/figs/own/SensorConnectData_32_SHS.png" alt="trajectory obtained with robust ZUPT detector (LSTM) aided (Error-State Kalman Filter based) foot-mounted INS" width=400 height=auto> |
+
+<h4>Experiment 33</h4>
+
+| Stride Indexes |  Trajectory (INS)  |
+|  :---:  |  :---:  |
+| <img src="results/figs/own/SensorConnectData_33_stride_detection.png" alt="Stride indexes plotted on top of IMU data" width=400 height=auto> | <img src="results/figs/own/SensorConnectData_33.png" alt="trajectory obtained with robust ZUPT detector (LSTM) aided (Error-State Kalman Filter based) foot-mounted INS" width=400 height=auto> |
+
+| Zero Velocity |  Trajectory (SHS) |
+|  :---:  |  :---:  |
+| <img src="results/figs/own/SensorConnectData_33_ZV_LSTM_filtered.png" alt="ZV labels produced with robust ZUPT (LSTM filtered) detector" width=400 height=auto> | <img src="results/figs/own/SensorConnectData_33_SHS.png" alt="trajectory obtained with robust ZUPT detector (LSTM) aided (Error-State Kalman Filter based) foot-mounted INS" width=400 height=auto> |
+
+<img src="results/figs/own/SensorConnectData_33_stride_annotation.png" alt="Stride indexes plotted on top of IMU data" width=%100 height=auto>
+
+<h4>Experiment 34</h4>
+
+<p align="justify">Here, the motion speed varies during the experiment as can be seen in the <a href="https://www.youtube.com/shorts/kLczRGQx4Ds">video</a>. PyShoe (LSTM based ZUPT aided ESKF) is able to detect only 22 of 24 strides as can be seen below.</p>
+
+| Stride Indexes |  Trajectory (INS)  |
+|  :---:  |  :---:  |
+| <img src="results/figs/own/SensorConnectData_34_stride_detection.png" alt="Stride indexes plotted on top of IMU data" width=400 height=auto> | <img src="results/figs/own/SensorConnectData_34.png" alt="trajectory obtained with robust ZUPT detector (LSTM) aided (Error-State Kalman Filter based) foot-mounted INS" width=400 height=auto> |
+
+| Zero Velocity |  Trajectory (SHS) |
+|  :---:  |  :---:  |
+| <img src="results/figs/own/SensorConnectData_34_ZV_LSTM_filtered.png" alt="ZV labels produced with robust ZUPT (LSTM filtered) detector" width=400 height=auto> | <img src="results/figs/own/SensorConnectData_34_SHS.png" alt="trajectory obtained with robust ZUPT detector (LSTM) aided (Error-State Kalman Filter based) foot-mounted INS" width=400 height=auto> |
+
+<img src="results/figs/own/SensorConnectData_34_stride_annotation.png" alt="Stride indexes plotted on top of IMU data" width=%100 height=auto>
+
+<h4>Experiment 35</h4>
+
+<p align="justify">Here, the motion speed varies during the experiment as can be seen in the <a href="https://www.youtube.com/shorts/R2UBuftXXrE">video</a>. PyShoe (LSTM based ZUPT aided ESKF) is able to detect only 23 of 28 strides as can be seen below.</p>
+
+| Stride Indexes |  Trajectory (INS)  |
+|  :---:  |  :---:  |
+| <img src="results/figs/own/SensorConnectData_35_stride_detection.png" alt="Stride indexes plotted on top of IMU data" width=400 height=auto> | <img src="results/figs/own/SensorConnectData_35.png" alt="trajectory obtained with robust ZUPT detector (LSTM) aided (Error-State Kalman Filter based) foot-mounted INS" width=400 height=auto> |
+
+| Zero Velocity |  Trajectory (SHS) |
+|  :---:  |  :---:  |
+| <img src="results/figs/own/SensorConnectData_35_ZV_LSTM_filtered.png" alt="ZV labels produced with robust ZUPT (LSTM filtered) detector" width=400 height=auto> | <img src="results/figs/own/SensorConnectData_35_SHS.png" alt="trajectory obtained with robust ZUPT detector (LSTM) aided (Error-State Kalman Filter based) foot-mounted INS" width=400 height=auto> |
+
+<img src="results/figs/own/SensorConnectData_35_stride_annotation.png" alt="Stride indexes plotted on top of IMU data" width=%100 height=auto>
+
+<h4>Experiment 36</h4>
+
+<p align="justify">Here, the motion speed is slow and constant during the experiment as can be seen in the <a href="https://youtu.be/uT7wL-taX08">video</a>. PyShoe (LSTM based ZUPT aided ESKF) is able to detect all 58 strides successfully. Stride#17 annotation is slightly corrected after examination of detected stride indexes on IMU data, i.e., the magnitudes of acceleration and angular velocity vectors.</p>
+
+| Stride Indexes |  Trajectory (INS)  |
+|  :---:  |  :---:  |
+| <img src="results/figs/own/SensorConnectData_36_stride_detection.png" alt="Stride indexes plotted on top of IMU data" width=400 height=auto> | <img src="results/figs/own/SensorConnectData_36.png" alt="trajectory obtained with robust ZUPT detector (LSTM) aided (Error-State Kalman Filter based) foot-mounted INS" width=400 height=auto> |
+
+| Zero Velocity |  Trajectory (SHS) |
+|  :---:  |  :---:  |
+| <img src="results/figs/own/SensorConnectData_36_ZV_LSTM_filtered.png" alt="ZV labels produced with robust ZUPT (LSTM filtered) detector" width=400 height=auto> | <img src="results/figs/own/SensorConnectData_36_SHS.png" alt="trajectory obtained with robust ZUPT detector (LSTM) aided (Error-State Kalman Filter based) foot-mounted INS" width=400 height=auto> |
+
+| Final Stride Indexes on IMU data |
+|  :---:  |
+| <img src="results/figs/own/SensorConnectData_36_stride_annotation.png" alt="Stride indexes plotted on top of IMU data" width=%100 height=auto> |
+
+<h4>Experiment 37</h4>
+
+<p align="justify">Here, the pedestrian speed is normal (walking style) during the experiment</a>. The video of this experiment was recorded but due to a computer SSD hard disk failure, unfortunately it could not be retrieved. Stride #{33, 34, 41, 43, 60} annotations are slightly corrected after coarse examination of detected stride indexes on IMU data, i.e., the magnitudes of acceleration and angular velocity vectors.</p>
+
+| Stride Indexes |  Trajectory (INS)  |
+|  :---:  |  :---:  |
+| <img src="results/figs/own/SensorConnectData_37_stride_detection.png" alt="Stride indexes plotted on top of IMU data" width=400 height=auto> | <img src="results/figs/own/SensorConnectData_37.png" alt="trajectory obtained with robust ZUPT detector (LSTM) aided (Error-State Kalman Filter based) foot-mounted INS" width=400 height=auto> |
+
+| Zero Velocity |  Trajectory (SHS) |
+|  :---:  |  :---:  |
+| <img src="results/figs/own/SensorConnectData_37_ZV_LSTM_filtered.png" alt="ZV labels produced with robust ZUPT (LSTM filtered) detector" width=400 height=auto> | <img src="results/figs/own/SensorConnectData_37_SHS.png" alt="trajectory obtained with robust ZUPT detector (LSTM) aided (Error-State Kalman Filter based) foot-mounted INS" width=400 height=auto> |
+
+| Final Stride Indexes on IMU data |
+|  :---:  |
+| <img src="results/figs/own/SensorConnectData_37_stride_annotation.png" alt="Stride indexes plotted on top of IMU data" width=%100 height=auto> |
+
+
+<h3>Experimental Test Results (Own Sensor Data)</h3>
 
 <p align="justify">Note that some experiments do not contain GCP or contain incorrectly documented GCP and thereby are not considered in performance evaluation. Also, in some experiments correct number of strides are not detected (with LSTM based robust ZV detector). These experiments are not used in evalation as well. However, in future, if a better ZV interval detector can be developed and detect all strides without missing any, then mentioned experiments could be involved in evaluation process.</p>
 
@@ -471,102 +588,6 @@ pip install pandas==1.1.5
 | Zero Velocity |  Trajectory (SHS) |
 |  :---:  |  :---:  |
 | <img src="results/figs/own/SensorConnectData_30_ZV_LSTM_filtered.png" alt="ZV labels produced with robust ZUPT (LSTM filtered) detector" width=400 height=auto> | <img src="results/figs/own/SensorConnectData_30_SHS.png" alt="trajectory obtained with robust ZUPT detector (LSTM) aided (Error-State Kalman Filter based) foot-mounted INS" width=400 height=auto> |
-
-<h3>PyShoe Training Dataset Expansion/Enlargement</h3>
-
-<p align="justify">Experiments conducted here are manually annotated by using a ruler (see the paper for more details). As the VICON room walks/experiments of PyShoe dataset is very different than hallway traversals, proposed <a href="https://github.com/mtahakoroglu/LLIO">LLIO</a> system required a bigger dataset that accounts for straight walk gait characteristics (at various walking paces). Additionally, faster motion experiments are conducted to make the dataset diverse.</p>
-
-<h4>Experiment 31</h4>
-
-| Stride Indexes |  Trajectory (INS)  |
-|  :---:  |  :---:  |
-| <img src="results/figs/own/SensorConnectData_31_stride_detection.png" alt="Stride indexes plotted on top of IMU data" width=400 height=auto> | <img src="results/figs/own/SensorConnectData_31.png" alt="trajectory obtained with robust ZUPT detector (LSTM) aided (Error-State Kalman Filter based) foot-mounted INS" width=400 height=auto> |
-
-| Zero Velocity |  Trajectory (SHS) |
-|  :---:  |  :---:  |
-| <img src="results/figs/own/SensorConnectData_31_ZV_LSTM_filtered.png" alt="ZV labels produced with robust ZUPT (LSTM filtered) detector" width=400 height=auto> | <img src="results/figs/own/SensorConnectData_31_SHS.png" alt="trajectory obtained with robust ZUPT detector (LSTM) aided (Error-State Kalman Filter based) foot-mounted INS" width=400 height=auto> |
-
-<h4>Experiment 32</h4>
-
-| Stride Indexes |  Trajectory (INS)  |
-|  :---:  |  :---:  |
-| <img src="results/figs/own/SensorConnectData_32_stride_detection.png" alt="Stride indexes plotted on top of IMU data" width=400 height=auto> | <img src="results/figs/own/SensorConnectData_32.png" alt="trajectory obtained with robust ZUPT detector (LSTM) aided (Error-State Kalman Filter based) foot-mounted INS" width=400 height=auto> |
-
-| Zero Velocity |  Trajectory (SHS) |
-|  :---:  |  :---:  |
-| <img src="results/figs/own/SensorConnectData_32_ZV_LSTM_filtered.png" alt="ZV labels produced with robust ZUPT (LSTM filtered) detector" width=400 height=auto> | <img src="results/figs/own/SensorConnectData_32_SHS.png" alt="trajectory obtained with robust ZUPT detector (LSTM) aided (Error-State Kalman Filter based) foot-mounted INS" width=400 height=auto> |
-
-<h4>Experiment 33</h4>
-
-| Stride Indexes |  Trajectory (INS)  |
-|  :---:  |  :---:  |
-| <img src="results/figs/own/SensorConnectData_33_stride_detection.png" alt="Stride indexes plotted on top of IMU data" width=400 height=auto> | <img src="results/figs/own/SensorConnectData_33.png" alt="trajectory obtained with robust ZUPT detector (LSTM) aided (Error-State Kalman Filter based) foot-mounted INS" width=400 height=auto> |
-
-| Zero Velocity |  Trajectory (SHS) |
-|  :---:  |  :---:  |
-| <img src="results/figs/own/SensorConnectData_33_ZV_LSTM_filtered.png" alt="ZV labels produced with robust ZUPT (LSTM filtered) detector" width=400 height=auto> | <img src="results/figs/own/SensorConnectData_33_SHS.png" alt="trajectory obtained with robust ZUPT detector (LSTM) aided (Error-State Kalman Filter based) foot-mounted INS" width=400 height=auto> |
-
-<img src="results/figs/own/SensorConnectData_33_stride_annotation.png" alt="Stride indexes plotted on top of IMU data" width=%100 height=auto>
-
-<h4>Experiment 34</h4>
-
-<p align="justify">Here, the motion speed varies during the experiment as can be seen in the <a href="https://www.youtube.com/shorts/kLczRGQx4Ds">video</a>. PyShoe (LSTM based ZUPT aided ESKF) is able to detect only 22 of 24 strides as can be seen below.</p>
-
-| Stride Indexes |  Trajectory (INS)  |
-|  :---:  |  :---:  |
-| <img src="results/figs/own/SensorConnectData_34_stride_detection.png" alt="Stride indexes plotted on top of IMU data" width=400 height=auto> | <img src="results/figs/own/SensorConnectData_34.png" alt="trajectory obtained with robust ZUPT detector (LSTM) aided (Error-State Kalman Filter based) foot-mounted INS" width=400 height=auto> |
-
-| Zero Velocity |  Trajectory (SHS) |
-|  :---:  |  :---:  |
-| <img src="results/figs/own/SensorConnectData_34_ZV_LSTM_filtered.png" alt="ZV labels produced with robust ZUPT (LSTM filtered) detector" width=400 height=auto> | <img src="results/figs/own/SensorConnectData_34_SHS.png" alt="trajectory obtained with robust ZUPT detector (LSTM) aided (Error-State Kalman Filter based) foot-mounted INS" width=400 height=auto> |
-
-<img src="results/figs/own/SensorConnectData_34_stride_annotation.png" alt="Stride indexes plotted on top of IMU data" width=%100 height=auto>
-
-<h4>Experiment 35</h4>
-
-<p align="justify">Here, the motion speed varies during the experiment as can be seen in the <a href="https://www.youtube.com/shorts/R2UBuftXXrE">video</a>. PyShoe (LSTM based ZUPT aided ESKF) is able to detect only 23 of 28 strides as can be seen below.</p>
-
-| Stride Indexes |  Trajectory (INS)  |
-|  :---:  |  :---:  |
-| <img src="results/figs/own/SensorConnectData_35_stride_detection.png" alt="Stride indexes plotted on top of IMU data" width=400 height=auto> | <img src="results/figs/own/SensorConnectData_35.png" alt="trajectory obtained with robust ZUPT detector (LSTM) aided (Error-State Kalman Filter based) foot-mounted INS" width=400 height=auto> |
-
-| Zero Velocity |  Trajectory (SHS) |
-|  :---:  |  :---:  |
-| <img src="results/figs/own/SensorConnectData_35_ZV_LSTM_filtered.png" alt="ZV labels produced with robust ZUPT (LSTM filtered) detector" width=400 height=auto> | <img src="results/figs/own/SensorConnectData_35_SHS.png" alt="trajectory obtained with robust ZUPT detector (LSTM) aided (Error-State Kalman Filter based) foot-mounted INS" width=400 height=auto> |
-
-<img src="results/figs/own/SensorConnectData_35_stride_annotation.png" alt="Stride indexes plotted on top of IMU data" width=%100 height=auto>
-
-<h4>Experiment 36</h4>
-
-<p align="justify">Here, the motion speed is slow and constant during the experiment as can be seen in the <a href="https://youtu.be/uT7wL-taX08">video</a>. PyShoe (LSTM based ZUPT aided ESKF) is able to detect all 58 strides successfully. Stride#17 annotation is slightly corrected after examination of detected stride indexes on IMU data, i.e., the magnitudes of acceleration and angular velocity vectors.</p>
-
-| Stride Indexes |  Trajectory (INS)  |
-|  :---:  |  :---:  |
-| <img src="results/figs/own/SensorConnectData_36_stride_detection.png" alt="Stride indexes plotted on top of IMU data" width=400 height=auto> | <img src="results/figs/own/SensorConnectData_36.png" alt="trajectory obtained with robust ZUPT detector (LSTM) aided (Error-State Kalman Filter based) foot-mounted INS" width=400 height=auto> |
-
-| Zero Velocity |  Trajectory (SHS) |
-|  :---:  |  :---:  |
-| <img src="results/figs/own/SensorConnectData_36_ZV_LSTM_filtered.png" alt="ZV labels produced with robust ZUPT (LSTM filtered) detector" width=400 height=auto> | <img src="results/figs/own/SensorConnectData_36_SHS.png" alt="trajectory obtained with robust ZUPT detector (LSTM) aided (Error-State Kalman Filter based) foot-mounted INS" width=400 height=auto> |
-
-| Final Stride Indexes on IMU data |
-|  :---:  |
-| <img src="results/figs/own/SensorConnectData_36_stride_annotation.png" alt="Stride indexes plotted on top of IMU data" width=%100 height=auto> |
-
-<h4>Experiment 37</h4>
-
-<p align="justify">Here, the pedestrian speed is normal (walking style) during the experiment</a>. The video of this experiment was recorded but due to a computer SSD hard disk failure, unfortunately it could not be retrieved. Stride #{33, 34, 41, 43, 60} annotations are slightly corrected after coarse examination of detected stride indexes on IMU data, i.e., the magnitudes of acceleration and angular velocity vectors.</p>
-
-| Stride Indexes |  Trajectory (INS)  |
-|  :---:  |  :---:  |
-| <img src="results/figs/own/SensorConnectData_37_stride_detection.png" alt="Stride indexes plotted on top of IMU data" width=400 height=auto> | <img src="results/figs/own/SensorConnectData_37.png" alt="trajectory obtained with robust ZUPT detector (LSTM) aided (Error-State Kalman Filter based) foot-mounted INS" width=400 height=auto> |
-
-| Zero Velocity |  Trajectory (SHS) |
-|  :---:  |  :---:  |
-| <img src="results/figs/own/SensorConnectData_37_ZV_LSTM_filtered.png" alt="ZV labels produced with robust ZUPT (LSTM filtered) detector" width=400 height=auto> | <img src="results/figs/own/SensorConnectData_37_SHS.png" alt="trajectory obtained with robust ZUPT detector (LSTM) aided (Error-State Kalman Filter based) foot-mounted INS" width=400 height=auto> |
-
-| Final Stride Indexes on IMU data |
-|  :---:  |
-| <img src="results/figs/own/SensorConnectData_37_stride_annotation.png" alt="Stride indexes plotted on top of IMU data" width=%100 height=auto> |
 
 <h2>REFERENCES</h2>
 <p align="justify" id="ref1"><a href="#gobacktoref1">[1]</a> X. Liu, N. Li and Y. Zhang, <a href="https://ieeexplore.ieee.org/document/9956821" target="_blank">"A Novel Adaptive Zero Velocity Detection Algorithm Based on Improved General Likelihood Ratio Test Detector,"</a> in <i>IEEE Sensors Journal</i>, vol. 22, no. 24, pp. 24479-24492, 2022.</p>
