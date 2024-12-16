@@ -137,7 +137,7 @@ def align_trajectories(traj_est, traj_gt):
 i = 0  # experiment index
 count_training_exp = 0
 # following two lines are used to run selected experiment results
-training_data_tag = [0]*56; training_data_tag[0:2] = [1]*5 # we left off at exp#6
+training_data_tag = [0]*56; training_data_tag[7] = 1 # we left off at exp#8
 # training_data_tag are the experiments to be used in extracting displacement and heading change data for LLIO training
 # training_data_tag = [1, 1, 1, -1, 1, -1, 1, 1, 1, 1, -1, 1, 0, 1, 1, 1, 1, -1, 1, 1, 
 #                     1, 1, 1, 1, 1, 1, -1, 1, 1, -1, 1, -1, 1, 1, 1, -1, 1, -1, 1, 1, 
@@ -213,24 +213,13 @@ for file in vicon_data_files:
         aligned_gt[:,0] = -aligned_gt[:,0]
         reconstructed_traj[:,0] = -reconstructed_traj[:,0]
 
-        # Plotting the reconstructed trajectory and the ground truth without stride indices
+        # Plotting the reconstructed trajectory and the ground truth
         plt.figure()
         visualize.plot_topdown([reconstructed_traj, gt[:, :2]], title=f"Exp#{i+1} ({base_filename}) - {detector[i].upper()}", 
-                               legend=[f'GT (stride) - {n}/{nGT[i]}', 'GT (sample)'])
-        # to visualize selected stides from the experiment of interest, change the parameters below
-        # if i+1==49:
-        #     # plt.plot(gt[-5:,0], gt[-5:,1], c='r')
-        #     # plt.scatter(-reconstructed_traj[-3:, 0], reconstructed_traj[-5:, 1], c='b', marker='x')
-        #     plt.scatter(-reconstructed_traj[:13, 0], reconstructed_traj[:13, 1], c='b', marker='x')
-        #     plt.scatter(-reconstructed_traj[14, 0], reconstructed_traj[14, 1], c='g', marker='s')
-        #     # hms = 34 # "how many strides" to show from the beginning (including the initial stride)
-        #     plt.plot(-reconstructed_traj[0:14, 0], reconstructed_traj[0:14, 1], c='r')
-        #     # plt.scatter(-reconstructed_traj[0, 0], reconstructed_traj[0, 1], c='b', marker='s')
-        #     # plt.scatter(-reconstructed_traj[0:hms-1, 0], reconstructed_traj[0:hms-1, 1], c='b', marker='x')
-        #     # plt.scatter(-reconstructed_traj[hms-1, 0], reconstructed_traj[hms-1, 1], c='g', marker='o')
-        # else:    
+                               legend=[f'GT (stride-wise) - {n}/{nGT[i]}', 'GT (sample-wise)'])  
         plt.scatter(reconstructed_traj[:, 0], reconstructed_traj[:, 1], c='b', marker='o')
         plt.savefig(os.path.join(output_dir, f'trajectory_exp_{i+1}.png'), dpi=600, bbox_inches='tight')
+        plt.close()
 
         # Plot LSTM trajectory results
         plt.figure()
@@ -239,26 +228,13 @@ for file in vicon_data_files:
         plt.savefig(os.path.join(output_dir, f'trajectory_exp_{i+1}_lstm_ins.png'), dpi=600, bbox_inches='tight')
         plt.close()
 
-        # # plotting vertical trajectories
-        # plt.figure()
-        # plt.plot(timestamps[:len(gt)], gt[:, 2], label='GT (sample-wise)')  # Plot GT Z positions
-        # plt.plot(timestamps[:len(reconstructed_traj)], reconstructed_traj[:, 1],
-        #         label='Stride & Heading')  # Plot reconstructed Z positions (use Y axis for visualization)
-        # plt.title(f'Vertical Trajectories - {base_filename} - ZUPT detector={detector[i]} for exp#{i+1}')
-        # plt.grid(True, which='both', linestyle='--', linewidth=1.5)
-        # plt.xlabel('Time [s]')
-        # plt.ylabel('Z Position')
-        # plt.legend()
-        # plt.savefig(os.path.join(output_dir, f'vertical_{base_filename}.png'), dpi=600, bbox_inches='tight')
-
-        # Plotting the zero velocity detection for filtered data without stride indices
+        # Plotting ZV raw and filtered signals an detected stride indexes
         plt.figure()
-        plt.plot(timestamps[:len(zv)], zv, label='Raw')
-        plt.plot(timestamps[:len(zv_filtered)], zv_filtered, label='Filtered')
-        plt.scatter(timestamps[strideIndex], zv_filtered[strideIndex], c='r', marker='x')
+        plt.plot(timestamps[:len(zv)], zv, label='Raw ZV signal')
+        plt.plot(timestamps[:len(zv_filtered)], zv_filtered, label='Filtered ZV signal')
+        plt.scatter(timestamps[strideIndex], zv_filtered[strideIndex], c='r', marker='x', label='Stride index')
         plt.title(f'Exp#{i+1} ({base_filename}) {n}/{nGT[i]} strides detected ({detector[i].upper()})')
-        plt.xlabel('Time [s]')
-        plt.ylabel('Zero Velocity')
+        plt.xlabel('Time [s]'); plt.ylabel('ZV label')
         plt.grid(True, which='both', linestyle='--', linewidth=1.5)
         plt.legend()
         plt.yticks([0,1])
@@ -267,12 +243,11 @@ for file in vicon_data_files:
 
         # Plotting the zero velocity detection for LSTM filtered data
         plt.figure()
-        plt.plot(timestamps[:len(zv_lstm)], zv_lstm, label='Raw')
-        plt.plot(timestamps[:len(zv_lstm_filtered)], zv_lstm_filtered, label='Filtered')
+        plt.plot(timestamps[:len(zv_lstm)], zv_lstm, label='Raw ZV signal')
+        plt.plot(timestamps[:len(zv_lstm_filtered)], zv_lstm_filtered, label='Filtered ZV signal')
         plt.scatter(timestamps[strideIndexLSTMfiltered], zv_lstm_filtered[strideIndexLSTMfiltered], c='r', marker='x')
         plt.title(f'Exp#{i+1} ({base_filename}) {n_lstm_filtered}/{nGT[i]} strides detected ({"lstm".upper()})')
-        plt.xlabel('Time [s]')
-        plt.ylabel('Zero Velocity')
+        plt.xlabel('Time [s]'); plt.ylabel('ZV label')
         plt.grid(True, which='both', linestyle='--', linewidth=1.5)
         plt.legend()
         plt.yticks([0,1])
@@ -284,7 +259,7 @@ for file in vicon_data_files:
         plt.plot(timestamps, np.linalg.norm(imu_data[:, :3], axis=1), label=r'$\Vert\mathbf{a}\Vert$')
         plt.plot(timestamps, np.linalg.norm(imu_data[:, 3:], axis=1), label=r'$\Vert\mathbf{\omega}\Vert$')
         plt.scatter(timestamps[strideIndex], np.linalg.norm(imu_data[strideIndex, :3], axis=1), 
-                    c='r', marker='x', label='Stride', zorder=3)
+                    c='r', marker='x', label='Stride index', zorder=3)
         plt.scatter(timestamps[strideIndex], np.linalg.norm(imu_data[strideIndex, 3:], axis=1), 
                     c='r', marker='x', zorder=3)
         plt.title(f'Exp#{i+1} ({base_filename}) - Stride Detection on IMU Data')
@@ -378,11 +353,11 @@ for file in vicon_data_files:
 
             # Plotting the zero velocity detection for the combined ZV detector without stride indices
             plt.figure()
-            plt.plot(timestamps, zv, label='Raw')
-            plt.plot(timestamps, zv_filtered, label='Filtered')
+            plt.plot(timestamps, zv, label='Raw ZV signal')
+            plt.plot(timestamps, zv_filtered, label='Filtered ZV signal')
             plt.scatter(timestamps[strideIndex], zv_filtered[strideIndex], c='r', marker='x')
             plt.title(f'Exp#{i+1} ({base_filename}) {n}/{nGT[i]} strides detected (combined)')
-            plt.xlabel('Time [s]'); plt.ylabel('Zero Velocity')
+            plt.xlabel('Time [s]'); plt.ylabel('ZV label')
             plt.grid(True, which='both', linestyle='--', linewidth=1.5)
             plt.legend(); plt.yticks([0,1])
             plt.savefig(os.path.join(output_dir, f'zv_labels_exp_{i+1}_corrected.png'), dpi=600, bbox_inches='tight')
@@ -393,11 +368,11 @@ for file in vicon_data_files:
             plt.plot(timestamps, np.linalg.norm(imu_data[:, :3], axis=1), label=r'$\Vert\mathbf{a}\Vert$')
             plt.plot(timestamps, np.linalg.norm(imu_data[:, 3:], axis=1), label=r'$\Vert\mathbf{\omega}\Vert$')
             plt.scatter(timestamps[strideIndex], np.linalg.norm(imu_data[strideIndex, :3], axis=1), 
-                        c='r', marker='x', label='Stride', zorder=3)
+                        c='r', marker='x', label='Stride index', zorder=3)
             plt.scatter(timestamps[strideIndex], np.linalg.norm(imu_data[strideIndex, 3:], axis=1), 
                         c='r', marker='x', zorder=3)
             plt.title(f'Exp#{i+1} ({base_filename}) - Stride Annotation on IMU Data')
-            plt.xlabel('Time [s]'); plt.ylabel(r'Magnitude'); plt.legend()
+            plt.xlabel('Time [s]'); plt.ylabel('Magnitude'); plt.legend()
             plt.grid(True, which='both', linestyle='--', linewidth=1.5)
             plt.savefig(os.path.join(output_dir, f'stride_detection_exp_{i+1}_corrected.png'), dpi=600, bbox_inches='tight')
             plt.close()
