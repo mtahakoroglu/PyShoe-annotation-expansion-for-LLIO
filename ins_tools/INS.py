@@ -62,9 +62,9 @@ class INS():
                 dt = self.config['T']
             else:
                 dt = self.config['dt'][k-1]
-            x_check[k,:], q[k,:],Rot = self.Localizer.nav_eq(x_check[k-1,:], imudata[k,:], q[k-1,:], dt) #update state through motion model
+            x_check[k,:], q[k,:], Rot = self.Localizer.nav_eq(x_check[k-1,:], imudata[k,:], q[k-1,:], dt) #update state through motion model
             
-            F,G = self.Localizer.state_update(imudata[k,:],q[k-1,:], dt) 
+            F, G = self.Localizer.state_update(imudata[k,:], q[k-1,:], dt) 
         
             P[k,:,:] = (F.dot(P[k-1,:,:])).dot(F.T) + (G.dot(self.Q)).dot(G.T)
             P[k,:,:] = (P[k,:,:] + P[k,:,:].T)/2 #make symmetric
@@ -73,7 +73,7 @@ class INS():
                 x_hat[k,:], P[k,:,:], q[k,:] = self.Localizer.corrector(x_check[k,:], P[k,:,:], Rot )
             else:
                 x_hat[k,:] = x_check[k,:]
-            self.x[k,:] = x_hat[k,:]  
+            self.x[k,:] = x_hat[k,:]
         self.x[:,2] = -self.x[:,2] 
         self.rot = self.x[:,6:9]
         self.q = q
