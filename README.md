@@ -48,6 +48,10 @@ pip install pandas==1.1.5
 
 <p align="justify">After cloning this repository to your local computer, you must install <b><a href="https://github.com/utiasSTARS/liegroups" target="_blank">liegroups</a></b> package to run the code if you would like to reproduce the results shown here in this repo or the paper.</p>
 
+<h4>Video Tutorial</h4>
+
+<p align="justify">If one fails or has troublesome experience in setting up the virtual environment <b>pyshoe</b>, the video in <a href="https://www.youtube.com/watch?v=CnA4yF7448c">Turkish</a> is available. English video is to be recorded and shared here soon.</p>
+
 <h3>VICON Room Experiments - Manual Annotation (Corrections) for LLIO</h3>
 
 <p align="justify">To extract a <b>gait-driven system</b> (in other words a <b>stride & heading system</b> - <b>SHS</b>) from VICON training dataset, which is a sampling-frequency driven system (sample-wise INS), displacement and heading change (or (dx, dy) relative position change) values at <b>each</b> stride must be extracted. In addition to relative positioning data, stride indexes and imu data will be used in training a data-driven (also called modern) INS that functions as a stride-wise dead-reckoning system. Some researchers call a data-driven or modern INS as learned inertial odometry.</p>
