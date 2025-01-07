@@ -161,6 +161,7 @@ for file in sensor_data_files:
         traj_list.append(x)
         zv_list.append(zv)
 
+    strideIndex = None # stride indexes will be used to chop imu data for LLIO training & are provided by PyShoe (LSTM) detector
     for i, zv in enumerate(zv_list):
         logging.info(f"Plotting zero velocity detection for {det_list[i].upper()} detector for file {base_filename}.")
         # Apply a heuristic filter to zero velocity labels (via LSTM) to eliminate undesired jumps & achieve correct stride detection
@@ -175,10 +176,13 @@ for file in sensor_data_files:
             # print(f"Time indexes: {timestamps[strideIndex]}")
 
             plt.figure()
-            plt.plot(timestamps[:len(zv_lstm_filtered)], zv_lstm_filtered)
-            plt.scatter(timestamps[strideIndex], zv_lstm_filtered[strideIndex], c='r', marker='x')
+            plt.plot(timestamps[:len(zv_lstm_filtered)], zv_lstm_filtered, label='ZV signal')
+            plt.scatter(timestamps[strideIndex], zv_lstm_filtered[strideIndex], c='r', marker='x', label='Stride')
+            # plot velocity magnitude where velocity is represented with x[:,3:6]
+            plt.plot(timestamps[:len(zv_lstm_filtered)], np.linalg.norm(imu_data.iloc[:, 3:6].values, axis=1), c='g', label='Velocity Magnitude')
+            plt.legend()
             plt.title(f'LSTM filtered ({n}/{numberOfStrides}) - {base_filename}')
-            plt.xlabel('Time [s]'); plt.ylabel('Zero Velocity')
+            plt.xlabel('Time [s]'); plt.ylabel('ZV label [0-1] & Velocity [m/s]'); plt.grid(True, which='both', linestyle='--', linewidth=1.5)
             plt.savefig(os.path.join(output_dir, f'{base_filename}_ZV_{det_list[i].upper()}_filtered.png'), dpi=dpi, bbox_inches='tight')
             plt.close()
 

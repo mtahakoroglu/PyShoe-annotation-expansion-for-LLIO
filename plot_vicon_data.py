@@ -137,7 +137,7 @@ def align_trajectories(traj_est, traj_gt):
 i = 0  # experiment index
 count_training_exp = 0
 # following two lines are used to run selected experiment results
-training_data_tag = [0]*56; training_data_tag[7] = 1 # we left off at exp#8
+training_data_tag = [0]*56; training_data_tag[0:3] = [1]*3 # we left off at exp#8
 # training_data_tag are the experiments to be used in extracting displacement and heading change data for LLIO training
 # training_data_tag = [1, 1, 1, -1, 1, -1, 1, 1, 1, 1, -1, 1, 0, 1, 1, 1, 1, -1, 1, 1, 
 #                     1, 1, 1, 1, 1, 1, -1, 1, 1, -1, 1, -1, 1, 1, 1, -1, 1, -1, 1, 1, 

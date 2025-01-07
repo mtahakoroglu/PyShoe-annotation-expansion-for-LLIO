@@ -31,7 +31,7 @@ class INS():
         self.Q[3:6,3:6] = self.var_gyro*np.identity(3)
         self.config["Q"] = self.Q
         
-        self.sigma_vel = 0.01 #0.01 default
+        self.sigma_vel = 0.01 # 0.01 default
         self.R = np.zeros((3,3))
         self.R[0:3,0:3] = np.power(self.sigma_vel,2)*np.identity(3)   ##measurement noise, 0.01 default
         self.config["R"] = self.R
