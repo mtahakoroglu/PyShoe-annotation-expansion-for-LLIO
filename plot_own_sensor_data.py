@@ -176,13 +176,10 @@ for file in sensor_data_files:
             # print(f"Time indexes: {timestamps[strideIndex]}")
 
             plt.figure()
-            plt.plot(timestamps[:len(zv_lstm_filtered)], zv_lstm_filtered, label='ZV signal')
-            plt.scatter(timestamps[strideIndex], zv_lstm_filtered[strideIndex], c='r', marker='x', label='Stride')
-            # plot velocity magnitude where velocity is represented with x[:,3:6]
-            plt.plot(timestamps[:len(zv_lstm_filtered)], np.linalg.norm(imu_data.iloc[:, 3:6].values, axis=1), c='g', label='Velocity Magnitude')
-            plt.legend()
+            plt.plot(timestamps[:len(zv_lstm_filtered)], zv_lstm_filtered)
+            plt.scatter(timestamps[strideIndex], zv_lstm_filtered[strideIndex], c='r', marker='x')
             plt.title(f'LSTM filtered ({n}/{numberOfStrides}) - {base_filename}')
-            plt.xlabel('Time [s]'); plt.ylabel('ZV label [0-1] & Velocity [m/s]'); plt.grid(True, which='both', linestyle='--', linewidth=1.5)
+            plt.xlabel('Time [s]'); plt.ylabel('Zero Velocity')
             plt.savefig(os.path.join(output_dir, f'{base_filename}_ZV_{det_list[i].upper()}_filtered.png'), dpi=dpi, bbox_inches='tight')
             plt.close()
 
@@ -192,11 +189,11 @@ for file in sensor_data_files:
     reconstructed_traj = reconstruct_trajectory(displacements, heading_changes, initial_position)
 
     # Align the trajectory wrt the selected stride (assuming it and the past strides are linear, i.e., no change in heading)
-    strideAlign = 4
+    strideAlign = 0
     if expNumber == 37:
-        strideAlign = 1
+        strideAlign = 0
     _, theta = calculate_displacement_and_heading(traj_list[-1][:, :2], strideIndex[np.array([0,strideAlign])])
-    theta = theta - np.pi
+    # theta = theta - np.pi
     if expNumber in [28, 29, 30]:
         theta = theta - 3*np.pi/2
     # Apply the rotation
@@ -204,8 +201,8 @@ for file in sensor_data_files:
     aligned_trajectory_SHS = np.squeeze(rotate_trajectory(reconstructed_traj, -theta))
 
     # reverse data in x direction to match with GCP and better illustration in the paper
-    aligned_trajectory_INS[:,0] = -aligned_trajectory_INS[:,0]
-    aligned_trajectory_SHS[:,0] = -aligned_trajectory_SHS[:,0]
+    # aligned_trajectory_INS[:,0] = -aligned_trajectory_INS[:,0]
+    # aligned_trajectory_SHS[:,0] = -aligned_trajectory_SHS[:,0]
 
     # PERFORMANCE EVALUTATION via METRICS
     if GCP_data['GCP_exist_and_correct'].item() and n == numberOfStrides:
