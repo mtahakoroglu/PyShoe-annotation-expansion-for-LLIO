@@ -10,12 +10,12 @@ import glob
 import scipy.io as sio  # Import scipy.io for loading .mat files
 
 # Directory of sensor data files
-sensor_data_dir = 'data/own'
+sensor_data_dir = 'data/own_obsolete'
 sensor_data_files = glob.glob(os.path.join(sensor_data_dir, 'SensorConnectData_*.csv'))
 GCP_files = glob.glob(os.path.join(sensor_data_dir, 'SensorConnectData_*.mat'))
 
 # Set up logging
-output_dir = "results/figs/own"
+output_dir = "results/figs/own_obsolete"
 os.makedirs(output_dir, exist_ok=True)
 log_file = os.path.join(output_dir, 'output.log')
 logging.basicConfig(level=logging.INFO, format='%(message)s',
@@ -166,7 +166,6 @@ for file in sensor_data_files:
         logging.info(f"Plotting zero velocity detection for {det_list[i].upper()} detector for file {base_filename}.")
         # Apply a heuristic filter to zero velocity labels (via LSTM) to eliminate undesired jumps & achieve correct stride detection
         if det_list[i] == 'lstm':
-            
             k = 75 # temporal window size for checking if detected strides are too close
             if expNumber in [33]:
                 k = 100
@@ -178,8 +177,8 @@ for file in sensor_data_files:
             plt.figure()
             plt.plot(timestamps[:len(zv_lstm_filtered)], zv_lstm_filtered, label='ZV signal')
             plt.scatter(timestamps[strideIndex], zv_lstm_filtered[strideIndex], c='r', marker='x', label='Stride')
-            # plot velocity magnitude where velocity is represented with x[:,3:6]
-            plt.plot(timestamps[:len(zv_lstm_filtered)], np.linalg.norm(imu_data.iloc[:, 3:6].values, axis=1), c='g', label='Velocity Magnitude')
+            # # plot velocity magnitude where velocity is represented with x[:,3:6]
+            # plt.plot(timestamps[:len(zv_lstm_filtered)], np.linalg.norm(imu_data.iloc[:, 3:6].values, axis=1), c='g', label='Velocity Magnitude')
             plt.legend()
             plt.title(f'LSTM filtered ({n}/{numberOfStrides}) - {base_filename}')
             plt.xlabel('Time [s]'); plt.ylabel('ZV label [0-1] & Velocity [m/s]'); plt.grid(True, which='both', linestyle='--', linewidth=1.5)

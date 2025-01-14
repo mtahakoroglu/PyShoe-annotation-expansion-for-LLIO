@@ -139,7 +139,7 @@ for file in sensor_data_files:
     expNumber = GCP_data['expID'].item()
     if GCP_data['GCP_exist_and_correct'].item() == True:
         logging.info(f"GCP are available & correct for file {base_filename}.")
-        GCP = GCP_data['GCP_meters']
+        GCP = GCP_data['GCP_meters']; GCP[:,1] = -GCP[:,1] # change made by mtahakoroglu to match with GT alignment
     else:
         logging.info(f"GCP are either not available or not correct for file {base_filename}.")
     GCP_stride_numbers = np.squeeze(GCP_data['GCP_stride_numbers'])
@@ -166,7 +166,6 @@ for file in sensor_data_files:
         logging.info(f"Plotting zero velocity detection for {det_list[i].upper()} detector for file {base_filename}.")
         # Apply a heuristic filter to zero velocity labels (via LSTM) to eliminate undesired jumps & achieve correct stride detection
         if det_list[i] == 'lstm':
-            
             k = 75 # temporal window size for checking if detected strides are too close
             if expNumber in [33]:
                 k = 100
@@ -188,17 +187,25 @@ for file in sensor_data_files:
     initial_position = traj_list[-1][strideIndex[0], :2] # Starting point
     reconstructed_traj = reconstruct_trajectory(displacements, heading_changes, initial_position)
 
-    # Align the trajectory wrt the selected stride (assuming it and the past strides are linear, i.e., no change in heading)
-    strideAlign = 0
-    if expNumber == 37:
-        strideAlign = 0
-    _, theta = calculate_displacement_and_heading(traj_list[-1][:, :2], strideIndex[np.array([0,strideAlign])])
+    # Align the trajectory wrt the selected stride - obsolete (this is an arbitrary rotation to align the trajectory along with x axis)
+    # Align the trajectory wrt the selected GCP - this is a rotation from navigation coordinate frame to world-fix coordinate frame
+    strideAlign = 3; GCP_align = strideAlign
+    # if expNumber == 37:
+    #     strideAlign = 1
+    _, thetaX = calculate_displacement_and_heading(traj_list[-1][:, :2], strideIndex[np.array([0,strideAlign])])
+    _, thetaGCP = calculate_displacement_and_heading(GCP, np.array([0,GCP_align]))
+    theta = thetaX - thetaGCP
+    print(f"theta = {np.degrees(theta)} degrees for experiment #{expNumber}.")
     # theta = theta - np.pi
     if expNumber in [28, 29, 30]:
         theta = theta - 3*np.pi/2
-    # Apply the rotation
-    aligned_trajectory_INS = np.squeeze(rotate_trajectory(traj_list[-1][:,:2], -theta))
-    aligned_trajectory_SHS = np.squeeze(rotate_trajectory(reconstructed_traj, -theta))
+    # Apply the rotation to GCP points instead of INS trajectory - this way we do not change IMU data
+    aligned_trajectory_INS = traj_list[-1][:,:2]
+    aligned_trajectory_SHS = reconstructed_traj
+    GCP = np.squeeze(rotate_trajectory(GCP, theta))
+    
+    # aligned_trajectory_INS = np.squeeze(rotate_trajectory(traj_list[-1][:,:2], -theta))
+    # aligned_trajectory_SHS = np.squeeze(rotate_trajectory(reconstructed_traj, -theta))
 
     # reverse data in x direction to match with GCP and better illustration in the paper
     # aligned_trajectory_INS[:,0] = -aligned_trajectory_INS[:,0]
@@ -273,10 +280,10 @@ for file in sensor_data_files:
     elif expNumber == 33 and strideIndex[12] == 2979:
         strideIndex[12] = 2921-1
         print(f"strideIndex[12] is manually corrected for experiment #{expNumber} after MATLAB inspection.")
-    elif expNumber == 34: # Stride #7 and #15 are missed so at MATLAB side they are manually annotated and inserted into the list
+    elif expNumber == 34: # Stride #7 and #15 are missed; at MATLAB side they are manually annotated and inserted into the list
         strideIndex = np.insert(strideIndex, 7, 1705-1) # Stride #7 index is inserted
         strideIndex = np.insert(strideIndex, 15, 3278-1) # Stride #15 index is inserted
-    elif expNumber == 35: # Stride #{2, 5, 17, 18, 19} are missed so at MATLAB side they are manually annotated and inserted into the list
+    elif expNumber == 35: # Stride #{2, 5, 17, 18, 19} are missed; at MATLAB side they are manually annotated and inserted into the list
         missedStride, missedStrideIndex = [2, 5, 17, 18, 19], [951-1, 1453-1, 3591-1, 3740-1, 3892-1]
         for i in range(len(missedStride)):
             strideIndex = np.insert(strideIndex, missedStride[i], missedStrideIndex[i]) # Stride #i index is inserted
@@ -291,8 +298,18 @@ for file in sensor_data_files:
             strideIndex[43] = 10933-1
         if strideIndex[60] == 14765:
             strideIndex[60] = 14710-1
+    elif expNumber == 38: # Stride #{__,__,__} are missed; at MATLAB side they are manually annotated and inserted into the list
+        missedStride = [5, 6, 7, 17, 19, 20, 21, 22, 23, 24, 25, 26, 28, 29, 30, 31, 41]
+        missedStrideIndex = [1348-1, 1535-1, 1732-1, 3636-1, 3983-1, 4155-1, 4329-1, 4500-1, 4672-1, 4843-1, 
+                             5013-1, 5180-1, 5517-1, 5687-1, 5854-1, 6017-1, 7947-1]
+        for i in range(len(missedStride)):
+            strideIndex = np.insert(strideIndex, missedStride[i], missedStrideIndex[i]) # Stride #i index is inserted
+        if strideIndex[45] == 8831-1:
+            strideIndex[45] = 8763-1
+        if strideIndex[59] == 11758-1:
+            strideIndex[59] = 11686-1
 
-    if expNumber in [32, 33, 34, 35, 36, 37]:
+    if expNumber in [32, 33, 34, 35, 36, 37, 38]: # these experiments either needed stride index correction or introduction
         # Plot annotated stride indexes on IMU data, i.e., the magnitudes of acceleration and angular velocity
         plt.figure()
         plt.plot(timestamps, np.linalg.norm(imu_data.iloc[:, :3].values, axis=1), label=r'$\Vert\mathbf{a}\Vert$')
@@ -306,9 +323,9 @@ for file in sensor_data_files:
         plt.grid(True, which='both', linestyle='--', linewidth=1.5)
         plt.savefig(os.path.join(output_dir, f'{base_filename}_stride_detection_annotation.png'), dpi=600, bbox_inches='tight')
         plt.close()
-    #################### SAVE TRAINING DATA for LLIO TRAINING #################
+    ################################################ SAVE TRAINING DATA for LLIO TRAINING ###############################################
     if extract_LLIO_training_data:
-        # Stride coordinates (GCP) is the target in Gradient Boosting (LLIO) training yet we can save polar coordinates for the sake of completeness
+        # Stride coordinates (GCP) is the target in LLIO training yet we can save polar coordinates for the sake of completeness
         # combined_data = np.column_stack((displacements, heading_changes)) # Combine displacement and heading change data into one array
         print(f"strideIndex.shape = {strideIndex.shape} len(strideIndex) = {len(strideIndex)}")
         print(f"strideIndex = {strideIndex}")
