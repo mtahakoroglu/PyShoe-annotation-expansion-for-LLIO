@@ -174,7 +174,6 @@ for file in vicon_data_files:
         imu_data = np.column_stack((data['imu'][:, :3], data['imu'][:, 3:6]))  # Accel and Gyro data
         timestamps = data['ts'][0]
         gt = data['gt']  # Ground truth from Vicon dataset
-        gt = gt - gt[0,:] # subtract the initial point to amke the GT start from 0 - important when evaluating predicted trajectories
 
         # Initialize INS object with correct parameters
         ins = INS(imu_data, sigma_a=0.00098, sigma_w=8.7266463e-5, T=1.0 / 200)
@@ -203,6 +202,7 @@ for file in vicon_data_files:
         #     k = 85
         zv_filtered, n, strideIndex = heuristic_zv_filter_and_stride_detector(zv, k)
         zv_lstm_filtered, n_lstm_filtered, strideIndexLSTMfiltered = heuristic_zv_filter_and_stride_detector(zv_lstm, k)
+        gt = gt - gt[strideIndex[0],:] # subtract the initial point to make the GT start from 0 - important when evaluating predicted trajectories
         # zv_bilstm_filtered, n_bilstm_filtered, strideIndexBiLSTMfiltered = heuristic_zv_filter_and_stride_detector(zv_bilstm, k)
         # zv_filtered = medfilt(zv_filtered, 15)
         # n, strideIndex = count_one_to_zero_transitions(zv_filtered)
@@ -449,7 +449,7 @@ for file in vicon_data_files:
     else:
         logging.info(f"===================================================================================================================")
         logging.info(f"Processing file {file}")
-        print(f"Experiment {i+1} data is not considered as bipedal locomotion data for the retraining process.".upper())
+        print(f"Experiment {i+1} data is not considered as bipedal locomotion data for LLIO training.".upper())
         # 13th experiment shows a lot of 180° turns, which causes multiple ZV phase and stride detections during the turns.
         # Labeled as 0, i.e., non bi-pedal locomotion data, temporarily. It will be included in future for further research. 
         # 20th experiment: The pedestrian stops in every 5 or 6 strides for a while but it is a valid bipedal locomotion data (confirmed by GCetin's ML code)
@@ -467,5 +467,4 @@ logging.info(f"=================================================================
 logging.info(f"Total traveled distance in {number_of_stride_wise_verified_experiments} VICON room experiments (to be used for LLIO training/test) is {total_distance:.3f} meters.")
 logging.info(f"Total experiment time in {number_of_stride_wise_verified_experiments} VICON room experiments (to be used for LLIO training/test) is {total_traverse_time:.3f}s = {total_traverse_time/60:.3f}mins.")
 logging.info(f"===================================================================================================================")
-print(f"Out of {i} experiments, {count_training_exp} of them will be used in retraining LSTM robust ZV detector.")
 logging.info("Processing complete for all files.")

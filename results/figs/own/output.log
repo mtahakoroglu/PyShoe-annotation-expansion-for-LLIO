@@ -90,7 +90,7 @@ RMSE for GCP 34 stepped on at stride 33 is 0.6899
 RMSE for GCP 35 stepped on at stride 34 is 0.7662
 RMSE for GCP 36 stepped on at stride 35 is 0.8568
 RMSE for GCP 37 stepped on at stride 36 is 0.9283
-RMSE for GCP 38 stepped on at stride 37 is 1.0034
+RMSE for GCP 38 stepped on at stride 37 is 1.0033
 RMSE for GCP 39 stepped on at stride 38 is 1.0921
 RMSE for GCP 40 stepped on at stride 39 is 1.1718
 RMSE for GCP 41 stepped on at stride 40 is 1.2795
@@ -140,8 +140,8 @@ RMSE for GCP 9 stepped on at stride 8 is 0.2462
 RMSE for GCP 10 stepped on at stride 9 is 0.2696
 RMSE for GCP 11 stepped on at stride 10 is 0.3203
 RMSE for GCP 12 stepped on at stride 11 is 0.3500
-RMSE for GCP 13 stepped on at stride 12 is 0.6570
-RMSE for GCP 14 stepped on at stride 13 is 1.4743
+RMSE for GCP 13 stepped on at stride 12 is 0.6571
+RMSE for GCP 14 stepped on at stride 13 is 1.4744
 RMSE for GCP 15 stepped on at stride 14 is 1.5088
 RMSE for GCP 16 stepped on at stride 15 is 1.6245
 RMSE for GCP 17 stepped on at stride 16 is 1.6545
@@ -381,8 +381,8 @@ Experiment #38 is annotated stride-wise & going to be used in LLIO training/test
 Traveled distance is 99.637 meters in experiment #38.
 Travel time is 59.993 seconds in experiment #38.
 ===================================================================================================================
-Total traveled distance in hallway experiments (to be used for LLIO training/test) is 571.967 meters.
-Total traveled distance in hallway experiments (to be used for LLIO training/test) is 454.702s = 7.578mins.
+Total traveled distance in 8 hallway experiments (to be used for LLIO training/test) is 571.967 meters.
+Total traverse time in 8 hallway experiments (to be used for LLIO training/test) is 454.702s = 7.578mins.
 ===================================================================================================================
 There are 8 experiments processed.
 Processing complete for all files.
