@@ -63,8 +63,7 @@ def heuristic_zv_filter_and_stride_detector(zv, k):
 
 # Function to calculate displacement and heading change between stride points
 def calculate_displacement_and_heading(traj, strideIndex):
-    displacements = []
-    heading_changes = []
+    displacements, heading_changes = [], []
     for j in range(1, len(strideIndex)):
         delta_position = traj[strideIndex[j], :2] - traj[strideIndex[j-1], :2]
         displacement = np.linalg.norm(delta_position)
@@ -100,11 +99,12 @@ def rotate_trajectory(trajectory, theta):
 extract_LLIO_training_data = False # used to save csv files for LLIO SHS training (displacement, heading change) and (stride indexes, timestamps, GCP stride coordinates)
 traveled_distances = [] # to keep track of the traveled distances in each experiment for LLIO training data generation
 traverse_times = [] # to keep track of experiment times and eventually total experiment time for LLIO training data generation
+number_of_stride_wise_verified_experiments = 0 # detected stride points must be equal to the actual number
 
 g = 9.8029 # gravity constant
 # processing zero velocity labels to turn a sampling frequency driven system into gait driven system (stride and heading system)
 expCount = 0 # experiment index
-dpi = 400 # for figure resolution
+dpi = 400 # for figure resolution 
 # Process each sensor data file
 for file in sensor_data_files:
     logging.info(f"===================================================================================================================")
@@ -192,31 +192,29 @@ for file in sensor_data_files:
     strideAlign = 3; GCP_align = strideAlign
     # if expNumber == 37:
     #     strideAlign = 1
-    _, thetaX = calculate_displacement_and_heading(traj_list[-1][:, :2], strideIndex[np.array([0,strideAlign])])
+    _, thetaPyShoe = calculate_displacement_and_heading(traj_list[-1][:, :2], strideIndex[np.array([0,strideAlign])])
     _, thetaGCP = calculate_displacement_and_heading(GCP, np.array([0,GCP_align]))
-    theta = thetaX - thetaGCP
+    theta = thetaPyShoe - thetaGCP
     print(f"theta = {np.degrees(theta)} degrees for experiment #{expNumber}.")
     # theta = theta - np.pi
     if expNumber in [28, 29, 30]:
         theta = theta - 3*np.pi/2
     # Apply the rotation to GCP points instead of INS trajectory - this way we do not change IMU data
-    aligned_trajectory_INS = traj_list[-1][:,:2]
-    aligned_trajectory_SHS = reconstructed_traj
+    # !!! NOTICE THAT GCP POINTS CHANGE AFTER THIS POINT !!!
+    # traj_list[-1][:,:2] = np.squeeze(rotate_trajectory(traj_list[-1][:,:2], -theta))
+    # reconstructed_traj = np.squeeze(rotate_trajectory(reconstructed_traj, -theta))
     GCP = np.squeeze(rotate_trajectory(GCP, theta))
     
-    # aligned_trajectory_INS = np.squeeze(rotate_trajectory(traj_list[-1][:,:2], -theta))
-    # aligned_trajectory_SHS = np.squeeze(rotate_trajectory(reconstructed_traj, -theta))
-
     # reverse data in x direction to match with GCP and better illustration in the paper
-    # aligned_trajectory_INS[:,0] = -aligned_trajectory_INS[:,0]
-    # aligned_trajectory_SHS[:,0] = -aligned_trajectory_SHS[:,0]
+    # traj_list[-1][:,:2][:,0] = -traj_list[-1][:,:2][:,0]
+    # reconstructed_traj[:,0] = -reconstructed_traj[:,0]
 
     # PERFORMANCE EVALUTATION via METRICS
     if GCP_data['GCP_exist_and_correct'].item() and n == numberOfStrides:
         k, number_of_GCP = 0, GCP.shape[0]
         logging.info(f"File {base_filename}, i.e., experiment {expNumber} will be used in performance evaluation.")
         # Calculate the RMSE between the GCP and GCP stride in SHS trajectories
-        rmse_GCP = np.sqrt(np.sum((aligned_trajectory_SHS[GCP_stride_numbers] - GCP)**2, axis=1))
+        rmse_GCP = np.sqrt(np.sum((reconstructed_traj[GCP_stride_numbers] - GCP)**2, axis=1))
         logging.info(f"There are {rmse_GCP.shape[0]} GCP for file {base_filename}, i.e., experiment {expNumber}.")
         for i in range(rmse_GCP.shape[0]):
             k += 1 # GCP index
@@ -229,9 +227,9 @@ for file in sensor_data_files:
     if GCP_data['GCP_exist_and_correct'].item():
         plt.scatter(GCP[:,0], GCP[:,1], color='r', s=30, marker='s', edgecolors='k', label="GCP")
     if n == numberOfStrides and not extract_LLIO_training_data: # experiments after 30 are conducted for expanding/enlarging LLIO training dataset
-        plt.scatter(aligned_trajectory_SHS[GCP_stride_numbers,0], aligned_trajectory_SHS[GCP_stride_numbers,1], color='r', s=45, 
+        plt.scatter(reconstructed_traj[GCP_stride_numbers,0], reconstructed_traj[GCP_stride_numbers,1], color='r', s=45, 
                     marker='o', facecolor='none', linewidths=1.5, label="GCP stride")
-    plt.plot(aligned_trajectory_INS[:,0], aligned_trajectory_INS[:,1], linewidth = 1.5, color='b', label=legend[-1])
+    plt.plot(traj_list[-1][:,:2][:,0], traj_list[-1][:,:2][:,1], linewidth = 1.5, color='b', label=legend[-1])
     plt.legend(fontsize=15); plt.xlabel('x [m]', fontsize=22); plt.ylabel('y [m]', fontsize=22)
     plt.title(f'{base_filename}', fontsize=22)
     plt.tick_params(labelsize=22)
@@ -243,12 +241,12 @@ for file in sensor_data_files:
     plt.close()
 
     plt.figure()
-    plt.plot(aligned_trajectory_SHS[:,0], aligned_trajectory_SHS[:,1], 'b.-', linewidth = 1.4, markersize=5, markeredgewidth=1.2, label="PyShoe (LSTM) SHS")
-    # plt.plot(aligned_trajectory_SHS[-3:,0], aligned_trajectory_SHS[-3:,1], 'bx-', linewidth = 1.4, markersize=5, markeredgewidth=1.2, label="PyShoe (LSTM) SHS last three")
+    plt.plot(reconstructed_traj[:,0], reconstructed_traj[:,1], 'b.-', linewidth = 1.4, markersize=5, markeredgewidth=1.2, label="PyShoe (LSTM) SHS")
+    # plt.plot(reconstructed_traj[-3:,0], reconstructed_traj[-3:,1], 'bx-', linewidth = 1.4, markersize=5, markeredgewidth=1.2, label="PyShoe (LSTM) SHS last three")
     if GCP_data['GCP_exist_and_correct'].item():
         plt.scatter(GCP[:,0], GCP[:,1], color='r', s=30, marker='s', edgecolors='k', label="GCP")
     if n == numberOfStrides and not extract_LLIO_training_data: # experiments after 30 are conducted for expanding/enlarging LLIO training dataset
-        plt.scatter(aligned_trajectory_SHS[GCP_stride_numbers,0], aligned_trajectory_SHS[GCP_stride_numbers,1], color='r', s=45, 
+        plt.scatter(reconstructed_traj[GCP_stride_numbers,0], reconstructed_traj[GCP_stride_numbers,1], color='r', s=45, 
                 marker='o', facecolor='none', linewidths=1.5, label="GCP stride")
     plt.legend(fontsize=15); plt.xlabel('x [m]', fontsize=22); plt.ylabel('y [m]', fontsize=22)
     plt.title(f'{n}/{numberOfStrides} strides detected', fontsize=22)
@@ -325,6 +323,7 @@ for file in sensor_data_files:
         plt.close()
     ################################################ SAVE TRAINING DATA for LLIO TRAINING ###############################################
     if extract_LLIO_training_data:
+        number_of_stride_wise_verified_experiments += 1
         # Stride coordinates (GCP) is the target in LLIO training yet we can save polar coordinates for the sake of completeness
         # combined_data = np.column_stack((displacements, heading_changes)) # Combine displacement and heading change data into one array
         print(f"strideIndex.shape = {strideIndex.shape} len(strideIndex) = {len(strideIndex)}")
@@ -354,7 +353,7 @@ for file in sensor_data_files:
 
         # save stride indexes, timestamps, GCP stride coordinates and IMU data to mat file
         sio.savemat(os.path.join(extracted_training_data_dir, f'LLIO_training_data/{base_filename}_LLIO.mat'), 
-                    {'strideIndex': strideIndex, 'timestamps': timestamps, 'GCP': GCP, 'imu_data': imu_data.values, 'pyshoeTrajectory': aligned_trajectory_INS})
+                    {'strideIndex': strideIndex, 'timestamps': timestamps, 'GCP': GCP, 'imu_data': imu_data.values, 'pyshoeTrajectory': traj_list[-1][:,:2]})
     else:
         # still save the stride indexes and the associated timestamps for further analysis in MATLAB side
         sio.savemat(os.path.join(extracted_training_data_dir, f'LLIO_nontraining_data/{base_filename}_LLIO_nontraining_data.mat'), 
@@ -362,8 +361,8 @@ for file in sensor_data_files:
 
 total_distance, total_traverse_time = sum(traveled_distances), sum(traverse_times)
 logging.info(f"===================================================================================================================")
-logging.info(f"Total traveled distance in hallway experiments (to be used for LLIO training/test) is {total_distance:.3f} meters.")
-logging.info(f"Total traveled distance in hallway experiments (to be used for LLIO training/test) is {total_traverse_time:.3f}s = {total_traverse_time/60:.3f}mins.")
+logging.info(f"Total traveled distance in {number_of_stride_wise_verified_experiments} hallway experiments (to be used for LLIO training/test) is {total_distance:.3f} meters.")
+logging.info(f"Total traverse time in {number_of_stride_wise_verified_experiments} hallway experiments (to be used for LLIO training/test) is {total_traverse_time:.3f}s = {total_traverse_time/60:.3f}mins.")
 logging.info(f"===================================================================================================================")
 logging.info(f"There are {expCount} experiments processed.")
 logging.info("Processing complete for all files.")

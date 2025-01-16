@@ -1,0 +1,1094 @@
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-22-03.mat
+Processing shoe detector for file data/vicon/processed\2017-11-22-11-22-03.mat
+Applying heuristic filter to optimal ZUPT detector SHOE generated ZV values for correct stride detection.
+Detected 22/22 strides with (filtered) optimal detector SHOE in experiment 1.
+Experiment #1 is annotated stride-wise & going to be used in LLIO training/testing.
+Traveled distance is 27.339 meters in experiment #1.
+Travel time is 32.445 seconds in experiment #1.
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-22-46.mat
+Processing ared detector for file data/vicon/processed\2017-11-22-11-22-46.mat
+Applying heuristic filter to optimal ZUPT detector ARED generated ZV values for correct stride detection.
+Detected 21/21 strides with (filtered) optimal detector ARED in experiment 2.
+Experiment #2 is annotated stride-wise & going to be used in LLIO training/testing.
+Traveled distance is 22.567 meters in experiment #2.
+Travel time is 33.760 seconds in experiment #2.
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-23-25.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-25-20.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-26-05.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-26-46.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-27-30.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-28-03.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-28-39.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-30-14.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-35-59.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-36-45.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-37-47.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-38-45.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-39-47.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-40-44.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-44-47.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-48-35.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-49-03.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-49-29.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-50-42.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-51-23.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-52-02.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-27-11-11-24.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-27-11-11-53.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-27-11-12-18.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-27-11-12-44.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-27-11-13-10.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-27-11-13-41.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-27-11-14-03.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-27-11-14-52.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-27-11-17-28.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-27-11-18-11.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-27-11-19-16.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-27-11-22-22.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-27-11-23-18.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-27-11-24-07.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-27-11-25-12.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-12-15-17-59-19.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-12-15-17-59-50.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-12-15-18-00-13.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-12-15-18-00-40.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-12-15-18-01-18.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-12-15-18-01-51.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-12-15-18-02-28.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-12-15-18-03-05.mat
+===================================================================================================================
+Processing file data/vicon/processed\2018-02-09-11-16-53.mat
+===================================================================================================================
+Processing file data/vicon/processed\2018-02-09-11-18-04.mat
+===================================================================================================================
+Processing file data/vicon/processed\2018-02-09-11-19-39.mat
+===================================================================================================================
+Processing file data/vicon/processed\2018-02-09-11-22-01.mat
+===================================================================================================================
+Processing file data/vicon/processed\2018-02-09-11-29-43.mat
+===================================================================================================================
+Processing file data/vicon/processed\2018-02-09-11-32-01.mat
+===================================================================================================================
+Processing file data/vicon/processed\2018-02-22-10-08-52.mat
+===================================================================================================================
+Processing file data/vicon/processed\2018-02-22-10-09-36.mat
+===================================================================================================================
+Processing file data/vicon/processed\2018-02-22-10-10-29.mat
+===================================================================================================================
+Processing file data/vicon/processed\2018-02-22-10-10-56.mat
+===================================================================================================================
+Total traveled distance in VICON room experiments (to be used for LLIO training/test) is 49.906 meters.
+Total experiment time in VICON room experiments (to be used for LLIO training/test) is 66.205s = 1.103mins.
+===================================================================================================================
+Processing complete for all files.
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-22-03.mat
+Processing SHOE detector for file data/vicon/processed\2017-11-22-11-22-03.mat
+Applying heuristic filter to optimal ZUPT detector SHOE generated ZV values for correct stride detection.
+Detected 22/22 strides with (filtered) optimal detector SHOE in experiment 1.
+Experiment #1 is annotated stride-wise & going to be used in LLIO training/testing.
+Traveled distance is 27.339 meters in experiment #1.
+Travel time is 32.445 seconds in experiment #1.
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-22-46.mat
+Processing ARED detector for file data/vicon/processed\2017-11-22-11-22-46.mat
+Applying heuristic filter to optimal ZUPT detector ARED generated ZV values for correct stride detection.
+Detected 21/21 strides with (filtered) optimal detector ARED in experiment 2.
+Experiment #2 is annotated stride-wise & going to be used in LLIO training/testing.
+Traveled distance is 22.567 meters in experiment #2.
+Travel time is 33.760 seconds in experiment #2.
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-23-25.mat
+Processing SHOE detector for file data/vicon/processed\2017-11-22-11-23-25.mat
+Applying heuristic filter to optimal ZUPT detector SHOE generated ZV values for correct stride detection.
+Detected 21/21 strides with (filtered) optimal detector SHOE in experiment 3.
+Experiment #3 is annotated stride-wise & going to be used in LLIO training/testing.
+Traveled distance is 23.871 meters in experiment #3.
+Travel time is 35.580 seconds in experiment #3.
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-25-20.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-26-05.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-26-46.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-27-30.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-28-03.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-28-39.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-30-14.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-35-59.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-36-45.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-37-47.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-38-45.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-39-47.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-40-44.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-44-47.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-48-35.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-49-03.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-49-29.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-50-42.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-51-23.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-52-02.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-27-11-11-24.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-27-11-11-53.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-27-11-12-18.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-27-11-12-44.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-27-11-13-10.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-27-11-13-41.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-27-11-14-03.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-27-11-14-52.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-27-11-17-28.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-27-11-18-11.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-27-11-19-16.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-27-11-22-22.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-27-11-23-18.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-27-11-24-07.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-27-11-25-12.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-12-15-17-59-19.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-12-15-17-59-50.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-12-15-18-00-13.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-12-15-18-00-40.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-12-15-18-01-18.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-12-15-18-01-51.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-12-15-18-02-28.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-12-15-18-03-05.mat
+===================================================================================================================
+Processing file data/vicon/processed\2018-02-09-11-16-53.mat
+===================================================================================================================
+Processing file data/vicon/processed\2018-02-09-11-18-04.mat
+===================================================================================================================
+Processing file data/vicon/processed\2018-02-09-11-19-39.mat
+===================================================================================================================
+Processing file data/vicon/processed\2018-02-09-11-22-01.mat
+===================================================================================================================
+Processing file data/vicon/processed\2018-02-09-11-29-43.mat
+===================================================================================================================
+Processing file data/vicon/processed\2018-02-09-11-32-01.mat
+===================================================================================================================
+Processing file data/vicon/processed\2018-02-22-10-08-52.mat
+===================================================================================================================
+Processing file data/vicon/processed\2018-02-22-10-09-36.mat
+===================================================================================================================
+Processing file data/vicon/processed\2018-02-22-10-10-29.mat
+===================================================================================================================
+Processing file data/vicon/processed\2018-02-22-10-10-56.mat
+===================================================================================================================
+Total traveled distance in VICON room experiments (to be used for LLIO training/test) is 73.777 meters.
+Total experiment time in VICON room experiments (to be used for LLIO training/test) is 101.784s = 1.696mins.
+===================================================================================================================
+Processing complete for all files.
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-22-03.mat
+Processing SHOE detector for file data/vicon/processed\2017-11-22-11-22-03.mat
+Applying heuristic filter to optimal ZUPT detector SHOE generated ZV values for correct stride detection.
+Detected 22/22 strides with (filtered) optimal detector SHOE in experiment 1.
+Experiment #1 is annotated stride-wise & going to be used in LLIO training/testing.
+Traveled distance is 27.339 meters in experiment #1.
+Travel time is 32.445 seconds in experiment #1.
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-22-46.mat
+Processing ARED detector for file data/vicon/processed\2017-11-22-11-22-46.mat
+Applying heuristic filter to optimal ZUPT detector ARED generated ZV values for correct stride detection.
+Detected 21/21 strides with (filtered) optimal detector ARED in experiment 2.
+Experiment #2 is annotated stride-wise & going to be used in LLIO training/testing.
+Traveled distance is 22.567 meters in experiment #2.
+Travel time is 33.760 seconds in experiment #2.
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-23-25.mat
+Processing SHOE detector for file data/vicon/processed\2017-11-22-11-23-25.mat
+Applying heuristic filter to optimal ZUPT detector SHOE generated ZV values for correct stride detection.
+Detected 21/21 strides with (filtered) optimal detector SHOE in experiment 3.
+Experiment #3 is annotated stride-wise & going to be used in LLIO training/testing.
+Traveled distance is 23.871 meters in experiment #3.
+Travel time is 35.580 seconds in experiment #3.
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-25-20.mat
+Processing SHOE detector for file data/vicon/processed\2017-11-22-11-25-20.mat
+Applying heuristic filter to optimal ZUPT detector SHOE generated ZV values for correct stride detection.
+Detected 17/18 strides with (filtered) optimal detector SHOE in experiment 4.
+Applying stride detection to the combined zero velocity detection results for experiment 4.
+Detected 18/18 strides detected with the combined ZV detector in the experiment 4.
+Experiment #4 is annotated stride-wise & going to be used in LLIO training/testing.
+Traveled distance is 25.628 meters in experiment #4.
+Travel time is 26.610 seconds in experiment #4.
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-26-05.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-26-46.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-27-30.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-28-03.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-28-39.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-30-14.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-35-59.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-36-45.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-37-47.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-38-45.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-39-47.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-40-44.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-44-47.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-48-35.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-49-03.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-49-29.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-50-42.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-51-23.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-52-02.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-27-11-11-24.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-27-11-11-53.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-27-11-12-18.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-27-11-12-44.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-27-11-13-10.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-27-11-13-41.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-27-11-14-03.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-27-11-14-52.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-27-11-17-28.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-27-11-18-11.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-27-11-19-16.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-27-11-22-22.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-27-11-23-18.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-27-11-24-07.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-27-11-25-12.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-12-15-17-59-19.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-12-15-17-59-50.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-12-15-18-00-13.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-12-15-18-00-40.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-12-15-18-01-18.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-12-15-18-01-51.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-12-15-18-02-28.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-12-15-18-03-05.mat
+===================================================================================================================
+Processing file data/vicon/processed\2018-02-09-11-16-53.mat
+===================================================================================================================
+Processing file data/vicon/processed\2018-02-09-11-18-04.mat
+===================================================================================================================
+Processing file data/vicon/processed\2018-02-09-11-19-39.mat
+===================================================================================================================
+Processing file data/vicon/processed\2018-02-09-11-22-01.mat
+===================================================================================================================
+Processing file data/vicon/processed\2018-02-09-11-29-43.mat
+===================================================================================================================
+Processing file data/vicon/processed\2018-02-09-11-32-01.mat
+===================================================================================================================
+Processing file data/vicon/processed\2018-02-22-10-08-52.mat
+===================================================================================================================
+Processing file data/vicon/processed\2018-02-22-10-09-36.mat
+===================================================================================================================
+Processing file data/vicon/processed\2018-02-22-10-10-29.mat
+===================================================================================================================
+Processing file data/vicon/processed\2018-02-22-10-10-56.mat
+===================================================================================================================
+Total traveled distance in VICON room experiments (to be used for LLIO training/test) is 99.404 meters.
+Total experiment time in VICON room experiments (to be used for LLIO training/test) is 128.394s = 2.140mins.
+===================================================================================================================
+Processing complete for all files.
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-22-03.mat
+Processing SHOE detector for file data/vicon/processed\2017-11-22-11-22-03.mat
+Applying heuristic filter to optimal ZUPT detector SHOE generated ZV values for correct stride detection.
+Detected 22/22 strides with (filtered) optimal detector SHOE in experiment 1.
+Experiment #1 is annotated stride-wise & going to be used in LLIO training/testing.
+Traveled distance is 27.339 meters in experiment #1.
+Travel time is 32.445 seconds in experiment #1.
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-22-46.mat
+Processing ARED detector for file data/vicon/processed\2017-11-22-11-22-46.mat
+Applying heuristic filter to optimal ZUPT detector ARED generated ZV values for correct stride detection.
+Detected 21/21 strides with (filtered) optimal detector ARED in experiment 2.
+Experiment #2 is annotated stride-wise & going to be used in LLIO training/testing.
+Traveled distance is 22.567 meters in experiment #2.
+Travel time is 33.760 seconds in experiment #2.
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-23-25.mat
+Processing SHOE detector for file data/vicon/processed\2017-11-22-11-23-25.mat
+Applying heuristic filter to optimal ZUPT detector SHOE generated ZV values for correct stride detection.
+Detected 21/21 strides with (filtered) optimal detector SHOE in experiment 3.
+Experiment #3 is annotated stride-wise & going to be used in LLIO training/testing.
+Traveled distance is 23.871 meters in experiment #3.
+Travel time is 35.580 seconds in experiment #3.
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-25-20.mat
+Processing SHOE detector for file data/vicon/processed\2017-11-22-11-25-20.mat
+Applying heuristic filter to optimal ZUPT detector SHOE generated ZV values for correct stride detection.
+Detected 17/18 strides with (filtered) optimal detector SHOE in experiment 4.
+Applying stride detection to the combined zero velocity detection results for experiment 4.
+Detected 18/18 strides detected with the combined ZV detector in the experiment 4.
+Experiment #4 is annotated stride-wise & going to be used in LLIO training/testing.
+Traveled distance is 25.628 meters in experiment #4.
+Travel time is 26.610 seconds in experiment #4.
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-26-05.mat
+Processing SHOE detector for file data/vicon/processed\2017-11-22-11-26-05.mat
+Applying heuristic filter to optimal ZUPT detector SHOE generated ZV values for correct stride detection.
+Detected 26/26 strides with (filtered) optimal detector SHOE in experiment 5.
+Experiment #5 is annotated stride-wise & going to be used in LLIO training/testing.
+Traveled distance is 29.713 meters in experiment #5.
+Travel time is 37.620 seconds in experiment #5.
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-26-46.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-27-30.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-28-03.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-28-39.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-30-14.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-35-59.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-36-45.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-37-47.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-38-45.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-39-47.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-40-44.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-44-47.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-48-35.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-49-03.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-49-29.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-50-42.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-51-23.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-52-02.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-27-11-11-24.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-27-11-11-53.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-27-11-12-18.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-27-11-12-44.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-27-11-13-10.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-27-11-13-41.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-27-11-14-03.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-27-11-14-52.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-27-11-17-28.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-27-11-18-11.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-27-11-19-16.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-27-11-22-22.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-27-11-23-18.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-27-11-24-07.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-27-11-25-12.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-12-15-17-59-19.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-12-15-17-59-50.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-12-15-18-00-13.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-12-15-18-00-40.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-12-15-18-01-18.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-12-15-18-01-51.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-12-15-18-02-28.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-12-15-18-03-05.mat
+===================================================================================================================
+Processing file data/vicon/processed\2018-02-09-11-16-53.mat
+===================================================================================================================
+Processing file data/vicon/processed\2018-02-09-11-18-04.mat
+===================================================================================================================
+Processing file data/vicon/processed\2018-02-09-11-19-39.mat
+===================================================================================================================
+Processing file data/vicon/processed\2018-02-09-11-22-01.mat
+===================================================================================================================
+Processing file data/vicon/processed\2018-02-09-11-29-43.mat
+===================================================================================================================
+Processing file data/vicon/processed\2018-02-09-11-32-01.mat
+===================================================================================================================
+Processing file data/vicon/processed\2018-02-22-10-08-52.mat
+===================================================================================================================
+Processing file data/vicon/processed\2018-02-22-10-09-36.mat
+===================================================================================================================
+Processing file data/vicon/processed\2018-02-22-10-10-29.mat
+===================================================================================================================
+Processing file data/vicon/processed\2018-02-22-10-10-56.mat
+===================================================================================================================
+Total traveled distance in VICON room experiments (to be used for LLIO training/test) is 129.117 meters.
+Total experiment time in VICON room experiments (to be used for LLIO training/test) is 166.014s = 2.767mins.
+===================================================================================================================
+Processing complete for all files.
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-22-03.mat
+Processing SHOE detector for file data/vicon/processed\2017-11-22-11-22-03.mat
+Applying heuristic filter to optimal ZUPT detector SHOE generated ZV values for correct stride detection.
+Detected 22/22 strides with (filtered) optimal detector SHOE in experiment 1.
+Experiment #1 is annotated stride-wise & going to be used in LLIO training/testing.
+Traveled distance is 27.339 meters in experiment #1.
+Travel time is 32.445 seconds in experiment #1.
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-22-46.mat
+Processing ARED detector for file data/vicon/processed\2017-11-22-11-22-46.mat
+Applying heuristic filter to optimal ZUPT detector ARED generated ZV values for correct stride detection.
+Detected 21/21 strides with (filtered) optimal detector ARED in experiment 2.
+Experiment #2 is annotated stride-wise & going to be used in LLIO training/testing.
+Traveled distance is 22.567 meters in experiment #2.
+Travel time is 33.760 seconds in experiment #2.
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-23-25.mat
+Processing SHOE detector for file data/vicon/processed\2017-11-22-11-23-25.mat
+Applying heuristic filter to optimal ZUPT detector SHOE generated ZV values for correct stride detection.
+Detected 21/21 strides with (filtered) optimal detector SHOE in experiment 3.
+Experiment #3 is annotated stride-wise & going to be used in LLIO training/testing.
+Traveled distance is 23.871 meters in experiment #3.
+Travel time is 35.580 seconds in experiment #3.
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-25-20.mat
+Processing SHOE detector for file data/vicon/processed\2017-11-22-11-25-20.mat
+Applying heuristic filter to optimal ZUPT detector SHOE generated ZV values for correct stride detection.
+Detected 17/18 strides with (filtered) optimal detector SHOE in experiment 4.
+Applying stride detection to the combined zero velocity detection results for experiment 4.
+Detected 18/18 strides detected with the combined ZV detector in the experiment 4.
+Experiment #4 is annotated stride-wise & going to be used in LLIO training/testing.
+Traveled distance is 25.628 meters in experiment #4.
+Travel time is 26.610 seconds in experiment #4.
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-26-05.mat
+Processing SHOE detector for file data/vicon/processed\2017-11-22-11-26-05.mat
+Applying heuristic filter to optimal ZUPT detector SHOE generated ZV values for correct stride detection.
+Detected 26/26 strides with (filtered) optimal detector SHOE in experiment 5.
+Experiment #5 is annotated stride-wise & going to be used in LLIO training/testing.
+Traveled distance is 29.713 meters in experiment #5.
+Travel time is 37.620 seconds in experiment #5.
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-26-46.mat
+Processing ARED detector for file data/vicon/processed\2017-11-22-11-26-46.mat
+Applying heuristic filter to optimal ZUPT detector ARED generated ZV values for correct stride detection.
+Detected 23/24 strides with (filtered) optimal detector ARED in experiment 6.
+Applying stride detection to the combined zero velocity detection results for experiment 6.
+Detected 24/24 strides detected with the combined ZV detector in the experiment 6.
+Experiment #6 is annotated stride-wise & going to be used in LLIO training/testing.
+Traveled distance is 30.523 meters in experiment #6.
+Travel time is 32.770 seconds in experiment #6.
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-27-30.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-28-03.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-28-39.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-30-14.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-35-59.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-36-45.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-37-47.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-38-45.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-39-47.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-40-44.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-44-47.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-48-35.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-49-03.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-49-29.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-50-42.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-51-23.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-52-02.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-27-11-11-24.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-27-11-11-53.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-27-11-12-18.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-27-11-12-44.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-27-11-13-10.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-27-11-13-41.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-27-11-14-03.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-27-11-14-52.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-27-11-17-28.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-27-11-18-11.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-27-11-19-16.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-27-11-22-22.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-27-11-23-18.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-27-11-24-07.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-27-11-25-12.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-12-15-17-59-19.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-12-15-17-59-50.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-12-15-18-00-13.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-12-15-18-00-40.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-12-15-18-01-18.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-12-15-18-01-51.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-12-15-18-02-28.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-12-15-18-03-05.mat
+===================================================================================================================
+Processing file data/vicon/processed\2018-02-09-11-16-53.mat
+===================================================================================================================
+Processing file data/vicon/processed\2018-02-09-11-18-04.mat
+===================================================================================================================
+Processing file data/vicon/processed\2018-02-09-11-19-39.mat
+===================================================================================================================
+Processing file data/vicon/processed\2018-02-09-11-22-01.mat
+===================================================================================================================
+Processing file data/vicon/processed\2018-02-09-11-29-43.mat
+===================================================================================================================
+Processing file data/vicon/processed\2018-02-09-11-32-01.mat
+===================================================================================================================
+Processing file data/vicon/processed\2018-02-22-10-08-52.mat
+===================================================================================================================
+Processing file data/vicon/processed\2018-02-22-10-09-36.mat
+===================================================================================================================
+Processing file data/vicon/processed\2018-02-22-10-10-29.mat
+===================================================================================================================
+Processing file data/vicon/processed\2018-02-22-10-10-56.mat
+===================================================================================================================
+Total traveled distance in VICON room experiments (to be used for LLIO training/test) is 159.640 meters.
+Total experiment time in VICON room experiments (to be used for LLIO training/test) is 198.784s = 3.313mins.
+===================================================================================================================
+Processing complete for all files.
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-22-03.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-22-46.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-23-25.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-25-20.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-26-05.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-26-46.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-27-30.mat
+Processing SHOE detector for file data/vicon/processed\2017-11-22-11-27-30.mat
+Applying heuristic filter to optimal ZUPT detector SHOE generated ZV values for correct stride detection.
+Detected 18/18 strides with (filtered) optimal detector SHOE in experiment 7.
+Experiment #7 is annotated stride-wise & going to be used in LLIO training/testing.
+Traveled distance is 8.414 meters in experiment #7.
+Travel time is 28.415 seconds in experiment #7.
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-28-03.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-28-39.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-30-14.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-35-59.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-36-45.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-37-47.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-38-45.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-39-47.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-40-44.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-44-47.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-48-35.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-49-03.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-49-29.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-50-42.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-51-23.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-52-02.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-27-11-11-24.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-27-11-11-53.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-27-11-12-18.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-27-11-12-44.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-27-11-13-10.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-27-11-13-41.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-27-11-14-03.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-27-11-14-52.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-27-11-17-28.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-27-11-18-11.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-27-11-19-16.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-27-11-22-22.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-27-11-23-18.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-27-11-24-07.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-27-11-25-12.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-12-15-17-59-19.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-12-15-17-59-50.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-12-15-18-00-13.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-12-15-18-00-40.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-12-15-18-01-18.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-12-15-18-01-51.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-12-15-18-02-28.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-12-15-18-03-05.mat
+===================================================================================================================
+Processing file data/vicon/processed\2018-02-09-11-16-53.mat
+===================================================================================================================
+Processing file data/vicon/processed\2018-02-09-11-18-04.mat
+===================================================================================================================
+Processing file data/vicon/processed\2018-02-09-11-19-39.mat
+===================================================================================================================
+Processing file data/vicon/processed\2018-02-09-11-22-01.mat
+===================================================================================================================
+Processing file data/vicon/processed\2018-02-09-11-29-43.mat
+===================================================================================================================
+Processing file data/vicon/processed\2018-02-09-11-32-01.mat
+===================================================================================================================
+Processing file data/vicon/processed\2018-02-22-10-08-52.mat
+===================================================================================================================
+Processing file data/vicon/processed\2018-02-22-10-09-36.mat
+===================================================================================================================
+Processing file data/vicon/processed\2018-02-22-10-10-29.mat
+===================================================================================================================
+Processing file data/vicon/processed\2018-02-22-10-10-56.mat
+===================================================================================================================
+Total traveled distance in VICON room experiments (to be used for LLIO training/test) is 8.414 meters.
+Total experiment time in VICON room experiments (to be used for LLIO training/test) is 28.415s = 0.474mins.
+===================================================================================================================
+Processing complete for all files.
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-22-03.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-22-46.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-23-25.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-25-20.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-26-05.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-26-46.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-27-30.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-28-03.mat
+Processing SHOE detector for file data/vicon/processed\2017-11-22-11-28-03.mat
+Applying heuristic filter to optimal ZUPT detector SHOE generated ZV values for correct stride detection.
+Detected 20/20 strides with (filtered) optimal detector SHOE in experiment 8.
+Experiment #8 is annotated stride-wise & going to be used in LLIO training/testing.
+Traveled distance is 8.216 meters in experiment #8.
+Travel time is 26.015 seconds in experiment #8.
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-28-39.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-30-14.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-35-59.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-36-45.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-37-47.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-38-45.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-39-47.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-40-44.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-44-47.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-48-35.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-49-03.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-49-29.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-50-42.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-51-23.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-52-02.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-27-11-11-24.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-27-11-11-53.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-27-11-12-18.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-27-11-12-44.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-27-11-13-10.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-27-11-13-41.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-27-11-14-03.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-27-11-14-52.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-27-11-17-28.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-27-11-18-11.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-27-11-19-16.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-27-11-22-22.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-27-11-23-18.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-27-11-24-07.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-27-11-25-12.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-12-15-17-59-19.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-12-15-17-59-50.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-12-15-18-00-13.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-12-15-18-00-40.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-12-15-18-01-18.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-12-15-18-01-51.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-12-15-18-02-28.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-12-15-18-03-05.mat
+===================================================================================================================
+Processing file data/vicon/processed\2018-02-09-11-16-53.mat
+===================================================================================================================
+Processing file data/vicon/processed\2018-02-09-11-18-04.mat
+===================================================================================================================
+Processing file data/vicon/processed\2018-02-09-11-19-39.mat
+===================================================================================================================
+Processing file data/vicon/processed\2018-02-09-11-22-01.mat
+===================================================================================================================
+Processing file data/vicon/processed\2018-02-09-11-29-43.mat
+===================================================================================================================
+Processing file data/vicon/processed\2018-02-09-11-32-01.mat
+===================================================================================================================
+Processing file data/vicon/processed\2018-02-22-10-08-52.mat
+===================================================================================================================
+Processing file data/vicon/processed\2018-02-22-10-09-36.mat
+===================================================================================================================
+Processing file data/vicon/processed\2018-02-22-10-10-29.mat
+===================================================================================================================
+Processing file data/vicon/processed\2018-02-22-10-10-56.mat
+===================================================================================================================
+Total traveled distance in VICON room experiments (to be used for LLIO training/test) is 8.216 meters.
+Total experiment time in VICON room experiments (to be used for LLIO training/test) is 26.015s = 0.434mins.
+===================================================================================================================
+Processing complete for all files.
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-22-03.mat
+Processing SHOE detector for file data/vicon/processed\2017-11-22-11-22-03.mat
+Applying heuristic filter to optimal ZUPT detector SHOE generated ZV values for correct stride detection.
+Detected 22/22 strides with (filtered) optimal detector SHOE in experiment 1.
+Experiment #1 is annotated stride-wise & going to be used in LLIO training/testing.
+Traveled distance is 27.339 meters in experiment #1.
+Travel time is 32.445 seconds in experiment #1.
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-22-46.mat
+Processing ARED detector for file data/vicon/processed\2017-11-22-11-22-46.mat
+Applying heuristic filter to optimal ZUPT detector ARED generated ZV values for correct stride detection.
+Detected 21/21 strides with (filtered) optimal detector ARED in experiment 2.
+Experiment #2 is annotated stride-wise & going to be used in LLIO training/testing.
+Traveled distance is 22.567 meters in experiment #2.
+Travel time is 33.760 seconds in experiment #2.
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-23-25.mat
+Processing SHOE detector for file data/vicon/processed\2017-11-22-11-23-25.mat
+Applying heuristic filter to optimal ZUPT detector SHOE generated ZV values for correct stride detection.
+Detected 21/21 strides with (filtered) optimal detector SHOE in experiment 3.
+Experiment #3 is annotated stride-wise & going to be used in LLIO training/testing.
+Traveled distance is 23.871 meters in experiment #3.
+Travel time is 35.580 seconds in experiment #3.
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-25-20.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-26-05.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-26-46.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-27-30.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-28-03.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-28-39.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-30-14.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-35-59.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-36-45.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-37-47.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-38-45.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-39-47.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-40-44.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-44-47.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-48-35.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-49-03.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-49-29.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-50-42.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-51-23.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-22-11-52-02.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-27-11-11-24.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-27-11-11-53.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-27-11-12-18.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-27-11-12-44.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-27-11-13-10.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-27-11-13-41.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-27-11-14-03.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-27-11-14-52.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-27-11-17-28.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-27-11-18-11.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-27-11-19-16.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-27-11-22-22.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-27-11-23-18.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-27-11-24-07.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-11-27-11-25-12.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-12-15-17-59-19.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-12-15-17-59-50.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-12-15-18-00-13.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-12-15-18-00-40.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-12-15-18-01-18.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-12-15-18-01-51.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-12-15-18-02-28.mat
+===================================================================================================================
+Processing file data/vicon/processed\2017-12-15-18-03-05.mat
+===================================================================================================================
+Processing file data/vicon/processed\2018-02-09-11-16-53.mat
+===================================================================================================================
+Processing file data/vicon/processed\2018-02-09-11-18-04.mat
+===================================================================================================================
+Processing file data/vicon/processed\2018-02-09-11-19-39.mat
+===================================================================================================================
+Processing file data/vicon/processed\2018-02-09-11-22-01.mat
+===================================================================================================================
+Processing file data/vicon/processed\2018-02-09-11-29-43.mat
+===================================================================================================================
+Processing file data/vicon/processed\2018-02-09-11-32-01.mat
+===================================================================================================================
+Processing file data/vicon/processed\2018-02-22-10-08-52.mat
+===================================================================================================================
+Processing file data/vicon/processed\2018-02-22-10-09-36.mat
+===================================================================================================================
+Processing file data/vicon/processed\2018-02-22-10-10-29.mat
+===================================================================================================================
+Processing file data/vicon/processed\2018-02-22-10-10-56.mat
+===================================================================================================================
+Total traveled distance in VICON room experiments (to be used for LLIO training/test) is 73.777 meters.
+Total experiment time in VICON room experiments (to be used for LLIO training/test) is 101.784s = 1.696mins.
+===================================================================================================================
+Processing complete for all files.

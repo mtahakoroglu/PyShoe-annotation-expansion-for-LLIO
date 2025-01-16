@@ -10,7 +10,7 @@ import scipy.io as sio
 from scipy.signal import medfilt
 from scipy.linalg import orthogonal_procrustes
 
-vicon_data_dir = 'data/vicon/processed/' # Directory containing Vicon data files
+vicon_data_dir = 'data/vicon/processed/' # Directory containing VICON data files
 vicon_data_files = glob.glob(os.path.join(vicon_data_dir, '*.mat'))
 
 output_dir = "results/figs/vicon/" # Set up logging and output directory
@@ -21,6 +21,7 @@ logging.basicConfig(level=logging.INFO, format='%(message)s',
 
 extracted_training_data_dir = "data/" # training data (imu, zv) for LSTM retraining & (displacement, heading change, stride indexes, timestamps) for LLIO training
 
+# Following optimal ZV detectors are extracted from the mat files yet some "not optimal" detectors needed to be corrected manually
 # 16th experiment: Despite showing MBGTD is the optimal detector in the mat file, VICON & ARED performs a lot better. Optimal detector is selected as ARED.
 # 51st experiment: Optimal detector is changed from MBGTD to VICON
 detector = ['shoe', 'ared', 'shoe', 'shoe', 'shoe', 'ared', 'shoe', 'shoe',
@@ -41,10 +42,10 @@ thresh = [2750000, 0.1, 6250000, 15000000, 5500000, 0.08, 3000000, 3250000,
           725000, 0.0175, 0.0225, 42500000, 0.0675, 9750000, 3500000, 0.175]
 
 # Function to calculate displacement and heading change between stride points
-def calculate_displacement_and_heading(gt, strideIndex):
+def calculate_displacement_and_heading(traj, strideIndex):
     displacements, heading_changes = [], []
     for j in range(1, len(strideIndex)):
-        delta_position = gt[strideIndex[j], :2] - gt[strideIndex[j - 1], :2]
+        delta_position = traj[strideIndex[j], :2] - traj[strideIndex[j - 1], :2]
         displacement = np.linalg.norm(delta_position)
         heading_change = np.arctan2(delta_position[1], delta_position[0])
         displacements.append(displacement)
@@ -85,7 +86,7 @@ def count_one_to_zero_transitions(zv):
     strides = np.where(np.diff(zv) < 0)[0] + 1
     return len(strides), strides
 
-# elimination of incorrect stride detections in raw zv_opt
+# Elimination of incorrect stride detections in the raw zv_opt
 def heuristic_zv_filter_and_stride_detector(zv, k):
     if zv.dtype == 'bool':
         zv = zv.astype(int)
@@ -133,17 +134,21 @@ def align_trajectories(traj_est, traj_gt):
 
     return traj_est_aligned, traj_gt_trimmed, scale
 
+def rotate_trajectory(trajectory, theta):
+    rotation_matrix = np.array([[np.cos(theta), -np.sin(theta)],
+                                [np.sin(theta), np.cos(theta)]])
+    return trajectory @ rotation_matrix.T
 
 i = 0  # experiment index
 count_training_exp = 0
 # following two lines are used to run selected experiment results
-training_data_tag = [0]*56; training_data_tag[0:3] = [1]*3 # we left off at exp#8
+# training_data_tag = [0]*56; training_data_tag[8] = 1 # we left off at exp#8
 # training_data_tag are the experiments to be used in extracting displacement and heading change data for LLIO training
-# training_data_tag = [1, 1, 1, -1, 1, -1, 1, 1, 1, 1, -1, 1, 0, 1, 1, 1, 1, -1, 1, 1, 
-#                     1, 1, 1, 1, 1, 1, -1, 1, 1, -1, 1, -1, 1, 1, 1, -1, 1, -1, 1, 1, 
-#                     1, 1, -1, 1, 1, 1, 0, 0, -1, 0, 1, 1, 1, 1, 0, 1]
+training_data_tag = [1, 1, 1, -1, 1, -1, 1, 1, 1, 1, -1, 1, 0, 1, 1, 1, 1, -1, 1, 1, 
+                    1, 1, 1, 1, 1, 1, 0, 1, 1, -1, 1, -1, 1, 1, 1, -1, 1, -1, 1, 1, # Exp 27 is excluded after further examination 
+                    1, 1, -1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0] # Exp {49,53,54,56} are excluded after further examination
 annotated_experiment_index = [4, 6, 11, 18, 27, 30, 32, 36, 38, 43, 49]
-nGT = [22, 21, 21, 18, 26, 24, 18, 20, 28, 35, 29, 22, 30, 34, 24, 36, 20, 15, 10, 33, 
+nGT = [22, 21, 21, 18, 26, 24, 18, 20, 29, 35, 29, 22, 30, 34, 24, 36, 20, 15, 10, 33, 
        22, 19, 13, 16, 17, 21, 20, 28, 18, 12, 13, 26, 34, 25, 24, 24, 43, 42, 15, 12, 
        13, 14, 24, 27, 25, 26, 0, 28, 13, 41, 33, 26, 16, 16, 11, 9] # number of actual strides
 training_data_tag = [abs(x) for x in training_data_tag]
@@ -153,6 +158,7 @@ extract_LLIO_training_data = True # used to save csv files for LLIO SHS training
 #     extract_bilstm_training_data = False # then do not write imu and zv data to file for BiLSTM training
 traveled_distances = [] # to keep track of the traveled distances in each experiment for LLIO training data generation
 traverse_times = [] # to keep track of experiment times and eventually total experiment time for LLIO training data generation
+number_of_stride_wise_verified_experiments = 0 # detected stride points must be equal to the actual number
 
 # Process each VICON room training data file
 for file in vicon_data_files:
@@ -168,6 +174,7 @@ for file in vicon_data_files:
         imu_data = np.column_stack((data['imu'][:, :3], data['imu'][:, 3:6]))  # Accel and Gyro data
         timestamps = data['ts'][0]
         gt = data['gt']  # Ground truth from Vicon dataset
+        gt = gt - gt[0,:] # subtract the initial point to amke the GT start from 0 - important when evaluating predicted trajectories
 
         # Initialize INS object with correct parameters
         ins = INS(imu_data, sigma_a=0.00098, sigma_w=8.7266463e-5, T=1.0 / 200)
@@ -182,13 +189,16 @@ for file in vicon_data_files:
         x = ins.baseline(zv=zv)
         x_lstm = ins.baseline(zv=zv_lstm)
         # Align trajectories using Procrustes analysis with scaling
-        aligned_x_lstm, aligned_gt, scale_lstm = align_trajectories(x_lstm, gt)
+        # !!!DEACTIVATED!!! for LLIO training data extraction
+        # aligned_x_lstm, aligned_gt, scale_lstm = align_trajectories(x_lstm, gt)
 
         # Apply filter to zero velocity detection results for stride detection corrections
         logging.info(f'Applying heuristic filter to optimal ZUPT detector {detector[i].upper()} generated ZV values for correct stride detection.')
         k = 75 # temporal window size for checking if detected strides are too close or not
         if i+1 == 54: # remove false positive by changing filter size for experiment 54
             k = 95
+        elif i+1 == 9:
+            k = 70
         # elif i+1 == 13: # not considered as part of training data due to sharp 180 degree changes in position
         #     k = 85
         zv_filtered, n, strideIndex = heuristic_zv_filter_and_stride_detector(zv, k)
@@ -202,29 +212,45 @@ for file in vicon_data_files:
         logging.info(f"Detected {n}/{nGT[i]} strides with (filtered) optimal detector {detector[i].upper()} in experiment {i+1}.")
         print(f"Detected {n_lstm_filtered}/{nGT[i]} strides with (filtered) LSTM ZV detector in experiment {i+1}.")
         # print(f"BiLSTM filtered ZV detector found {n_bilstm_filtered}/{nGT[i]} strides in the experiment {i+1}.")
-        # Calculate displacement and heading changes between stride points based on ground truth
-        displacements, heading_changes = calculate_displacement_and_heading(gt[:, :2], strideIndex)
+
+        # Align the trajectory wrt the selected stride (GT data)
+        # this is a rotation from the navigation coordinate frame to the world-fix coordinate frame
+        strideAlign = 1; GT_align = strideAlign
+        _, thetaPyShoe = calculate_displacement_and_heading(x_lstm[:, :2], strideIndex[np.array([0, strideAlign])])
+        _, thetaGT = calculate_displacement_and_heading(gt[:, :2], strideIndex[np.array([0, GT_align])])
+        theta = thetaPyShoe - thetaGT
+        print(f"theta = {np.degrees(theta)} degrees for experiment #{i+1}.")
+
+        # Apply the rotation to the GT data instead of PyShoe trajectory - this way we do not change IMU data
+        # !!! NOTICE THAT GT DATA CHANGE AFTER THIS POINT !!!
+        gt = gt[:, :2] # only interested in x-y positioning info
+        gt = np.squeeze(rotate_trajectory(gt, theta))
+
+        # Calculate displacement and heading changes between stride points for ground truth and PyShoe trajectory, respectively
+        displacements_GT, heading_changes_GT = calculate_displacement_and_heading(gt[:, :2], strideIndex)
+        displacements_PyShoe, heading_changes_PyShoe = calculate_displacement_and_heading(x_lstm[:, :2], strideIndex)
         # Reconstruct the trajectory from displacements and heading changes
-        initial_position = gt[strideIndex[0], :2]  # Starting point from the GT trajectory
-        reconstructed_traj = reconstruct_trajectory(displacements, heading_changes, initial_position)
+        initial_position = gt[strideIndex[0], :2] # Get the starting point from the GT
+        reconstructed_traj_GT = reconstruct_trajectory(displacements_GT, heading_changes_GT, initial_position)
+        # reconstructed_traj_PyShoe = reconstruct_trajectory(displacements_PyShoe, heading_changes_PyShoe, initial_position)
 
         # reverse data in x direction to match with GCP and better illustration in the paper
-        aligned_x_lstm[:,0] = -aligned_x_lstm[:,0]
-        aligned_gt[:,0] = -aligned_gt[:,0]
-        reconstructed_traj[:,0] = -reconstructed_traj[:,0]
+        # x_lstm[:,0] = -x_lstm[:,0]
+        # gt[:,0] = -gt[:,0]
+        # reconstructed_traj[:,0] = -reconstructed_traj[:,0]
 
         # Plotting the reconstructed trajectory and the ground truth
         plt.figure()
-        visualize.plot_topdown([reconstructed_traj, gt[:, :2]], title=f"Exp#{i+1} ({base_filename}) - {detector[i].upper()}", 
+        visualize.plot_topdown([reconstructed_traj_GT, gt[:, :2]], title=f"Exp#{i+1} ({base_filename}) - {detector[i].upper()}", 
                                legend=[f'GT (stride-wise) - {n}/{nGT[i]}', 'GT (sample-wise)'])  
-        plt.scatter(reconstructed_traj[:, 0], reconstructed_traj[:, 1], c='b', marker='o')
+        plt.scatter(reconstructed_traj_GT[:, 0], reconstructed_traj_GT[:, 1], c='b', marker='o')
         plt.savefig(os.path.join(output_dir, f'trajectory_exp_{i+1}.png'), dpi=600, bbox_inches='tight')
         plt.close()
 
         # Plot LSTM trajectory results
         plt.figure()
-        visualize.plot_topdown([aligned_x_lstm, aligned_gt[:, :2]], title=f"Exp#{i+1} ({base_filename}) - PyShoe (LSTM)", legend=['PyShoe (LSTM)', 'GT'])
-        plt.scatter(aligned_x_lstm[strideIndexLSTMfiltered, 0], aligned_x_lstm[strideIndexLSTMfiltered, 1], c='b', marker='o')
+        visualize.plot_topdown([x_lstm, gt[:, :2]], title=f"Exp#{i+1} ({base_filename}) - PyShoe (LSTM)", legend=['PyShoe (LSTM)', 'GT'])
+        plt.scatter(x_lstm[strideIndexLSTMfiltered, 0], x_lstm[strideIndexLSTMfiltered, 1], c='b', marker='o')
         plt.savefig(os.path.join(output_dir, f'trajectory_exp_{i+1}_lstm_ins.png'), dpi=600, bbox_inches='tight')
         plt.close()
 
@@ -321,10 +347,11 @@ for file in vicon_data_files:
             zv[905:944] = 1 # zv is the target data in LSTM retraining for robust ZUPT aided INS
             zv[2613:2662] = 1 # zv is the target data in LSTM retraining for robust ZUPT aided INS
             zv[2925:2974] = 1 # zv is the target data in LSTM retraining for robust ZUPT aided INS
+        # EXPERIMENT 49 IS LATER EXCLUDED AFTER EXAMINING TOTAL TRAVERSE TIME INFORMATION
         elif i+1 == 49: # 49th experiment: Detected last 4 strides are left outside of the experiment as they do not cause any x-y motion.
             zv_filtered = zv_filtered[:13070] # data cropped to exclude the last 4 strides
             zv = zv[:13070] # zv is the target data in LSTM retraining for robust ZUPT aided INS
-            reconstructed_traj = reconstructed_traj[:13070]
+            reconstructed_traj_GT = reconstructed_traj_GT[:13070]
             gt = gt[:13070]
             timestamps = timestamps[:13070]
             imu_data = imu_data[0:13070,:]
@@ -337,17 +364,17 @@ for file in vicon_data_files:
             logging.info(f"Detected {n}/{nGT[i]} strides detected with the combined ZV detector in the experiment {i+1}.")
 
             # Calculate displacement and heading changes between ground truth values of stride points
-            displacements, heading_changes = calculate_displacement_and_heading(gt[:, :2], strideIndex)
+            displacements_GT, heading_changes_GT = calculate_displacement_and_heading(gt[:, :2], strideIndex)
 
             # Reconstruct the trajectory from displacements and heading changes
             initial_position = gt[strideIndex[0], :2]  # Starting point from the GT trajectory
-            reconstructed_traj = reconstruct_trajectory(displacements, heading_changes, initial_position)
+            reconstructed_traj_GT = reconstruct_trajectory(displacements_GT, heading_changes_GT, initial_position)
 
             # Plotting the reconstructed trajectory and the ground truth without stride indices
             plt.figure()
-            visualize.plot_topdown([reconstructed_traj, gt[:, :2]], title=f"Exp#{i+1} ({base_filename}) - Combined",
+            visualize.plot_topdown([reconstructed_traj_GT, gt[:, :2]], title=f"Exp#{i+1} ({base_filename}) - Combined",
                                 legend=[f'GT (stride-wise) - {n}/{nGT[i]}', 'GT (sample-wise)']) 
-            plt.scatter(reconstructed_traj[:, 0], reconstructed_traj[:, 1], c='b', marker='o')
+            plt.scatter(reconstructed_traj_GT[:, 0], reconstructed_traj_GT[:, 1], c='b', marker='o')
             plt.savefig(os.path.join(output_dir, f'trajectory_exp_{i+1}_corrected.png'), dpi=600, bbox_inches='tight')
             plt.close()
 
@@ -389,6 +416,7 @@ for file in vicon_data_files:
                     header='t,ax,ay,az,wx,wy,wz,zv', comments='')
         #################### SAVE TRAINING DATA for LLIO TRAINING #################
         if extract_LLIO_training_data:
+            number_of_stride_wise_verified_experiments += 1
             # Stride coordinates (GCP) is the target in Gradient Boosting (LLIO) training yet we can save polar coordinates for the sake of completeness
             # combined_data = np.column_stack((displacements, heading_changes)) # Combine displacement and heading change data into one array
             GCP = gt[strideIndex, :2] # extract the stride coordinates (GCP) from the ground truth data
@@ -436,8 +464,8 @@ for file in vicon_data_files:
 
 total_distance, total_traverse_time = sum(traveled_distances), sum(traverse_times)
 logging.info(f"===================================================================================================================")
-logging.info(f"Total traveled distance in VICON room experiments (to be used for LLIO training/test) is {total_distance:.3f} meters.")
-logging.info(f"Total experiment time in VICON room experiments (to be used for LLIO training/test) is {total_traverse_time:.3f}s = {total_traverse_time/60:.3f}mins.")
+logging.info(f"Total traveled distance in {number_of_stride_wise_verified_experiments} VICON room experiments (to be used for LLIO training/test) is {total_distance:.3f} meters.")
+logging.info(f"Total experiment time in {number_of_stride_wise_verified_experiments} VICON room experiments (to be used for LLIO training/test) is {total_traverse_time:.3f}s = {total_traverse_time/60:.3f}mins.")
 logging.info(f"===================================================================================================================")
 print(f"Out of {i} experiments, {count_training_exp} of them will be used in retraining LSTM robust ZV detector.")
 logging.info("Processing complete for all files.")
