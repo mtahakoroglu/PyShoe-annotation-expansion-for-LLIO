@@ -72,7 +72,7 @@ class Localizer():
         
         return x_out, q_out, Rot_out
     
-    def state_update(self, imu,q, dt):
+    def state_update(self, imu, q, dt):
 #        return F,G
         F = np.identity(9)
         F[0:3,3:6] = dt*np.identity(3)
@@ -86,7 +86,7 @@ class Localizer():
         G[3:6,0:3] = dt*Rot
         G[6:9,3:6] = -dt*Rot
        
-        return F,G
+        return F, G
     
     def corrector(self, x_check, P_check, Rot):
         eye3 = np.identity(3)
@@ -168,7 +168,7 @@ class Localizer():
         zupt = zupt/W    
         return zupt
         
-    def MBGTD(self,W=5):
+    def MBGTD(self, W=5):
         imudata = self.imudata
         zupt = np.ones(imudata.shape[0])
         acc = imudata[:,0:3]

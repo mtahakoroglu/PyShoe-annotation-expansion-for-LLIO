@@ -173,7 +173,7 @@ for file in vicon_data_files:
         # Extract the relevant columns
         imu_data = np.column_stack((data['imu'][:, :3], data['imu'][:, 3:6]))  # Accel and Gyro data
         timestamps = data['ts'][0]
-        gt = data['gt']  # Ground truth from Vicon dataset
+        gt = data['gt']  # Ground truth from VICON dataset
 
         # Initialize INS object with correct parameters
         ins = INS(imu_data, sigma_a=0.00098, sigma_w=8.7266463e-5, T=1.0 / 200)
@@ -434,7 +434,7 @@ for file in vicon_data_files:
             # Save stride indexes, timestamps, GCP stride coordinates and IMU data to mat file
             sio.savemat(os.path.join(extracted_training_data_dir, f'LLIO_training_data/{base_filename}_LLIO.mat'),
                         {'strideIndex': strideIndex, 'timestamps': timestamps[strideIndex], 'GCP': GCP, 'imu_data': imu_data, 
-                         'timestamps_all': timestamps})
+                         'timestamps_all': timestamps, 'euler_angles': x_lstm[:,6:]})
             
         logging.info(f"Experiment #{i+1} is annotated stride-wise & going to be used in LLIO training/testing.")
         # compute stride distances and sum them up to get the traveled distance made in the current walk

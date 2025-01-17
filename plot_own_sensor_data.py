@@ -117,22 +117,13 @@ for file in sensor_data_files:
     base_filename = os.path.splitext(os.path.basename(file))[0]
     GCP_data = sio.loadmat(sensor_data_dir + '/' + base_filename + '.mat')
 
-    # Extract the relevant columns and multiply accelerations by gravity
+    # Extract the relevant columns from csv data files (SensorConnect by LORD Microstrain)
     timestamps = sensor_data['Time'].values
-    imu_data = sensor_data[
-        [
-            'inertial-6253.76535:scaledAccelX',
-            'inertial-6253.76535:scaledAccelY',
-            'inertial-6253.76535:scaledAccelZ',
-            'inertial-6253.76535:scaledGyroX',
-            'inertial-6253.76535:scaledGyroY',
-            'inertial-6253.76535:scaledGyroZ'
-        ]
-    ].copy()
-
-    imu_data[['inertial-6253.76535:scaledAccelX',
-              'inertial-6253.76535:scaledAccelY',
-              'inertial-6253.76535:scaledAccelZ']] *= g
+    imu_data = sensor_data[['inertial-6253.76535:scaledAccelX', 'inertial-6253.76535:scaledAccelY', 'inertial-6253.76535:scaledAccelZ',
+            'inertial-6253.76535:scaledGyroX', 'inertial-6253.76535:scaledGyroY', 'inertial-6253.76535:scaledGyroZ']].copy()
+    # Multiply accelerations by gravity
+    imu_data[['inertial-6253.76535:scaledAccelX', 'inertial-6253.76535:scaledAccelY', 'inertial-6253.76535:scaledAccelZ']] *= g
+    euler_angles = sensor_data[['inertial-6253.76535:roll', 'inertial-6253.76535:pitch', 'inertial-6253.76535:yaw']].copy()
     
     # Extract Ground Control Points (GCP) info from mat files
     # logging.info(f"Keys in GCP_data: {list(GCP_data.keys())}")
@@ -148,7 +139,7 @@ for file in sensor_data_files:
     if expNumber > 30: # update this statement later to include only the experiments that are manually annotated for LLIO training
         extract_LLIO_training_data = True
 
-    # Initialize INS object with correct parameters
+    # Initialize INS object with correct parameters - adopted the exact parameters used in PyShoe research (makes sense as our sensor is in the same family)
     ins = INS(imu_data.values, sigma_a=0.00098, sigma_w=8.7266463e-5, T=1.0/200)
 
     traj_list = []
@@ -272,6 +263,33 @@ for file in sensor_data_files:
     plt.savefig(os.path.join(output_dir, f'{base_filename}_stride_detection.png'), dpi=600, bbox_inches='tight')
     plt.close()
 
+    # Plot Euler angles vs. time
+    plt.figure()
+    plt.subplot(3, 1, 1)
+    plt.plot(timestamps, euler_angles.values[:, 0], c='b', label="Roll (IMU)", linewidth=0.9)
+    plt.plot(timestamps, x[:, 6], c='r', label="Roll (PyShoe)", linewidth=0.8)
+    plt.title(f'{base_filename} - Euler Angles')
+    plt.ylabel('Angle [rad]')
+    plt.grid(True, which='both', linestyle='--', linewidth=1)
+    plt.legend()
+    plt.subplot(3, 1, 2)
+    plt.plot(timestamps, euler_angles.values[:, 1], c='b', label="Pitch (IMU)", linewidth=0.9)
+    plt.plot(timestamps, x[:, 7], c='r', label="Pitch (PyShoe)", linewidth=0.8)
+    # plt.title(f'{base_filename} - Pitch Angle')
+    plt.ylabel('Angle [rad]')
+    plt.grid(True, which='both', linestyle='--', linewidth=1)
+    plt.legend()
+    plt.subplot(3, 1, 3)
+    plt.plot(timestamps, euler_angles.values[:, -1], c='b', label="Yaw (IMU)", linewidth=0.9)
+    plt.plot(timestamps, x[:, -1], c='r', label="Yaw (PyShoe)", linewidth=0.8)
+    # plt.title(f'{base_filename} - Yaw Angle')
+    plt.xlabel('Time [s]'); plt.ylabel('Angle [rad]')
+    plt.grid(True, which='both', linestyle='--', linewidth=1)
+    plt.legend()
+    plt.tight_layout()
+    plt.savefig(os.path.join(output_dir, f'{base_filename}_euler_angles.png'), dpi=600, bbox_inches='tight')
+    plt.close()
+
     if expNumber == 32 and strideIndex[-2] == 14203:
         strideIndex[-2] = 14131-1
         print(f"strideIndex[-2] is manually corrected for experiment #{expNumber} after MATLAB inspection.")
@@ -353,7 +371,8 @@ for file in sensor_data_files:
 
         # save stride indexes, timestamps, GCP stride coordinates and IMU data to mat file
         sio.savemat(os.path.join(extracted_training_data_dir, f'LLIO_training_data/{base_filename}_LLIO.mat'), 
-                    {'strideIndex': strideIndex, 'timestamps': timestamps, 'GCP': GCP, 'imu_data': imu_data.values, 'pyshoeTrajectory': traj_list[-1][:,:2]})
+                    {'strideIndex': strideIndex, 'timestamps': timestamps, 'GCP': GCP, 'imu_data': imu_data.values, 
+                     'pyshoeTrajectory': traj_list[-1][:,:2], 'euler_angles': x[:,6:]})
     else:
         # still save the stride indexes and the associated timestamps for further analysis in MATLAB side
         sio.savemat(os.path.join(extracted_training_data_dir, f'LLIO_nontraining_data/{base_filename}_LLIO_nontraining_data.mat'), 
