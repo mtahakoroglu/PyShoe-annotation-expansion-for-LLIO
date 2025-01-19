@@ -314,12 +314,13 @@ for file in sensor_data_files:
             strideIndex[43] = 10933-1
         if strideIndex[60] == 14765:
             strideIndex[60] = 14710-1
-    elif expNumber == 38: # Stride #{__,__,__} are missed; at MATLAB side they are manually annotated and inserted into the list
+    elif expNumber == 38: # At MATLAB side missed strides are manually annotated and inserted into the list
         missedStride = [5, 6, 7, 17, 19, 20, 21, 22, 23, 24, 25, 26, 28, 29, 30, 31, 41]
         missedStrideIndex = [1348-1, 1535-1, 1732-1, 3636-1, 3983-1, 4155-1, 4329-1, 4500-1, 4672-1, 4843-1, 
                              5013-1, 5180-1, 5517-1, 5687-1, 5854-1, 6017-1, 7947-1]
         for i in range(len(missedStride)):
             strideIndex = np.insert(strideIndex, missedStride[i], missedStrideIndex[i]) # Stride #i index is inserted
+        # At MATLAB side some strides are manually corrected as follows
         if strideIndex[45] == 8831-1:
             strideIndex[45] = 8763-1
         if strideIndex[59] == 11758-1:

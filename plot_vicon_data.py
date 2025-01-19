@@ -145,7 +145,7 @@ count_training_exp = 0
 # training_data_tag = [0]*56; training_data_tag[8] = 1 # we left off at exp#8
 # training_data_tag are the experiments to be used in extracting displacement and heading change data for LLIO training
 training_data_tag = [1, 1, 1, -1, 1, -1, 1, 0, 1, 1, -1, 1, 0, 1, 1, 1, 1, -1, 1, 1, # Exp 8 is excluded due to an extreme jump in a ZV region
-                    1, 1, 1, 1, 1, 1, 0, 1, 1, -1, 1, -1, 1, 1, 1, -1, 1, -1, 1, 1, # Exp 27 is excluded after further examination 
+                    1, 1, 1, 1, 1, 1, 0, 1, 1, -1, 1, -1, 0, 0, 0, -1, 1, -1, 1, 1, # Exp {27,33,34,35} is excluded after further examination 
                     1, 1, -1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0] # Exp {49,53,54,56} are excluded after further examination
 annotated_experiment_index = [4, 6, 11, 18, 27, 30, 32, 36, 38, 43, 49]
 nGT = [22, 21, 21, 18, 26, 24, 18, 20, 29, 35, 29, 22, 30, 34, 24, 36, 20, 15, 10, 33, 
