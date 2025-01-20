@@ -141,14 +141,12 @@ for file in sensor_data_files:
 
     # Initialize INS object with correct parameters - adopted the exact parameters used in PyShoe research (makes sense as our sensor is in the same family)
     ins = INS(imu_data.values, sigma_a=0.00098, sigma_w=8.7266463e-5, T=1.0/200)
-
-    traj_list = []
-    zv_list = []
+    traj_list, zv_list = [], []
 
     for i, detector in enumerate(det_list):
         logging.info(f"Processing {detector.upper()} detector for file {base_filename}.")
         zv = ins.Localizer.compute_zv_lrt(W=W_list[i], G=thresh_list[i], detector=detector)
-        x = ins.baseline(zv=zv)
+        x, acc_n = ins.baseline(zv=zv)
         traj_list.append(x)
         zv_list.append(zv)
 
@@ -373,7 +371,7 @@ for file in sensor_data_files:
         # save stride indexes, timestamps, GCP stride coordinates and IMU data to mat file
         sio.savemat(os.path.join(extracted_training_data_dir, f'LLIO_training_data/{base_filename}_LLIO.mat'), 
                     {'strideIndex': strideIndex, 'timestamps': timestamps, 'GCP': GCP, 'imu_data': imu_data.values, 
-                     'pyshoeTrajectory': traj_list[-1][:,:2], 'euler_angles': x[:,6:]})
+                     'pyshoeTrajectory': traj_list[-1][:,:2], 'euler_angles': x[:,6:], 'acc_n': acc_n})
     else:
         # still save the stride indexes and the associated timestamps for further analysis in MATLAB side
         sio.savemat(os.path.join(extracted_training_data_dir, f'LLIO_nontraining_data/{base_filename}_LLIO_nontraining_data.mat'), 

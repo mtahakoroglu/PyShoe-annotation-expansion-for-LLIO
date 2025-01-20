@@ -60,7 +60,7 @@ class Localizer():
         else:
             q_out = qin
 
-        attitude = quat2euler(q_out,'sxyz')#update euler angles
+        attitude = quat2euler(q_out, 'sxyz') # update euler angles
         x_out[6:9] = attitude    
         
         Rot_out = quat2mat(q_out) # get rotation matrix from quat
@@ -70,7 +70,7 @@ class Localizer():
         x_out[3:6] += dt*acc_n # velocity update
         x_out[0:3] += dt*x_out[3:6] +0.5*np.power(dt,2)*acc_n # position update
         
-        return x_out, q_out, Rot_out
+        return x_out, q_out, Rot_out, acc_n
     
     def state_update(self, imu, q, dt):
 #        return F,G
