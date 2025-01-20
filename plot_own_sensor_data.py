@@ -141,7 +141,9 @@ for file in sensor_data_files:
 
     # Initialize INS object with correct parameters - adopted the exact parameters used in PyShoe research (makes sense as our sensor is in the same family)
     ins = INS(imu_data.values, sigma_a=0.00098, sigma_w=8.7266463e-5, T=1.0/200)
-    traj_list, zv_list = [], []
+
+    traj_list = []
+    zv_list = []
 
     for i, detector in enumerate(det_list):
         logging.info(f"Processing {detector.upper()} detector for file {base_filename}.")

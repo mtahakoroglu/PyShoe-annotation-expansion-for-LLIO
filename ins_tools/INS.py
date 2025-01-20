@@ -12,7 +12,6 @@ class INS():
         "dt": dt,
             }
         self.imudata = imudata
-        self.acc_n = np.zeros_like(imudata[:,0:3], dtype=np.float64) # we defined this variable
         self.sigma_a = self.config["sigma_a"]
         self.sigma_w = self.config["sigma_w"]
         self.var_a = np.power(self.sigma_a,2)
@@ -47,7 +46,7 @@ class INS():
         imudata = self.imudata
         
         x_check, q, P = self.Localizer.init() # initialize state
-        x_hat = x_check
+        x_hat = x_check 
         self.x = x_hat
         
         if zv is None:
@@ -56,10 +55,10 @@ class INS():
         else:
             # Use a pre-computed zero-velocity estimate
             self.zv = zv
-
+            
         acc_n_list = []
 
-        for k in range(x_check.shape[0]): # range(1, x_check.shape[0]):
+        for k in range(1, x_check.shape[0]):
             # predictor
             if self.config['dt'] is None:
                 dt = self.config['T']
@@ -67,7 +66,7 @@ class INS():
                 dt = self.config['dt'][k-1]
             x_check[k,:], q[k,:], Rot, acc_n = self.Localizer.nav_eq(x_check[k-1,:], imudata[k,:], q[k-1,:], dt) # update state through motion model
             acc_n_list.append(acc_n)
-
+            
             F, G = self.Localizer.state_update(imudata[k,:], q[k-1,:], dt) 
         
             P[k,:,:] = (F.dot(P[k-1,:,:])).dot(F.T) + (G.dot(self.Q)).dot(G.T)
@@ -82,5 +81,7 @@ class INS():
         self.rot = self.x[:,6:9]
         self.q = q
         self.P = P
+        acc_n_list.insert(0, acc_n_list[0]) # acc_n_list has size of one less than imudata so we insert the first element at the beginning
         self.acc_n = np.array(acc_n_list)
+
         return self.x, self.acc_n

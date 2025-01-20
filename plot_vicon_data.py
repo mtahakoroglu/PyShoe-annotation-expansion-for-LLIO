@@ -433,8 +433,8 @@ for file in vicon_data_files:
 
             # Save stride indexes, timestamps, GCP stride coordinates and IMU data to mat file
             sio.savemat(os.path.join(extracted_training_data_dir, f'LLIO_training_data/{base_filename}_LLIO.mat'),
-                        {'strideIndex': strideIndex, 'timestamps': timestamps[strideIndex], 'GCP': GCP, 'imu_data': imu_data, 
-                         'timestamps_all': timestamps, 'euler_angles': x_lstm[:,6:], 'acc_n': acc_n})
+                        {'strideIndex': strideIndex, 'timestamps': timestamps[strideIndex], 'GCP': GCP, 'imu_data': imu_data, 'gt': gt, 
+                         'pyshoeTrajectory': x_lstm[:,:2], 'timestamps_all': timestamps, 'euler_angles': x_lstm[:,6:], 'acc_n': acc_n})
             
         logging.info(f"Experiment #{i+1} is annotated stride-wise & going to be used in LLIO training/testing.")
         # compute stride distances and sum them up to get the traveled distance made in the current walk
@@ -449,7 +449,7 @@ for file in vicon_data_files:
     else:
         logging.info(f"===================================================================================================================")
         logging.info(f"Processing file {file}")
-        print(f"Experiment {i+1} data is not considered for LLIO training.".upper())
+        print(f"Experiment {i+1} data is not considered as bipedal locomotion data for LLIO training.".upper())
         # 13th experiment shows a lot of 180° turns, which causes multiple ZV phase and stride detections during the turns.
         # Labeled as 0, i.e., non bi-pedal locomotion data, temporarily. It will be included in future for further research. 
         # 20th experiment: The pedestrian stops in every 5 or 6 strides for a while but it is a valid bipedal locomotion data (confirmed by GCetin's ML code)
