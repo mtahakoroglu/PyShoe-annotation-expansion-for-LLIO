@@ -181,15 +181,13 @@ for file in sensor_data_files:
     # Align the trajectory wrt the selected stride - obsolete (this is an arbitrary rotation to align the trajectory along with x axis)
     # Align the trajectory wrt the selected GCP - this is a rotation from navigation coordinate frame to world-fix coordinate frame
     strideAlign = 3; GCP_align = strideAlign
-    # if expNumber == 37:
-    #     strideAlign = 1
+    # if expNumber == 39: # Exp39 starts the motion in y direction and makes quick turns while making circular trajectory
+    #     strideAlign = 5
+    #     GCP_align = strideAlign
     _, thetaPyShoe = calculate_displacement_and_heading(traj_list[-1][:, :2], strideIndex[np.array([0,strideAlign])])
     _, thetaGCP = calculate_displacement_and_heading(GCP, np.array([0,GCP_align]))
-    theta = thetaPyShoe - thetaGCP
+    theta = thetaPyShoe - thetaGCP # later we apply theta to GCP to align world coordinate frame with nav coordinate frame
     print(f"theta = {np.degrees(theta)} degrees for experiment #{expNumber}.")
-    # theta = theta - np.pi
-    if expNumber in [28, 29, 30]:
-        theta = theta - 3*np.pi/2
     # Apply the rotation to GCP points instead of INS trajectory - this way we do not change IMU data
     # !!! NOTICE THAT GCP POINTS CHANGE AFTER THIS POINT !!!
     # traj_list[-1][:,:2] = np.squeeze(rotate_trajectory(traj_list[-1][:,:2], -theta))
@@ -373,7 +371,8 @@ for file in sensor_data_files:
         # save stride indexes, timestamps, GCP stride coordinates and IMU data to mat file
         sio.savemat(os.path.join(extracted_training_data_dir, f'LLIO_training_data/{base_filename}_LLIO.mat'), 
                     {'strideIndex': strideIndex, 'timestamps': timestamps, 'GCP': GCP, 'imu_data': imu_data.values, 
-                     'pyshoeTrajectory': traj_list[-1][:,:2], 'euler_angles': x[:,6:], 'acc_n': acc_n})
+                     'pyshoeTrajectory': traj_list[-1][:,:2], 'euler_angles': x[:,6:], 'acc_n': acc_n,
+                     'euler_angles_imu': euler_angles.values, 'thetaPyShoe': thetaPyShoe, 'thetaGCP': thetaGCP, 'theta': theta})
     else:
         # still save the stride indexes and the associated timestamps for further analysis in MATLAB side
         sio.savemat(os.path.join(extracted_training_data_dir, f'LLIO_nontraining_data/{base_filename}_LLIO_nontraining_data.mat'), 
