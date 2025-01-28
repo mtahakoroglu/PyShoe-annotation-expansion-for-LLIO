@@ -1,4 +1,5 @@
 <h2>PyShoe Dataset Annotation & Expansion/Enlargement for Loose Learned Inertial Odometry (LLIO)</h2>
+
 <p align="justify">Similar to <a href="https://github.com/mtahakoroglu/gradient-boosting-based-LLIO">LLIO</a> repository, the following installations are required to run the scripts and reproduce the results presented here and in the paper. Given scripts for creating the <b>pyshoe</b> virtual environment have worked successfully on various Windows systems, although we cannot guarantee compatibility with all system configurations.</p>
 
 <p align="justify"><b>Note:</b> The Anaconda virtual environment is named <b>pyshoe</b> because initially the research was completely based on <a href="https://scholar.google.ca/citations?user=I_x8PVcAAAAJ&hl=en">Brandon Wagstaff's PyShoe study</a> and <a href="https://ieee-dataport.org/open-access/university-toronto-foot-mounted-inertial-navigation-dataset">public dataset</a>. Despite the transition to using exclusively self-collected data and building own inertial odometry public dataset, the original name was retained.</p>
@@ -10,7 +11,7 @@
 conda create --name pyshoe python=3.7
 ```
 
-<p align="justify">to create <b>ipyshoe</b> virtual environment (venv). Subsequently, type</p>
+<p align="justify">to create <b>pyshoe</b> virtual environment (venv). Subsequently, type</p>
 
 ```
 conda activate pyshoe
@@ -19,6 +20,7 @@ conda activate pyshoe
 <p align="justify">to activate <b>pyshoe</b> venv.</p>
 
 <h3>Installing Required Packages</h3>
+
 <p align="justify">Type and enter the following commands in Anaconda PS terminal to install the required packages and libraries to run PyShoe codes and reproduce the results in the page and the paper. We thank <a href="https://scholar.google.com.tr/citations?user=F2NkKNAAAAAJ&hl=tr">Dr. Ramazan Özgür Doğan</a> for the assistance in setting up the environment.</p>
 
 ```
@@ -46,15 +48,15 @@ pip install pandas==1.1.5
 
 <h3>Installing <b>liegroups</b> package</h3>
 
-<p align="justify">After cloning this repository to your local computer, you must install <b><a href="https://github.com/utiasSTARS/liegroups" target="_blank">liegroups</a></b> package to run the code if you would like to reproduce the results shown here in this repo or the paper.</p>
+<p align="justify">After cloning this repository to your local computer, you must install <b><a href="https://github.com/utiasSTARS/liegroups" target="_blank">liegroups</a></b> package if you would like to reproduce the results shown here in this repo or the paper.</p>
 
 <h4>Video Tutorial</h4>
 
 <p align="justify">If one fails or has troublesome experience in setting up the virtual environment <b>pyshoe</b>, the video in <a href="https://www.youtube.com/watch?v=CnA4yF7448c">Turkish</a> is available. English video is to be recorded and shared here soon.</p>
 
-<h3>VICON Room Experiments - Manual Annotation (Corrections) for LLIO</h3>
+<h3>VICON Room Experiments - Manual Annotation & Corrections for LLIO</h3>
 
-<p align="justify">To extract a <b>gait-driven system</b> (in other words a <b>stride & heading system</b> - <b>SHS</b>) from VICON training dataset, which is a sampling-frequency driven system (sample-wise INS), displacement and heading change (or (dx, dy) relative position change) values at <b>each</b> stride must be extracted. In addition to relative positioning data, stride indexes and imu data will be used in training a data-driven (also called modern) INS that functions as a stride-wise dead-reckoning system. Some researchers call a data-driven or modern INS as learned inertial odometry.</p>
+<p align="justify">We aim to form a <b>gait-driven system</b> (in other words a <b>stride & heading system</b> - <b>SHS</b>) from VICON room experiments of PyShoe dataset. VICON room experiments are sample-wise annotated pedestrian trajectories. In addition IMU data with GT values, stride indexes are required in training a data-driven (also called modern) INS that functions as a stride-wise dead-reckoning system. Some researchers call a data-driven or modern INS as learned inertial odometry.</p>
 
 <p align="justify">Here, some troublesome experiments are shown to understand Zero Velocity (ZV) interval and stride detection problems. The optimal ZV detectors are selected (e.g., SHOE for experiment 4, ARED for experiment 6) with the corresponding optimal threshold values (optimal values are supplied by Wagstaff <i>et. al.</i> in the structure of the mat files for VICON room experiments of PyShoe dataset).</p>
 
