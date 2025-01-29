@@ -52,7 +52,7 @@ pip install pandas==1.1.5
 
 <h4>Video Tutorial</h4>
 
-<p align="justify">If one fails or has troublesome experience in setting up the virtual environment <b>pyshoe</b>, the video in <a href="https://www.youtube.com/watch?v=CnA4yF7448c">Turkish</a> is available. English video is to be recorded and shared here soon.</p>
+<p align="justify">If one fails or has troublesome experience in setting up the virtual environment <b>pyshoe</b>, the video in <a href="https://www.youtube.com/watch?v=CnA4yF7448c">pyshoe venv setting</a> will soon be available.</p>
 
 <h3>VICON Room Experiments - Annotation & Corrections for LLIO</h3>
 
