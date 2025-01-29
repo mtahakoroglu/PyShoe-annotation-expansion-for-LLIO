@@ -54,35 +54,37 @@ pip install pandas==1.1.5
 
 <p align="justify">If one fails or has troublesome experience in setting up the virtual environment <b>pyshoe</b>, the video in <a href="https://www.youtube.com/watch?v=CnA4yF7448c">Turkish</a> is available. English video is to be recorded and shared here soon.</p>
 
-<h3>VICON Room Experiments - Manual Annotation & Corrections for LLIO</h3>
+<h3>VICON Room Experiments - Annotation & Corrections for LLIO</h3>
 
-<p align="justify">We aim to form a <b>gait-driven system</b> (in other words a <b>stride & heading system</b> - <b>SHS</b>) from VICON room experiments of PyShoe dataset. VICON room experiments are sample-wise annotated pedestrian trajectories. In addition IMU data with GT values, stride indexes are required in training a data-driven (also called modern) INS that functions as a stride-wise dead-reckoning system. Some researchers call a data-driven or modern INS as learned inertial odometry.</p>
+<p align="justify">We aim to form a <b>gait-driven system</b> (in other words a <b>stride & heading system</b> - <b>SHS</b>) from VICON room experiments of PyShoe dataset. VICON room experiments are sample-wise annotated. In addition IMU data with Ground-Truth (GT) values, stride indexes are required in training a data-driven (also called modern) INS that functions as a stride-wise dead-reckoning system. Some researchers call a data-driven or modern INS as learned inertial odometry.</p>
 
 <p align="justify">Here, some troublesome experiments are shown to understand Zero Velocity (ZV) interval and stride detection problems. The optimal ZV detectors are selected (e.g., SHOE for experiment 4, ARED for experiment 6) with the corresponding optimal threshold values (optimal values are supplied by Wagstaff <i>et. al.</i> in the structure of the mat files for VICON room experiments of PyShoe dataset).</p>
 
-<p align="justify"><b>The process described here is the manual ZV interval & stride index annotation (or correction) of some troublesome trajectories produced in VICON room experiments (PyShoe dataset). Eventually, ZV interval and stride index detection errors in the <b>bipedal locomotion</b> data would be fixed.</b> While correcting for the missed stride(s) one by one in the experiments <b>with at least one missed stride</b>, crawling experiments (non-bipedal motion) were excluded by observing zero-velocity plots qualitatively. PyShoe is based on OpenShoe ZUPT aided EKF method, which is a traditional double integration approach (in prediction step of KF) where the corrections are made in periodic ZUPT phase (correction step of KF). Including non-bipedal locomotion data such as crawling experiments inherently affects PyShoe (i.e., adaptive version of OpenShoe) performance in walking and running experiments negatively due to missed ZV intervals and stride indexes. Eventually, after correction/annotation process of VICON room experiments, bipedal locomotion training dataset is formed. Resulting smaller dataset would be used to generate training data for <a href="https://github.com/mtahakoroglu/LLIO">Loose Learned Inertial Odometry (LLIO)</a>.</p>
+<p align="justify">The process depicted below is the manual ZV interval & stride index annotation (or correction) of some troublesome trajectories produced in VICON room experiments (PyShoe dataset). Eventually, ZV interval and stride index detection errors in VICON data would be fixed. Extracted dataset of stride & heading system with GT values would be used in training <a href="https://github.com/mtahakoroglu/LLIO">Loose Learned Inertial Odometry (LLIO)</a>, a gait & data driven INS.</p>
 
-<p align="justify">Please use <b>detect_missed_strides.m</b> located at <b>data/vicon/processed</b> if you like to reproduce the figures related to training dataset correction.</p>
+<p align="justify">Please use <b>detect_missed_strides.m</b> located at <b>data/vicon/processed</b> if you like to reproduce the figures related to ZV interval annotation & correction.</p>
 
 <h4>VICON Room Experiments - Experiment 4 (2017-11-22-11-25-20) Annotation</h4>
 
-<p align="justify">When carefully tracked starting from the initial stride, one can see that the 10<sup>th</sup> stride is not detected in the trajectory plot shown below. It is more obvious to notice the missed ZV interval and the stride index in ZV plot.</p>
+<p align="justify">When carefully tracked starting from the initial stride, one can see that the 10<sup>th</sup> stride is not detected in the trajectory plot shown below. To detect the missed ZV interval(s), supplementary ZUPT detectors such as VICON, ARED, MBGTD or AMVD can be utilized. In general, VICON detector was able to generate ZV labels correctly; therefore, in many cases, only VICON ZUPT detector is used as the supplementary detector.</p>
 
+<!--
 <img src="results/figs/vicon_obsolete/exp4.jpg" alt="Optimal detector results for experiment 4 (2017-11-22-11-25-20) VICON dataset" width=%100 height=auto>
-
-<p align="justify">As mentioned above, to detect the missed ZV interval(s), supplementary ZUPT detectors such as VICON, ARED, MBGTD or AMVD can be utilized. In general, VICON detector was able to generate ZV labels correctly; therefore, in many of the cases, we only used VICON ZUPT detector as the only supplementary detector.</p>
+-->
 
 <img src="data/vicon/processed/experiment4_ZUPT_detectors_strides.png" alt="ZV labels for experiment 4 (2017-11-22-11-25-20) VICON dataset" width=%100 height=auto>
 
 <p align="justify">Integration of filtered optimal ZUPT detector SHOE with the filtered supplementary ZUPT detector (i.e., VICON) enabled successful detection of the ZV interval as shown in the combined ZUPT detector plot above (located at the bottom). The corrected ground-truth data (as a sample-wise and a stride & heading system trajectory) and ZV signals can be seen below. Note that the annotation is only going to be used in extracting x-y axes displacement (or displacement and heading change) values for LLIO training dataset generation; therefore, corrected ZV labels are not used in any trajectory generation.</p>
 
+<!--
 <img src="results/figs/vicon_obsolete/exp4_corrected.jpg" alt="Experiment trajectory after corrections - VICON dataset" width=%100 height=auto>
-
-<p align="justify">The gif file inserted below shows the correction explicitly.</p>
+-->
 
 <img src="results/figs/vicon_obsolete/gif/exp4.gif" alt="ZV correction results" width=%100 height=auto>
 
+<!--
 <img src="results/figs/vicon_obsolete/stride_detection_exp_4.png" alt="Stride detection results on imu data - VICON dataset">
+-->
 
 <h4>Experiment 6 (2017-11-22-11-26-46) - VICON training dataset</h4>
 
