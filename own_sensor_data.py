@@ -181,9 +181,9 @@ for file in sensor_data_files:
     # Align the trajectory wrt the selected stride - obsolete (this is an arbitrary rotation to align the trajectory along with x axis)
     # Align the trajectory wrt the selected GCP - this is a rotation from navigation coordinate frame to world-fix coordinate frame
     strideAlign = 3; GCP_align = strideAlign
-    # if expNumber == 39: # Exp39 starts the motion in y direction and makes quick turns while making circular trajectory
-    #     strideAlign = 5
-    #     GCP_align = strideAlign
+    if expNumber == 40: # Exp40 is conducted at Science Road
+        strideAlign = 10 # this stride number is selected according to the trajectory plot
+        GCP_align = strideAlign
     _, thetaPyShoe = calculate_displacement_and_heading(traj_list[-1][:, :2], strideIndex[np.array([0,strideAlign])])
     _, thetaGCP = calculate_displacement_and_heading(GCP, np.array([0,GCP_align]))
     theta = thetaPyShoe - thetaGCP # later we apply theta to GCP to align world coordinate frame with nav coordinate frame
@@ -323,8 +323,12 @@ for file in sensor_data_files:
             strideIndex[45] = 8763-1
         if strideIndex[59] == 11758-1:
             strideIndex[59] = 11686-1
-
-    if expNumber in [32, 33, 34, 35, 36, 37, 38]: # these experiments either needed stride index correction or introduction
+    elif expNumber == 40: # At MATLAB side missed strides are manually annotated and inserted into the list
+        missedStride, missedStrideIndex = [3], [981-1]
+        for i in range(len(missedStride)):
+            strideIndex = np.insert(strideIndex, missedStride[i], missedStrideIndex[i]) # Stride #i index is inserted
+            
+    if expNumber in [32, 33, 34, 35, 36, 37, 38, 40]: # these experiments either needed stride index correction or introduction
         # Plot annotated stride indexes on IMU data, i.e., the magnitudes of acceleration and angular velocity
         plt.figure()
         plt.plot(timestamps, np.linalg.norm(imu_data.iloc[:, :3].values, axis=1), label=r'$\Vert\mathbf{a}\Vert$')
@@ -340,7 +344,6 @@ for file in sensor_data_files:
         plt.close()
     ################################################ SAVE TRAINING DATA for LLIO TRAINING ###############################################
     if extract_LLIO_training_data:
-        number_of_stride_wise_verified_experiments += 1
         # Stride coordinates (GCP) is the target in LLIO training yet we can save polar coordinates for the sake of completeness
         # combined_data = np.column_stack((displacements, heading_changes)) # Combine displacement and heading change data into one array
         print(f"strideIndex.shape = {strideIndex.shape} len(strideIndex) = {len(strideIndex)}")
@@ -350,12 +353,13 @@ for file in sensor_data_files:
         print(f"imu_data shape: {imu_data.shape}")
         
         if len(strideIndex)-1 == numberOfStrides:
+            number_of_stride_wise_verified_experiments += 1
             logging.info(f"There are {len(strideIndex)-1}/{numberOfStrides} strides detected in experiment #{expNumber}.")
             combined_data = np.column_stack((strideIndex, timestamps[strideIndex], GCP[:,0], GCP[:,1]))
             combined_csv_filename = os.path.join(extracted_training_data_dir, f'LLIO_training_data/{base_filename}_strideIndex_timestamp_gcpX_gcpY.csv')
             np.savetxt(combined_csv_filename, combined_data, delimiter=',', header='strideIndex,timestamp,gcpX,gcpY', comments='')
 
-        logging.info(f"Experiment #{expNumber} is annotated stride-wise & going to be used in LLIO training/testing.")
+        logging.info(f"Experiment #{expNumber} is annotated stride-wise (GCP) & going to be used in LLIO training/testing.")
         # compute stride distances and sum them up to get the traveled distance made in the current walk
         traveled_distance = np.sum(np.linalg.norm(np.diff(GCP, axis=0), axis=1))
         logging.info(f"Traveled distance is {traveled_distance:.3f} meters in experiment #{expNumber}.")
@@ -372,7 +376,8 @@ for file in sensor_data_files:
         sio.savemat(os.path.join(extracted_training_data_dir, f'LLIO_training_data/{base_filename}_LLIO.mat'), 
                     {'strideIndex': strideIndex, 'timestamps': timestamps, 'GCP': GCP, 'imu_data': imu_data.values, 
                      'pyshoeTrajectory': traj_list[-1][:,:2], 'euler_angles': x[:,6:], 'acc_n': acc_n,
-                     'euler_angles_imu': euler_angles.values, 'thetaPyShoe': thetaPyShoe, 'thetaGCP': thetaGCP, 'theta': theta})
+                     'euler_angles_imu': euler_angles.values, 'thetaPyShoe': thetaPyShoe, 'thetaGCP': thetaGCP, 
+                     'theta': theta, 'traveled_distance': traveled_distance, 'traverse_time': traverse_time})
     else:
         # still save the stride indexes and the associated timestamps for further analysis in MATLAB side
         sio.savemat(os.path.join(extracted_training_data_dir, f'LLIO_nontraining_data/{base_filename}_LLIO_nontraining_data.mat'), 
