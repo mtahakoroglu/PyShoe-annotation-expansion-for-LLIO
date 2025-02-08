@@ -130,7 +130,8 @@ for file in sensor_data_files:
     expNumber = GCP_data['expID'].item()
     if GCP_data['GCP_exist_and_correct'].item() == True:
         logging.info(f"GCP are available & correct for file {base_filename}.")
-        GCP = GCP_data['GCP_meters']; GCP[:,1] = -GCP[:,1] # change made by mtahakoroglu to match with GT alignment
+        GCP = GCP_data['GCP_meters']
+        GCP[:,1] = -GCP[:,1] # change made by mtahakoroglu to match with GT alignment
     else:
         logging.info(f"GCP are either not available or not correct for file {base_filename}.")
     GCP_stride_numbers = np.squeeze(GCP_data['GCP_stride_numbers'])
@@ -192,7 +193,15 @@ for file in sensor_data_files:
     # !!! NOTICE THAT GCP POINTS CHANGE AFTER THIS POINT !!!
     # traj_list[-1][:,:2] = np.squeeze(rotate_trajectory(traj_list[-1][:,:2], -theta))
     # reconstructed_traj = np.squeeze(rotate_trajectory(reconstructed_traj, -theta))
+    GCP_wcf = GCP.copy(); # for trajectory in WCF
     GCP = np.squeeze(rotate_trajectory(GCP, theta))
+    # save plots in world coordinate frame as well - following data are not saved to file
+    traj_wcf = np.squeeze(rotate_trajectory(traj_list[-1][:, :2], -theta)) # rotate PyShoe INS to make it compatible with GCP
+    reconstructed_traj_wcf = np.squeeze(rotate_trajectory(reconstructed_traj, -theta)) # rotate PyShoe SHS to make it compatible with GCP
+    GCP_wcf[:,1] = -GCP_wcf[:,1] # change made by mtahakoroglu to match with GT alignment
+    traj_wcf[:,1] = -traj_wcf[:,1] # change made by mtahakoroglu to match with GT alignment
+    reconstructed_traj_wcf[:,1] = -reconstructed_traj_wcf[:,1] # change made by mtahakoroglu to match with GT alignment
+    # acc_w = np.squeeze(rotate_trajectory(acc_n[:, :2], -theta)) # rotate acc_n to make it acc_w
     
     # reverse data in x direction to match with GCP and better illustration in the paper
     # traj_list[-1][:,:2][:,0] = -traj_list[-1][:,:2][:,0]
@@ -220,13 +229,13 @@ for file in sensor_data_files:
                     marker='o', facecolor='none', linewidths=1.5, label="GCP stride")
     plt.plot(traj_list[-1][:,:2][:,0], traj_list[-1][:,:2][:,1], linewidth = 1.5, color='b', label=legend[-1])
     plt.legend(fontsize=15); plt.xlabel('x [m]', fontsize=22); plt.ylabel('y [m]', fontsize=22)
-    plt.title(f'{base_filename}', fontsize=22)
+    plt.title(f'{base_filename}_NCF', fontsize=22)
     plt.tick_params(labelsize=22)
     plt.axis('equal')
     if expNumber == 28:
         plt.ylim(-10,20)
     plt.grid(True, which='both', linestyle='--', linewidth=1.5)
-    plt.savefig(os.path.join(output_dir, f'{base_filename}.png'), dpi=dpi, bbox_inches='tight')
+    plt.savefig(os.path.join(output_dir, f'{base_filename}_NCF.png'), dpi=dpi, bbox_inches='tight')
     plt.close()
 
     plt.figure()
@@ -238,14 +247,50 @@ for file in sensor_data_files:
         plt.scatter(reconstructed_traj[GCP_stride_numbers,0], reconstructed_traj[GCP_stride_numbers,1], color='r', s=45, 
                 marker='o', facecolor='none', linewidths=1.5, label="GCP stride")
     plt.legend(fontsize=15); plt.xlabel('x [m]', fontsize=22); plt.ylabel('y [m]', fontsize=22)
-    plt.title(f'{n}/{numberOfStrides} strides detected', fontsize=22)
+    plt.title(f'Exp#{expNumber}: {n}/{numberOfStrides} strides detected', fontsize=22)
     plt.tick_params(labelsize=22)
     plt.axis('equal')
     if expNumber == 28:
         plt.ylim(-10,20)
     plt.grid(True, which='both', linestyle='--', linewidth=1.5)
-    plt.savefig(os.path.join(output_dir, f'{base_filename}_SHS.png'), dpi=dpi, bbox_inches='tight')
+    plt.savefig(os.path.join(output_dir, f'{base_filename}_SHS_NCF.png'), dpi=dpi, bbox_inches='tight')
     plt.close()
+    
+    plt.figure()
+    if GCP_data['GCP_exist_and_correct'].item():
+        plt.scatter(GCP_wcf[:,0], GCP_wcf[:,1], color='r', s=30, marker='s', edgecolors='k', label="GCP")
+    if n == numberOfStrides and not extract_LLIO_training_data: # experiments after 30 are conducted for expanding/enlarging LLIO training dataset
+        plt.scatter(reconstructed_traj_wcf[GCP_stride_numbers,0], reconstructed_traj_wcf[GCP_stride_numbers,1], color='r', s=45, 
+                    marker='o', facecolor='none', linewidths=1.5, label="GCP stride")
+    plt.plot(traj_wcf[:,0], traj_wcf[:,1], linewidth = 1.5, color='b', label=legend[-1])
+    plt.legend(fontsize=15); plt.xlabel('x [m]', fontsize=22); plt.ylabel('y [m]', fontsize=22)
+    plt.title(f'{base_filename}_WCF', fontsize=22)
+    plt.tick_params(labelsize=22)
+    plt.axis('equal')
+    if expNumber == 28:
+        plt.ylim(-10,20)
+    plt.grid(True, which='both', linestyle='--', linewidth=1.5)
+    plt.savefig(os.path.join(output_dir, f'{base_filename}_WCF.png'), dpi=dpi, bbox_inches='tight')
+    plt.close()
+
+    plt.figure()
+    plt.plot(reconstructed_traj_wcf[:,0], reconstructed_traj_wcf[:,1], 'b.-', linewidth = 1.4, markersize=5, markeredgewidth=1.2, label="PyShoe (LSTM) SHS")
+    # plt.plot(reconstructed_traj[-3:,0], reconstructed_traj[-3:,1], 'bx-', linewidth = 1.4, markersize=5, markeredgewidth=1.2, label="PyShoe (LSTM) SHS last three")
+    if GCP_data['GCP_exist_and_correct'].item():
+        plt.scatter(GCP_wcf[:,0], GCP_wcf[:,1], color='r', s=30, marker='s', edgecolors='k', label="GCP")
+    if n == numberOfStrides and not extract_LLIO_training_data: # experiments after 30 are conducted for expanding/enlarging LLIO training dataset
+        plt.scatter(reconstructed_traj_wcf[GCP_stride_numbers,0], reconstructed_traj_wcf[GCP_stride_numbers,1], color='r', s=45, 
+                marker='o', facecolor='none', linewidths=1.5, label="GCP stride")
+    plt.legend(fontsize=15); plt.xlabel('x [m]', fontsize=22); plt.ylabel('y [m]', fontsize=22)
+    plt.title(f'Exp#{expNumber}: {n}/{numberOfStrides} strides detected (WCF)', fontsize=22)
+    plt.tick_params(labelsize=22)
+    plt.axis('equal')
+    if expNumber == 28:
+        plt.ylim(-10,20)
+    plt.grid(True, which='both', linestyle='--', linewidth=1.5)
+    plt.savefig(os.path.join(output_dir, f'{base_filename}_SHS_WCF.png'), dpi=dpi, bbox_inches='tight')
+    plt.close()
+    
 
     # Plot stride indexes on IMU data, i.e., the magnitudes of acceleration and angular velocity
     plt.figure()

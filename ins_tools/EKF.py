@@ -60,7 +60,7 @@ class Localizer():
         else:
             q_out = qin
 
-        attitude = quat2euler(q_out,'sxyz')#update euler angles
+        attitude = quat2euler(q_out,'sxyz') # update euler angles
         x_out[6:9] = attitude    
         
         Rot_out = quat2mat(q_out) # get rotation matrix from quat
