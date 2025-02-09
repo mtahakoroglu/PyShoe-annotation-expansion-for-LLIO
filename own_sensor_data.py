@@ -309,7 +309,7 @@ for file in sensor_data_files:
         plt.scatter(reconstructed_traj_wcf[GCP_stride_numbers,0], reconstructed_traj_wcf[GCP_stride_numbers,1], color='r', s=45, 
                 marker='o', facecolor='none', linewidths=1.5, label="GCP stride")
     plt.legend(fontsize=15); plt.xlabel('x [m]', fontsize=22); plt.ylabel('y [m]', fontsize=22)
-    plt.title(f'Exp#{expNumber}: {n}/{numberOfStrides} strides detected (WCF)', fontsize=22)
+    plt.title(f'Exp#{expNumber}: {n}/{numberOfStrides} strides detected', fontsize=22)
     plt.tick_params(labelsize=22)
     plt.axis('equal')
     if expNumber == 28:
@@ -317,7 +317,6 @@ for file in sensor_data_files:
     plt.grid(True, which='both', linestyle='--', linewidth=1.5)
     plt.savefig(os.path.join(output_dir, f'{base_filename}_SHS_WCF.png'), dpi=dpi, bbox_inches='tight')
     plt.close()
-    
 
     # Plot stride indexes on IMU data, i.e., the magnitudes of acceleration and angular velocity
     plt.figure()

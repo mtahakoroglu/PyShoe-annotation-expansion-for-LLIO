@@ -585,15 +585,15 @@ RMSE for GCP 89 stepped on at stride 88 is 2.1523
 RMSE for GCP 90 stepped on at stride 89 is 2.2911
 RMSE for GCP 91 stepped on at stride 90 is 2.2606
 RMSE for GCP 92 stepped on at stride 91 is 2.2782
-RMSE for GCP 93 stepped on at stride 92 is 2.3717
-Average RMSE for all GCP strides in experiment 41 is 0.9367
+RMSE for GCP 93 stepped on at stride 92 is 2.3752
+Average RMSE for all GCP strides in experiment 41 is 0.9368
 There are 92/92 strides detected in experiment #41.
 Experiment #41 is annotated stride-wise (GCP) & going to be used in LLIO training/testing.
 Traveled distance is 108.849 meters in experiment #41.
-Travel time is 112.997 seconds in experiment #41.
+Travel time is 111.997 seconds in experiment #41.
 ===================================================================================================================
 Total traveled distance in 11 hallway experiments (to be used for LLIO training/test) is 895.078 meters.
-Total traverse time in 11 hallway experiments (to be used for LLIO training/test) is 773.686s = 12.895mins.
+Total traverse time in 11 hallway experiments (to be used for LLIO training/test) is 772.686s = 12.878mins.
 ===================================================================================================================
 There are 11 experiments processed.
 Processing complete for all files.
