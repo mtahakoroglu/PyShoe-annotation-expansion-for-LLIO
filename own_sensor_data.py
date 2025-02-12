@@ -209,8 +209,11 @@ for file in sensor_data_files:
     # Align the trajectory wrt the selected stride - obsolete (this is an arbitrary rotation to align the trajectory along with x axis)
     # Align the trajectory wrt the selected GCP - this is a rotation from navigation coordinate frame to world-fix coordinate frame
     strideAlign = 3; GCP_align = strideAlign
-    if expNumber == 40: # Exp40 is conducted at Science Road
+    if expNumber == 40: # Exp#40 is conducted at Science Road
         strideAlign = 10 # this stride number is selected according to the trajectory plot
+        GCP_align = strideAlign
+    elif expNumber == 42: # Exp#42 is conducted at Science Road
+        strideAlign = 13 # this stride number is selected according to the trajectory plot
         GCP_align = strideAlign
     _, thetaPyShoe = calculate_displacement_and_heading(traj_list[-1][:, :2], strideIndex[np.array([0,strideAlign])])
     _, thetaGCP = calculate_displacement_and_heading(GCP, np.array([0,GCP_align]))
@@ -415,16 +418,28 @@ for file in sensor_data_files:
         missedStride, missedStrideIndex = [3], [981-1]
         for i in range(len(missedStride)):
             strideIndex = np.insert(strideIndex, missedStride[i], missedStrideIndex[i]) # Stride #i index is inserted
+    elif expNumber == 42: # At MATLAB side missed strides are manually annotated and inserted into the list
+        missedStride, missedStrideIndex = [1], [545-1]
+        for i in range(len(missedStride)):
+            strideIndex = np.insert(strideIndex, missedStride[i], missedStrideIndex[i])
             
-    if expNumber in [32, 33, 34, 35, 36, 37, 38, 40]: # these experiments either needed stride index correction or introduction
+    if expNumber in [32, 33, 34, 35, 36, 37, 38, 40, 42]: # these experiments either needed stride index correction or introduction
         # Plot annotated stride indexes on IMU data, i.e., the magnitudes of acceleration and angular velocity
         plt.figure()
-        plt.plot(timestamps, np.linalg.norm(imu_data.iloc[:, :3].values, axis=1), label=r'$\Vert\mathbf{a}\Vert$')
-        plt.plot(timestamps, np.linalg.norm(imu_data.iloc[:, 3:].values, axis=1), label=r'$\Vert\mathbf{\omega}\Vert$')
-        plt.scatter(timestamps[strideIndex], np.linalg.norm(imu_data.iloc[strideIndex, :3].values, axis=1), 
-                    c='r', marker='x', label='Stride', zorder=3)
-        plt.scatter(timestamps[strideIndex], np.linalg.norm(imu_data.iloc[strideIndex, 3:].values, axis=1), 
-                    c='r', marker='x', zorder=3)
+        if expNumber <= 40:
+            plt.plot(timestamps, np.linalg.norm(imu_data.iloc[:, :3].values, axis=1), label=r'$\Vert\mathbf{a}\Vert$')
+            plt.plot(timestamps, np.linalg.norm(imu_data.iloc[:, 3:].values, axis=1), label=r'$\Vert\mathbf{\omega}\Vert$')
+            plt.scatter(timestamps[strideIndex], np.linalg.norm(imu_data.iloc[strideIndex, :3].values, axis=1), 
+                        c='r', marker='x', label='Stride', zorder=3)
+            plt.scatter(timestamps[strideIndex], np.linalg.norm(imu_data.iloc[strideIndex, 3:].values, axis=1), 
+                        c='r', marker='x', zorder=3)
+        else:
+            plt.plot(timestamps, np.linalg.norm(imu_data[:, :3], axis=1), label=r'$\Vert\mathbf{a}\Vert$')
+            plt.plot(timestamps, np.linalg.norm(imu_data[:, 3:], axis=1), label=r'$\Vert\mathbf{\omega}\Vert$')
+            plt.scatter(timestamps[strideIndex], np.linalg.norm(imu_data[strideIndex, :3], axis=1), 
+                        c='r', marker='x', label='Stride', zorder=3)
+            plt.scatter(timestamps[strideIndex], np.linalg.norm(imu_data[strideIndex, 3:], axis=1), 
+                        c='r', marker='x', zorder=3)
         plt.title(f'{base_filename} - Stride Detection on IMU Data')
         plt.xlabel('Time [s]'); plt.ylabel(r'Magnitude'); plt.legend()
         plt.grid(True, which='both', linestyle='--', linewidth=1.5)
@@ -466,13 +481,15 @@ for file in sensor_data_files:
                         {'strideIndex': strideIndex, 'timestamps': timestamps, 'GCP': GCP, 'imu_data': imu_data.values, 
                         'pyshoeTrajectory': traj_list[-1][:,:2], 'euler_angles': x[:,6:], 'acc_n': acc_n,
                         'euler_angles_imu': euler_angles.values, 'thetaPyShoe': thetaPyShoe, 'thetaGCP': thetaGCP, 
-                        'theta': theta, 'traveled_distance': traveled_distance, 'traverse_time': traverse_time})
+                        'theta': theta, 'traveled_distance': traveled_distance, 'traverse_time': traverse_time, 
+                        'GCP_wcf': GCP_wcf, 'traj_wcf': traj_wcf, 'reconstructed_traj_wcf': reconstructed_traj_wcf})
         else:
             sio.savemat(os.path.join(extracted_training_data_dir, f'LLIO_training_data/{base_filename}_LLIO.mat'), 
                         {'strideIndex': strideIndex, 'timestamps': timestamps, 'GCP': GCP, 'imu_data': imu_data, 
                         'pyshoeTrajectory': traj_list[-1][:,:2], 'euler_angles': x[:,6:], 'acc_n': acc_n,
                         'euler_angles_imu': euler_angles, 'thetaPyShoe': thetaPyShoe, 'thetaGCP': thetaGCP, 
-                        'theta': theta, 'traveled_distance': traveled_distance, 'traverse_time': traverse_time})
+                        'theta': theta, 'traveled_distance': traveled_distance, 'traverse_time': traverse_time, 
+                        'GCP_wcf': GCP_wcf, 'traj_wcf': traj_wcf, 'reconstructed_traj_wcf': reconstructed_traj_wcf})
     else:
         # still save the stride indexes and the associated timestamps for further analysis in MATLAB side
         if expNumber <= 40:
