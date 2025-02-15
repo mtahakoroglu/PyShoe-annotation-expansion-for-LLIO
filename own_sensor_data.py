@@ -213,7 +213,10 @@ for file in sensor_data_files:
         strideAlign = 10 # this stride number is selected according to the trajectory plot
         GCP_align = strideAlign
     elif expNumber == 42: # Exp#42 is conducted at Science Road
-        strideAlign = 13 # this stride number is selected according to the trajectory plot
+        strideAlign = 10 # this stride number is selected according to the trajectory plot
+        GCP_align = strideAlign
+    elif expNumber == 43:
+        strideAlign = 5 # this stride number is selected according to the trajectory plot
         GCP_align = strideAlign
     _, thetaPyShoe = calculate_displacement_and_heading(traj_list[-1][:, :2], strideIndex[np.array([0,strideAlign])])
     _, thetaGCP = calculate_displacement_and_heading(GCP, np.array([0,GCP_align]))
@@ -251,9 +254,12 @@ for file in sensor_data_files:
     else:
         logging.info(f"File {base_filename}, i.e., experiment {expNumber} will not be used in performance evaluation.")
     
+    ############################ PLOTS ###############################
+    # NAVIGATION COORDINATE SYSTEM
     plt.figure()
     if GCP_data['GCP_exist_and_correct'].item():
-        plt.scatter(GCP[:,0], GCP[:,1], color='r', s=30, marker='s', edgecolors='k', label="GCP")
+        # plt.scatter(GCP[:,0], GCP[:,1], color='r', s=30, marker='s', edgecolors='k', label="GCP")
+        plt.plot(GCP[:,0], GCP[:,1], 'ks-', linewidth=1.4, markersize=5, markerfacecolor='r', markeredgecolor='k', markeredgewidth=1.2, label="GCP")
     if n == numberOfStrides and not extract_LLIO_training_data: # experiments after 30 are conducted for expanding/enlarging LLIO training dataset
         plt.scatter(reconstructed_traj[GCP_stride_numbers,0], reconstructed_traj[GCP_stride_numbers,1], color='r', s=45, 
                     marker='o', facecolor='none', linewidths=1.5, label="GCP stride")
@@ -269,10 +275,11 @@ for file in sensor_data_files:
     plt.close()
 
     plt.figure()
+    if GCP_data['GCP_exist_and_correct'].item():
+        # plt.scatter(GCP[:,0], GCP[:,1], color='r', s=30, marker='s', edgecolors='k', label="GCP")
+        plt.plot(GCP[:,0], GCP[:,1], 'ks-', linewidth=1.4, markersize=5, markerfacecolor='r', markeredgewidth=1.2, markeredgecolor='k', label="GCP")
     plt.plot(reconstructed_traj[:,0], reconstructed_traj[:,1], 'b.-', linewidth = 1.4, markersize=5, markeredgewidth=1.2, label="PyShoe (LSTM) SHS")
     # plt.plot(reconstructed_traj[-3:,0], reconstructed_traj[-3:,1], 'bx-', linewidth = 1.4, markersize=5, markeredgewidth=1.2, label="PyShoe (LSTM) SHS last three")
-    if GCP_data['GCP_exist_and_correct'].item():
-        plt.scatter(GCP[:,0], GCP[:,1], color='r', s=30, marker='s', edgecolors='k', label="GCP")
     if n == numberOfStrides and not extract_LLIO_training_data: # experiments after 30 are conducted for expanding/enlarging LLIO training dataset
         plt.scatter(reconstructed_traj[GCP_stride_numbers,0], reconstructed_traj[GCP_stride_numbers,1], color='r', s=45, 
                 marker='o', facecolor='none', linewidths=1.5, label="GCP stride")
@@ -286,9 +293,11 @@ for file in sensor_data_files:
     plt.savefig(os.path.join(output_dir, f'{base_filename}_SHS_NCF.png'), dpi=dpi, bbox_inches='tight')
     plt.close()
     
+    # WORLD COORDINATE SYSTEM
     plt.figure()
     if GCP_data['GCP_exist_and_correct'].item():
-        plt.scatter(GCP_wcf[:,0], GCP_wcf[:,1], color='r', s=30, marker='s', edgecolors='k', label="GCP")
+        # plt.scatter(GCP_wcf[:,0], GCP_wcf[:,1], color='r', s=30, marker='s', edgecolors='k', label="GCP")
+        plt.plot(GCP_wcf[:,0], GCP_wcf[:,1], 'ks-', linewidth=1.4, markersize=5, markerfacecolor='r', markeredgecolor='k', markeredgewidth=1.2, label="GCP")
     if n == numberOfStrides and not extract_LLIO_training_data: # experiments after 30 are conducted for expanding/enlarging LLIO training dataset
         plt.scatter(reconstructed_traj_wcf[GCP_stride_numbers,0], reconstructed_traj_wcf[GCP_stride_numbers,1], color='r', s=45, 
                     marker='o', facecolor='none', linewidths=1.5, label="GCP stride")
@@ -304,10 +313,11 @@ for file in sensor_data_files:
     plt.close()
 
     plt.figure()
+    if GCP_data['GCP_exist_and_correct'].item():
+        # plt.scatter(GCP_wcf[:,0], GCP_wcf[:,1], color='r', s=30, marker='s', edgecolors='k', label="GCP")
+        plt.plot(GCP_wcf[:,0], GCP_wcf[:,1], 'ks-', linewidth=1.4, markersize=5, markerfacecolor='r', markeredgecolor='k', markeredgewidth=1.2, label="GCP")
     plt.plot(reconstructed_traj_wcf[:,0], reconstructed_traj_wcf[:,1], 'b.-', linewidth = 1.4, markersize=5, markeredgewidth=1.2, label="PyShoe (LSTM) SHS")
     # plt.plot(reconstructed_traj[-3:,0], reconstructed_traj[-3:,1], 'bx-', linewidth = 1.4, markersize=5, markeredgewidth=1.2, label="PyShoe (LSTM) SHS last three")
-    if GCP_data['GCP_exist_and_correct'].item():
-        plt.scatter(GCP_wcf[:,0], GCP_wcf[:,1], color='r', s=30, marker='s', edgecolors='k', label="GCP")
     if n == numberOfStrides and not extract_LLIO_training_data: # experiments after 30 are conducted for expanding/enlarging LLIO training dataset
         plt.scatter(reconstructed_traj_wcf[GCP_stride_numbers,0], reconstructed_traj_wcf[GCP_stride_numbers,1], color='r', s=45, 
                 marker='o', facecolor='none', linewidths=1.5, label="GCP stride")
@@ -379,6 +389,7 @@ for file in sensor_data_files:
     plt.savefig(os.path.join(output_dir, f'{base_filename}_euler_angles.png'), dpi=600, bbox_inches='tight')
     plt.close()
 
+    #################### STRIDE INDEX ANNOTATION (IN CASE OF PYSHOE (LSTM) MISSES ZV INTERVALS) ##################################
     if expNumber == 32 and strideIndex[-2] == 14203:
         strideIndex[-2] = 14131-1
         print(f"strideIndex[-2] is manually corrected for experiment #{expNumber} after MATLAB inspection.")
@@ -422,8 +433,16 @@ for file in sensor_data_files:
         missedStride, missedStrideIndex = [1], [545-1]
         for i in range(len(missedStride)):
             strideIndex = np.insert(strideIndex, missedStride[i], missedStrideIndex[i])
-            
-    if expNumber in [32, 33, 34, 35, 36, 37, 38, 40, 42]: # these experiments either needed stride index correction or introduction
+    # starting at exp#43, now any incorrect stride index is deleted first and then annotated from scratch instead of correction
+    elif expNumber == 43: # there are 9 missed strides indexes and an incorrect stride index | incorrect stride index is deleted
+        strideIndex = np.delete(strideIndex, 34) # remove incorrectly annotated (by PyShoe (LSTM)) stride index
+        print(f"strideIndex[34] is removed for experiment #{expNumber} after MATLAB inspection.")
+        missedStride, missedStrideIndex = [19, 20, 21, 23, 37, 41, 42, 43, 44], [3963, 4148, 4332, 4692, 7594, 8326, 8508, 8688, 8868]
+        for i in range(len(missedStride)):
+            strideIndex = np.insert(strideIndex, missedStride[i], missedStrideIndex[i]) # Stride #i index is inserted
+        
+    ############################### CORRECTED PLOTS ########################################
+    if expNumber in [32, 33, 34, 35, 36, 37, 38, 40, 42, 43]: # these experiments either needed stride index correction or introduction
         # Plot annotated stride indexes on IMU data, i.e., the magnitudes of acceleration and angular velocity
         plt.figure()
         if expNumber <= 40:
