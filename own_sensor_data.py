@@ -440,6 +440,15 @@ for file in sensor_data_files:
         missedStride, missedStrideIndex = [19, 20, 21, 23, 37, 41, 42, 43, 44], [3963, 4148, 4332, 4692, 7594, 8326, 8508, 8688, 8868]
         for i in range(len(missedStride)):
             strideIndex = np.insert(strideIndex, missedStride[i], missedStrideIndex[i]) # Stride #i index is inserted
+    elif expNumber == 44: # 52/65: 2 stride indexes are removed and 15 missed stride indexes are added
+        strideIndex = np.delete(strideIndex, 7) # remove incorrectly annotated (by PyShoe (LSTM)) stride index
+        print(f"strideIndex[7] is removed for experiment #{expNumber} after MATLAB inspection.")
+        strideIndex = np.delete(strideIndex, -3) # remove incorrectly annotated (by PyShoe (LSTM)) stride index
+        print(f"strideIndex[-3] is removed for experiment #{expNumber} after MATLAB inspection.")
+        missedStride = [8, 10, 11, 15, 25, 26, 27, 42, 43, 47, 54, 55, 57, 58, 63]
+        missedStrideIndex = [1998, 2350, 2532, 3245, 5171, 5357, 5547, 8472, 8657, 9402, 10701, 10886, 11264, 11439, 12535]
+        for i in range(len(missedStride)):
+            strideIndex = np.insert(strideIndex, missedStride[i], missedStrideIndex[i]) # Stride #i index is inserted
         
     ############################### CORRECTED PLOTS ########################################
     if expNumber in [32, 33, 34, 35, 36, 37, 38, 40, 42, 43]: # these experiments either needed stride index correction or introduction
