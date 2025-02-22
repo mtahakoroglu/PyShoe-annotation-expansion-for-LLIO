@@ -451,6 +451,8 @@ len(training_data_tag) = 56
 
 <h4>Experiment 43 (Compensated IMU data)</h4>
 
+<p align="justify">Experiment 43 video, captured by Gökhan Çetin, can be viewed <a href="https://www.youtube.com/shorts/-nBwdj_sYYA">here</a>.</p>
+
 | Stride Indexes |  Trajectory (INS)  |
 |  :---:  |  :---:  |
 | <img src="results/figs/own/SensorConnectData_43_stride_detection.png" alt="Stride indexes plotted on top of IMU data" width=400 height=auto> | <img src="results/figs/own/SensorConnectData_43_WCF.png" alt="trajectory obtained with robust ZUPT detector (LSTM) aided (Error-State Kalman Filter based) foot-mounted INS" width=400 height=auto> |
@@ -461,6 +463,8 @@ len(training_data_tag) = 56
 
 <h4>Experiment 44 (Compensated IMU data)</h4>
 
+<p align="justify">Experiment 44 video is <a href="https://www.youtube.com/watch?v=xBWOx4vfLdg">here</a>.</p>
+
 | Stride Indexes |  Trajectory (INS)  |
 |  :---:  |  :---:  |
 | <img src="results/figs/own/SensorConnectData_44_stride_detection.png" alt="Stride indexes plotted on top of IMU data" width=400 height=auto> | <img src="results/figs/own/SensorConnectData_44_WCF.png" alt="trajectory obtained with robust ZUPT detector (LSTM) aided (Error-State Kalman Filter based) foot-mounted INS" width=400 height=auto> |
@@ -470,6 +474,8 @@ len(training_data_tag) = 56
 | <img src="results/figs/own/SensorConnectData_44_ZV_LSTM_filtered.png" alt="ZV labels produced with robust ZUPT (LSTM filtered) detector" width=400 height=auto> | <img src="results/figs/own/SensorConnectData_44_SHS_WCF.png" alt="trajectory obtained with robust ZUPT detector (LSTM) aided (Error-State Kalman Filter based) foot-mounted INS" width=400 height=auto> |
 
 <h4>Experiment 45 (Compensated IMU data)</h4>
+
+<p align="justify">Experiment 45 video, captured by Yasin Emir, can be viewed <a href="https://www.youtube.com/shorts/SWT8pragH8U">here</a>.</p>
 
 | Stride Indexes |  Trajectory (INS)  |
 |  :---:  |  :---:  |
