@@ -449,9 +449,20 @@ for file in sensor_data_files:
         missedStrideIndex = [1998, 2350, 2532, 3245, 5171, 5357, 5547, 8472, 8657, 9402, 10701, 10886, 11264, 11439, 12535]
         for i in range(len(missedStride)):
             strideIndex = np.insert(strideIndex, missedStride[i], missedStrideIndex[i]) # Stride #i index is inserted
+    elif expNumber == 45: # 74/74 but 11th, 16th & 27th stride indexes are incorrectly detected by PyShoe LSTM
+        strideIndex = np.delete(strideIndex, 11) # remove incorrectly annotated (by PyShoe (LSTM)) stride index
+        print(f"strideIndex[11] is removed for experiment #{expNumber} after MATLAB inspection.")
+        strideIndex = np.delete(strideIndex, 16-1) # remove incorrectly annotated (by PyShoe (LSTM)) stride index
+        print(f"strideIndex[16] is removed for experiment #{expNumber} after MATLAB inspection.")
+        strideIndex = np.delete(strideIndex, 27-2) # remove incorrectly annotated (by PyShoe (LSTM)) stride index
+        print(f"strideIndex[27] is removed for experiment #{expNumber} after MATLAB inspection.")
+        missedStride = [11, 16, 27]
+        missedStrideIndex = [2992, 4166, 6800]
+        for i in range(len(missedStride)):
+            strideIndex = np.insert(strideIndex, missedStride[i], missedStrideIndex[i]) # Stride #i index is inserted
         
     ############################### CORRECTED PLOTS ########################################
-    if expNumber in [32, 33, 34, 35, 36, 37, 38, 40, 42, 43]: # these experiments either needed stride index correction or introduction
+    if expNumber in [32, 33, 34, 35, 36, 37, 38, 40, 42, 43, 44, 45]: # these experiments either needed stride index correction or introduction
         # Plot annotated stride indexes on IMU data, i.e., the magnitudes of acceleration and angular velocity
         plt.figure()
         if expNumber <= 40:
