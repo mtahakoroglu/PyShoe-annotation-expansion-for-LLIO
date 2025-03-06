@@ -217,7 +217,11 @@ for file in sensor_data_files:
         GCP_align = strideAlign
     elif expNumber == 43:
         strideAlign = 5 # this stride number is selected according to the trajectory plot
-        GCP_align = strideAlign
+        GCP_align = strideAlign  
+    # elif expNumber == 45:
+    #     strideAlign = 8 # this stride number is selected according to the trajectory plot
+    #     GCP_align = strideAlign
+    
     _, thetaPyShoe = calculate_displacement_and_heading(traj_list[-1][:, :2], strideIndex[np.array([0,strideAlign])])
     _, thetaGCP = calculate_displacement_and_heading(GCP, np.array([0,GCP_align]))
     theta = thetaPyShoe - thetaGCP # later we apply theta to GCP to align world coordinate frame with nav coordinate frame
