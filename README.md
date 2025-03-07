@@ -50,17 +50,13 @@ pip install pandas==1.1.5
 
 <p align="justify">After cloning this repository to your local computer, you must install <b><a href="https://github.com/utiasSTARS/liegroups" target="_blank">liegroups</a></b> package if you would like to reproduce the results shown here in this repo or the paper.</p>
 
-<h4>Video Tutorial</h4>
-
-<p align="justify">If one fails or has troublesome experience in setting up the virtual environment <b>pyshoe</b>, the video in <a href="https://www.youtube.com/watch?v=CnA4yF7448c">pyshoe venv setting</a> will soon be available.</p>
-
 <h3>VICON Room Experiments - Annotation & Corrections for LLIO</h3>
 
-<p align="justify">We aim to form a <b>gait-driven system</b> (in other words a <b>stride & heading system</b> - <b>SHS</b>) from VICON room experiments of PyShoe dataset where VICON room experiments are sample-wise annotated pedestrian trajectories. Stride indexes are also required in training a stride-wise INS.</p>
+<p align="justify">We aim to form a <b>gait-driven inertial navigation system (INS)</b> (also known as a <b>stride & heading system</b> - <b>SHS</b> as gait-driven means stride length and heading change updates in the dead-reckoning method</b>) from VICON room experiments of PyShoe dataset where VICON room experiments are sample-wise annotated pedestrian trajectories. Stride indexes would later be required for training a stride-wise SHS via Loose Learned Inertial Odometry approach.</p>
 
 <p align="justify">Here, some troublesome experiments are shown to understand Zero Velocity (ZV) interval and stride detection problems. The optimal ZV detectors are selected (e.g., SHOE for experiment 4, ARED for experiment 6) with the corresponding optimal threshold values (optimal values are supplied by Wagstaff <i>et. al.</i> in the structure of the mat files for VICON room experiments of PyShoe dataset) for all VICON room experiments.</p>
 
-<p align="justify">The process depicted below is the ZV interval & stride index annotation (or correction) of some troublesome trajectories produced in VICON room experiments (PyShoe dataset). Eventually, ZV interval and stride index detection errors in VICON data are fixed. Extracted dataset is going to be used in training <a href="https://github.com/mtahakoroglu/LLIO">Loose Learned Inertial Odometry (LLIO)</a>, a gait & data driven INS. Some researchers call a data-driven (or modern) INS as learned inertial odometry.</p>
+<p align="justify">The process depicted below is the ZV interval and stride index annotation (or correction) of some troublesome trajectories produced in VICON room experiments (PyShoe dataset). Eventually, ZV interval and stride index detection errors in VICON data are fixed. Extracted dataset is going to be used in training <a href="https://github.com/mtahakoroglu/LLIO">Loose Learned Inertial Odometry (LLIO)</a>, a gait & data driven INS. Some researchers call a data-driven INS as <b>learned inertial odometry</b>, which is the reason for the title given to the proposed modern INS.</p>
 
 <p align="justify">Please use <b>detect_missed_strides.m</b> located at <b>data/vicon/processed</b> if you like to reproduce the figures related to ZV interval annotation & correction.</p>
 
@@ -88,11 +84,11 @@ pip install pandas==1.1.5
 
 <h4>Experiment 6 (2017-11-22-11-26-46) - VICON training dataset</h4>
 
-<p align="justify">We see that the 9th stride is not detected in the plots below.</p>
+<p align="justify">We see that the 9<sup>th</sup> stride is not detected in the plots below.</p>
 
 <img src="results/figs/vicon_obsolete/exp6.jpg" alt="optimal detector results for experiment 6 (2017-11-22-11-26-46) VICON dataset" width=%100 height=auto>
 
-<p align="justify">Just like we did to compensate for the errors ZUPT phase and stride detection in experiment 4, here VICON ZUPT detector is selected again as the supplementary detector to correctly detect the missed stride.</p>
+<p align="justify">Just like we did to compensate for the errors in ZV interval and stride detection in experiment 4, here VICON ZUPT detector is selected again as the supplementary detector to correctly detect the missed ZV interval and the stride.</p>
 
 <img src="data/vicon/processed/experiment6_ZUPT_detectors_strides.png" alt="ZV labels for experiment 6 (2017-11-22-11-26-46) VICON dataset" width=%100 height=auto>
 
@@ -104,7 +100,9 @@ pip install pandas==1.1.5
 
 <img src="results/figs/vicon_obsolete/gif/exp6.gif" alt="experiment 6 results after ZV correction" width=%100 height=auto>
 
+<!---
 <img src="results/figs/vicon_obsolete/stride_detection_exp_6.png" alt="stride detection results on imu data for experiment 6 of VICON dataset">
+--->
 
 <h4>Experiment 11 (2017-11-22-11-35-59) - VICON training dataset</h4>
 
@@ -124,7 +122,9 @@ pip install pandas==1.1.5
 
 <img src="results/figs/vicon_obsolete/gif/exp11.gif" alt="experiment 11 results after ZV correction" width=%100 height=auto>
 
+<!---
 <img src="results/figs/vicon_obsolete/stride_detection_exp_11.png" alt="stride detection results on imu data for experiment 11 of VICON dataset">
+--->
 
 <h4>Experiment 18 (2017-11-22-11-48-35) - VICON training dataset</h4>
 
@@ -144,7 +144,9 @@ pip install pandas==1.1.5
 
 <img src="results/figs/vicon_obsolete/gif/exp18.gif" alt="experiment 18 results after ZV correction" width=%100 height=auto>
 
+<!---
 <img src="results/figs/vicon_obsolete/stride_detection_exp_18.png" alt="stride detection results on imu data for experiment 18 of VICON dataset">
+--->
 
 <!-- EXPERIMENT 27 is excluded after further examination of the aligned trajectory in the navigation coordinate frame
 <h4>Experiment 27 (2017-11-27-11-12-44) - VICON training dataset</h4>
@@ -186,7 +188,9 @@ pip install pandas==1.1.5
 
 <img src="results/figs/vicon_obsolete/gif/exp30.gif" alt="experiment 30 results after ZV correction" width=%100 height=auto>
 
+<!---
 <img src="results/figs/vicon_obsolete/stride_detection_exp_30.png" alt="stride detection results on imu data for experiment 30 of VICON dataset">
+--->
 
 <h4>Experiment 32 (2017-11-27-11-17-28) - VICON training dataset</h4>
 
@@ -206,7 +210,9 @@ pip install pandas==1.1.5
 
 <img src="results/figs/vicon_obsolete/gif/exp32.gif" alt="experiment 32 results after ZV correction" width=%100 height=auto>
 
+<!---
 <img src="results/figs/vicon_obsolete/stride_detection_exp_32.png" alt="stride detection results on imu data for experiment 32 of VICON dataset">
+--->
 
 <h4>Experiment 36 (2017-11-27-11-23-18) - VICON training dataset</h4>
 
@@ -226,7 +232,9 @@ pip install pandas==1.1.5
 
 <img src="results/figs/vicon_obsolete/gif/exp36.gif" alt="experiment 36 results after ZV correction" width=%100 height=auto>
 
+<!---
 <img src="results/figs/vicon_obsolete/stride_detection_exp_36.png" alt="stride detection results on imu data for experiment 36 of VICON dataset">
+--->
 
 <h4>Experiment 38 (2017-11-27-11-25-12) - VICON training dataset</h4>
 
@@ -246,7 +254,9 @@ pip install pandas==1.1.5
 
 <img src="results/figs/vicon_obsolete/gif/exp38.gif" alt="experiment 38 results after ZV correction" width=%100 height=auto>
 
+<!---
 <img src="results/figs/vicon_obsolete/stride_detection_exp_38.png" alt="stride detection results on imu data for experiment 38 of VICON dataset">
+--->
 
 <h4>Experiment 43 (2017-12-15-18-01-18) - VICON training dataset</h4>
 
@@ -266,14 +276,14 @@ pip install pandas==1.1.5
 
 <img src="results/figs/vicon_obsolete/gif/exp43.gif" alt="experiment 43 results after ZV correction" width=%100 height=auto>
 
+<!---
 <img src="results/figs/vicon_obsolete/stride_detection_exp_43.png" alt="stride detection results on imu data for experiment 43 of VICON dataset">
+--->
 
 <p align="justify">Thus far, due to some undetected steps in VICON room experiments data (recall that Wagstaff <i>et. al.</i> conducted crawling motion experiments in PyShoe) and self-collected data, we examined 56 experiments coarsely in the training dataset <i><b>(i)</b></i> to correct for undetected steps (they are classified as 0 in ZV signal plot despite them actually being 1, i.e., it is false-negative) and <i><b>(ii)</b></i> to exclude motions like crawling, which are not of type bipedal locomotion. As can be seen above, experiments {4, 6, 11, 18, 30, 32, 36, 38, 43} are corrected with manual ZV interval and stride index annotations by utilizing supplementary detectors. In <b>plot_vicon_data.py</b> file, right before processing experimental data in a loop, annotated experiments are tagged as -1 as follows:</p>
 
 ```
-training_data_tag = [1, 1, 1, -1, 1, -1, 1, 1, 1, 1, -1, 1, 0, 1, 1, 1, 1, -1, 1, 1, 
-                    1, 1, 1, 1, 1, 1, 0, 1, 1, -1, 1, -1, 1, 1, 1, -1, 1, -1, 1, 1,  
-                    1, 1, -1, 1, 1, 1, 0, 0, -1, 0, 1, 1, 1, 1, 0, 1]
+training_data_tag = [1, 1, 1, -1, 1, -1, 1, 1, 1, 1, -1, 1, 0, 1, 1, 1, 1, -1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, -1, 1, -1, 1, 1, 1, -1, 1, -1, 1, 1, 1, 1, -1, 1, 1, 1, 0, 0, -1, 0, 1, 1, 1, 1, 0, 1]
 ```
 
 <p align="justify">where</p>
@@ -282,24 +292,24 @@ training_data_tag = [1, 1, 1, -1, 1, -1, 1, 1, 1, 1, -1, 1, 0, 1, 1, 1, 1, -1, 1
 len(training_data_tag) = 56
 ```
 
-<p align="justify">In the signal processing main loop (where the loop visits each experiment one by one), experiments are accepted as training data for LLIO according to the absolute values of given tags. In other words, experiments labeled as 1's directly satisfy conditions while the ones labeled as -1s needed corrections on ZV intervals and stride indexes to be included in LLIO training dataset. On the other hand, 0s stand for eliminated experiments due to being nonbipedal locomotion data or unrecoverable errors in ZV intervals and/or stride indexes (we actually emailed Brandon Wagstaff about motion types of experiments yet no documentation was made regarding the motion types (e.g., walking, running, crawling) in the experiments at the time of PyShoe dataset generation). In the decision of labeling an experiment as 0, trajectory (spatial) plots along with IMU data (time series) plots with stride indexes are coarsely examined by the second author of the paper by using MATLAB and Python environments. Eventually, the elimination of VICON room data yielded shrink in the traveled distance by the pedestrian, which negatively affcets LLIO training to produce a data-driven INS. Therefore, additional training data was required in LLIO training. The next section describes dataset expansion/enlargement process.</p>
+<p align="justify">In the signal processing main loop (where the loop visits each experiment one by one), experiments are accepted as training data for LLIO according to the absolute values of given tags. In other words, experiments labeled as 1's directly satisfy conditions while the ones labeled as -1s needed corrections on ZV intervals and stride indexes to be included in LLIO training dataset. On the other hand, 0s stand for eliminated experiments due to being nonbipedal locomotion data or unrecoverable errors in ZV intervals and/or stride indexes (we actually emailed Brandon Wagstaff about motion types of experiments yet no documentation was made regarding the motion types (e.g., walking, running, crawling) in the experiments at the time of PyShoe dataset generation). In the decision of labeling an experiment as 0, trajectory (spatial) plots along with IMU data (time series) plots with stride indexes are coarsely examined by using MATLAB and Python environments. Eventually, the elimination of VICON room data yielded a shrink in the total traveled distance by the pedestrian, which negatively affected LLIO training to produce a robust data-driven INS. Therefore, additional training data was required in LLIO training. The next section describes dataset expansion/enlargement process.</p>
 
 <h3>Training Dataset Expansion/Enlargement for LLIO</h3>
 
-<p align="justify">Here robust (pre-trained LSTM based ZV detector) pedestrian INS is applied on our own-collected data where our sensor is <a href="https://www.microstrain.com/sites/default/files/applications/files/3dm-gx5-25_datasheet_8400-0093_rev_n.pdf">3DM-GX5-25</a> and sensor data capture software is <a href="https://www.microstrain.com/software/sensorconnect">SensorConnect</a>.</p>
+<p align="justify">Here PyShoe (pre-trained LSTM based INS) is applied on our own-collected data for stride index extraction, which is reuired for LLIO training. In the experiments, we used <a href="https://www.microstrain.com/sites/default/files/applications/files/3dm-gx5-25_datasheet_8400-0093_rev_n.pdf">3DM-GX5-25</a> Lord Microstrain IMU and sensor data capture software is <a href="https://www.microstrain.com/software/sensorconnect">SensorConnect</a>. Notice that the employed IMU is of the same brand (and the family as well) that is used in PyShoe experiments.</p>
 
 | 3DM-GX5-25 Sensor | SensorConnect software screen |
 | :---: | :---: |
 | <img src="https://www.zse.de/db_pics/shop_content/500x500/3dm-gx5-25.png" alt="3DM-GX5-25" width=auto height=200> | <img src="https://www.microstrain.com/sites/default/files/bitmap.png" alt="SensorConnect" width=auto height=200> |
 
 
-<p align="justify">Experiments conducted here are manually annotated by using a ruler (see the paper for more details). As the VICON room walks/experiments of PyShoe dataset is very different than hallway traversals, proposed <a href="https://github.com/mtahakoroglu/LLIO">LLIO</a> system required a bigger dataset that accounts for straight walk gait characteristics (at various walking paces). Additionally, faster motion experiments are conducted to make the dataset diverse.</p>
+<p align="justify">Experiments conducted here are manually <a href="https://www.dropbox.com/scl/fo/xl6szvjqfh129hxdpxas4/AGWk_iRdc8VASGbUhnKX1Vw?rlkey=9sbdq6vkctspe633cvb5a1jdh&st=gcj793t0&dl=0">annotated by using a ruler</a>. As the VICON room walks/experiments of PyShoe dataset is very different than hallway traversals, proposed <a href="https://github.com/mtahakoroglu/LLIO">LLIO</a> system required a bigger dataset that accounts for straight walk gait characteristics (at various walking paces). Additionally, faster motion experiments are conducted to make the dataset diverse.</p>
 
-<p align="justify">Similar to the notation used for VICON room experiments, the start point is called as stride #0, i.e., initial stride. If <b>plot_vicon_data.py</b> is checked, one can see that ZV labels are filtered for accurate stride index detection. However the filtered ZV values are not used in the trajectory generation. In other words, the pedestrian trajectories are obtained with the raw (not filtered) LSTM based PyShoe generated ZV labels while the strides that are visualized on the trajectories with x correspond to the last index of the ZV intervals of the filtered ZV signals (i.e., stride index).</p>
+<p align="justify">Similar to the notation used for VICON room experiments, the start point is called as stride #0, i.e., initial stride. If <b>vicon_data.py</b> is viewed, one can see that ZV labels are (intuitively) filtered for accurate stride index detection. However, the filtered ZV values are not used in the trajectory generation. In other words, the pedestrian trajectories are obtained with the raw (not filtered) LSTM based PyShoe generated ZV labels while the strides that are visualized on the trajectories with marker <b>x</b> correspond to the last index of the ZV intervals of the filtered ZV signals (i.e., stride index).</p>
 
-<p align="justify">As all strides produced a foot-print on the ground thar are later measured to form ground-truth data for the experiments, each stride location is called a Ground Control Point (GCP).</p>
+<p align="justify">As all strides produced a foot-print on the ground that are later measured to form ground-truth data for the experiments, each stride location is called a Ground Control Point (GCP).</p>
 
-<p align="justify"><b>Note:</b> One can run <b>plot_own_sensor_data.py</b> to obtain the same results shown below. To learn more about experiment info and results, one can view <b>output.txt</b> log file (located at <b>results/figs/own</b>) recorded while the code was running.</p>
+<p align="justify"><b>Note:</b> One can run <b>own_data.py</b> to obtain the same results shown below. To learn more about experiment info and results, one can view <b>output.txt</b> log file (located at <b>results/figs/own</b>) recorded while the code was running.</p>
 
 <h4>Experiment 31</h4>
 
